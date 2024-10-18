@@ -18,17 +18,17 @@
 * Java is a programming language as well as a Platform.
 * Compiler compiles the Java code (.java file) in to byte code (.class file). JVM only understands the byte code which is available in RAM of the OS.
 
-## Components of JVM
-* Class Loader - Compiled .class files are loaded without linking using Class Loader.
-* Byte Code verifier – Verify the byte Code. (Reason for why Java is secure).
-* Execution Engine – Converts the byte code in to machine code.
+#### Components of JVM
+* **Class Loader** - Compiled .class files are loaded without linking using Class Loader.
+* **Byte Code verifier** – Verify the byte Code. (Reason for why Java is secure).
+* **Execution Engine** – Converts the byte code in to machine code.
 
 ![Components of JDK!](/Java/Images/JDK_JRE_JVM_ss.png "Components of JDK")
 
 ## What is Class and Object in Java?
-* A class is like a set of instructions or a blueprint.
+* A **class** is like a set of instructions or a blueprint.
 * Ex: The class would describe things like the car’s features (color, model, speed) and what it can do (drive, honk). 
-* An object is the actual thing created from those instructions. 
+* An **object** is the actual thing created from those instructions. 
 * An object would be an actual car made using that blueprint, with specific details (e.g., a red sports car that can go 200 km/h) .
 
 ### First Java Program
