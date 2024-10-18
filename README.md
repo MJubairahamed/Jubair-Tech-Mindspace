@@ -1,4 +1,4 @@
 # Jubair-Tech-Mindspace
 # Java Notes
 
-- [Introduction to Java](java/introduction_to_java.md)
+- [Introduction to Java](Java/introduction_to_java.md)
