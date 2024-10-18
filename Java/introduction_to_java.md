@@ -38,3 +38,14 @@
         }
     }
 
+## Difference between interpreters and compilers
+
+Here's a simple table explaining the difference between **interpreters** and **compilers** that a 5th grader can understand:
+
+| **Feature**              | **Interpreter**                              | **Compiler**                                 |
+|--------------------------|----------------------------------------------|----------------------------------------------|
+| **How it works**          | Reads and runs the program **one line at a time**. | Reads the whole program and **translates it all at once**. |
+| **Speed**                 | **Slower** because it works line by line.    | **Faster** because it runs the entire program at once. |
+| **Errors**                | Stops when it finds an error, so you fix them **one by one**. | Shows **all errors** after translating the whole program. |
+| **Output**                | No file is created, it just runs the code.   | Creates a **new file** that can be run on any computer. |
+| **Examples**              | Python, JavaScript                          | C, C++, Java                                  |
