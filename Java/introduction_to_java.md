@@ -23,3 +23,5 @@
 * Byte Code verifier – Verify the byte Code. (Reason for why Java is secure).
 * Execution Engine – Converts the byte code in to machine code.
 
+![Components of JDK!](/Java/Images/JDK_JRE_JVM_ss.png "Components of JDK")
+
