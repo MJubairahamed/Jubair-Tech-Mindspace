@@ -40,8 +40,6 @@
 
 ## Difference between interpreters and compilers
 
-Here's a simple table explaining the difference between **interpreters** and **compilers** that a 5th grader can understand:
-
 | **Feature**              | **Interpreter**                              | **Compiler**                                 |
 |--------------------------|----------------------------------------------|----------------------------------------------|
 | **How it works**          | Reads and runs the program **one line at a time**. | Reads the whole program and **translates it all at once**. |
