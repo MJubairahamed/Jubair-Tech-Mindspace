@@ -47,3 +47,5 @@
 | **Errors**                | Stops when it finds an error, so you fix them **one by one**. | Shows **all errors** after translating the whole program. |
 | **Output**                | No file is created, it just runs the code.   | Creates a **new file** that can be run on any computer. |
 | **Examples**              | Python, JavaScript                          | C, C++, Java                                  |
+
+![Interperter_Compiler!](/Java/Images/Interperter_Compiler.png "Interperter & Compiler")
