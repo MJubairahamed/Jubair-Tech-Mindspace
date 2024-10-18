@@ -25,3 +25,16 @@
 
 ![Components of JDK!](/Java/Images/JDK_JRE_JVM_ss.png "Components of JDK")
 
+## What is Class and Object in Java?
+* A class is like a set of instructions or a blueprint.
+* Ex: The class would describe things like the car’s features (color, model, speed) and what it can do (drive, honk). 
+* An object is the actual thing created from those instructions. 
+* An object would be an actual car made using that blueprint, with specific details (e.g., a red sports car that can go 200 km/h) .
+
+### First Java Program
+    public class HelloWorld {
+        public static void main(String[] args) {
+            System.out.println("Hello, World!");
+        }
+    }
+
