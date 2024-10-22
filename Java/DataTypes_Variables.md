@@ -35,3 +35,14 @@
 | **Descriptive and Meaningful Names**  | It is a good practice to use names that clearly describe the variable’s purpose.                  | Good: `studentAge`, `totalMarks` <br> Bad: `x`, `y` |
 | **Use CamelCase for Multiple Words**  | When naming variables with more than one word, use camelCase: start with lowercase and capitalize subsequent words. | Correct: `studentName`, `totalMarks` <br> Incorrect: `Studentname`, `Totalmarks` |
 
+### Java Literals
+
+| **Literal Type**       | **Description**                                          | **Example**              |
+|------------------------|----------------------------------------------------------|--------------------------|
+| **Integer Literals**    | Whole numbers without a decimal point.                   | **`int age = 25;`** (Here, `25` is an integer literal) |
+| **Floating-Point Literals** | Numbers with a decimal point, often used for decimals. | **`float pi = 3.14f;`** (Here, `3.14f` is a floating-point literal) |
+| **Character Literals**  | A single character enclosed in single quotes.            | **`char grade = 'A';`** (Here, `'A'` is a character literal) |
+| **String Literals**     | A sequence of characters enclosed in double quotes.      | **`String name = "John";`** (Here, `"John"` is a string literal) |
+| **Boolean Literals**    | Represents logical values `true` or `false`.             | **`boolean isPassed = true;`** (Here, `true` is a boolean literal) |
+
+* Note: By default the decimal number value will be double literal unless it is explicitly mentioneds a 'f';
