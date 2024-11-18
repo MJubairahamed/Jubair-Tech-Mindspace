@@ -1,5 +1,5 @@
 # String
-### Key Points of string
+### Definition
 In Java, a `String` is a built-in class used to represent sequences of characters. It can be created using string literals (e.g., `String str1 = "Java program";`) or through constructors. Strings are immutable, meaning they cannot be modified once created. Java also maintains a pool of string constants to optimize memory; identical string literals refer to the same object in the pool. New string objects created with the `new` keyword reside in heap memory. There are three string constructors: `String(char[])`, which converts a character array to a string; `String(byte[])`, converting a byte array; and `String(String)` for creating new strings from existing ones. Reference variables in Java hold or point to objects, including strings.
 
 ### How strings are stored?
