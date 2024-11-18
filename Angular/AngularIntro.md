@@ -16,9 +16,9 @@
 
 ## What are the different types of Complier in Angular? 
 * There are 2 types of complier 
-    * JIT – Just in Time 
+    * **JIT** – Just in Time 
         * By Default, Angular build and serves using JIT. Ex: ng build, ng serve 
-    * AOT – Ahead of Time compilation. 
+    * **AOT** – Ahead of Time compilation. 
         * To use AOT, Ex: ng build --aot, ng serve --aot 
 
 ## What is a Bootstrapping in Angular? 

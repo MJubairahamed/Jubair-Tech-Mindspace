@@ -6,7 +6,7 @@
 - [Features and Architecture](Java/Features_And_Architecture.md)
 - [String](Java/String.md)
 
-# Java Notes
+# Angular Notes
 - [Introduction to Angular](Angular/AngularIntro.md)
 
 # Cucmber & Selenium Notes
