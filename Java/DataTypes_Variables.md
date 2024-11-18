@@ -19,21 +19,31 @@
 | `char`    | 2 bytes (16 bits) | 0 to 65,535 (Unsigned Unicode characters)                              | '\u0000' (null character) |
 | `boolean` | 1 bit           | `true` or `false`                                                       | `false`           |
 
+### Type Casting
+
+* Converting from one primitive type to another
+    * int i = 10;
+    * long l = (long) i;
+* Converting from one wrapper type to another
+    * Integer i = 10;
+    * Long l = Long.parseLong(10);
 
 ## Variables
 * Variables are used to store data.
 * Variable can store the value based on the min & max range of the datatypes. Ex: byte b=128 will throw as byte max value is 127.
 
 ### Java variable naming rules
-| **Rule**                              | **Description**                                                                                  | **Example**              |
-|---------------------------------------|--------------------------------------------------------------------------------------------------|--------------------------|
-| **Must Start with a Letter or Underscore** | The variable name must begin with a letter (a-z, A-Z) or an underscore (`_`). It cannot start with a number. | Correct: `age`, `_score` <br> Incorrect: `1stPlace`, `123name` |
-| **Can Contain Letters, Numbers, and Underscores** | After the first character, variable names can include letters, digits, or underscores. No spaces allowed. | Correct: `student1`, `final_score` <br> Incorrect: `final score`, `my#name` |
-| **No Special Characters**             | Variable names cannot contain special symbols like `@`, `#`, `%`, etc., except for `$` and `_`.   | Correct: `total$Amount`, `name_` <br> Incorrect: `@count`, `salary#` |
-| **Case-Sensitive**                    | Java treats uppercase and lowercase letters differently. `name` and `Name` are different variables. | `studentAge`, `StudentAge` (different variables) |
-| **Cannot Use Reserved Keywords**      | Java’s reserved keywords (e.g., `int`, `class`, `if`) cannot be used as variable names.          | Incorrect: `int`, `if`, `class` |
-| **Descriptive and Meaningful Names**  | It is a good practice to use names that clearly describe the variable’s purpose.                  | Good: `studentAge`, `totalMarks` <br> Bad: `x`, `y` |
-| **Use CamelCase for Multiple Words**  | When naming variables with more than one word, use camelCase: start with lowercase and capitalize subsequent words. | Correct: `studentName`, `totalMarks` <br> Incorrect: `Studentname`, `Totalmarks` |
+* The variable name must begin with a letter (a-z, A-Z) or an underscore (`_`). It cannot start with a number.
+* Variable names cannot contain special symbols like @, #, %, etc., except for $ and _.
+* Java’s reserved keywords (e.g., int, class, if) cannot be used as variable names.
+
+### Variable Types
+* **Instance variables(Non-static fields)** - Instance variables are used to reflect the state of the object.
+* **Static variables(Static fields)** - Static variables are variables that are common to all instances.
+* **Local variables** - Local variables are declared within a method and are visible only within the block in which they are declared.
+
+* **Note** : Local variable needs to initialize before they can be used. Which is not true for Static or Instance variable.
+
 
 ### Java Literals
 
