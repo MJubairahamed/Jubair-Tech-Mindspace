@@ -21,7 +21,7 @@
         * By Default, Angular build and serves using JIT. Ex: ng build, ng serve 
     * **AOT** – Ahead of Time compilation. 
         * To use AOT, Ex: `ng build --aot`, `ng serve --aot `
-    ![JIT AOT!](/Java/Images/AOT_JIT.png "JIT AOT")
+    ![JIT AOT!](/Angular/Images/AOT_JIT.png "JIT AOT")
 
 ### The advantages of using AOT compilation are: 
  * Since the application compiles before running inside the browser, the browser loads the executable code and renders the application immediately, which leads to faster rendering. 
