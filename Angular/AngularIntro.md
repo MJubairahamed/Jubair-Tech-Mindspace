@@ -1,12 +1,12 @@
 # Introduction
 
-## What it is Angular?
+### What it is Angular?
 * Angular is an open-source framework developed by Google that uses TypeScript (Convert in JS after Compile), a JavaScript-based programming language. It includes a collection of libraries, developer tools, and a component-based framework.
 
-## Why Angular?
+### Why Angular?
 * Plain Venilla JS/Jquery is hard to maintain.Angular can help developers create scalable, maintainable, and interactive web applications more efficiently and faster. It provides a **standard structure** and a set of features that can help developers avoid rebuilding code from scratch.
 
-## Difference between AngularJs and Angular?
+### Difference between AngularJs and Angular?
 
  | **Feature**             |**AngularJs**                              | **Angular**                                 |
 |----------------------------------------------|----------------------------------------------|----------------------------------------------|
@@ -14,14 +14,22 @@
 | **Language**          | AngularJS uses JavaScript language, which is a dynamically typed language. | Angular uses **TypeScript** language, which is a statically typed language and is a **superset of JavaScript**. By using statically typed language, Angular provides better performance while developing larger applications.  |
 | **Mobile Support**          | AngularJS does not provide mobile support.  | Angular is supported by all popular mobile browsers. |
 
-## What are the different types of Complier in Angular? 
+#
+### What are the different types of Complier in Angular? 
 * There are 2 types of complier 
     * **JIT** – Just in Time 
         * By Default, Angular build and serves using JIT. Ex: ng build, ng serve 
     * **AOT** – Ahead of Time compilation. 
         * To use AOT, Ex: `ng build --aot`, `ng serve --aot `
+    ![JIT AOT!](/Java/Images/AOT_JIT.png "JIT AOT")
 
-## What is a Bootstrapping in Angular? 
+### The advantages of using AOT compilation are: 
+ * Since the application compiles before running inside the browser, the browser loads the executable code and renders the application immediately, which leads to faster rendering. 
+ * In AOT compilation, the compiler sends the external HTML and CSS files along with the application, eliminating separate AJAX requests for those source files, which leads to fewer ajax requests. 
+ * Developers can detect and handle errors during the building phase, which helps in minimizing errors. 
+ * The AOT compiler adds HTML and templates into the JS files before they run inside the browser. Due to this, there are no extra HTML files to be read, which provide better security to the application. 
+
+### What is a Bootstrapping in Angular? 
 
 * Bootstrapping is the process of initializing or loading our Angular application. 
 * Angular takes the following steps to load our first view. 
@@ -31,8 +39,8 @@
     * Load & execute Root Module (`app.module.ts`) 
     * Executes the Root Component (`app.component.ts`) 
     * Displayes the template (`app.component.html`) 
-
-## How Angular works:
+#
+### How Angular works:
 * **Angular.json**(Ealier angular-cli.json) :
     * This file will contain all the configurations of the app. While building the app, the builder looks at this file to find the entry point of the application. 
     * Entry point of the application (`Main.ts`) is declared under build section 
