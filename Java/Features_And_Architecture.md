@@ -32,7 +32,7 @@ must be error free to transform into machine code. | Stops execution immediately
 
 This two-step process makes Java both a compiled and an interpreted language, providing a good balance of performance, portability, and platform independence.
 
-#
+
 ### How java is platform independent?
 Java is considered **platform-independent** due to its unique "write once, run anywhere" capability. This characteristic is made possible by the use of **bytecode** and the **Java Virtual Machine (JVM)**.
 
