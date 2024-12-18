@@ -61,28 +61,29 @@
     #### **ViewEncapsulation.Emulated**
     - **Default Mode in Angular**: Encapsulates styles so that they only apply to the component's template.
     - **How it Works**:
-    - Angular generates a unique HTML attribute for the component.
-    - This attribute is applied to template elements and CSS selectors.
+        - Angular generates a unique HTML attribute for the component.
+        - This attribute is applied to template elements and CSS selectors.
     - **Key Features**:
-    - Component styles **don’t leak** to other components.
-    - **Global styles** can still affect the component.
-    - Supports `:host` and `:host-context()` pseudo-classes by transforming them into attributes (not native behavior).
-    - **Limitations**: Does not support Shadow DOM pseudo-classes like `::shadow` or `::part`.
+        - Component styles **don’t leak** to other components.
+        - **Global styles** can still affect the component.
+        - Supports `:host` and `:host-context()` pseudo-classes by transforming them into attributes (not native behavior).
+        - **Limitations**: Does not support Shadow DOM pseudo-classes like `::shadow` or `::part`.
     - **Special Case - ::ng-deep**:
-    - Used to **disable encapsulation** for a CSS rule, making it global.
-    - Strongly discouraged for new development; retained only for backward compatibility.
+        - Used to **disable encapsulation** for a CSS rule, making it global.
+        - Strongly discouraged for new development; retained only for backward compatibility.
 
     #### **ViewEncapsulation.ShadowDom**
     - **Uses Web Standard Shadow DOM API**:
-    - Styles are **strictly scoped** to the component.
-    - Global styles **cannot affect** the component, and vice versa.
+        - Styles are **strictly scoped** to the component.
+        - Global styles **cannot affect** the component, and vice versa.
     - **How it Works**:
-    - Angular attaches a **shadow root** to the component's host element.
-    - Template and styles are rendered in the **shadow tree**.
+        - Angular attaches a **shadow root** to the component's host element.
+        - Template and styles are rendered in the **shadow tree**.
     - **Key Features**:
-    - Guarantees **style isolation** for the component.
-    - Affects event propagation, `<slot>` API behavior, and browser developer tools.
-    - **Caution**: Understand the implications before using Shadow DOM, as it impacts rendering and interaction.
-
+        - Guarantees **style isolation** for the component.
+        - Affects event propagation, `<slot>` API behavior, and browser developer tools.
+ 
     #### **ViewEncapsulation.None**
     - This mode **disables all style** encapsulation for the component. Any styles associated with the component behave as global styles.
+
+    - **Caution**: Understand the implications before using Shadow DOM, as it impacts rendering and interaction.
