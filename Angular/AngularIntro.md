@@ -1,10 +1,10 @@
 # Introduction
 
 ### What it is Angular?
-* Angular is an open-source framework developed by Google that uses TypeScript (Convert in JS after Compile), a JavaScript-based programming language. It includes a collection of libraries, developer tools, and a component-based framework.
+* Angular is an open-source framework developed by Google that uses TypeScript (Convert in JS after Compile), a JavaScript-based programming language. Angular provides a broad suite of tools, APIs, libraries, developer tools, and a component-based framework.
 
 ### Why Angular?
-* Plain Venilla JS/Jquery is hard to maintain.Angular can help developers create scalable, maintainable, and interactive web applications more efficiently and faster. It provides a **standard structure** and a set of features that can help developers avoid rebuilding code from scratch.
+* Plain Venilla JS/Jquery is hard to maintain. Angular can help developers create scalable, maintainable, and interactive web applications more efficiently and faster. It provides a **standard structure** and a set of features that can help developers avoid rebuilding code from scratch.
 
 ### Difference between AngularJs and Angular?
 
@@ -13,6 +13,19 @@
 | **Architecture**          | AngularJS uses MVC or Model-View-Controller architecture, where the Model contains the business logic, Controller processes information and View shows the information present in the Model . | Angular replaces controllers with Components. **Components are nothing but directives with a predefined template**. |
 | **Language**          | AngularJS uses JavaScript language, which is a dynamically typed language. | Angular uses **TypeScript** language, which is a statically typed language and is a **superset of JavaScript**. By using statically typed language, Angular provides better performance while developing larger applications.  |
 | **Mobile Support**          | AngularJS does not provide mobile support.  | Angular is supported by all popular mobile browsers. |
+
+#
+### Angular Architecture Overview:
+* Angular is a component-based framework for building scalable, maintainable, and modular web applications. Its architecture is built around the following core concepts:
+    * **Modules**
+        * Angular applications are modularized using **NgModules**.
+        * Use modules to manage application organization and code reusability.
+        * The `AppModule` is the root module.
+    * **Components**
+        * The basic building blocks of the Angular framework are Angular components.
+        * Components define views, which are sets of screen elements that Angular can choose among and modify according to your program logic and data.
+        * Components use services, which provide background functionality not directly related to views such as fetching data. Such services can be injected into components as dependencies, making your code modular, reusable, and efficient.
+        * Components interact via Input and Output properties for data binding.
 
 #
 ### What are the different types of Complier in Angular? 
