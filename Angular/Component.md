@@ -1,3 +1,4 @@
+# Component Metadata
 ## Anatomy of a component
 * Every component must have:
     * A **TypeScript** class with behaviors such as handling user input and fetching data from a server
@@ -32,7 +33,7 @@
 #### Note:
 * In Angular versions prior to **19.0.0**, when creating a component, directive, or pipe, you had to **explicitly set the standalone property to true** if you wanted it to be standalone. If you didn't specify the standalone property, **it would default to false**, meaning the component, directive, or pipe would be considered part of an NgModule.
 
-
+---
 # Selector
 * **Angular matches selectors statically at compile-time.** Changing the DOM at run-time, either via Angular bindings or with DOM APIs, does not affect the components rendered.
 * **An element can match exactly one component selector.** If multiple component selectors match a single element, Angular reports an error.
@@ -51,7 +52,7 @@
 * You can combine multiple selectors by concatenating them. 
     * For example, you can match <button> elements that specify type="reset": `selector: 'button[type="reset"]',`
     * You can also define multiple selectors with a comma-separated list: `selector: 'drop-zone, [dropzone]'`
-
+---
 # Style
 ### Style Scoping
 * Every component has a view encapsulation setting that determines how the framework scopes a component's styles. There are three view encapsulation modes: Emulated, ShadowDom, and None.
@@ -85,8 +86,8 @@
     - This mode **disables all style** encapsulation for the component. Any styles associated with the component behave as global styles.
 
     - **Caution**: Understand the implications before using Shadow DOM, as it impacts rendering and interaction.
-
-### **Provider**
+---
+### **Provider:**
   - A way to supply dependencies to components or services using Angular’s **Dependency Injection (DI)** system.
   - Defines how and where an instance of a dependency (like a service) is created.
   - Configured in a module, component, or directive using the `providers` array.
@@ -99,10 +100,10 @@
             export class ExampleComponent {}
     ```
     - **Scopes**:
-     - **Module-level**: Shared across all components in a module.
-     - **Component-level**: Each component gets its own instance of the service.
+        - **Module-level**: Shared across all components in a module.
+        - **Component-level**: Each component gets its own instance of the service.
 ---
-### **View Provider**
+### **View Provider:**
   - A specialized form of a provider, configured using the `viewProviders` array, to supply dependencies **only to the component's view** (**not its content children**).
   - Used when you want a dependency to be available for the template of the component but not for components projected into it.
   - **Example**:
