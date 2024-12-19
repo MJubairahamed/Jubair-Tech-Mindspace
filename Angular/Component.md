@@ -30,7 +30,7 @@
 * To use a component, directive, or pipe, you must add it to the imports array in the @Component decorator:`imports: [ProfilePhoto]`
 
 #### Note:
-* In Angular versions prior to **19.0.0**, when creating a component, directive, or pipe, you had to explicitly set the standalone property to true if you wanted it to be standalone. If you didn't specify the standalone property, it would default to false, meaning the component, directive, or pipe would be considered part of an NgModule.
+* In Angular versions prior to **19.0.0**, when creating a component, directive, or pipe, you had to **explicitly set the standalone property to true** if you wanted it to be standalone. If you didn't specify the standalone property, **it would default to false**, meaning the component, directive, or pipe would be considered part of an NgModule.
 
 
 # Selector
@@ -39,11 +39,11 @@
 * **Component selectors are case-sensitive**.
 
 ### Type of Selectors
-    | **Selector Type**          |**Description**                                                 | **Examples**                                 |
-    |----------------------------|----------------------------------------------------------------|----------------------------------------------|
-    | **Type selector**          | Matches elements based on their HTML tag name, or node name. . | profile-photo |
-    | **Attribute selector**     | Matches elements based on the presence of an HTML attribute and, optionally, an exact value for that attribute. |[dropzone] [type="reset"]  |
-    | **Class selector**          | Matches elements based on the presence of a CSS class.  | .menu-item |
+| **Selector Type**          |**Description**                                                 | **Examples**                                 |
+|----------------------------|----------------------------------------------------------------|----------------------------------------------|
+| **Type selector**          | Matches elements based on their HTML tag name, or node name. . | profile-photo |
+| **Attribute selector**     | Matches elements based on the presence of an HTML attribute and, optionally, an exact value for that attribute. |[dropzone] [type="reset"]  |
+| **Class selector**          | Matches elements based on the presence of a CSS class.  | .menu-item |
 
 #### Notes:
 * Angular component selectors do not support **combinators & namespaces**.
