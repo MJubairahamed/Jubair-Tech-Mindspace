@@ -85,3 +85,59 @@
     - This mode **disables all style** encapsulation for the component. Any styles associated with the component behave as global styles.
 
     - **Caution**: Understand the implications before using Shadow DOM, as it impacts rendering and interaction.
+
+### **Provider**
+  - A way to supply dependencies to components or services using Angular’s **Dependency Injection (DI)** system.
+  - Defines how and where an instance of a dependency (like a service) is created.
+  - Configured in a module, component, or directive using the `providers` array.
+    - **Example**:
+    ```typescript
+            @Component({
+                selector: 'app-example',
+                providers: [MyService] // Provides a new instance of MyService for this component
+            })
+            export class ExampleComponent {}
+    ```
+    - **Scopes**:
+     - **Module-level**: Shared across all components in a module.
+     - **Component-level**: Each component gets its own instance of the service.
+---
+### **View Provider**
+  - A specialized form of a provider, configured using the `viewProviders` array, to supply dependencies **only to the component's view** (**not its content children**).
+  - Used when you want a dependency to be available for the template of the component but not for components projected into it.
+  - **Example**:
+    ```typescript
+    @Component({
+        selector: 'app-example',
+        viewProviders: [MyService] // Service available only to this component’s view
+    })
+    export class ExampleComponent {}
+    ```
+---
+
+### **Change Detection**
+   - The process Angular uses to track changes in the application and update the DOM (UI) accordingly.
+   - Angular creates a **Change Detection Tree** for the application.
+   - When a change occurs (e.g., a user event or data update), Angular checks the component tree to identify what needs to be updated.
+    - **Strategies**:
+        1. **Default**:
+            - Checks every component in the change detection tree.
+            - Suitable for most use cases.
+        2. **OnPush**:
+            - Optimizes performance by skipping checks for a component unless:
+            - Input properties change (by reference).
+            - An event bound to the component is triggered.
+            - Used for components with immutable data structures.
+            - Example:
+            ```typescript
+            @Component({
+                selector: 'app-optimized',
+                changeDetection: ChangeDetectionStrategy.OnPush
+            })
+            export class OptimizedComponent {}
+            ```
+    - **Common Scenarios**:
+    - Default strategy is used for dynamic, frequently updated components.
+    - OnPush is preferred for high-performance and static data scenarios.
+
+---
