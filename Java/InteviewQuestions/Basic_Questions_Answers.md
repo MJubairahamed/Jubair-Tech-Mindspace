@@ -164,7 +164,7 @@ interface Engine {
         }
     }
 ```
- - * After Java 7
+ - After Java 7
 ```java
     try (InputStream stream = new MyInputStream(...)){
         // ... use stream
