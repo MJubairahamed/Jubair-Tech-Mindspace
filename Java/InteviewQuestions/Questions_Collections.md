@@ -16,17 +16,18 @@
 
 3. **What is the difference between `Collection` and `Collections` in Java?**  
    
-     | Feature | **Collection** | **Collections** |
-        |---------|--------------|----------------|
-        | **Definition** | `Collection` is an **interface** in Java that represents a group of objects. | `Collections` is a **utility class** that provides static methods for working with collections. |
-        | **Package** | `java.util.Collection` (superinterface for List, Set, Queue). | `java.util.Collections` (utility class for collection manipulation). |
-        | **Type** | Interface | Class |
-        | **Usage** | Provides a blueprint for implementing data structures like `List`, `Set`, `Queue`. | Provides helper methods such as sorting, searching, and thread-safety. |
-        | **Methods** | Contains methods like `add()`, `remove()`, `size()`, `iterator()`. | Contains static utility methods like `sort()`, `reverse()`, `synchronizedList()`, `min()`, `max()`. |
-        | **Inheritance** | Extended by subinterfaces (`List`, `Set`, `Queue`). | Cannot be extended (final class). |
-        | **Implementation** | Implemented by classes like `ArrayList`, `HashSet`, `LinkedList`, etc. | Not implemented, only contains static methods. |
-        | **Thread Safety** | Does not provide synchronization by default. | Provides methods like `synchronizedList()` and `synchronizedMap()` for thread safety. |
-        | **Sorting Support** | No built-in sorting mechanism. | Provides `Collections.sort()` for sorting lists. |
+| Feature | **Collection** | **Collections** |
+|---------|--------------|----------------|
+| **Definition** | `Collection` is an **interface** in Java that represents a group of objects. | `Collections` is a **utility class** that provides static methods for working with collections. |
+| **Package** | `java.util.Collection` (superinterface for List, Set, Queue). | `java.util.Collections` (utility class for collection manipulation). |
+| **Type** | Interface | Class |
+| **Usage** | Provides a blueprint for implementing data structures like `List`, `Set`, `Queue`. | Provides helper methods such as sorting, searching, and thread-safety. |
+| **Methods** | Contains methods like `add()`, `remove()`, `size()`, `iterator()`. | Contains static utility methods like `sort()`, `reverse()`, `synchronizedList()`, `min()`, `max()`. |
+| **Inheritance** | Extended by subinterfaces (`List`, `Set`, `Queue`). | Cannot be extended (final class). |
+| **Implementation** | Implemented by classes like `ArrayList`, `HashSet`, `LinkedList`, etc. | Not implemented, only contains static methods. |
+| **Thread Safety** | Does not provide synchronization by default. | Provides methods like `synchronizedList()` and `synchronizedMap()` for thread safety. |
+| **Sorting Support** | No built-in sorting mechanism. | Provides `Collections.sort()` for sorting lists. |
+
 
 ---
 
@@ -57,7 +58,7 @@
 7. **How does `HashSet` ensure uniqueness?**  
    - `HashSet` uses **hashing** and relies on `hashCode()` and `equals()` to prevent duplicates.  
         <img src="" class="img-rounded" alt="Cinque Terre">
-        ![Hashset Flow!](/Java/Images/HashSetUniqueFlwo_ss.png "Hashset")
+        ![Hashset Flow!](Java/Images/HashSetUniqueFlow_ss.png "Hashset")
 8. **What is the difference between `HashSet`, `LinkedHashSet`, and `TreeSet`?**  
    - `HashSet` - **Unordered** and provides O(1) operations.  
    - `LinkedHashSet` - **Maintains insertion order**.  
