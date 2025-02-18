@@ -1,4 +1,4 @@
-Here is a **table with 30 Java Collections Framework questions** suitable for a **10-year experienced candidate** in an interview setting.  
+**30 Java Collections Framework questions** 
 
 | #  | Question | Answer | Example (if required) |
 |----|----------|--------|----------------------|
@@ -32,5 +32,55 @@ Here is a **table with 30 Java Collections Framework questions** suitable for a 
 | 28 | What is the difference between Iterable and Iterator? | `Iterable` provides an `iterator()`, while `Iterator` is used to iterate elements using `next()`. | - |
 | 29 | How do you remove an element while iterating a collection? | Using `Iterator.remove()`, as `for-each` loop will cause `ConcurrentModificationException`. | `Iterator<Integer> it = list.iterator(); while(it.hasNext()) { it.remove(); }` |
 | 30 | What is EnumSet and its advantages? | A high-performance `Set` for enums, internally using a **bitwise representation**, making it very memory-efficient. | `EnumSet.of(Day.MONDAY, Day.TUESDAY);` |
+
+---
+**What is the difference between `Collection` and `Collections?`**
+| Feature | **Collection** | **Collections** |
+|---------|--------------|----------------|
+| **Definition** | `Collection` is an **interface** in Java that represents a group of objects. | `Collections` is a **utility class** that provides static methods for working with collections. |
+| **Package** | `java.util.Collection` (superinterface for List, Set, Queue). | `java.util.Collections` (utility class for collection manipulation). |
+| **Type** | Interface | Class |
+| **Usage** | Provides a blueprint for implementing data structures like `List`, `Set`, `Queue`. | Provides helper methods such as sorting, searching, and thread-safety. |
+| **Methods** | Contains methods like `add()`, `remove()`, `size()`, `iterator()`. | Contains static utility methods like `sort()`, `reverse()`, `synchronizedList()`, `min()`, `max()`. |
+| **Inheritance** | Extended by subinterfaces (`List`, `Set`, `Queue`). | Cannot be extended (final class). |
+| **Implementation** | Implemented by classes like `ArrayList`, `HashSet`, `LinkedList`, etc. | Not implemented, only contains static methods. |
+| **Thread Safety** | Does not provide synchronization by default. | Provides methods like `synchronizedList()` and `synchronizedMap()` for thread safety. |
+| **Sorting Support** | No built-in sorting mechanism. | Provides `Collections.sort()` for sorting lists. |
+
+---
+
+### **Example of `Collection` (Interface) Usage**
+```java
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class CollectionExample {
+    public static void main(String[] args) {
+        Collection<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        System.out.println(fruits);
+    }
+}
+```
+
+### **Example of `Collections` (Utility Class) Usage**
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class CollectionsExample {
+    public static void main(String[] args) {
+        List<String> fruits = new ArrayList<>();
+        fruits.add("Orange");
+        fruits.add("Apple");
+        fruits.add("Banana");
+
+        Collections.sort(fruits); // Sorting list using Collections class
+        System.out.println(fruits); // Output: [Apple, Banana, Orange]
+    }
+}
+```
 
 ---
