@@ -57,8 +57,7 @@
 
 7. **How does `HashSet` ensure uniqueness?**  
    - `HashSet` uses **hashing** and relies on `hashCode()` and `equals()` to prevent duplicates.  
-        <img src="" class="img-rounded" alt="Cinque Terre">
-        ![Hashset Flow!](Java/Images/HashSetUniqueFlow_ss.png "Hashset")
+       ![Hashset Flow!](../Images/HashSetUniqueFlow_ss.png "Hashset")
 8. **What is the difference between `HashSet`, `LinkedHashSet`, and `TreeSet`?**  
    - `HashSet` - **Unordered** and provides O(1) operations.  
    - `LinkedHashSet` - **Maintains insertion order**.  
