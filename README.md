@@ -6,7 +6,7 @@
 - [Features and Architecture](Java/Features_And_Architecture.md)
 - [String](Java/String.md)
 - [Interview Q&A](Java/InteviewQuestions/)
-    - [Basic Q&A](Java/InteviewQuestions/Basic_Questions_Answers.md)
+    - [Basics](Java/InteviewQuestions/Basic_Questions_Answers.md)
 
 # Angular Notes
 - [Introduction to Angular](Angular/AngularIntro.md)
