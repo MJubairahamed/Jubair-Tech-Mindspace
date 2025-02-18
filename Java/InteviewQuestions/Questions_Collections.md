@@ -82,6 +82,18 @@ public class CollectionsExample {
     }
 }
 ```
+---
+### **Difference Between `Collections.sort()` with and without `Comparator`**  
+### **🔹 Summary**
+| Feature | `Collections.sort(list)` (Without Comparator) | `Collections.sort(list, Comparator)` (With Comparator) |
+|---------|--------------------------------|------------------------------------|
+| **Sorting Order** | Natural order (ascending for numbers, lexicographical for Strings). | Custom order (ascending, descending, or based on other properties). |
+| **Implementation Requirement** | Class must implement `Comparable<T>` and override `compareTo()`. | No need to modify class; sorting logic is external. |
+| **Flexibility** | One sorting logic per class. | Multiple sorting strategies possible. |
+| **Best Use Case** | Simple sorting when natural order is sufficient. | Complex sorting scenarios (e.g., sorting by multiple fields). |
+
+---
+
 
 ---
 ## Notes:
