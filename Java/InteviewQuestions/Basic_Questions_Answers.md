@@ -146,7 +146,7 @@ interface Engine {
 
 ### **Explain try-with-resources with examples** 
 
-    - It is introduced in Java 7 — allows us to declare resources to be used in a try block with the assurance that the resources will be closed after the execution of that block.The resources declared need to implement the AutoCloseable interface.
+- It is introduced in Java 7 — allows us to declare resources to be used in a try block with the assurance that the resources will be closed after the execution of that block.The resources declared need to implement the AutoCloseable interface.
  - Before Java 7
 ```java
     InputStream stream = new MyInputStream(...);
