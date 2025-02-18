@@ -15,9 +15,7 @@
    - `Map` (e.g., `HashMap`, `TreeMap`, `LinkedHashMap`, `ConcurrentHashMap`)  
 
 3. **What is the difference between `Collection` and `Collections` in Java?**  
-   - `Collection` is an **interface** that defines methods for handling groups of objects.  
-   - `Collections` is a **utility class** that provides static methods (like `sort()`, `reverse()`, `synchronizedList()`) to operate on collections.  
-        **What is the difference between `Collection` and `Collections?`**
+   
         | Feature | **Collection** | **Collections** |
         |---------|--------------|----------------|
         | **Definition** | `Collection` is an **interface** in Java that represents a group of objects. | `Collections` is a **utility class** that provides static methods for working with collections. |
@@ -35,8 +33,13 @@
 ### **List and Set Implementations**  
 
 4. **What is the difference between `ArrayList` and `LinkedList`? When should you use each?**  
-   - `ArrayList` is backed by a **dynamic array** and provides **O(1)** access time but **O(n) insertion/deletion** in the middle.  
-   - `LinkedList` is a **doubly linked list**, making insertion/deletion **O(1)** but lookup **O(n)**.  
+   - `ArrayList` 
+        - It is backed by a **dynamic array** to store the elements.
+        - It provides **O(1)** access time but **O(n) insertion/deletion** in the middle.  
+        - Manipulation with ArrayList is slow because it internally uses an array. If any element is removed from the array, all the other elements are shifted in memory.
+   - `LinkedList` 
+        - It is a **doubly linked list**, making insertion/deletion **O(1)** but lookup **O(n)**.  
+        - Manipulation with LinkedList is faster than ArrayList because it uses a doubly linked list, so no bit shifting is required in memory.
 
    **Example:**
    ```java
@@ -53,6 +56,7 @@
 
 7. **How does `HashSet` ensure uniqueness?**  
    - `HashSet` uses **hashing** and relies on `hashCode()` and `equals()` to prevent duplicates.  
+        <img src="HashSetUniqueFlwo_ss.png" class="img-rounded" alt="Cinque Terre">
 
 8. **What is the difference between `HashSet`, `LinkedHashSet`, and `TreeSet`?**  
    - `HashSet` - **Unordered** and provides O(1) operations.  
