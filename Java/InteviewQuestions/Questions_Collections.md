@@ -11,16 +11,16 @@
 | 7  | How does HashSet maintain uniqueness? | It uses a **hashing mechanism** and relies on `hashCode()` and `equals()` to prevent duplicates. | - |
 | 8  | What is the difference between HashSet and TreeSet? | `HashSet` is unordered, while `TreeSet` maintains a **sorted order** (Red-Black Tree). | - |
 | 9  | How does HashMap work internally? | It uses an **array of buckets** and applies **hashing** (`hashCode()`) to store key-value pairs efficiently. **Collisions** are handled via **Linked List (before Java 8)** or **Tree (after Java 8, for high collision cases).** | - |
-| 10 | What is the difference between HashMap and Hashtable? | `HashMap` is **non-synchronized** and allows **null keys/values**. `Hashtable` is **synchronized** and **does not allow null keys or values**. | - |
+| 10 | What is the difference between HashMap and Hashtable? | `HashMap` is **non-synchronized** and allows **null keys/values**,HashMap allows adding one Entry with null as key as well as many entries with null as value. `Hashtable` is **synchronized** and **does not allow null keys or values**. | - |
 | 11 | What is LinkedHashMap, and how does it differ from HashMap? | `LinkedHashMap` maintains the **insertion order**, while `HashMap` does not guarantee any order. | - |
-| 12 | What is the time complexity of basic operations in HashMap? | **O(1)** (best case) for `put()`, `get()`, `remove()`. In worst-case collision scenarios, it is **O(log n)** (Java 8+ due to tree structure). | - |
+| 12 | What is the time complexity of basic operations in HashMap? | **O(1)** (best case) for `put()`, `get()`, `remove()`,meaning that the operation takes constant time regardless of the size of the map. In worst-case collision scenarios, it is **O(log n)** (Java 8+ due to tree structure). | - |
 | 13 | What is WeakHashMap? | `WeakHashMap` stores keys as **WeakReferences**, allowing GC to remove entries if the key is no longer referenced elsewhere. | - |
 | 14 | What is IdentityHashMap? | Unlike `HashMap`, it uses **reference equality (`==`)** instead of `.equals()` for key comparison. | - |
 | 15 | What is the difference between TreeMap and HashMap? | `TreeMap` maintains **sorted order** (Red-Black Tree), while `HashMap` has no ordering guarantees. | - |
-| 16 | What is ConcurrentHashMap? | A thread-safe version of `HashMap` using **segment-based locking** for better performance. | - |
-| 17 | What is CopyOnWriteArrayList? | A thread-safe `ArrayList` where all mutative operations (`add`, `remove`) create a **new copy** of the list. Best suited for **read-heavy scenarios**. | - |
-| 18 | What is BlockingQueue? | It is a **thread-safe queue** used for producer-consumer scenarios, blocking when retrieving from an empty queue or inserting into a full one. | `LinkedBlockingQueue, ArrayBlockingQueue` |
-| 19 | What are PriorityQueue and its use case? | A queue where elements are ordered based on **natural ordering** or a **custom comparator**. Used in **task scheduling** and **graph algorithms** (Dijkstra’s). | - |
+| 16 | What is ConcurrentHashMap? | The ConcurrentHashMap is a **thread-safe implementation of the Map interface**. It allows multiple threads to read and write data simultaneously, without the need for locking the entire map. Unlike a regular HashMap, which is not thread-safe, ConcurrentHashMap ensures that the operations are thread-safe, making it ideal for scenarios where multiple threads need to access and modify the map concurrently.| - |
+| 17 | What is CopyOnWriteArrayList? | It implements the List Interface. A thread-safe `ArrayList` where all mutative operations (`add`, `remove`) create a **new copy** of the list. Best suited for **read-heavy scenarios**. | - |
+| 18 | What is BlockingQueue? | A blocking queue is a data structure in Java that allows threads to wait for space to become available when adding items to a queue, or for items to become available when removing them. | `LinkedBlockingQueue, ArrayBlockingQueue` |
+| 19 | What are PriorityQueue and its use case? | A PriorityQueue in Java is a special type of queue where each element is associated with a priority. Elements are retrieved based on their priority, with the highest priority element being dequeued first. If multiple elements have the same priority, they are dequeued in the order they were added. It is based on the heap data structure. | - |
 | 20 | How does TreeSet maintain order? | `TreeSet` uses a **Red-Black Tree**, ensuring elements are stored in **sorted order**. | - |
 | 21 | What is the difference between SynchronizedList and CopyOnWriteArrayList? | `SynchronizedList` is synchronized using **locks**, whereas `CopyOnWriteArrayList` uses **copy-on-write** (creating a new list on modification). | - |
 | 22 | What is the difference between Poll() and Remove() in Queue? | `poll()` retrieves and removes the head **or returns null** if empty. `remove()` does the same but **throws an exception** if empty. | - |
@@ -84,3 +84,7 @@ public class CollectionsExample {
 ```
 
 ---
+## Notes:
+ - In Java, "non-synchronized" signifies that a method or block of code does not have any built-in mechanism to control concurrent access from multiple threads. When a method is not synchronized, multiple threads can execute it simultaneously, potentially leading to data corruption or inconsistent state if the method accesses shared resources. 
+    - on-synchronized methods are faster due to the absence of locking overhead
+ - synchronized methods or blocks, which allow only one thread to execute them at a time, ensuring data consistency.
