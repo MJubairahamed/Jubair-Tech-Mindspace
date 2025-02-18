@@ -95,19 +95,18 @@ interface Engine {
   - Use **abstract class** when you need **state (instance variables)** and **partial implementation**.  
   - Use **interface** when you need **multiple inheritance** or **a strict contract** for implementation.  
 
-## 
 
-- * "Can an interface have concrete methods after Java 8?" (**Yes, via default/static methods**).  
+- "Can an interface have concrete methods after Java 8?" (**Yes, via default/static methods**).  
 
-- * "What is the difference between default and static methods in interfaces?" (**Default methods can be overridden, but static methods belong to the interface itself**).  
-- * "Can an interface extend another interface?" (**Yes, multiple inheritance is allowed**).  
+- "What is the difference between default and static methods in interfaces?" (**Default methods can be overridden, but static methods belong to the interface itself**).  
+- "Can an interface extend another interface?" (**Yes, multiple inheritance is allowed**).  
 
-- * Why were default methods introduced in Java 8?
-    - * To enable backward compatibility without breaking existing implementations.Before Java 8, if a new method was added to an interface, all implementing classes needed to implement it. Default methods allow adding new methods without breaking existing implementations.
-    - * Also, Java 8 introduced Lambda Expressions and Functional Interfaces (interfaces with a single abstract method). To support this, changes in interfaces were required.
+- Why were default methods introduced in Java 8?
+    - To enable backward compatibility without breaking existing implementations.Before Java 8, if a new method was added to an interface, all implementing classes needed to implement it. Default methods allow adding new methods without breaking existing implementations.
+    - Also, Java 8 introduced Lambda Expressions and Functional Interfaces (interfaces with a single abstract method). To support this, changes in interfaces were required.
 
-- * Can default methods be overridden?
-    - * Yes, implementing classes can override default methods.
+- Can default methods be overridden?
+    - Yes, implementing classes can override default methods.
 ```java
     interface Vehicle {
         default void start() {
@@ -126,8 +125,8 @@ interface Engine {
         }
     }
 ```
-- * Can static methods in interfaces be overridden?
-    -   * No, static methods belong to the interface and cannot be overridden by implementing classes.
+- Can static methods in interfaces be overridden?
+    - No, static methods belong to the interface and cannot be overridden by implementing classes.
 ```java
     interface Engine {
         static void engineType() {
@@ -142,12 +141,13 @@ interface Engine {
     }
 ```
 
-- * Why do we need static methods in interfaces?
-    - * To define helper/utility methods within the interface instead of using external utility classes.
+- Why do we need static methods in interfaces?
+    - To define helper/utility methods within the interface instead of using external utility classes.
 
-- *  Explain try-with-resources with examples:
-    - *  It is introduced in Java 7 — allows us to declare resources to be used in a try block with the assurance that the resources will be closed after the execution of that block.The resources declared need to implement the AutoCloseable interface.
- - * Before Java 7
+### **Explain try-with-resources with examples** 
+
+    - It is introduced in Java 7 — allows us to declare resources to be used in a try block with the assurance that the resources will be closed after the execution of that block.The resources declared need to implement the AutoCloseable interface.
+ - Before Java 7
 ```java
     InputStream stream = new MyInputStream(...);
     try {
