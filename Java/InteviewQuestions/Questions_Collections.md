@@ -16,7 +16,7 @@
 
 3. **What is the difference between `Collection` and `Collections` in Java?**  
    
-        | Feature | **Collection** | **Collections** |
+     | Feature | **Collection** | **Collections** |
         |---------|--------------|----------------|
         | **Definition** | `Collection` is an **interface** in Java that represents a group of objects. | `Collections` is a **utility class** that provides static methods for working with collections. |
         | **Package** | `java.util.Collection` (superinterface for List, Set, Queue). | `java.util.Collections` (utility class for collection manipulation). |
@@ -56,8 +56,8 @@
 
 7. **How does `HashSet` ensure uniqueness?**  
    - `HashSet` uses **hashing** and relies on `hashCode()` and `equals()` to prevent duplicates.  
-        <img src="HashSetUniqueFlwo_ss.png" class="img-rounded" alt="Cinque Terre">
-
+        <img src="" class="img-rounded" alt="Cinque Terre">
+        ![Hashset Flow!](/Java/Images/HashSetUniqueFlwo_ss.png "Hashset")
 8. **What is the difference between `HashSet`, `LinkedHashSet`, and `TreeSet`?**  
    - `HashSet` - **Unordered** and provides O(1) operations.  
    - `LinkedHashSet` - **Maintains insertion order**.  
