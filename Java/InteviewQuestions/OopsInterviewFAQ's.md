@@ -1,4 +1,4 @@
-Here are **10 advanced Object-Oriented Programming (OOP) concepts** that are frequently tested in **senior-level Java interviews**, along with their explanations and examples:  
+**Advanced Object-Oriented Programming (OOP) concepts** that are frequently tested in **senior-level Java interviews**
 
 ---
 
