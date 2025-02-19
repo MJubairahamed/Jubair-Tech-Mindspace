@@ -74,16 +74,12 @@ Advanced `String` concepts are **frequently tested in senior-level Java intervie
 - Each character is stored as **two bytes** (16 bits).  
 - Unicode characters beyond **U+FFFF (Supplementary characters)** are stored as **surrogate pairs** (two `char` values).  
 
----
-
 ### 2. **What are the memory implications of creating Strings in Java?**  
 **Answer:**  
 - **String literals** are stored in the **string pool** (efficient memory usage).  
 - **New String objects (`new String("abc")`) are stored in heap memory** (inefficient if pooling is not used).  
 - **Excessive String operations** (e.g., concatenation inside loops) can lead to **heap fragmentation and increased GC pressure**.  
 - Use **`StringBuilder` or `StringBuffer`** for better memory efficiency.  
-
----
 
 ### 3. **How does `split()` in Java behave with regex, and what is a common pitfall?**  
 **Answer:**  
@@ -95,8 +91,6 @@ Advanced `String` concepts are **frequently tested in senior-level Java intervie
   ```
 - **Performance Impact**: For simple delimiters, use `StringTokenizer` or manual parsing for better performance.  
 
----
-
 ### 4. **What is the difference between `concat()` and `+` operator in Java Strings?**  
 **Answer:**  
 - Both methods concatenate strings, but:  
@@ -107,8 +101,6 @@ Advanced `String` concepts are **frequently tested in senior-level Java intervie
   String b = null;
   String result = a.concat(b); // Throws NullPointerException
   ```
-
----
 
 ### 5. **What is `StringJoiner` and how does it differ from `String.join()`?**  
 **Answer:**  
@@ -127,8 +119,6 @@ Advanced `String` concepts are **frequently tested in senior-level Java intervie
   - `StringJoiner` allows **custom prefix & suffix**.  
   - `String.join()` is a **static method**, better for simple use cases.  
 
----
-
 ### 6. **How can you efficiently check if a String contains only digits?**  
 **Answer:**  
 - Using **Regex** (not optimal for performance-heavy applications):  
@@ -140,8 +130,6 @@ Advanced `String` concepts are **frequently tested in senior-level Java intervie
   boolean isNumeric = str.chars().allMatch(Character::isDigit);
   ```
 
----
-
 ### 7. **How can you make a String mutable in Java?**  
 **Answer:**  
 - Since `String` is **immutable**, alternatives include:  
@@ -152,8 +140,6 @@ Advanced `String` concepts are **frequently tested in senior-level Java intervie
   chars[0] = 'J'; 
   System.out.println(new String(chars)); // "Jello"
   ```
-
----
 
 ### 8. **What are memory leaks related to Strings in Java, and how can you avoid them?**  
 **Answer:**  
@@ -169,8 +155,6 @@ Advanced `String` concepts are **frequently tested in senior-level Java intervie
     smallString = new String(smallString);
     ```
 
----
-
 ### 9. **How can you optimize searching operations on large Strings?**  
 **Answer:**  
 - **Use `indexOf()` or `contains()`** for simple searches.  
@@ -181,8 +165,6 @@ Advanced `String` concepts are **frequently tested in senior-level Java intervie
   boolean found = matcher.find(); // True
   ```
 - **Use Trie Data Structure** for efficient prefix-based search.  
-
----
 
 ### 10. **How does `String.format()` work, and when should you use it?**  
 **Answer:**  
