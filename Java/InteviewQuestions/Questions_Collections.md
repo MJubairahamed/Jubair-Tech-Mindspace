@@ -145,16 +145,19 @@
 ### **Use Cases & Best Practices**  
 
 22. **How do you implement an LRU Cache in Java?**  
-   - Use `LinkedHashMap` with `accessOrder=true` and override `removeEldestEntry()`.  
+   - Use `LinkedHashMap` with `accessOrder=true` and override `removeEldestEntry()`.  An LRU (Least Recently Used) cache is a type of cache that evicts the least recently accessed element when the cache is full.
+        - [Example LRU](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/LeastRecentlyUsedCache.java)
 
 23. **How do you remove duplicates from an `ArrayList`?**  
    - Use `Set` (`HashSet` for unordered, `LinkedHashSet` for ordered).  
-
+        -  [Code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/removeduplicatesarraylist/RemoveDuplicatesArrayListUsingStream.java)
 24. **How would you count the occurrences of words in a sentence using Java Collections?**  
    - Use `HashMap<String, Integer>` to store word frequencies.  
+        -  [Code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/WordCountFromSentence.java)
 
 25. **Which Java collection would you use for a multi-threaded job queue?**  
-   - Use `BlockingQueue` (`LinkedBlockingQueue` or `ArrayBlockingQueue`).  
+   - BlockingQueue provides thread-safe operations for adding and retrieving elements, with the added benefit of blocking behavior when the queue is either full or empty. This eliminates the need for manual synchronization and wait/notify mechanisms, simplifying the code and reducing the risk of errors.
+   - LinkedBlockingQueue is often preferred due to its flexibility.  Use (`LinkedBlockingQueue` or `ArrayBlockingQueue`).  
 
 26. **Which collection would you use for real-time leaderboard ranking?**  
    - Use `TreeMap` (sorted order) or `PriorityQueue`.  
@@ -169,6 +172,7 @@
 
 29. **What is `EnumSet`, and when is it used?**  
    - A specialized `Set` for Enums with **high performance** and **bitwise storage**.  
+        -  [Code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/EnumSetsExample.java)
 
 30. **What are the best practices for using Java Collections in large-scale applications?**  
    - Use **lazy initialization**, **proper data structures**, and **optimize memory usage**.  
