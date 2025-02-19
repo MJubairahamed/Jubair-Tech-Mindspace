@@ -1,49 +1,74 @@
-# String
-### Definition
-In Java, a `String` is a built-in class used to represent sequences of characters. It can be created using string literals (e.g., `String str1 = "Java program";`) or through constructors. Strings are immutable, meaning they cannot be modified once created. Java also maintains a pool of string constants to optimize memory; identical string literals refer to the same object in the pool. New string objects created with the `new` keyword reside in heap memory. There are three string constructors: `String(char[])`, which converts a character array to a string; `String(byte[])`, converting a byte array; and `String(String)` for creating new strings from existing ones. Reference variables in Java hold or point to objects, including strings.
+# Java String - Interview Notes  
 
-### How strings are stored?
-* String is special class in Java and all String literal e.g. "abc"  (anything which is inside double quotes are String literal in Java) are maintained in a separate String pool, special memory location inside Java memory.
+- **Definition**: `String` is a built-in class representing sequences of characters.  
+- **Creation**:  
+  - Using **string literals** (e.g., `String str1 = "Java program";`) → Stored in **String Pool**.  
+  - Using **constructors** (e.g., `new String("Java")`) → Stored in **Heap Memory**.  
+  - **JVM** doesn't perform String pool check if you create object using 'new' operator.
+      ![String Storage!](/Java/Images/StringStorage.png "String Storage")
+- **Immutability**: Strings **cannot be modified** once created.  
+- **String Pool Optimization**: Identical string literals refer to the **same object** in the **String Constant Pool** to save memory.  
+- **Heap Allocation**: Strings created with `new` are stored in the heap, even if they have the same value as a pooled string.  
+- **Constructors**:  
+  1. `String(char[])` → Converts character array to string.  
+  2. `String(byte[])` → Converts byte array to string.  
+  3. `String(String)` → Creates a new string from an existing one.  
+- **Reference Variables**: Store memory addresses pointing to string objects.
 
-* Any time you create a new String object using String literal, JVM first checks String pool and if an object with similar content available, than it returns that and doesn't create a new object.
+---
 
-* JVM doesn't perform String pool check if you create object using 'new' operator.
+### **Java `String` - Key Interview Points**  
 
-![String Storage!](/Java/Images/StringStorage.png "String Storage")
+1. **Immutability**:  
+   - `String` objects are immutable, meaning modifications create new instances.  
+   - **Why?**  
+     - Improves performance by enabling string pooling.  
+     - Saves memory by reusing existing string literals instead of creating new ones.  
 
-## Concise list of key points about Java `String` that are frequently asked during interviews:
+2. **String Pool (Interning)**:  
+   - Java stores string literals in a **special memory pool** to optimize memory.  
+   - If a string with the same content exists, new references point to the existing object.  
+   - The `intern()` method explicitly stores a string in the pool if not already present.  
 
-1. **Immutable Nature**: Strings in Java are immutable, meaning once a string is created, its value cannot be changed. Any modification creates a new object.
-    * Why Java Strings are immutable?
-        * Main reason behind it is for better performance. 
-        * Creating a copy of existing java String is easier as there is no need to create a new instance but can be easily created by pointing to already existing String. This saves valuable primary memory.
+3. **Creating Strings**:  
+   - **String Literals**: `String str = "Java";` (stored in the string pool).  
+   - **Using `new` Keyword**: `String str = new String("Java");` (creates a new object in heap memory).  
 
-2. **String Pool**: Java maintains a special memory pool (string pool) to store string literals. If a string with the same content exists in the pool, new references point to the existing object instead of creating a new one.
+4. **String Comparison**:  
+   - Use `.equals()` to compare string **content**.  
+   - `==` checks if two references point to the same object, not content.  
 
-3. **Creating Strings**: Strings can be created using string literals (e.g., `String str = "text";`) or the `new` keyword (e.g., `String str = new String("text");`). The former allows for pooling optimization.
+5. **String Methods** *(Commonly Asked in Interviews)*:  
+   - `length()`, `charAt()`, `substring()`, `toLowerCase()`, `toUpperCase()`, `trim()`,  
+   - `equals()`, `equalsIgnoreCase()`, `compareTo()`, `split()`, `replace()`.  
 
-4. **String Methods**: Familiarity with common `String` methods such as `length()`, `charAt()`, `substring()`, `toLowerCase()`, `toUpperCase()`, `trim()`, `equals()`, `equalsIgnoreCase()`, `compareTo()`, `split()`, and `replace()` is crucial.
+6. **Performance & Concatenation**:  
+   - Using `+` repeatedly creates multiple string objects due to immutability.  
+   - **Use `StringBuilder` or `StringBuffer`** for efficient string manipulation.  
 
-5. **String Comparison**: Use `equals()` to compare string content instead of `==`, which compares object references.
+7. **StringBuilder vs. StringBuffer**:  
+   - `StringBuilder` (faster, non-thread-safe).  
+   - `StringBuffer` (thread-safe, synchronized).  
 
-6. **StringBuilder and StringBuffer**: Both classes offer mutable alternatives to `String` for efficient string manipulation. `StringBuffer` is thread-safe (synchronized), whereas `StringBuilder` is not but offers better performance in single-threaded contexts.
+8. **String and Hashing**:  
+   - Strings are widely used as keys in `HashMap` because immutability ensures a **consistent hash code**.  
 
-7. **Concatenation and Performance**: Using the `+` operator for string concatenation creates new objects due to immutability, potentially impacting performance. `StringBuilder` or `StringBuffer` is recommended for iterative concatenation.
+9. **Character Arrays vs. Strings**:  
+   - `String` is **immutable**, while `char[]` is **mutable**.  
+   - Using `char[]` for passwords is safer as it can be cleared after use.  
 
-8. **Interning Strings**: The `intern()` method returns a canonical representation of the string from the pool if it already exists, helping save memory.
+10. **Regular Expressions (Regex) in Strings**:  
+   - Methods like `matches()`, `split()`, `replaceAll()`, and `replaceFirst()` support regex operations.  
 
-9. **Character Arrays vs. Strings**: Strings are immutable, while character arrays (`char[]`) are mutable. This distinction matters for sensitive data storage (e.g., passwords) due to security reasons.
+11. **Unicode Support**:  
+   - Java `String` supports **Unicode**, making it useful for internationalization.  
 
-10. **Regular Expressions (Regex)**: The `String` class supports basic regex functionalities through methods like `matches()`, `split()`, `replaceAll()`, and `replaceFirst()`.
+12. **Empty vs. Null Strings**:  
+   - `""` (empty string) is a valid `String` object.  
+   - `null` means the reference doesn’t point to any object.  
 
-11. **String immutability impact on Hashing**: Strings are commonly used as keys in `HashMap` due to their immutability, ensuring consistent hash codes for the same content.
+13. **Substring Memory Issue (Fixed in Java 7+)**:  
+   - Before Java 7, `substring()` used to **share memory** with the original string, leading to **memory leaks**.  
+   - Now, it creates a **new character array** instead.  
 
-12. **Unicode Support**: Java `String` supports Unicode, making it suitable for internationalization.
-
-13. **Difference between `==` and `.equals()`**: `==` compares memory references, while `.equals()` checks the content of the strings.
-
-14. **Substring Sharing Memory**: Prior to Java 7, `substring()` used to share the memory with the original string (due to `char[]` backing). This was changed to avoid memory leaks.
-
-15. **Empty and Null Strings**: An empty string (`""`) is different from a `null` reference; it represents a `String` object with zero characters.
-
-Having a deep understanding of these key points will help you effectively handle string-related questions in interviews.
+---

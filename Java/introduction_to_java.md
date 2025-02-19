@@ -48,4 +48,13 @@
 | **Output**                | No file is created, it just runs the code.   | Creates a **new file** that can be run on any computer. |
 | **Examples**              | Python, JavaScript                          | C, C++, Java                                  |
 
+-
+### Note: Java uses both a compiler and an interpreter** as part of its execution process. Here's how it works:
+
+1. **Compilation Stage**: When you write Java code, it is first compiled by the **Java compiler (`javac`)**. The compiler translates your source code into an intermediate form called **bytecode**. This bytecode is platform-independent, meaning it can run on any system that has a Java Virtual Machine (JVM).
+
+2. **Interpretation/Execution Stage**: The **JVM** (Java Virtual Machine) then interprets this bytecode. The JVM includes an **interpreter** that reads and executes the bytecode line by line, as well as a **Just-In-Time (JIT) compiler** that can optimize the code by compiling it to native machine code for faster execution.
+
+This two-step process makes Java both a compiled and an interpreted language, providing a good balance of performance, portability, and platform independence.
+
 ![Interperter_Compiler!](/Java/Images/Interperter_Compiler.png "Interperter & Compiler")
