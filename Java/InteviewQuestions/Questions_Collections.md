@@ -189,7 +189,7 @@
 | **Flexibility** | One sorting logic per class. | Multiple sorting strategies possible. |
 | **Best Use Case** | Simple sorting when natural order is sufficient. | Complex sorting scenarios (e.g., sorting by multiple fields). |
 
-[Example for sort with and without comparator](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/ComparatorInterfaceExample.java)
+    - [Code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/ComparatorInterfaceExample.java)
 ---
 ## Notes:
  - In Java, "non-synchronized" signifies that a method or block of code does not have any built-in mechanism to control concurrent access from multiple threads. When a method is not synchronized, multiple threads can execute it simultaneously, potentially leading to data corruption or inconsistent state if the method accesses shared resources. 
