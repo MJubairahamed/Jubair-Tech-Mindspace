@@ -203,5 +203,18 @@ class Producer implements Runnable {
     }
 }
 ```
+### **11. What Happens When You Run `1.0 / 0.0` in Java?**  
 
+- In Java, **floating-point division by zero** follows the **IEEE 754 standard** for floating-point arithmetic.  
+- **`1.0 / 0.0`** results in **`Infinity`** instead of throwing an exception.  
+- Example:  
+  ```java
+  public class Test {
+      public static void main(String[] args) {
+          System.out.println(1.0 / 0.0); // Output: Infinity
+      }
+  }
+  ```
+- However, **integer division by zero (`1 / 0`)** throws an `ArithmeticException`.  
+- **Conclusion:** In **floating-point arithmetic**, division by zero **does not cause an exception**, but returns **positive or negative infinity** depending on the sign of the numerator. 🚀
 ---

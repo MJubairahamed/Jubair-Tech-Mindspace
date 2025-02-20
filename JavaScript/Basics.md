@@ -133,7 +133,9 @@
 ### **13. JavaScript Data Types & Type Coercion**  
 - JavaScript is **loosely typed**, meaning variables can change types dynamically.  
 - **Primitive types**: `String`, `Number`, `Boolean`, `Null`, `Undefined`, `Symbol`, `BigInt`.  
-- **Reference types**: `Object`, `Array`, `Function`.  
+- **Reference types**: `Object`, `Array`, `Function`. 
+- Type Coercion:
+    - Type coercion in JavaScript refers to the automatic conversion of values from one data type to another during operations or comparisons. This implicit conversion happens when JavaScript expects a value of a certain type but receives a different one.
 - Example of **type coercion**:  
   ```js
   console.log("5" + 2);  // "52" (string)
@@ -169,7 +171,7 @@
 ---
 
 ### **16. JavaScript Security Best Practices**  
-- Avoid **`eval()`** due to security risks.  
+- Avoid **`eval()`** due to security risks, because it makes code injection bugs possible.  
 - Use **`Content Security Policy (CSP)`** to prevent XSS attacks.  
 - Always **validate user inputs**.  
 
@@ -206,75 +208,11 @@
 - Use **`const` and `let`** instead of `var`.  
 - Follow **modular coding** with separate files.  
 - Use **strict mode (`"use strict"`)** for cleaner code.  
+    -  It enforce stricter parsing and error handling on the code at runtime. It helps to write cleaner code and catch errors and bugs that might otherwise go unnoticed.
 - Write **self-documenting code** with meaningful variable and function names.  
 
 ---
-I haven't extracted the content from your attached **PDF** yet. Let me now process the document and provide a **structured summary** based on its actual content. Give me a moment. 🚀
-
-Here is a **concise summary** of the **JavaScript** article, organized **topic-wise** for interview preparation:  
-
----
-
-### **21. JavaScript in Web Development**  
-- Works closely with **HTML** to **modify webpage structure** dynamically.  
-- Can enhance **CSS animations and styles** using JavaScript.  
-- Facilitates **seamless user experiences** by **handling form validation, dynamic menus, and interactive elements**.  
-
----
-
-### **22. JavaScript Frameworks and Libraries**  
-- Popular frameworks include **React.js, Angular, and Vue.js**.  
-- Libraries like **jQuery** simplify **DOM manipulation and AJAX requests**.  
-- **Node.js** allows JavaScript to run on the **server side**, enabling **full-stack development**.  
-
----
-
-### **23. JavaScript and AJAX**  
-- **Asynchronous JavaScript and XML (AJAX)** allows data retrieval from servers **without refreshing the page**.  
-- Used for **live search, real-time updates, and single-page applications (SPA)**.  
-- Example using `fetch()`:  
-  ```js
-  fetch('https://api.example.com/data')
-    .then(response => response.json())
-    .then(data => console.log(data));
-  ```  
-
----
-
-### **24. JavaScript Event Handling**  
-- JavaScript follows an **event-driven programming** model.  
-- Uses event listeners such as `click`, `mouseover`, `keydown`, and `scroll` to make web pages interactive.  
-- Example:  
-  ```js
-  document.getElementById("btn").addEventListener("click", function() {
-    alert("Button clicked!");
-  });
-  ```  
-
----
-
-### **25. JavaScript Security Considerations**  
-- Avoid using `eval()` as it poses **security vulnerabilities**.  
-- JavaScript should **not be relied upon for security measures**, as it can be bypassed by disabling it in the browser.  
-- Always use **server-side validation** in addition to client-side validation.  
-
----
-
-### **26. JavaScript Performance Optimization**  
-- Use **`let` and `const`** instead of `var` to avoid variable scope issues.  
-- Optimize **loops** using `forEach`, `map`, or `reduce` instead of traditional `for` loops.  
-- Minimize **DOM manipulations** as they can slow down performance.  
-
----
-
-### **27. JavaScript Best Practices**  
-- Use **modular coding** and separate JavaScript files for better maintainability.  
-- Follow the **"Unobtrusive JavaScript"** principle to avoid interfering with HTML and CSS.  
-- Always test for **cross-browser compatibility**.  
-
----
-
-### **28. The Future of JavaScript**  
+### **21. The Future of JavaScript**  
 - JavaScript is evolving with **new ES6+ features**, making it more powerful and efficient.  
 - Expanding into **AI, IoT, and Blockchain applications**.  
 - Continuous improvements in **browser engines and JavaScript performance**.  

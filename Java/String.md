@@ -178,3 +178,18 @@ Advanced `String` concepts are **frequently tested in senior-level Java intervie
   - **Better readability** for constructing complex messages.  
   - **Localization support** (via `Locale` argument).  
 
+  ### 11. **Is it Necessary to Declare Immutable Objects as `final`?**  
+
+- **Not mandatory**, but declaring an immutable class as `final` is a **best practice** to prevent subclassing, which could introduce mutability.  
+- **Fields should be `private final`** to ensure they cannot be modified after object creation.  
+- If a class is **not declared `final`**, it can still be immutable if all fields are `final` and there are **no setter methods**.  
+- Example (Immutable without `final` class):  
+  ```java
+  class ImmutableExample {
+      private final String name;
+      public ImmutableExample(String name) { this.name = name; }
+      public String getName() { return name; }
+  }
+  ```
+
+

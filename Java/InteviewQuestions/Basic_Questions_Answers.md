@@ -172,3 +172,42 @@ interface Engine {
     // handle exception
     }
 ```
+  
+
+### ** `PATH` Variable:**  
+- The `PATH` environment variable tells the **operating system** where to find executable files, including Java tools like `javac` and `java`.  
+- It should include the **bin directory** of the Java installation (e.g., `C:\Program Files\Java\jdk-17\bin`).  
+- Without setting `PATH`, running `javac` or `java` from the command line will result in a **"command not found"** error.  
+- Example:  
+  ```sh
+  export PATH=$PATH:/usr/lib/jvm/java-17-openjdk-amd64/bin
+  ```
+
+### ** `CLASSPATH` Variable:**  
+- The `CLASSPATH` environment variable tells the **JVM** where to find **Java class files or JAR files** for execution and compilation.  
+- If not set, Java looks in the **current directory (`.`) by default**.  
+- Required when referencing **external libraries** in class execution.  
+- Example:  
+  ```sh
+  export CLASSPATH=.:/home/user/lib/myLibrary.jar
+  ```
+
+  ### **Java `Properties` Class**  
+
+- The **`Properties` class** in Java is a **subclass of `Hashtable`** used to store **key-value pairs**, where both the key and value are **Strings**.  
+- It is commonly used for **reading and writing configuration files**, such as `.properties` files for application settings.  
+- Supports **I/O operations** to **load and store properties** from a file using methods like `load()` and `store()`.  
+- Example:  
+  ```java
+  import java.io.FileInputStream;
+  import java.util.Properties;
+
+  public class PropertiesExample {
+      public static void main(String[] args) throws Exception {
+          Properties prop = new Properties();
+          prop.load(new FileInputStream("config.properties")); // Load properties file
+          System.out.println(prop.getProperty("database.url")); // Read property
+      }
+  }
+  ```
+
