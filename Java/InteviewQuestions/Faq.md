@@ -2,10 +2,10 @@
 • What is the importance of the hashCode() and equals() contract?
 
 • Can we use HashMap in a multi-threaded environment?
-• What is the Properties class?
+• 
 • What are weak references in Java?
 • How does Java handle stack and heap memory?
-• What will happen if you run 1.0/0.0?
+
 
 𝗖𝗼𝗹𝗹𝗲𝗰𝘁𝗶𝗼𝗻𝘀 𝗮𝗻𝗱 𝗗𝗮𝘁𝗮 𝗦𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗲𝘀
 • Differentiate between the Vector and ArrayList collections in Java.
