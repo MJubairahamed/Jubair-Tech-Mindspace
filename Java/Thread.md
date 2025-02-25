@@ -125,11 +125,7 @@ public class ThreadJoinExample {
 | `T get()` | Retrieves the result (blocks if not ready). |
 | `T get(long timeout, TimeUnit unit)` | Retrieves result with a timeout. |
 
----
-
 ✅ **Future waits until the task completes and retrieves the result.**  
-
----
 
 ### **🔹 Handling `Future` Without Blocking (`isDone()`)**
 Instead of blocking with `get()`, you can check `isDone()` in a loop.
@@ -143,8 +139,6 @@ System.out.println("Task completed, result: " + future.get());
 ```
 ✅ **Avoids unnecessary blocking, allowing other tasks to continue.**
 
----
-
 ### **🔹 Cancelling a Future Task**
 If a task is taking too long, you can cancel it.
 
@@ -154,8 +148,6 @@ System.out.println("Task cancelled: " + cancelled);
 ```
 ✅ **Stops execution if the task hasn’t started or is interruptible.**  
 
----
-
 ### **🔹 `Future` vs `CompletableFuture`**
 | Feature | `Future<T>` | `CompletableFuture<T>` |
 |---------|------------|----------------------|
@@ -164,10 +156,35 @@ System.out.println("Task cancelled: " + cancelled);
 | **Exception Handling** | Uses `try-catch` | Supports `exceptionally()` |
 | **Chaining Tasks** | No | Yes (`thenCompose()`) |
 
----
-
 ### **🔹 𝗪𝗵𝗲𝗻 𝘁𝗼 𝗨𝘀𝗲 `𝗖𝗮𝗹𝗹𝗮𝗯𝗹𝗲` 𝗮𝗻𝗱 `𝗙𝘂𝘁𝘂𝗿𝗲`?**
 ✅ When **asynchronous processing** is needed but callbacks aren’t required.  
 ✅ When managing **long-running tasks** in **multi-threaded applications**. Split large tasks into smaller parallel ones.
 ✅ When using `ExecutorService` to **execute background tasks**.  
 ✅ Concurrent API Calls: Retrieve results from multiple endpoints simultaneously.
+
+---
+### **Difference Between `sleep()` and `wait()` in Java**  
+
+Both `sleep()` and `wait()` cause a thread to pause, but they have different behaviors and use cases.
+- **Sleep()** is a blocking operation that keeps a hold on the monitor/lock of the shared objects for the specified number of milliseconds.Use when delaying execution.
+- **Wait()** is pauses the thread until either the specified number of milliseconds have elapsed or it recieves a desired notification from another thread. Note whithout keep hold on the monitor/lock of the shared objects. use when coordinating multiple threads 
+
+### **🔹 Key Differences of `Sleep` and `Wait`**
+| Feature | `sleep(long ms)` | `wait(long ms)` |
+|---------|----------------|----------------|
+| **Defined In** | `Thread` class | `Object` class |
+| **Purpose** | Pauses the thread for a given time | Makes the thread wait until notified |
+| **Lock Handling** | Does **not** release the lock | **Releases the lock** on the object |
+| **Resumption** | Automatically resumes after timeout | Needs `notify()` or `notifyAll()` |
+| **Usage Scenario** | Used to introduce **delays** | Used for **thread communication** |
+
+
+### **🔹 When to Use What?**
+| Use Case | Use `sleep()` | Use `wait()` |
+|----------|-------------|-------------|
+| **Delay execution for a fixed time** | ✅ Yes | ❌ No |
+| **Pause execution until another thread notifies** | ❌ No | ✅ Yes |
+| **Retain object lock while sleeping** | ✅ Yes | ❌ No (Releases lock) |
+| **Thread synchronization and coordination** | ❌ No | ✅ Yes |
+
+---
