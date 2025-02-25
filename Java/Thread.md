@@ -85,13 +85,12 @@ public class ThreadJoinExample {
 
 ---
 
-## **🔹 Thread Synchronization & Locks**
-### **Why Synchronization?**
+### **🔹 Why Synchronization?**
 - To prevent **race conditions** where multiple threads access shared resources incorrectly.  
 - Ensures **thread safety** when modifying shared objects.
 
 
-### **What is `Callable` in Java?**  
+### **🔹What is `Callable` in Java?**  
 `Callable<T>` is an interface in Java introduced in **Java 5** under the **`java.util.concurrent`** package. It is used to define **tasks that return a result** and **can throw checked exceptions**, unlike `Runnable`.
 
 ---
@@ -105,8 +104,70 @@ public class ThreadJoinExample {
 | **Usage** | Used with `Thread` | Used with `ExecutorService.submit()` |
 
 ---
-
-
-
 - **Callable Example** [code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/ThreadConcepts/CallableExample.java)
 - **MultiCallable Example** [code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/ThreadConcepts/MultiCallableExample.java)
+
+---
+### **What is `Future` in Java?**  
+`Future<T>` is an interface in Java's **`java.util.concurrent`** package that represents the **result of an asynchronous computation**. It allows you to:  
+✅ **Check if a task is completed** (`isDone()`).  
+✅ **Cancel a task** (`cancel()`).  
+✅ **Retrieve the result** (`get()`, which blocks until completion).  
+
+---
+
+### **🔹 Key Methods of `Future<T>`**
+| **Method** | **Description** |
+|------------|----------------|
+| `boolean cancel(boolean mayInterruptIfRunning)` | Attempts to cancel execution. |
+| `boolean isCancelled()` | Returns `true` if the task was cancelled. |
+| `boolean isDone()` | Returns `true` if the task is completed. |
+| `T get()` | Retrieves the result (blocks if not ready). |
+| `T get(long timeout, TimeUnit unit)` | Retrieves result with a timeout. |
+
+---
+
+✅ **Future waits until the task completes and retrieves the result.**  
+
+---
+
+### **🔹 Handling `Future` Without Blocking (`isDone()`)**
+Instead of blocking with `get()`, you can check `isDone()` in a loop.
+
+```java
+while (!future.isDone()) {
+    System.out.println("Task is still running...");
+    Thread.sleep(500);
+}
+System.out.println("Task completed, result: " + future.get());
+```
+✅ **Avoids unnecessary blocking, allowing other tasks to continue.**
+
+---
+
+### **🔹 Cancelling a Future Task**
+If a task is taking too long, you can cancel it.
+
+```java
+boolean cancelled = future.cancel(true);
+System.out.println("Task cancelled: " + cancelled);
+```
+✅ **Stops execution if the task hasn’t started or is interruptible.**  
+
+---
+
+### **🔹 `Future` vs `CompletableFuture`**
+| Feature | `Future<T>` | `CompletableFuture<T>` |
+|---------|------------|----------------------|
+| **Blocking** | Yes (uses `get()`) | No (async support) |
+| **Callbacks** | No | Yes (`thenApply()`, `thenAccept()`) |
+| **Exception Handling** | Uses `try-catch` | Supports `exceptionally()` |
+| **Chaining Tasks** | No | Yes (`thenCompose()`) |
+
+---
+
+### **🔹 𝗪𝗵𝗲𝗻 𝘁𝗼 𝗨𝘀𝗲 `𝗖𝗮𝗹𝗹𝗮𝗯𝗹𝗲` 𝗮𝗻𝗱 `𝗙𝘂𝘁𝘂𝗿𝗲`?**
+✅ When **asynchronous processing** is needed but callbacks aren’t required.  
+✅ When managing **long-running tasks** in **multi-threaded applications**. Split large tasks into smaller parallel ones.
+✅ When using `ExecutorService` to **execute background tasks**.  
+✅ Concurrent API Calls: Retrieve results from multiple endpoints simultaneously.
