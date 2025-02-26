@@ -60,7 +60,16 @@
   }
   ```  
 
-🚀 **Key Difference:** `volatile` ensures **visibility in multi-threading**, while `transient` prevents **serialization** of variables.
----
+### 8. What is the difference between `fail-fast` &  `fail-safe`iterators in Java?**  
+- **Fail-Fast Iterators:** Fail-fast iterators in Java are designed to immediately throw a **ConcurrentModificationException** if the underlying collection is structurally modified while the iterator is in use (except for modifications made through the iterator's own methods like remove()). They ensure that the iteration process is halted as soon as a concurrent modification is detected, preventing potential inconsistencies.
+- Fail-fast iterators provide immediate feedback about concurrent modifications but might lead to exceptions and termination of the iteration.
 
+- **Fail-Safe Iterators:** Fail-safe iterators in Java operate on a cloned copy of the collection. They do not throw exceptions if the underlying collection is modified during iteration. However, any modifications made to the original collection after the iterator is created will not be reflected in the iterator. This approach ensures that the iterator operates on a stable copy of the data and avoids potential concurrent modification issues.
+- Fail-safe iterators continue the iteration without exceptions but might not reflect recent changes in the collection.
+
+- **Fail Fast** [code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/CheckFailFast.java)
+- **Fail Safe** [code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/CheckFailSafe.java)
+
+### 9. What is the instanceOf Operator ?**  
+- 
 

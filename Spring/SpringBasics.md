@@ -93,3 +93,50 @@ public class MyBean {
     }
 }
 ```
+### **Does Spring Bean Provide Thread Safety**
+- The default scope of the spring bean is singleton, so there will only one instance per context. That mean a class level variable that any thread can update will lead to data inconsistent. 
+- To achieve thread safety either change the scope to prototype/session or Keep beans stateless,meaning they do not store instance variables. This eliminates concurrency issue.
+Example:
+```java
+@Component
+public class MyService {
+    public String process(String input) {
+        return "Processed: " + input;
+    }
+}
+```
+
+---
+### **What is Spring IoC Container?**  
+
+The **Spring IoC (Inversion of Control) Container** is responsible for managing the lifecycle, configuration, and dependencies of Spring beans. The IoC container follows the **Dependency Injection (DI)** principle to provide objects (beans) to a Spring application rather than the application manually creating them.  
+
+### **How Does Spring IoC Work?**  
+1. **Defines Beans** – Objects are defined in XML configuration, Java-based configuration, or using annotations.
+2. **Manages Dependencies** – Automatically injects dependencies into beans.
+3. **Controls Lifecycle** – Handles bean initialization, dependency injection, and destruction.
+
+### **Types of IoC Containers in Spring**  
+
+1. **BeanFactory (Lightweight Container)**  
+   - The simplest container that provides basic DI support.
+   - **Example:**
+     ```java
+     Resource resource = new ClassPathResource("beans.xml");
+     BeanFactory factory = new XmlBeanFactory(resource);
+     ```
+   - Rarely used today, as `ApplicationContext` is preferred.
+
+2. **ApplicationContext (Advanced Container)**  
+   - A more powerful container that includes features like event propagation, declarative mechanisms, and internationalization.
+   - **Common Implementations:**
+     - `ClassPathXmlApplicationContext` – Loads beans from an XML configuration file.
+     - `AnnotationConfigApplicationContext` – Uses Java-based configuration with `@Configuration`.
+     - `WebApplicationContext` – Special version for web applications.
+   - **Example:**
+     ```java
+     ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+     MyBean myBean = context.getBean(MyBean.class);
+     ```
+
+---

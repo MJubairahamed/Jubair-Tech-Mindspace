@@ -127,27 +127,6 @@ public class ThreadJoinExample {
 
 ✅ **Future waits until the task completes and retrieves the result.**  
 
-### **🔹 Handling `Future` Without Blocking (`isDone()`)**
-Instead of blocking with `get()`, you can check `isDone()` in a loop.
-
-```java
-while (!future.isDone()) {
-    System.out.println("Task is still running...");
-    Thread.sleep(500);
-}
-System.out.println("Task completed, result: " + future.get());
-```
-✅ **Avoids unnecessary blocking, allowing other tasks to continue.**
-
-### **🔹 Cancelling a Future Task**
-If a task is taking too long, you can cancel it.
-
-```java
-boolean cancelled = future.cancel(true);
-System.out.println("Task cancelled: " + cancelled);
-```
-✅ **Stops execution if the task hasn’t started or is interruptible.**  
-
 ### **🔹 `Future` vs `CompletableFuture`**
 | Feature | `Future<T>` | `CompletableFuture<T>` |
 |---------|------------|----------------------|
@@ -163,7 +142,7 @@ System.out.println("Task cancelled: " + cancelled);
 ✅ Concurrent API Calls: Retrieve results from multiple endpoints simultaneously.
 
 ---
-### **Difference Between `sleep()` and `wait()` in Java**  
+### **🔹 Difference Between `sleep()` and `wait()` in Java**  
 
 Both `sleep()` and `wait()` cause a thread to pause, but they have different behaviors and use cases.
 - **Sleep()** is a blocking operation that keeps a hold on the monitor/lock of the shared objects for the specified number of milliseconds.Use when delaying execution.
