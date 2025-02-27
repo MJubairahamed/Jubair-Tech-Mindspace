@@ -20,3 +20,5 @@
         - Example: While watching videos in mobile buffer initially to load the high quality videos. Because the rate the resource sending the data and rate at which video displayed in video would be different.      
  
  ![IO Stream Flow!](../Images/IO_Streams_ss.png "IO Stream"){ width: 200px; }
+
+ <img src="../Images/IO_Streams_ss.png" alt="Alt Text" width="200" height="150">
