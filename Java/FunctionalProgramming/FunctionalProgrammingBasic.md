@@ -14,7 +14,6 @@
 
 ✅ **Method Reference** is a shorthand way to refer to a method **without calling it explicitly**. It makes the code **cleaner and more readable**, especially when using **Lambda Expressions**.  
 ✅  It works with static methods (`Class::staticMethod`), instance methods (`object::method` or `Class::method`), and constructors (`Class::new`).
-- **Method Reference:** [code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/FunctionalInterface/LamdaExamples/LambdaMultiParamExample.java)
 
 ### **🔹 Why Use Method References?**
 🔸 Reduces **boilerplate code** in Lambda Expressions.  
