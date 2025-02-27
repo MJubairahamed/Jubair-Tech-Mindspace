@@ -20,4 +20,4 @@
         - Example: While watching videos in mobile buffer initially to load the high quality videos. Because the rate the resource sending the data and rate at which video displayed in video would be different.      
 
 ## IO Stream
- <img src="../Images/IO_Streams_ss.png" alt="Alt Text" width="300" height="200">
+ <img src="../Images/IO_Streams_ss.png" alt="Alt Text" width="400" height="400">
