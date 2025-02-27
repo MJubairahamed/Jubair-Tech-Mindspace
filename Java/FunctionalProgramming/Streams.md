@@ -19,4 +19,4 @@
     - If the speed of the data send from resource to the Java program environment would not be same, in that case data might get lost. To avoid that, Transfer the data to buffer. Then reciever will get the complete data.
         - Example: While watching videos in mobile buffer initially to load the high quality videos. Because the rate the resource sending the data and rate at which video displayed in video would be different.      
  
- ![IO Stream Flow!](../Images/IO_Streams_ss.png "IO Stream")
+ ![IO Stream Flow!](../Images/IO_Streams_ss.png "IO Stream"){ width: 200px; }
