@@ -25,10 +25,10 @@
  ## InputStream and OutputStream
 
 - InputStream Classes
- <img src="../Images/IOStreams.png" alt="Alt Text" width="400" height="400">
+ <img src="../Images/InputStreamClasses.png" alt="Alt Text" width="400" height="400">
 
 - OutputStream Classes
- <img src="../Images/IOStreams.png" alt="Alt Text" width="400" height="400">
+ <img src="../Images/OutputStreamClasses.png" alt="Alt Text" width="400" height="400">
 
 - **Simple Input and Output Streams**
 
