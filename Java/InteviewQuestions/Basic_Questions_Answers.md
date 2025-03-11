@@ -147,31 +147,47 @@ interface Engine {
 ### **Explain try-with-resources with examples** 
 
 - It is introduced in Java 7 — allows us to declare resources to be used in a try block with the assurance that the resources will be closed after the execution of that block.The resources declared need to implement the AutoCloseable interface.
- - Before Java 7
+ - **Example Without finally (Using Try-with-Resources)**
 ```java
-    InputStream stream = new MyInputStream(...);
+   try (Connection conn = DriverManager.getConnection(jdbcUrl, username, password)) {
+    conn.setAutoCommit(false);
+
+    try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO users(name) VALUES ('John Doe')")) {
+        stmt.executeUpdate();
+    }
+
+    conn.commit();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+```
+ - **Example Without Try-with-Resources (Needs finally)**
+```java
+   Connection conn = null;
     try {
-        // ... use stream
-    } catch(IOException e) {
-    // handle exception
+        conn = DriverManager.getConnection(jdbcUrl, username, password);
+        conn.setAutoCommit(false);
+
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO users(name) VALUES ('John Doe')");
+        stmt.executeUpdate();
+        stmt.close();
+
+        conn.commit();
+    } catch (SQLException e) {
+        e.printStackTrace();
     } finally {
-        try {
-            if(stream != null) {
-                stream.close();
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-        } catch(IOException e) {
-            // handle yet another possible exception
         }
     }
 ```
- - After Java 7
-```java
-    try (InputStream stream = new MyInputStream(...)){
-        // ... use stream
-    } catch(IOException e) {
-    // handle exception
-    }
-```
+- Note:
+    - In try-with-resources, any object that implements AutoCloseable (like `Connection`, `PreparedStatement`, and `ResultSet`) is **automatically closed** when the block exits, regardless of whether it exits normally or due to an exception.
+    - `Connection` in JDBC implements AutoCloseable, so it gets closed automatically when the try block finishes.
   
 
 ### ** `PATH` Variable:**  

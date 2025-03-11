@@ -20,92 +20,6 @@ Spring Framework is a powerful, open-source framework for building Java applicat
 - Offers integration with various technologies like databases, messaging systems, and cloud platforms.
 - Supports both monolithic and microservices architecture.
 
-**What is a Spring Beans?**  
-A **Spring Bean** is an object that is instantiated, managed, and controlled by the Spring IoC (Inversion of Control) container. Beans are the backbone of a Spring application and are defined in the Spring configuration file (XML-based or Java-based annotations).  
-
-### **Defining a Spring Bean**
-#### **1. Using XML Configuration**
-```xml
-<bean id="myBean" class="com.example.MyClass"/>
-```
-
-#### **2. Using Java-based Configuration**
-```java
-@Configuration
-public class AppConfig {
-    @Bean
-    public MyClass myBean() {
-        return new MyClass();
-    }
-}
-```
-
-#### **3. Using Annotations (Component Scanning)**
-```java
-@Component
-public class MyBean {
-    // Bean logic
-}
-```
-If using `@ComponentScan`, Spring will automatically detect `@Component`, `@Service`, `@Repository`, and `@Controller` annotated classes.
-
----
-
-### **Spring Bean Scopes**
-Spring provides different scopes to control the lifecycle of beans:
-- **Singleton (default)** – One instance per Spring container.
-- **Prototype** – A new instance is created every time it is requested.
-- **Request (Web Applications)** – One instance per HTTP request.
-- **Session (Web Applications)** – One instance per HTTP session.
-- **Application (Web Applications)** – One instance per ServletContext.
-- **WebSocket (Web Applications)** – One instance per WebSocket connection.
-
-Example of defining a prototype bean:
-```java
-@Bean
-@Scope("prototype")
-public MyClass myBean() {
-    return new MyClass();
-}
-```
----
-
-### **Bean Lifecycle in Spring**
-Spring manages the complete lifecycle of a bean:
-1. **Instantiation** – The container creates the bean instance.
-2. **Dependency Injection** – Dependencies are injected into the bean.
-3. **Initialization** – `@PostConstruct` or `init-method` executes.
-4. **Usage** – The bean is used in the application.
-5. **Destruction** – `@PreDestroy` or `destroy-method` executes before bean removal.
-
-Example:
-```java
-@Component
-public class MyBean {
-    @PostConstruct
-    public void init() {
-        System.out.println("Bean is initialized.");
-    }
-
-    @PreDestroy
-    public void destroy() {
-        System.out.println("Bean is about to be destroyed.");
-    }
-}
-```
-### **Does Spring Bean Provide Thread Safety**
-- The default scope of the spring bean is singleton, so there will only one instance per context. That mean a class level variable that any thread can update will lead to data inconsistent. 
-- To achieve thread safety either change the scope to prototype/session or Keep beans stateless,meaning they do not store instance variables. This eliminates concurrency issue.
-Example:
-```java
-@Component
-public class MyService {
-    public String process(String input) {
-        return "Processed: " + input;
-    }
-}
-```
-
 ---
 ### **What is Spring IoC Container?**  
 
@@ -133,10 +47,42 @@ The **Spring IoC (Inversion of Control) Container** is responsible for managing 
      - `ClassPathXmlApplicationContext` – Loads beans from an XML configuration file.
      - `AnnotationConfigApplicationContext` – Uses Java-based configuration with `@Configuration`.
      - `WebApplicationContext` – Special version for web applications.
-   - **Example:**
-     ```java
-     ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-     MyBean myBean = context.getBean(MyBean.class);
-     ```
+   
+     -  ### **Different implementations of ApplicationContext?** 
+        ApplicationContext interface in Spring can be configured in several different ways. Each configuration approach has its own benefits depending on your application's needs:
 
----
+        1. **XML-based configuration** (`ClassPathXmlApplicationContext`): Traditionally, Spring used XML files to define beans and dependencies.
+        ```xml
+        <beans>
+            <bean id="userService" class="com.example.UserServiceImpl">
+            <property name="userRepository" ref="userRepository"/>
+            </bean>
+        </beans>
+
+        ```  
+        ```java
+            ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+            MyBean myBean = context.getBean(MyBean.class);
+        ```
+
+        2. **Java-based configuration** (`AnnotationConfigApplicationContext`): Using `@Configuration` and `@Bean` annotations.
+        ```java
+        @Configuration
+        public class AppConfig {
+            @Bean
+            public UserService userService() {
+            return new UserServiceImpl(userRepository());
+            }
+        }
+        ```
+
+        3. **Annotation-based configuration**: Using component scanning with annotations like `@Component`, `@Service`, `@Repository`, etc.
+        ```java
+        @Service
+        public class UserServiceImpl implements UserService {
+            @Autowired
+            private UserRepository userRepository;
+        }
+        ```
+        4. **Spring Boot auto-configuration**: Letting Spring Boot configure the context automatically based on dependencies in your classpath.
+
