@@ -20,17 +20,7 @@
 | `@RequestBody` | Maps request body to a Java object (for JSON data). | `@PostMapping("/") public void createUser(@RequestBody User user) { }` |
 | `@ResponseBody` | Converts Java object to JSON response. | `@ResponseBody public User getUser() { return new User(1, "John"); }` |
 | `@Autowired` | Injects a Spring bean automatically. | `@Service public class UserService { @Autowired private UserRepository userRepository; }` |
-| `@Qualifier` | Resolves conflicts when multiple beans of the same type exist. | `interface Animal {}`
-    `@Component("cat")`
-    ` class Cat implements Animal {}`
-    ` @Component("dog")`
-    ` class Dog implements Animal {}`
-   ` @Service`
-    `class AnimalService {`
-       ` @Autowired`
-       ` @Qualifier("cat")`
-       ` private Animal animal;`
-   ` }` |
+| `@Qualifier` | Resolves conflicts when multiple beans of the same type exist. | `interface Animal {} @Component("cat") class Cat implements Animal {} @Component("dog") class Dog implements Animal {} @Service class AnimalService { @Autowired @Qualifier("cat")  private Animal animal; }` |
 | `@Primary` | Marks a bean as the primary candidate for autowiring. | `@Primary @Component public class PrimaryBean { }` |
 | `@Value` | Injects values from properties files. | `@Value("${app.name}") private String appName;` |
 | `@Configuration` | Marks a class as a **Spring configuration class**. | `@Configuration public class AppConfig { @Bean public RestTemplate restTemplate() { return new RestTemplate(); } }` |
