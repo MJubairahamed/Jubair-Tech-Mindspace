@@ -1,9 +1,9 @@
 
 ## **🔹 Core Spring Boot Questions**  
 
-### ** What is Spring Boot, and how is it different from Spring Framework?**  
+### What is Spring Boot, and how is it different from Spring Framework?  
 ✅ **Spring Boot** is a framework that simplifies **Spring-based applications** by eliminating XML configuration, providing embedded servers, and enabling auto-configuration.  
-    ✅ **auto-configuration** A key feature enabling this is Auto Configuration, which automatically sets up your application based on the dependencies present on the classpath.
+✅ **auto-configuration** A key feature, which automatically sets up your application based on the dependencies present on the classpath.
 ✅ **Providing production-ready** features like metrics, health checks, and externalized configuration.
 
 **Key Differences:**  
@@ -17,11 +17,11 @@
 
 ---
 
-### ** What is the purpose of the `@SpringBootApplication` annotation?**  
+### What is the purpose of the `@SpringBootApplication` annotation? 
 - `@SpringBootApplication` is a **meta-annotation** combining:  
-- `@Configuration` – Marks the class as a Spring configuration.  
-- `@EnableAutoConfiguration` – Enables automatic configuration based on dependencies.  
-- `@ComponentScan` – Scans for Spring components (like controllers, services).  
+    - `@Configuration` – Marks the class as a Spring configuration.  
+    - `@EnableAutoConfiguration` – Enables automatic configuration based on dependencies.  
+    - `@ComponentScan` – Scans for Spring components (like controllers, services).  
 
 📌 **Example:**
 ```java
@@ -33,7 +33,7 @@ public class MyApplication {
 }
 ```
 ---
-### **Spring Boot Internal Flow**
+### Spring Boot Internal Flow
 
 1. **Initialization**: Main class with `@SpringBootApplication` starts the application, combining `@Configuration`, `@EnableAutoConfiguration`, and `@ComponentScan`.
    - Entry point method calls `SpringApplication.run()` which begins the bootstrapping process.
@@ -57,18 +57,7 @@ public class MyApplication {
    - It Publishes ApplicationReadyEvent, completes startup logging, and begins accepting client requests.
 ---
 
-### ** What is the difference between `@Component`, `@Service`, and `@Repository`?**  
-✅ All three are **Spring-managed beans**, but they have different use cases:  
-
-| Annotation | Purpose |
-|------------|---------|
-| `@Component` | is the generic stereotype annotation that marks a class as a Spring-managed component.  It's the parent annotation that @Service and @Repository inherit from. Use this when a class doesn't fit into any specialized category.|
-| `@Service` | indicates that a class performs business logic or calculations. It's functionally identical to @Component but communicates to developers that this class contains service-layer logic like transaction management, validation, or orchestration of multiple repositories. `@Service public class UserService { } ` |
-| `@Repository` | designates a class that interacts with a database or other data store.Exception translation: Automatically converts persistence-specific exceptions into Spring's unified DataAccessException hierarchy.`@Repository public class UserRepository { } ` |
-
----
-
-### ** How does Spring Boot handle exceptions globally?**  
+### How does Spring Boot handle exceptions globally?
 - Spring Boot provides mechanisms for handling exceptions globally across the application using @ControllerAdvice and @ExceptionHandler annotations.
 - `@ControllerAdvice`: This annotation enables a class to act as a global exception handler for all controllers. Any exception that is thrown within a controller will be caught by a method annotated with @ExceptionHandler inside a @ControllerAdvice class.
 - `@ExceptionHandler`: This annotation is used within a @ControllerAdvice class to define methods that handle specific types of exceptions. It takes the exception class as an argument, specifying which exception type the method should handle.
@@ -95,9 +84,14 @@ public class GlobalExceptionHandler {
 
 ---
 
+### What is ResponseEntity<>?
+- **ResponseEntity<T>** represents the entire HTTP response, including the status code, headers, and body. It offers a way to fully customize the response sent to the client. The generic type T specifies the type of the response body. It is commonly used in RESTful web services to provide more control over the response than simply returning the data directly. 
+
+---
+
 ## **🔹 REST API & Security Questions**  
 
-### ** How do you create a REST API in Spring Boot?**  
+### How do you create a REST API in Spring Boot?
 ✅ Use `@RestController` with `@RequestMapping`.  
 
 📌 **Example:**
@@ -119,10 +113,12 @@ GET /users/1  → { "id": 1, "name": "John Doe" }
 
 ---
 
-### ** What are the different types of authentication in Spring Security?**  
-# Types of Authentication in Spring Security
-
-## Form-Based Authentication
+### What are the different types of authentication in Spring Security?
+- Form-Based Authentication
+- HTTP Basic Authentication
+- OAuth 2.0 / OpenID Connect
+- JWT Authentication
+### Form-Based Authentication
 - Uses HTML forms for credentials collection
 - Default login page provided by Spring Security
 - Session-based authentication 
@@ -219,70 +215,6 @@ public class JwtSecurityConfig {
     }
 }
 ```
-
-## Remember-Me Authentication
-- Allows returning users to be automatically authenticated
-- Uses persistent tokens or cookies
-- Enhances user experience for frequent visitors
-
-```java
-@Configuration
-@EnableWebSecurity
-public class RememberMeConfig {
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .formLogin(Customizer.withDefaults())
-            .rememberMe(rememberMe -> rememberMe
-                .key("uniqueAndSecretKey")
-                .tokenValiditySeconds(86400) // 1 day
-            )
-            .authorizeHttpRequests(authorize -> authorize
-                .anyRequest().authenticated()
-            );
-        return http.build();
-    }
-}
-```
-
-## LDAP Authentication
-- Integrates with LDAP directories for authentication
-- Common for enterprise environments
-- Supports Active Directory integration
-- Can be combined with other authentication methods
-
-```java
-@Configuration
-@EnableWebSecurity
-public class LdapSecurityConfig {
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests(authorize -> authorize
-                .anyRequest().authenticated()
-            )
-            .formLogin(Customizer.withDefaults());
-        return http.build();
-    }
-    
-    @Bean
-    public EmbeddedLdapServerContextSourceFactoryBean contextSourceFactoryBean() {
-        EmbeddedLdapServerContextSourceFactoryBean factory = 
-            EmbeddedLdapServerContextSourceFactoryBean.fromEmbeddedLdapServer();
-        factory.setPort(0);
-        return factory;
-    }
-    
-    @Bean
-    public LdapBindAuthenticationManagerFactory authenticationManagerFactory(
-            BaseLdapPathContextSource contextSource) {
-        LdapBindAuthenticationManagerFactory factory = new LdapBindAuthenticationManagerFactory(contextSource);
-        factory.setUserDnPatterns("uid={0},ou=people");
-        return factory;
-    }
-}
-```
-
 ---
 
 ### **8️⃣ How do you implement role-based access control in Spring Boot?**  
