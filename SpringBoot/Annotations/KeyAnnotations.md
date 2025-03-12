@@ -20,24 +20,18 @@
 | `@RequestBody` | Maps request body to a Java object (for JSON data). | `@PostMapping("/") public void createUser(@RequestBody User user) { }` |
 | `@ResponseBody` | Converts Java object to JSON response. | `@ResponseBody public User getUser() { return new User(1, "John"); }` |
 | `@Autowired` | Injects a Spring bean automatically. | `@Service public class UserService { @Autowired private UserRepository userRepository; }` |
-| `@Qualifier` | Resolves conflicts when multiple beans of the same type exist. | `interface Animal {} @Component("cat") class Cat implements Animal {} @Component("dog") class Dog implements Animal {} @Service class AnimalService { @Autowired @Qualifier("cat")  private Animal animal; }` |
-| `@Primary` | Marks a bean as the primary candidate for autowiring. | `@Primary @Component public class PrimaryBean { }` |
+| `@Qualifier` | Resolves conflicts when multiple beans of the same type exist. It allows you to specify a specific bean to be injected by using a qualifier value.| `interface Message {} @Component("email") class Email implements Message {} @Component("sms") class SMS implements Message {} @Service class MessageService { @Autowired @Qualifier("email")  private Message message; }` Note: In this example, the **MessageService** depends on the Message interface. There are two implementations of this interface: Email and SMS. Without the **@Qualifier** annotation, Spring would not know which bean to inject. By using **@Qualifier("email")**, we specify that the email bean should be injected.|
+| `@Primary` | The `@Primary` annotation is used to indicate a default bean when multiple beans of the same type are present. If multiple beans are eligible for autowiring and none of them are explicitly specified using @Qualifier, the bean marked with @Primary will be selected by default. | `@Primary @Component public class PrimaryBean { }` |
 | `@Value` | Injects values from properties files. | `@Value("${app.name}") private String appName;` |
 | `@Configuration` | Marks a class as a **Spring configuration class**. | `@Configuration public class AppConfig { @Bean public RestTemplate restTemplate() { return new RestTemplate(); } }` |
 | `@Bean` | Declares a Spring bean explicitly inside a `@Configuration` class. | `@Bean public RestTemplate restTemplate() { return new RestTemplate(); }` |
 | `@ComponentScan` | Tells Spring to scan a package for components. | `@ComponentScan("com.example")` |
 | `@EnableAutoConfiguration` | Enables automatic Spring Boot configuration. | `@EnableAutoConfiguration` |
 | `@Transactional` | Ensures that a method runs within a transaction. | `@Transactional public void transferMoney() { debitAccount(); creditAccount(); }` |
-| `@Cacheable` | Caches the method result. | `@Cacheable("users") public User getUser(int id) { return userRepository.findById(id); }` |
-| `@Scheduled` | Runs a method at fixed intervals (cron jobs). | `@Scheduled(fixedRate = 5000) public void logTime() { System.out.println(new Date()); }` |
-| `@Async` | Runs a method asynchronously in a separate thread. | `@Async public void sendEmail() { // Asynchronous email sending logic }` |
-| `@PreAuthorize` | Applies method-level security based on roles. | `@PreAuthorize("hasRole('ADMIN')") public void deleteUser() { }` |
+| `@Cacheable` | The `@Cacheable` annotation in Spring is used to enable caching for a method. When a method annotated with `@Cacheable` is called, Spring checks if the result of the method call is already cached. If it is, Spring returns the cached result instead of executing the method again. If it is not cached, the method is executed, and the result is stored in the cache before being returned. This can significantly **improve the performance of applications** by reducing the number of times expensive operations, such as database queries or API calls, need to be performed.To use `@Cacheable`, you need to first enable caching in your Spring application using the `@EnableCaching` annotation. Then, you can annotate the methods you want to cache with @Cacheable | `@Service @EnableCaching public class MyService { @Cacheable("myCache") public String getData(String key) {   return data;    } }` |
+| `@Scheduled` | In the Spring Framework, `@Scheduled` is an annotation used to schedule the execution of methods at specific times or   ntervals. It's a part of Spring's task scheduling capabilities, allowing developers to automate tasks within their applications. To use `@Scheduled`, it's necessary to enable scheduling in the Spring configuration, typically by using the `@EnableScheduling` annotation.`@Scheduled` annotation offers several attributes to define the scheduling behavior:`fixedDelay`,`fixedRate`,`Corn`  | `@Scheduled(fixedRate = 5000) public void logTime() { System.out.println(new Date()); }` |
+| `@Async` | The `@Async` annotation is used to indicate that a method should be executed asynchronously in a separate thread. This allows the calling thread to continue its execution without waiting for the completion of the annotated method. It's particularly useful for long-running tasks or operations that don't require immediate results, improving application responsiveness and performance. To use `@Async`, you need to: Enable asynchronous processing by adding `@EnableAsync` to your Spring configuration class. The return type of an `@Async` method can be either `void` or `Future<?>`| `@Async public void sendEmail() { // Asynchronous email sending logic }` |
+| `@PreAuthorize` | Applies method-level security based on roles.If the conditions are not met, an `AccessDeniedException` is thrown, and the method is not executed. To use `@PreAuthorize`, you first need to enable method security in your Spring configuration. This can be done by adding the `@EnableGlobalMethodSecurity(prePostEnabled = true)` annotation to a configuration class.| `@PreAuthorize("hasRole('ADMIN')") public void deleteUser() { }` |
 
 ---
-
-### **🔹 Key Takeaways**
-✅ `@RestController`, `@RequestMapping`, `@GetMapping` → **For REST APIs**  
-✅ `@Service`, `@Repository`, `@Component` → **For Business & DAO Layers**  
-✅ `@Autowired`, `@Bean`, `@Value` → **For Dependency Injection**  
-✅ `@Transactional`, `@Cacheable`, `@Async` → **For Performance & DB Handling**  
-✅ `@Scheduled`, `@PreAuthorize` → **For Scheduling & Security**  
+ 
