@@ -1,5 +1,3 @@
-# Spring
----
 ## **🔹 Spring Basics Concepts**
 **What is a Spring?**  
 Spring Framework is a powerful, open-source framework for building Java applications, particularly enterprise-level applications. It provides comprehensive infrastructure support, making it easier to develop, test, and deploy Java applications. 
@@ -71,7 +69,7 @@ The **Spring IoC (Inversion of Control) Container** is responsible for managing 
         public class AppConfig {
             @Bean
             public UserService userService() {
-            return new UserServiceImpl(userRepository());
+                return new UserServiceImpl(userRepository());
             }
         }
         ```

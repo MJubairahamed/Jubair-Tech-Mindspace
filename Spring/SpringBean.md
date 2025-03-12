@@ -1,5 +1,4 @@
 # Spring Bean
----
 
 ### **What is a Spring Beans?**  
 - A **Spring Bean** is an object that is instantiated, managed, and controlled by the Spring IoC (Inversion of Control) container. Beans are the backbone of a Spring application and are defined in the Spring configuration file (XML-based or Java-based annotations @Bean).

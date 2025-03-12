@@ -1,5 +1,5 @@
 # Spring MVC Concepts
----
+
 ### **What is a Controller in Spring MVC?**  
 
 In **Spring MVC**, a **Controller** is a key component that handles incoming HTTP requests, processes them, and returns responses. It acts as an intermediary between the **Model** (business logic/data) and the **View** (UI). Controllers are typically annotated with `@Controller` or `@RestController` to define request-handling logic.
@@ -11,7 +11,7 @@ In **Spring MVC**, a **Controller** is a key component that handles incoming HTT
 3. **`@RequestMapping`** – Maps HTTP requests to specific handler methods.
 4. **`@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`** – Shortcut annotations for HTTP methods.
 5. **`@RequestParam`, `@PathVariable`** – Used to extract parameters from the request.
--
+
 ### **Example of a Spring MVC Controller**
 #### **1. Using `@Controller` (Returns a View)**
 ```java
