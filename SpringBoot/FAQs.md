@@ -146,7 +146,7 @@ public class SecurityConfig {
 
 ## HTTP Basic Authentication
 - Uses HTTP Authorization header
-- Credentials sent with every request
+- Credentials sent with every request.
 - Simple implementation for APIs
 - No session management required
 
@@ -217,10 +217,10 @@ public class JwtSecurityConfig {
 ```
 ---
 
-### **8️⃣ How do you implement role-based access control in Spring Boot?**  
+### ** How do you implement role-based access control in Spring Boot?**  
 ✅ Use `@PreAuthorize` for **method-level security**.  
 
-📌 **Example:**
+📌 **Example:** **Only ADMIN users can access this API.**
 ```java
 @PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/admin")
@@ -228,13 +228,11 @@ public String adminPage() {
     return "Admin Content";
 }
 ```
-**Only ADMIN users can access this API.**
-
 ---
 
 ## **🔹 Database & JPA Questions**  
 
-### **9️⃣ What is the difference between `CrudRepository`, `JpaRepository`, and `PagingAndSortingRepository`?**  
+### ** What is the difference between `CrudRepository`, `JpaRepository`, and `PagingAndSortingRepository`?**  
 
 | Repository Type | Features |
 |----------------|---------|
