@@ -218,3 +218,47 @@
 - Continuous improvements in **browser engines and JavaScript performance**.  
 
 ---
+### **22. What is Debouncing in JavaScript?**  
+- **Debouncing** is a technique used to **limit the frequency of function execution** in JavaScript. It ensures that a function **executes only after a specified delay**, preventing unnecessary calls when an event is triggered **repeatedly** (e.g., typing in a search box, resizing a window, or scrolling).  
+
+  ### **🔹 Why Use Debouncing?**
+  - Prevents **unnecessary API calls** or expensive function executions.  
+  - Improves **performance** by reducing function calls in rapid succession.  
+  - Helps in **better user experience** (e.g., real-time search suggestions).  
+
+  ### **🔹 How Debouncing Works**
+  1. When an event occurs (e.g., `onkeyup` in an input field), **a timer starts**.  
+  2. If the event fires again before the delay ends, **the previous timer resets**.  
+  3. The function executes **only after the event stops firing for the given delay**.  
+
+
+  ### **🔹 Example: Debouncing a Search Input**
+   **Without Debouncing:** Calls the function on **every keystroke** → Bad Performance 🚫  
+  ```javascript
+  document.getElementById("search").addEventListener("keyup", () => {
+      console.log("API Call: Searching...");
+  });
+  ```
+  If the user types **"hello"**, the function executes **5 times** (one for each letter).  
+
+    ---
+
+     **With Debouncing:** Executes **only after the user stops typing for 300ms** → Optimized Performance ✅  
+    ```javascript
+    function debounce(func, delay) {
+        let timer;
+        return function (...args) {
+            clearTimeout(timer); // Clears previous timer
+            timer = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+
+    // Function that should be debounced
+    function searchQuery() {
+        console.log("API Call: Searching...");
+    }
+
+    // Attach debounced function to input field
+    document.getElementById("search").addEventListener("keyup", debounce(searchQuery, 300));
+    ```
+    ✅ **Now, the function executes only once after the user stops typing for 300ms.**  

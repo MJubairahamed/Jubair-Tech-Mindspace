@@ -1,37 +1,7 @@
 
 ## **🔹 Core Spring Boot Questions**  
 
-### What is Spring Boot, and how is it different from Spring Framework?  
-✅ **Spring Boot** is a framework that simplifies **Spring-based applications** by eliminating XML configuration, providing embedded servers, and enabling auto-configuration.  
-✅ **auto-configuration** A key feature, which automatically sets up your application based on the dependencies present on the classpath.
-✅ **Providing production-ready** features like metrics, health checks, and externalized configuration.
 
-**Key Differences:**  
-| Feature | Spring Framework | Spring Boot |
-|---------|----------------|-------------|
-| Configuration | Requires XML / Java Config | Uses auto-configuration |
-| Deployment | Needs external server (Tomcat, Jetty) | Comes with embedded servers |
-| Complexity | More manual setup | Less boilerplate, faster development |
-
-📌 **Example:** Spring Boot removes the need for a `web.xml` file and allows you to start an application with a simple `main()` method.
-
----
-
-### What is the purpose of the `@SpringBootApplication` annotation? 
-- `@SpringBootApplication` is a **meta-annotation** combining:  
-    - `@Configuration` – Marks the class as a Spring configuration.  
-    - `@EnableAutoConfiguration` – Enables automatic configuration based on dependencies.  
-    - `@ComponentScan` – Scans for Spring components (like controllers, services).  
-
-📌 **Example:**
-```java
-@SpringBootApplication
-public class MyApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(MyApplication.class, args);
-    }
-}
-```
 ---
 ### Spring Boot Internal Flow
 
@@ -249,7 +219,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 ---
 
-### **🔟 How do you implement pagination in Spring Boot?**  
+### ** How do you implement pagination in Spring Boot?**  
 ✅ Use `Pageable` with `JpaRepository`.  
 
 📌 **Example:**
@@ -268,7 +238,7 @@ GET /users?page=0&size=10&sort=name,asc
 
 ## **🔹 Microservices & Cloud Questions**  
 
-### **1️⃣1️⃣ What is Spring Cloud, and why is it used?**  
+### ** What is Spring Cloud, and why is it used?**  
 ✅ **Spring Cloud** provides tools to build **distributed systems** with features like:  
 - **Service Discovery** (`Eureka`)  
 - **Load Balancing** (`Ribbon`, `Spring Cloud LoadBalancer`)  
@@ -277,7 +247,7 @@ GET /users?page=0&size=10&sort=name,asc
 
 ---
 
-### **1️⃣2️⃣ How does Spring Boot handle inter-service communication?**  
+### ** How does Spring Boot handle inter-service communication?**  
 ✅ Using **RestTemplate (Legacy)** or **WebClient (Modern, Non-blocking)**.  
 
 📌 **Example (WebClient):**
@@ -288,7 +258,7 @@ User user = client.get().uri("/users/1").retrieve().bodyToMono(User.class).block
 
 ---
 
-### **1️⃣3️⃣ How do you implement Circuit Breaker in Spring Boot?**  
+### ** How do you implement Circuit Breaker in Spring Boot?**  
 ✅ Using **Resilience4j** to prevent cascading failures.  
 
 📌 **Example:**
@@ -307,17 +277,17 @@ public String fallback(Throwable t) {
 
 ## **🔹 Other Advanced Questions**  
 
-### **1️⃣4️⃣ How do you secure sensitive configurations in Spring Boot?**  
+### ** How do you secure sensitive configurations in Spring Boot?**  
 ✅ Use **Spring Cloud Config + Vault** or **Environment Variables**.  
 
 ---
 
-### **1️⃣5️⃣ How do you optimize a slow Spring Boot application?**  
+### ** How do you optimize a slow Spring Boot application?**  
 ✅ **Optimize SQL Queries, Enable Caching, Use Connection Pooling (HikariCP), Compress Responses, Use Profiling Tools.**  
 
 ---
 
-### **1️⃣6️⃣ How does Spring Boot handle transactions?**  
+### ** How does Spring Boot handle transactions?**  
 ✅ Using `@Transactional`.  
 
 📌 **Example:**
@@ -334,19 +304,12 @@ If any method fails, **the entire transaction rolls back**.
 
 ## **🔹 Final Questions (Behavioral & Best Practices)**  
 
-### **1️⃣7️⃣ What are best practices for designing REST APIs?**  
+### ** What are best practices for designing REST APIs?**  
 ✅ Use **proper status codes**, **versioning**, **pagination**, **JWT for security**, and **HATEOAS**.  
 
-### **1️⃣8️⃣ How do you handle large file uploads in Spring Boot?**  
+### ** How do you handle large file uploads in Spring Boot?**  
 ✅ Use `MultipartFile` and configure `spring.servlet.multipart.max-file-size`.  
 
 ---
-
-## **🔥 Final Thoughts**  
-This set of **25+ high-impact questions** covers:  
-✅ **Spring Boot Core**  
-✅ **REST APIs & Security**  
-✅ **Microservices & Cloud**  
-✅ **Database & Performance**  
-
-Would you like **mock interview practice** based on these questions? 🚀
+### ** How manage different environments in Spring Boot?**  
+✅ Use `profile` and configure `spring.profile.active=dev or test`. Use Spring profiles (application-dev.properties, application-prod.properties) for environment-specific configurations, activated by SPRING_PROFILES_ACTIVE.

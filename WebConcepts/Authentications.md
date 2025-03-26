@@ -1,4 +1,62 @@
 # Web Authentications
+### How do you handle API authentication in Java?
+In **Java (Spring Boot)**, API authentication can be handled using:  
+
+### **1. Basic Authentication**  
+- Uses `username:password` in **HTTP headers**.  
+- Example:  
+  ```java
+  @Configuration
+  public class SecurityConfig extends WebSecurityConfigurerAdapter {
+      @Override
+      protected void configure(HttpSecurity http) throws Exception {
+          http.csrf().disable()
+              .authorizeRequests().anyRequest().authenticated()
+              .and().httpBasic();
+      }
+  }
+  ```
+  
+### **2. Token-Based Authentication (JWT - JSON Web Token)**  
+- Secure, **stateless** authentication using tokens.  
+- Steps:
+  - User logs in → Server issues JWT token.
+  - User sends JWT in headers (`Authorization: Bearer <token>`).
+  - Server validates token before allowing access.  
+- **Spring Boot JWT Example:**  
+  ```java
+  @GetMapping("/secure-data")
+  @PreAuthorize("hasRole('USER')")
+  public ResponseEntity<String> getSecureData() {
+      return ResponseEntity.ok("This is a secure API");
+  }
+  ```
+
+### **3. OAuth2 Authentication**  
+- Used for third-party logins (**Google, Facebook, GitHub**).  
+- Uses **access tokens** for authentication.  
+- Example:  
+  ```java
+  @Configuration
+  @EnableOAuth2Client
+  public class OAuth2Config {
+      // OAuth2 security configurations
+  }
+  ```
+
+### **4. API Key Authentication**  
+- Uses an **API Key** in headers or query params.  
+- Example:  
+  ```java
+  @GetMapping("/data")
+  public ResponseEntity<String> getData(@RequestHeader("X-API-KEY") String apiKey) {
+      if (!"MY_SECRET_KEY".equals(apiKey)) {
+          return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid API Key");
+      }
+      return ResponseEntity.ok("Authorized data");
+  }
+  ```
+
 
 ### Difference Between Cookies, Sessions, JWT, and PASETO in Web Authentication
 

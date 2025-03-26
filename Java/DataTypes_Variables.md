@@ -56,3 +56,19 @@
 | **Boolean Literals**    | Represents logical values `true` or `false`.             | **`boolean isPassed = true;`** (Here, `true` is a boolean literal) |
 
 * Note: By default the decimal number value will be double literal unless it is explicitly mentioneds a 'f';
+
+
+### Java ENUM
+- In Java, an enum (short for enumeration) is a **special data type** that represents a group of named constants. It is used to define a set of related values, making code more readable and maintainable. Each value in an enum is an **object**, and the **enum itself is a class**.
+- enum constants are public, static and final (unchangeable - cannot be overridden).
+- An enum cannot be used to create objects, and it cannot extend other classes.
+ ```java  
+    enum Status {
+        Running, Pending, Success, Failed
+    }
+    public static void main(String[] args) {
+        Status s = Status.Running;
+        System.out.println(s);
+    }
+    
+ ```
