@@ -83,7 +83,7 @@ In **Java (Spring Boot)**, API authentication can be handled using:
  - **JWT (JSON Web Tokens)** are self-contained tokens that include all necessary information encoded and signed within the token itself. They're ideal for stateless authentication in modern APIs and microservices. The main advantages are portability across domains and no server storage requirements, but they can't be easily invalidated once issued.
 
  - **PASETO (Platform-Agnostic Security Tokens)** is a more secure alternative to JWT, addressing several JWT security concerns. It uses modern cryptographic standards, has a versioned protocol, and eliminates algorithm confusion attacks. While offering enhanced security, PASETO has less adoption and fewer libraries available than JWT.
- <img src="/WebConcepts/Images/API_Authentication_ss.png" alt="Alt Text" width="200" height="200">
+ <img src="/WebConcepts/Images/Authentication_ss.png" alt="Alt Text" width="400" height="400">
 
 ---
 ###  what is CSRF vulnerabilities and how to over come it
