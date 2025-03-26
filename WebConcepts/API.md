@@ -420,5 +420,4 @@ Client -> Load Balancer -> API Pods (Kubernetes) -> Databases & Caches
 3️⃣ **Monitor Usage** – Logging and analytics track API requests, detect anomalies, and help identify potential security threats or performance issues.  
 
 4️⃣ **Rate Limit** – Restricts the number of API requests per user/IP within a timeframe to prevent abuse and ensure fair usage. 
-
- ![Authentication Process!](/image/API_Authentication_ss.png "Authentication")
+<img src="/WebConcepts/Images/API_Authentication_ss.png" alt="Alt Text" width="200" height="200">
