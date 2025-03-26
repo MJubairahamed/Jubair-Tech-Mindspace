@@ -14,9 +14,9 @@
     - Single Parameter - `(x) -> System.out.println(x);`
     - Multiple Parameters - `(x, y) -> x + y;`
 
-<img src="../Images/LambdaExpression_Syntax.png" alt="Alt Text" width="400" height="400">
+<img src="../Images/LambdaExpression_Syntax.png" alt="Alt Text" width="200" height="200">
 
-### **Additional Points ##
+### **Additional Points**
 - Lambda expression can access **local variables** only if they are **final** or they are **never modified** inside the method.
 - Whereas **instance variables** are allowed to be modifed and access inside the lambda.
     - **Example:**  

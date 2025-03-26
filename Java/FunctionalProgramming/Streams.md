@@ -20,15 +20,15 @@
         - Example: While watching videos in mobile buffer initially to load the high quality videos. Because the rate the resource sending the data and rate at which video displayed in video would be different.      
 
 ## IO Stream
- <img src="../Images/IOStreams.png" alt="Alt Text" width="400" height="400">
+ <img src="../Images/IOStreams.png" alt="Alt Text" width="300" height="300">
 
  ## InputStream and OutputStream
 
 - InputStream Classes
- <img src="../Images/InputStreamClasses.png" alt="Alt Text" width="400" height="400">
+ <img src="../Images/InputStreamClasses.png" alt="Alt Text" width="300" height="300">
 
 - OutputStream Classes
- <img src="../Images/OutputStreamClasses.png" alt="Alt Text" width="400" height="400">
+ <img src="../Images/OutputStreamClasses.png" alt="Alt Text" width="300" height="300">
 
 - **Simple Input and Output Streams**
 
@@ -72,7 +72,7 @@
 
 ## Reader and Writer Classes
 
- <img src="../Images/ReaderWriterClasses.png" alt="Alt Text" width="400" height="400">
+ <img src="../Images/ReaderWriterClasses.png" alt="Alt Text" width="300" height="300">
 
 ---
  ## **What is Serialization?**
@@ -82,11 +82,11 @@
 - **Stored in a database**
 - **Recreated later by deserialization**  
 
-### **Example: Writing an Object to a File** [code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/Stream/SerializeExample.java) 
+#### **Example: Writing an Object to a File** [code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/Stream/SerializeExample.java) 
 
-### **Example: Reading the Serialized Object** [code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/Stream/DeserializeExample.java)
+#### **Example: Reading the Serialized Object** [code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/Stream/DeserializeExample.java)
 
-## **Why Do Objects Need to Be Serialized?**
+### **Why Do Objects Need to Be Serialized?**
 Java objects exist **temporarily in memory (heap)**. To **save, transfer, or retrieve** them later:
 1. **Convert them into bytes** (`ObjectOutputStream` - Serialization).
 2. **Store or send the bytes** (file, network, etc.).
@@ -98,7 +98,7 @@ Java objects exist **temporarily in memory (heap)**. To **save, transfer, or ret
 ✅ **Storing objects in databases**.  
 ✅ **Deep cloning** (object duplication without reference links).  
 
-## **Important Notes**
+### **Important Notes**
 🚀 **Objects must implement `Serializable`** for serialization.  
 ⚠ **`transient` keyword** skips fields from serialization (e.g., passwords).  
 🔑 **Use `serialVersionUID`** to ensure class version consistency.  

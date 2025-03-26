@@ -35,12 +35,12 @@
     3. Function - It accepts a single argument and returns a result.        
     4. Supplier - It does not take any arguments but provides a result.
 
-   - **Bi Variant of above:**
+- **Bi Variant of above:**
      - BiConsumer - It accepts two arguments and returns no result.
      - BiPredicate -It accepts two arguments and returns a boolean result.
      - BiFunction -It accepts two arguments and returns a result.
 
 ### Important Points:
-- An infinite number of methods (whether **static or default**) can be added to the functional interface. In simple words, there is no limit to a functional interface containing static and default methods.
+- An infinite number of methods (whether **static or default) can be added to the functional interface. In simple words, there is no limit to a functional interface containing static and default methods.
 - **Overriding methods** from the parent class do not violate the rules of a functional interface in Java.
 - The **java.util.function** package contains many built-in functional interfaces in Java 8.
