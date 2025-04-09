@@ -1,0 +1,274 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>String</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Java String - Interview Notes</h1>
+<ul>
+<li><strong>Definition</strong>: <code>String</code> is a built-in class representing sequences of characters.</li>
+<li><strong>Creation</strong>:
+<ul>
+<li>Using <strong>string literals</strong> (e.g., <code>String str1 = &quot;Java program&quot;;</code>) → Stored in <strong>String Pool</strong>.</li>
+<li>Using <strong>constructors</strong> (e.g., <code>new String(&quot;Java&quot;)</code>) → Stored in <strong>Heap Memory</strong>.</li>
+<li><strong>JVM</strong> doesn't perform String pool check if you create object using 'new' operator.
+<img src="/Java/Images/StringStorage.png" alt="String Storage!" title="String Storage"></li>
+</ul>
+</li>
+<li><strong>Immutability</strong>: Strings <strong>cannot be modified</strong> once created.</li>
+<li><strong>String Pool Optimization</strong>: Identical string literals refer to the <strong>same object</strong> in the <strong>String Constant Pool</strong> to save memory.</li>
+<li><strong>Heap Allocation</strong>: Strings created with <code>new</code> are stored in the heap, even if they have the same value as a pooled string.</li>
+<li><strong>Constructors</strong>:
+<ol>
+<li><code>String(char[])</code> → Converts character array to string.</li>
+<li><code>String(byte[])</code> → Converts byte array to string.</li>
+<li><code>String(String)</code> → Creates a new string from an existing one.</li>
+</ol>
+</li>
+<li><strong>Reference Variables</strong>: Store memory addresses pointing to string objects.</li>
+</ul>
+<hr>
+<h3><strong>Java <code>String</code> - Key Interview Points</strong></h3>
+<ol>
+<li>
+<p><strong>Immutability</strong>:</p>
+<ul>
+<li><code>String</code> objects are immutable, meaning modifications create new instances.</li>
+<li><strong>Why?</strong>
+<ul>
+<li>Improves performance by enabling string pooling.</li>
+<li>Saves memory by reusing existing string literals instead of creating new ones.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>String Pool (Interning)</strong>:</p>
+<ul>
+<li>Java stores string literals in a <strong>special memory pool</strong> to optimize memory.</li>
+<li>If a string with the same content exists, new references point to the existing object.</li>
+<li>The <code>intern()</code> method explicitly stores a string in the pool if not already present.</li>
+</ul>
+</li>
+<li>
+<p><strong>Creating Strings</strong>:</p>
+<ul>
+<li><strong>String Literals</strong>: <code>String str = &quot;Java&quot;;</code> (stored in the string pool).</li>
+<li><strong>Using <code>new</code> Keyword</strong>: <code>String str = new String(&quot;Java&quot;);</code> (creates a new object in heap memory).</li>
+</ul>
+</li>
+<li>
+<p><strong>String Comparison</strong>:</p>
+<ul>
+<li>Use <code>.equals()</code> to compare string <strong>content</strong>.</li>
+<li><code>==</code> checks if two references point to the same object, not content.</li>
+</ul>
+</li>
+<li>
+<p><strong>String Methods</strong> <em>(Commonly Asked in Interviews)</em>:</p>
+<ul>
+<li><code>length()</code>, <code>charAt()</code>, <code>substring()</code>, <code>toLowerCase()</code>, <code>toUpperCase()</code>, <code>trim()</code>,</li>
+<li><code>equals()</code>, <code>equalsIgnoreCase()</code>, <code>compareTo()</code>, <code>split()</code>, <code>replace()</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance &amp; Concatenation</strong>:</p>
+<ul>
+<li>Using <code>+</code> repeatedly creates multiple string objects due to immutability.</li>
+<li><strong>Use <code>StringBuilder</code> or <code>StringBuffer</code></strong> for efficient string manipulation.</li>
+</ul>
+</li>
+<li>
+<p><strong>StringBuilder vs. StringBuffer</strong>:</p>
+<ul>
+<li><code>StringBuilder</code> (faster, non-thread-safe). StringBuilder, on the other hand, is not thread-safe. Its methods are not synchronized, resulting in faster performance compared to StringBuffer. However, this lack of synchronization means that StringBuilder should not be used in multi-threaded environments, as it can lead to unexpected behavior and data corruption.</li>
+<li><code>StringBuffer</code> (thread-safe, synchronized). StringBuffer is thread-safe, meaning its methods are synchronized to allow safe access and modification from multiple threads concurrently. This synchronization introduces overhead, making it slower than StringBuilder.</li>
+</ul>
+</li>
+<li>
+<p><strong>String and Hashing</strong>:</p>
+<ul>
+<li>Strings are widely used as keys in <code>HashMap</code> because immutability ensures a <strong>consistent hash code</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Character Arrays vs. Strings</strong>:</p>
+<ul>
+<li><code>String</code> is <strong>immutable</strong>, while <code>char[]</code> is <strong>mutable</strong>.</li>
+<li>Using <code>char[]</code> for passwords is safer as it can be cleared after use.</li>
+</ul>
+</li>
+<li>
+<p><strong>Empty vs. Null Strings</strong>:</p>
+</li>
+</ol>
+<ul>
+<li><code>&quot;&quot;</code> (empty string) is a valid <code>String</code> object.</li>
+<li><code>null</code> means the reference doesn’t point to any object.</li>
+</ul>
+<ol start="11">
+<li><strong>Substring Memory Issue (Fixed in Java 7+)</strong>:</li>
+</ol>
+<ul>
+<li>Before Java 7, <code>substring()</code> used to <strong>share memory</strong> with the original string, leading to <strong>memory leaks</strong>.</li>
+<li>Now, it creates a <strong>new character array</strong> instead.</li>
+</ul>
+<hr>
+<p>Advanced <code>String</code> concepts are <strong>frequently tested in senior-level Java interviews</strong>.</p>
+<h3>1. <strong>How does Java handle String encoding and character representation?</strong></h3>
+<p><strong>Answer:</strong></p>
+<ul>
+<li>Java uses <strong>UTF-16</strong> encoding for <code>String</code> internally.</li>
+<li>Each character is stored as <strong>two bytes</strong> (16 bits).</li>
+<li>Unicode characters beyond <strong>U+FFFF (Supplementary characters)</strong> are stored as <strong>surrogate pairs</strong> (two <code>char</code> values).</li>
+</ul>
+<h3>2. <strong>What are the memory implications of creating Strings in Java?</strong></h3>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>String literals</strong> are stored in the <strong>string pool</strong> (efficient memory usage).</li>
+<li><strong>New String objects (<code>new String(&quot;abc&quot;)</code>) are stored in heap memory</strong> (inefficient if pooling is not used).</li>
+<li><strong>Excessive String operations</strong> (e.g., concatenation inside loops) can lead to <strong>heap fragmentation and increased GC pressure</strong>.</li>
+<li>Use <strong><code>StringBuilder</code> or <code>StringBuffer</code></strong> for better memory efficiency.</li>
+</ul>
+<h3>3. <strong>How does <code>split()</code> in Java behave with regex, and what is a common pitfall?</strong></h3>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><code>split()</code> uses <strong>regular expressions</strong>, not simple character matching.</li>
+<li>Common Pitfall: <strong>Using <code>split(&quot;.&quot;)</code> without escaping</strong>, as <code>&quot;.&quot;</code> is a regex meta-character.<pre><code class="language-java">String[] parts = &quot;www.google.com&quot;.split(&quot;.&quot;); // Incorrect, results in empty array
+String[] correctParts = &quot;www.google.com&quot;.split(&quot;\\.&quot;); // Correct
+</code></pre>
+</li>
+<li><strong>Performance Impact</strong>: For simple delimiters, use <code>StringTokenizer</code> or manual parsing for better performance.</li>
+</ul>
+<h3>4. <strong>What is the difference between <code>concat()</code> and <code>+</code> operator in Java Strings?</strong></h3>
+<p><strong>Answer:</strong></p>
+<ul>
+<li>Both methods concatenate strings, but:
+<ul>
+<li><code>+</code> internally uses <code>StringBuilder</code> (except for compile-time constants).</li>
+<li><code>concat()</code> only works if the argument is <strong>non-null</strong> (throws <code>NullPointerException</code> otherwise).</li>
+</ul>
+<pre><code class="language-java">String a = &quot;Hello&quot;;
+String b = null;
+String result = a.concat(b); // Throws NullPointerException
+</code></pre>
+</li>
+</ul>
+<h3>5. <strong>What is <code>StringJoiner</code> and how does it differ from <code>String.join()</code>?</strong></h3>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><code>StringJoiner</code> (introduced in <strong>Java 8</strong>) allows efficient concatenation with <strong>prefix, suffix, and delimiter</strong>.<pre><code class="language-java">StringJoiner sj = new StringJoiner(&quot;, &quot;, &quot;[&quot;, &quot;]&quot;);
+sj.add(&quot;Java&quot;).add(&quot;Python&quot;).add(&quot;C++&quot;);
+System.out.println(sj); // Output: [Java, Python, C++]
+</code></pre>
+</li>
+<li><code>String.join()</code> is a simpler alternative:<pre><code class="language-java">String result = String.join(&quot;, &quot;, &quot;Java&quot;, &quot;Python&quot;, &quot;C++&quot;);
+System.out.println(result); // Output: Java, Python, C++
+</code></pre>
+</li>
+<li><strong>Difference</strong>:
+<ul>
+<li><code>StringJoiner</code> allows <strong>custom prefix &amp; suffix</strong>.</li>
+<li><code>String.join()</code> is a <strong>static method</strong>, better for simple use cases.</li>
+</ul>
+</li>
+</ul>
+<h3>6. <strong>How can you efficiently check if a String contains only digits?</strong></h3>
+<p><strong>Answer:</strong></p>
+<ul>
+<li>Using <strong>Regex</strong> (not optimal for performance-heavy applications):<pre><code class="language-java">boolean isNumeric = str.matches(&quot;\\d+&quot;);
+</code></pre>
+</li>
+<li>Using <strong>Character.isDigit()</strong> (more efficient):<pre><code class="language-java">boolean isNumeric = str.chars().allMatch(Character::isDigit);
+</code></pre>
+</li>
+</ul>
+<h3>7. <strong>How can you make a String mutable in Java?</strong></h3>
+<p><strong>Answer:</strong></p>
+<ul>
+<li>Since <code>String</code> is <strong>immutable</strong>, alternatives include:
+<ul>
+<li><strong><code>StringBuilder</code> or <code>StringBuffer</code></strong> for modifying content.</li>
+<li><strong><code>char[]</code></strong> for manual modification (e.g., security-sensitive data like passwords).</li>
+</ul>
+<pre><code class="language-java">char[] chars = &quot;Hello&quot;.toCharArray();
+chars[0] = 'J'; 
+System.out.println(new String(chars)); // &quot;Jello&quot;
+</code></pre>
+</li>
+</ul>
+<h3>8. <strong>What are memory leaks related to Strings in Java, and how can you avoid them?</strong></h3>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Long-lived String references in memory (e.g., static collections)</strong> can lead to <strong>memory leaks</strong>.</li>
+<li><strong>Using <code>substring()</code> (pre-Java 7)</strong> held a reference to the <strong>original large string</strong>, preventing GC.<pre><code class="language-java">String largeString = new String(new char[1000000]); 
+String smallString = largeString.substring(0, 10);
+</code></pre>
+<ul>
+<li>Pre-Java 7: <code>smallString</code> still holds a reference to <code>largeString</code>, leading to memory wastage.</li>
+<li><strong>Solution</strong>: Explicitly create a new String:<pre><code class="language-java">smallString = new String(smallString);
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3>9. <strong>How can you optimize searching operations on large Strings?</strong></h3>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Use <code>indexOf()</code> or <code>contains()</code></strong> for simple searches.</li>
+<li><strong>Use <code>Pattern</code> and <code>Matcher</code> (Regex) when complex patterns are needed.</strong><pre><code class="language-java">Pattern pattern = Pattern.compile(&quot;Java&quot;);
+Matcher matcher = pattern.matcher(&quot;I love Java programming.&quot;);
+boolean found = matcher.find(); // True
+</code></pre>
+</li>
+<li><strong>Use Trie Data Structure</strong> for efficient prefix-based search.</li>
+</ul>
+<h3>10. <strong>How does <code>String.format()</code> work, and when should you use it?</strong></h3>
+<p><strong>Answer:</strong></p>
+<ul>
+<li>
+<p><code>String.format()</code> allows formatted string creation similar to <code>printf()</code>.</p>
+<pre><code class="language-java">String result = String.format(&quot;Hello, %s! You have %d new messages.&quot;, &quot;Alice&quot;, 5);
+System.out.println(result); // Output: Hello, Alice! You have 5 new messages.
+</code></pre>
+</li>
+<li>
+<p><strong>Use Cases</strong>:</p>
+<ul>
+<li><strong>Dynamic string formatting</strong> (instead of manual concatenation).</li>
+<li><strong>Better readability</strong> for constructing complex messages.</li>
+<li><strong>Localization support</strong> (via <code>Locale</code> argument).</li>
+</ul>
+<h3>11. <strong>Is it Necessary to Declare Immutable Objects as <code>final</code>?</strong></h3>
+</li>
+<li>
+<p><strong>Not mandatory</strong>, but declaring an immutable class as <code>final</code> is a <strong>best practice</strong> to prevent subclassing, which could introduce mutability.</p>
+</li>
+<li>
+<p><strong>Fields should be <code>private final</code></strong> to ensure they cannot be modified after object creation.</p>
+</li>
+<li>
+<p>If a class is <strong>not declared <code>final</code></strong>, it can still be immutable if all fields are <code>final</code> and there are <strong>no setter methods</strong>.</p>
+</li>
+<li>
+<p>Example (Immutable without <code>final</code> class):</p>
+<pre><code class="language-java">class ImmutableExample {
+    private final String name;
+    public ImmutableExample(String name) { this.name = name; }
+    public String getName() { return name; }
+}
+</code></pre>
+</li>
+</ul>
+
+      </body>
+      </html>
+    

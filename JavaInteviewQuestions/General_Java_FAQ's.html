@@ -1,0 +1,126 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>General Java FAQ'S</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>JAVA FQA's</h1>
+<h2>Genereal Interview Questions</h2>
+<h3>General Java Questions**</h3>
+<h3>1. <strong>Explain the difference between <code>HashMap</code>, <code>LinkedHashMap</code>, and <code>TreeMap</code>.</strong></h3>
+<ul>
+<li><strong>Answer</strong>:
+<ul>
+<li><code>HashMap</code> is <strong>unordered</strong> and offers O(1) time complexity for insert, delete, and search.</li>
+<li><code>LinkedHashMap</code> maintains <strong>insertion order</strong> and performs slightly slower than <code>HashMap</code>.</li>
+<li><code>TreeMap</code> maintains <strong>sorted order</strong> (according to keys) and offers O(log n) time complexity.</li>
+</ul>
+</li>
+</ul>
+<h3>2. <strong>How does Java handle memory management, and what is garbage collection?</strong></h3>
+<ul>
+<li><strong>Answer</strong>:<br>
+Java uses <strong>automatic memory management</strong> with the help of <strong>Garbage Collection (GC)</strong>. GC reclaims unused objects in <strong>heap memory</strong>. The key GC algorithms include:
+<ul>
+<li><strong>Serial GC</strong> (for small applications)</li>
+<li><strong>Parallel GC</strong> (for multi-threaded applications)</li>
+<li><strong>G1 GC</strong> (for low-latency applications)</li>
+<li><strong>ZGC &amp; Shenandoah</strong> (for ultra-low-latency needs)</li>
+</ul>
+</li>
+</ul>
+<h3>3. <strong>What is the difference between <code>Callable</code> and <code>Runnable</code>?</strong></h3>
+<ul>
+<li><strong>Answer</strong>:
+<ul>
+<li><code>Runnable</code> runs on a separate thread but <strong>cannot return a result</strong>.</li>
+<li><code>Callable&lt;V&gt;</code> allows returning a value and can <strong>throw checked exceptions</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3>4. <strong>Explain the SOLID principles in Java.</strong></h3>
+<ul>
+<li><strong>Answer</strong>:
+<ul>
+<li><strong>S</strong>ingle Responsibility Principle (SRP) – A class should have <strong>one reason to change</strong>.</li>
+<li><strong>O</strong>pen/Closed Principle (OCP) – A class should be <strong>open for extension but closed for modification</strong>.</li>
+<li><strong>L</strong>iskov Substitution Principle (LSP) – Subtypes must be <strong>interchangeable</strong> with their base types.</li>
+<li><strong>I</strong>nterface Segregation Principle (ISP) – Prefer <strong>small, specific interfaces</strong> over large, general ones.</li>
+<li><strong>D</strong>ependency Inversion Principle (DIP) – Depend on <strong>abstractions, not concrete implementations</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3>5. <strong>What is the difference between <code>@Transactional</code> and <code>propagation</code> in Spring?</strong></h3>
+<ul>
+<li><strong>Answer</strong>:
+<ul>
+<li><code>@Transactional</code> ensures database operations are atomic (all succeed or fail).</li>
+<li><code>Propagation</code> defines how transactions interact when one method calls another:
+<ul>
+<li><code>REQUIRED</code> (default) – Uses an existing transaction or creates one.</li>
+<li><code>REQUIRES_NEW</code> – Always starts a new transaction.</li>
+<li><code>NESTED</code> – Runs within a parent transaction but can roll back independently.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>6. <code>volatile</code> Variable:**</h3>
+<ul>
+<li>Used for <strong>multi-threading</strong> to ensure <strong>visibility</strong> of variable changes across threads.</li>
+<li>Prevents <strong>caching</strong> of the variable by threads, ensuring every read fetches the latest value from main memory.</li>
+<li>Does <strong>not guarantee atomicity</strong> for compound operations (e.g., <code>x++</code>).</li>
+<li>Example:<pre><code class="language-java">class Example {
+    volatile int counter = 0; // Changes visible to all threads
+}
+</code></pre>
+</li>
+</ul>
+<h3>7. <code>transient</code> Variable:**</h3>
+<ul>
+<li>Used in <strong>serialization</strong> to prevent storing a variable's value when an object is serialized.</li>
+<li>Useful for sensitive data like <strong>passwords</strong> or <strong>temporary variables</strong>.</li>
+<li>Upon deserialization, the variable is reset to its <strong>default value</strong> (<code>null</code>, <code>0</code>, <code>false</code>, etc.).</li>
+<li>Example:<pre><code class="language-java">class Example implements Serializable {
+    transient int tempData; // Will not be serialized
+}
+</code></pre>
+</li>
+</ul>
+<h3>8. What is the difference between <code>fail-fast</code> &amp;  <code>fail-safe</code>iterators in Java?**</h3>
+<ul>
+<li>
+<p><strong>Fail-Fast Iterators:</strong> Fail-fast iterators in Java are designed to immediately throw a <strong>ConcurrentModificationException</strong> if the underlying collection is structurally modified while the iterator is in use (except for modifications made through the iterator's own methods like remove()). They ensure that the iteration process is halted as soon as a concurrent modification is detected, preventing potential inconsistencies.</p>
+</li>
+<li>
+<p>Fail-fast iterators provide immediate feedback about concurrent modifications but might lead to exceptions and termination of the iteration.</p>
+</li>
+<li>
+<p><strong>Fail-Safe Iterators:</strong> Fail-safe iterators in Java operate on a cloned copy of the collection. They do not throw exceptions if the underlying collection is modified during iteration. However, any modifications made to the original collection after the iterator is created will not be reflected in the iterator. This approach ensures that the iterator operates on a stable copy of the data and avoids potential concurrent modification issues.</p>
+</li>
+<li>
+<p>Fail-safe iterators continue the iteration without exceptions but might not reflect recent changes in the collection.</p>
+</li>
+<li>
+<p><strong>Fail Fast</strong> <a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/CheckFailFast.java">code</a></p>
+</li>
+<li>
+<p><strong>Fail Safe</strong> <a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/CheckFailSafe.java">code</a></p>
+</li>
+</ul>
+<h3>9. What is the instanceOf Operator ?**</h3>
+<ul>
+<li></li>
+</ul>
+
+      </body>
+      </html>
+    

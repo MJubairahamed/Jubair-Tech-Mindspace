@@ -1,0 +1,121 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>FunctionalInterface</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Functional Interface Notes</h1>
+<h3><strong>What is Functional Interface in Java</strong></h3>
+<ul>
+<li>
+<p>An interface that contains <strong>only one abstract method</strong>.</p>
+</li>
+<li>
+<p>Functional interfaces can have multiple default or static methods, but only one abstract method.</p>
+</li>
+<li>
+<p>Runnable, ActionListener, and Comparator are common examples of Java functional interfaces.</p>
+</li>
+<li>
+<p>From Java 8 onwards, lambda expressions and method references can be used to represent the instance of a functional interface.</p>
+</li>
+<li>
+<p>Functional Interface is additionally recognized as Single Abstract Method Interfaces. In short, they are also known as SAM interfaces</p>
+</li>
+<li>
+<p>Example:</p>
+<pre><code class="language-java">    public class Geeks {  
+    public static void main(String[] args) {
+            // Using lambda expression 
+            // to implement Runnable
+            new Thread(() -&gt; System.out.println(&quot;New thread created&quot;)).start();
+        }
+    }
+    Output: New thread created
+    ```
+</code></pre>
+</li>
+</ul>
+<h3>@FunctionalInterface Annotation</h3>
+<ul>
+<li><strong>@FunctionalInterface</strong> annotation is used to ensure that the functional interface cannot have more than one abstract method. In case more than one abstract methods are present, the compiler flags an <strong>“Unexpected @FunctionalInterface annotation”</strong> message. However, it is not mandatory to use this annotation.</li>
+</ul>
+<h3>Java built in Functional Interface?</h3>
+<ul>
+<li>There are many interfaces that are converted into functional interfaces. All these interfaces are annotated with @FunctionalInterface.
+<ul>
+<li>These interfaces are as follows:
+<ul>
+<li><strong>Runnable:</strong> This interface only contains the run() method.</li>
+<li><strong>Comparable:</strong> This interface only contains the compareTo() method.</li>
+<li><strong>ActionListener:</strong> This interface only contains the actionPerformed() method.</li>
+<li><strong>Callable:</strong> This interface only contains the call() method.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Types of Functional Interfaces in Java</h3>
+<ul>
+<li>
+<p>four main kinds of functional interfaces which can be applied in multiple situations as mentioned below:.</p>
+<ol>
+<li>Consumer - It accepts a single input argument and returns no result.</li>
+<li>Predicate - It accepts a single argument and returns a boolean result.</li>
+<li>Function - It accepts a single argument and returns a result.</li>
+<li>Supplier - It does not take any arguments but provides a result.</li>
+</ol>
+</li>
+<li>
+<p><strong>Bi Variant of above:</strong></p>
+<ul>
+<li>BiConsumer - It accepts two arguments and returns no result.</li>
+<li>BiPredicate -It accepts two arguments and returns a boolean result.</li>
+<li>BiFunction -It accepts two arguments and returns a result.</li>
+</ul>
+</li>
+</ul>
+<h3>What are static methods in Interfaces?</h3>
+<ul>
+<li><strong>Static methods</strong>, which contains method implementation is owned by the interface and is invoked using the name of the interface, it is suitable for defining the utility methods and cannot be overridden.</li>
+</ul>
+<h3>What is the default method, and why is it required?</h3>
+<ul>
+<li>In Java, a &quot;default method&quot; allows interfaces to have methods with implementations, enabling the addition of new methods to interfaces without breaking existing implementations of those interfaces.</li>
+<li>This is required to maintain backward compatibility and allow for evolving interfaces without forcing all implementing classes to recompile and update.</li>
+<li>Example:<pre><code class="language-java">interface MyInterface {
+    void abstractMethod(); // Abstract method
+    default void defaultMethod() { // Default method
+        System.out.println(&quot;Default implementation&quot;);
+    }
+}
+</code></pre>
+</li>
+</ul>
+<h3>Important Points:</h3>
+<ul>
+<li>An infinite number of methods (whether **static or default) can be added to the functional interface. In simple words, there is no limit to a functional interface containing static and default methods.</li>
+<li><strong>Overriding methods</strong> from the parent class do not violate the rules of a functional interface in Java.</li>
+<li>The <strong>java.util.function</strong> package contains many built-in functional interfaces in Java 8.</li>
+</ul>
+<h3>FAQ's</h3>
+<ul>
+<li>Can a functional interface extend/inherit another interface?
+<ul>
+<li>A functional interface <strong>cannot extend another interface with abstract methods</strong> as it will void the rule of one abstract method per functional interface.</li>
+<li></li>
+</ul>
+</li>
+</ul>
+
+      </body>
+      </html>
+    

@@ -1,0 +1,209 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>CodingChallenge</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h3><strong>Coding Challenges with Solutions</strong></h3>
+<h4><strong>1. Reverse a String without using built-in methods</strong></h4>
+<pre><code class="language-java">public class ReverseString {
+    public static String reverse(String str) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = str.length() - 1; i &gt;= 0; i--) {
+            sb.append(str.charAt(i));
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(reverse(&quot;Hello&quot;)); // Output: olleH
+    }
+}
+</code></pre>
+<hr>
+<h4><strong>2. Find the first non-repeating character in a string</strong></h4>
+<pre><code class="language-java">import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class FirstUniqueChar {
+    public static char findFirstUnique(String str) {
+        Map&lt;Character, Integer&gt; charCount = new LinkedHashMap&lt;&gt;();
+        for (char c : str.toCharArray()) {
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+        for (Map.Entry&lt;Character, Integer&gt; entry : charCount.entrySet()) {
+            if (entry.getValue() == 1) return entry.getKey();
+        }
+        return '_'; // Return '_' if no unique character found
+    }
+
+    public static void main(String[] args) {
+        System.out.println(findFirstUnique(&quot;swiss&quot;)); // Output: w
+    }
+}
+</code></pre>
+<hr>
+<h4><strong>3. Check if a number is prime</strong></h4>
+<pre><code class="language-java">public class PrimeCheck {
+    public static boolean isPrime(int num) {
+        if (num &lt;= 1) return false;
+        for (int i = 2; i &lt;= Math.sqrt(num); i++) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(isPrime(11)); // Output: true
+    }
+}
+</code></pre>
+<hr>
+<h4><strong>4. Find the factorial of a number using recursion</strong></h4>
+<pre><code class="language-java">public class Factorial {
+    public static int factorial(int n) {
+        return (n == 0) ? 1 : n * factorial(n - 1);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(factorial(5)); // Output: 120
+    }
+}
+</code></pre>
+<hr>
+<h4><strong>5. Find the missing number in an array</strong></h4>
+<pre><code class="language-java">public class MissingNumber {
+    public static int findMissing(int[] arr, int n) {
+        int total = n * (n + 1) / 2;
+        int sum = 0;
+        for (int num : arr) sum += num;
+        return total - sum;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 4, 5, 6};
+        System.out.println(findMissing(nums, 6)); // Output: 3
+    }
+}
+</code></pre>
+<hr>
+<h4><strong>6. Check if a string is a palindrome</strong></h4>
+<pre><code class="language-java">public class PalindromeCheck {
+    public static boolean isPalindrome(String str) {
+        int left = 0, right = str.length() - 1;
+        while (left &lt; right) {
+            if (str.charAt(left++) != str.charAt(right--)) return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(isPalindrome(&quot;madam&quot;)); // Output: true
+    }
+}
+</code></pre>
+<hr>
+<h4><strong>7. Implement a simple Singleton pattern</strong></h4>
+<pre><code class="language-java">public class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {}
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+</code></pre>
+<hr>
+<h4><strong>8. Find the intersection of two arrays</strong></h4>
+<pre><code class="language-java">import java.util.HashSet;
+
+public class ArrayIntersection {
+    public static void findIntersection(int[] arr1, int[] arr2) {
+        HashSet&lt;Integer&gt; set = new HashSet&lt;&gt;();
+        for (int num : arr1) set.add(num);
+        for (int num : arr2) {
+            if (set.contains(num)) System.out.print(num + &quot; &quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr1 = {1, 2, 3, 4, 5};
+        int[] arr2 = {3, 4, 5, 6, 7};
+        findIntersection(arr1, arr2); // Output: 3 4 5
+    }
+}
+</code></pre>
+<hr>
+<h4><strong>9. Reverse a linked list</strong></h4>
+<pre><code class="language-java">class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int val) { this.val = val; }
+}
+
+public class ReverseLinkedList {
+    public static ListNode reverse(ListNode head) {
+        ListNode prev = null;
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
+    }
+}
+</code></pre>
+<hr>
+<h4><strong>10. Implement a simple Producer-Consumer using <code>BlockingQueue</code></strong></h4>
+<pre><code class="language-java">import java.util.concurrent.*;
+
+class Producer implements Runnable {
+    private BlockingQueue&lt;Integer&gt; queue;
+    Producer(BlockingQueue&lt;Integer&gt; queue) { this.queue = queue; }
+    public void run() {
+        try {
+            for (int i = 1; i &lt;= 5; i++) {
+                queue.put(i);
+                System.out.println(&quot;Produced: &quot; + i);
+                Thread.sleep(500);
+            }
+        } catch (InterruptedException e) { e.printStackTrace(); }
+    }
+}
+</code></pre>
+<h3><strong>11. What Happens When You Run <code>1.0 / 0.0</code> in Java?</strong></h3>
+<ul>
+<li>In Java, <strong>floating-point division by zero</strong> follows the <strong>IEEE 754 standard</strong> for floating-point arithmetic.</li>
+<li><strong><code>1.0 / 0.0</code></strong> results in <strong><code>Infinity</code></strong> instead of throwing an exception.</li>
+<li>Example:<pre><code class="language-java">public class Test {
+    public static void main(String[] args) {
+        System.out.println(1.0 / 0.0); // Output: Infinity
+    }
+}
+</code></pre>
+</li>
+<li>However, <strong>integer division by zero (<code>1 / 0</code>)</strong> throws an <code>ArithmeticException</code>.</li>
+<li><strong>Conclusion:</strong> In <strong>floating-point arithmetic</strong>, division by zero <strong>does not cause an exception</strong>, but returns <strong>positive or negative infinity</strong> depending on the sign of the numerator. 🚀</li>
+</ul>
+<hr>
+
+      </body>
+      </html>
+    

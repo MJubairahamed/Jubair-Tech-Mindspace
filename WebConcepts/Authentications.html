@@ -1,0 +1,206 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>Authentications</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Web Authentications</h1>
+<h3>How do you handle API authentication in Java?</h3>
+<p>In <strong>Java (Spring Boot)</strong>, API authentication can be handled using:</p>
+<h3><strong>1. Basic Authentication</strong></h3>
+<ul>
+<li>Uses <code>username:password</code> in <strong>HTTP headers</strong>.</li>
+<li>Example:<pre><code class="language-java">@Configuration
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+            .authorizeRequests().anyRequest().authenticated()
+            .and().httpBasic();
+    }
+}
+</code></pre>
+</li>
+</ul>
+<h3><strong>2. Token-Based Authentication (JWT - JSON Web Token)</strong></h3>
+<ul>
+<li>Secure, <strong>stateless</strong> authentication using tokens.</li>
+<li>Steps:
+<ul>
+<li>User logs in → Server issues JWT token.</li>
+<li>User sends JWT in headers (<code>Authorization: Bearer &lt;token&gt;</code>).</li>
+<li>Server validates token before allowing access.</li>
+</ul>
+</li>
+<li><strong>Spring Boot JWT Example:</strong><pre><code class="language-java">@GetMapping(&quot;/secure-data&quot;)
+@PreAuthorize(&quot;hasRole('USER')&quot;)
+public ResponseEntity&lt;String&gt; getSecureData() {
+    return ResponseEntity.ok(&quot;This is a secure API&quot;);
+}
+</code></pre>
+</li>
+</ul>
+<h3><strong>3. OAuth2 Authentication</strong></h3>
+<ul>
+<li>Used for third-party logins (<strong>Google, Facebook, GitHub</strong>).</li>
+<li>Uses <strong>access tokens</strong> for authentication.</li>
+<li>Example:<pre><code class="language-java">@Configuration
+@EnableOAuth2Client
+public class OAuth2Config {
+    // OAuth2 security configurations
+}
+</code></pre>
+</li>
+</ul>
+<h3><strong>4. API Key Authentication</strong></h3>
+<ul>
+<li>Uses an <strong>API Key</strong> in headers or query params.</li>
+<li>Example:<pre><code class="language-java">@GetMapping(&quot;/data&quot;)
+public ResponseEntity&lt;String&gt; getData(@RequestHeader(&quot;X-API-KEY&quot;) String apiKey) {
+    if (!&quot;MY_SECRET_KEY&quot;.equals(apiKey)) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(&quot;Invalid API Key&quot;);
+    }
+    return ResponseEntity.ok(&quot;Authorized data&quot;);
+}
+</code></pre>
+</li>
+</ul>
+<h3>Difference Between Cookies, Sessions, JWT, and PASETO in Web Authentication</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Cookies</th>
+<th>Sessions</th>
+<th>JWT (JSON Web Tokens)</th>
+<th>PASETO (Platform-Agnostic Security Tokens)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Storage Location</strong></td>
+<td>Client-side (browser)</td>
+<td>Server-side with client reference</td>
+<td>Client-side</td>
+<td>Client-side</td>
+</tr>
+<tr>
+<td><strong>How It Works</strong></td>
+<td>Small data pieces stored in the browser</td>
+<td>Server stores session data with ID reference in cookie</td>
+<td>Self-contained token with encoded payload</td>
+<td>Similar to JWT but with stronger cryptographic standards</td>
+</tr>
+<tr>
+<td><strong>Stateful/Stateless</strong></td>
+<td>Can be either</td>
+<td>Stateful</td>
+<td>Stateless</td>
+<td>Stateless</td>
+</tr>
+<tr>
+<td><strong>Data Access</strong></td>
+<td>Sent automatically with requests to same domain</td>
+<td>Session ID maps to server-stored data</td>
+<td>All data encoded in token itself</td>
+<td>All data encoded in token itself</td>
+</tr>
+<tr>
+<td><strong>Security Features</strong></td>
+<td>HttpOnly, Secure, SameSite flags</td>
+<td>Relies on secure cookie transmission</td>
+<td>Signature verification, expiration</td>
+<td>Versioned protocol, modern crypto, no algorithm confusion</td>
+</tr>
+<tr>
+<td><strong>Expiration</strong></td>
+<td>Set via Expires/Max-Age attributes</td>
+<td>Configurable server-side</td>
+<td>Encoded in token payload</td>
+<td>Encoded in token payload</td>
+</tr>
+<tr>
+<td><strong>Use Cases</strong></td>
+<td>Simple data storage, session references</td>
+<td>Traditional web applications</td>
+<td>Modern APIs, microservices</td>
+<td>High-security requirements</td>
+</tr>
+<tr>
+<td><strong>Pros</strong></td>
+<td>• Simple to implement&lt;br&gt;• Built into browsers&lt;br&gt;• Can be secured well with proper flags</td>
+<td>• Sensitive data stays on server&lt;br&gt;• Easy to invalidate&lt;br&gt;• Good for complex session data</td>
+<td>• Stateless&lt;br&gt;• Portable across domains&lt;br&gt;• Contains all needed data&lt;br&gt;• Good for microservices</td>
+<td>• Enhanced security&lt;br&gt;• Removes JWT algorithm vulnerabilities&lt;br&gt;• Standardized formats&lt;br&gt;• Future-proof cryptography</td>
+</tr>
+<tr>
+<td><strong>Cons</strong></td>
+<td>• Size limitations&lt;br&gt;• Vulnerable to CSRF attacks&lt;br&gt;• Privacy concerns</td>
+<td>• Server storage overhead&lt;br&gt;• Scaling challenges&lt;br&gt;• Session fixation risks</td>
+<td>• Can't be invalidated easily&lt;br&gt;• Payload increases size&lt;br&gt;• Algorithm confusion attacks</td>
+<td>• Newer, less adoption&lt;br&gt;• Fewer libraries/support&lt;br&gt;• Slightly more complex</td>
+</tr>
+<tr>
+<td><strong>Implementation</strong></td>
+<td><code>Set-Cookie</code> HTTP header</td>
+<td>Session middleware + cookies</td>
+<td>Sign/verify with secret or public/private keys</td>
+<td>Use specialized PASETO libraries</td>
+</tr>
+</tbody>
+</table>
+<h4>When comparing authentication methods in web applications:</h4>
+<ul>
+<li>
+<p><strong>Cookies</strong> are simple client-side storage mechanisms handled automatically by browsers. They're easy to implement but have size limitations and CSRF vulnerabilities. They typically store a session ID or small pieces of data.</p>
+</li>
+<li>
+<p><strong>Sessions</strong> use server-side storage with a reference (usually in a cookie) sent to the client. The server maintains all user data while the client only has an identifier. This offers better security for sensitive data but creates scaling challenges in distributed systems.</p>
+</li>
+<li>
+<p><strong>JWT (JSON Web Tokens)</strong> are self-contained tokens that include all necessary information encoded and signed within the token itself. They're ideal for stateless authentication in modern APIs and microservices. The main advantages are portability across domains and no server storage requirements, but they can't be easily invalidated once issued.</p>
+</li>
+<li>
+<p><strong>PASETO (Platform-Agnostic Security Tokens)</strong> is a more secure alternative to JWT, addressing several JWT security concerns. It uses modern cryptographic standards, has a versioned protocol, and eliminates algorithm confusion attacks. While offering enhanced security, PASETO has less adoption and fewer libraries available than JWT.
+&lt;img src=&quot;/WebConcepts/Images/Authentication_ss.png&quot; alt=&quot;Alt Text&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;</p>
+</li>
+</ul>
+<hr>
+<h3>what is CSRF vulnerabilities and how to over come it</h3>
+<p><strong>CSRF (Cross-Site Request Forgery)</strong> is an attack where a malicious website tricks a logged-in user into unknowingly submitting a request to another website where they have privileges (e.g., transferring money).</p>
+<h4><strong>How to Prevent CSRF in JavaScript:</strong></h4>
+<ol>
+<li><strong>Use CSRF Tokens</strong> – Generate a unique token for each request and verify it on the server.</li>
+<li><strong>SameSite Cookies</strong> – Set cookies with <code>SameSite=Strict</code> or <code>SameSite=Lax</code> to prevent cross-origin requests.</li>
+<li><strong>Referer &amp; Origin Checks</strong> – Validate the <code>Referer</code> and <code>Origin</code> headers in incoming requests.</li>
+<li><strong>User Authentication</strong> – Require re-authentication for sensitive actions.</li>
+<li><strong>Use CORS Properly</strong> – Restrict allowed domains and HTTP methods.</li>
+</ol>
+<p><strong>Example in Express.js (CSRF Token Implementation):</strong></p>
+<pre><code class="language-javascript">const csrf = require('csurf');
+const cookieParser = require('cookie-parser');
+
+app.use(cookieParser());
+app.use(csrf({ cookie: true }));
+
+app.get('/form', (req, res) =&gt; {
+    res.json({ csrfToken: req.csrfToken() });
+});
+
+app.post('/submit', (req, res) =&gt; {
+    res.send('CSRF-protected request successful');
+});
+</code></pre>
+<h2>This ensures every form submission includes a valid CSRF token, blocking unauthorized requests.</h2>
+
+      </body>
+      </html>
+    

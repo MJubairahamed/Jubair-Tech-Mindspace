@@ -1,0 +1,88 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>LambdaExpression</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Lambda Notes</h1>
+<h3><strong>What is Lambda Expression in Java</strong></h3>
+<ul>
+<li>Lambda expression is an <strong>anonymous</strong> function that provides a clear and concise way to represent a method interface.</li>
+<li>It is beneficial in iterating, filtering, and extracting data from a collection.It may or may not have results and parameters.</li>
+<li>Lambda expressions work only with Functional Interfaces (interfaces with a single abstract method).
+<ul>
+<li>
+<pre><code class="language-java">  @FunctionalInterface
+  interface MyFunctionalInterface {
+      void show();
+  }
+</code></pre>
+</li>
+</ul>
+<pre><code></code></pre>
+</li>
+</ul>
+<h3><strong>Types of Lambda Expressions</strong></h3>
+<ul>
+<li>There are three Lambda Expression Parameters are mentioned below:
+<ul>
+<li>Zero Parameter - <code>() -&gt; System.out.println(&quot;Hello, Lambda!&quot;);</code></li>
+<li>Single Parameter - <code>(x) -&gt; System.out.println(x);</code></li>
+<li>Multiple Parameters - <code>(x, y) -&gt; x + y;</code></li>
+</ul>
+</li>
+</ul>
+<p>&lt;img src=&quot;../Images/LambdaExpression_Syntax.png&quot; alt=&quot;Alt Text&quot; width=&quot;200&quot; height=&quot;200&quot;&gt;</p>
+<h3><strong>Additional Points</strong></h3>
+<ul>
+<li>
+<p>Lambda expression can access <strong>local variables</strong> only if they are <strong>final</strong> or they are <strong>never modified</strong> inside the method.</p>
+</li>
+<li>
+<p>Whereas <strong>instance variables</strong> are allowed to be modifed and access inside the lambda.</p>
+<ul>
+<li><strong>Example:</strong><pre><code class="language-java">class Test {   
+    int temp=10;
+    public static void main(String[] args) {
+        int count = 0;
+        mylambda ml=()-&gt;{ 
+            int i=o;
+            system.out.println(&quot;i&quot;+(++i)); // right  ✅                              
+            system.out.println(&quot;temp&quot;+(++temp)); // right  ✅
+            count ++; // Wrong ❌
+        }
+    }
+}
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Lambda expression can be send as a parameter if the method is taking a functional interfaces as parameter.</p>
+<ul>
+<li><strong>Example:</strong>  <code> useLambda.callLambda(()-&gt;{System.out.println(&quot;Hello Lambda&quot;);});</code></li>
+<li><strong>Lambda as parameter:</strong> <a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/FunctionalInterface/LamdaExamples/LambdaMultiParamExample.java">code</a></li>
+</ul>
+</li>
+<li>
+<p>Stream API and Lambda Expressions</p>
+<ul>
+<li>Commonly used in Streams for concise operations:</li>
+</ul>
+<pre><code class="language-java">   List&lt;String&gt; names = Arrays.asList(&quot;Java&quot;, &quot;Spring&quot;, &quot;Microservices&quot;);
+   names.stream().filter(name -&gt; name.startsWith(&quot;J&quot;)).forEach(System.out::println);
+</code></pre>
+</li>
+</ul>
+
+      </body>
+      </html>
+    

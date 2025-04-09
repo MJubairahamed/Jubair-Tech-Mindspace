@@ -1,0 +1,132 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>Express</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Express Js Noted</h1>
+<h3>What is Express.js?</h3>
+<p>Express.js is a <strong>fast, minimalist web framework</strong> for <strong>Node.js</strong>. It simplifies the process of writing server-side code by providing a thin layer of fundamental web application features without obscuring Node's capabilities. It's widely used for <strong>creating APIs, handling HTTP requests, and serving web content</strong> through middleware functions that can examine/modify request and response objects.</p>
+<hr>
+<h3><strong>Basic Express.js Example</strong></h3>
+<pre><code class="language-javascript">const express = require('express');
+const app = express();
+
+// Define a simple route
+app.get('/', (req, res) =&gt; {
+    res.send('Hello, Express.js!');
+});
+
+// Start the server
+app.listen(3000, () =&gt; {
+    console.log('Server is running on http://localhost:3000');
+});
+</code></pre>
+<p>🔹 <strong>Run the app:</strong></p>
+<pre><code class="language-sh">npm install express  
+node app.js  
+</code></pre>
+<p>🔹 Open <strong>http://localhost:3000</strong> in a browser, and it will display: <strong>&quot;Hello, Express.js!&quot;</strong></p>
+<hr>
+<h3><strong>Why Use Express.js?</strong></h3>
+<ul>
+<li>🚀 <strong>Faster Development</strong> – Reduces boilerplate code compared to raw Node.js.</li>
+<li>🔌 <strong>Flexible &amp; Extensible</strong> – Easily integrates with databases, authentication, and other Node.js packages.</li>
+<li>📡 <strong>Great for APIs &amp; Microservices</strong> – Commonly used in backend development for scalable applications.</li>
+</ul>
+<p>Let's set up a <strong>full Express.js project</strong> from scratch, step by step. 🚀</p>
+<hr>
+<h3>Set up a Express.js project</h3>
+<ul>
+<li>Step 1: Install Node.js &amp; npm then verify the using version</li>
+</ul>
+<pre><code class="language-sh">node -v
+npm -v
+</code></pre>
+<ul>
+<li>
+<p>Step 2: Create a New Express Project</p>
+<ul>
+<li>Navigate to your project folder and initialize a new Node.js project:<pre><code class="language-sh">mkdir my-express-app &amp;&amp; cd my-express-app
+npm init -y
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>This creates a <code>package.json</code> file.</p>
+</li>
+<li>
+<p>Step 3: Install Express.js</p>
+<ul>
+<li>Run the following command to install <strong>Express.js</strong>:<pre><code class="language-sh">npm install express
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Step 4: Create the Main Server File (<code>server.js</code>)</p>
+<ul>
+<li>
+<p>Create a new file named <strong><code>server.js</code></strong> and add the following code:</p>
+<pre><code class="language-javascript">const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// Middleware to parse JSON
+app.use(express.json());
+
+// Home Route
+app.get('/', (req, res) =&gt; {
+    res.send('Welcome to My Express.js App!');
+});
+
+// Sample API Route
+app.get('/api/data', (req, res) =&gt; {
+    res.json({ message: 'Hello from Express API!', status: 'Success' });
+});
+
+// Start Server
+app.listen(PORT, () =&gt; {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Step 5: Run the Server</p>
+<ul>
+<li>Start the Express.js server with:</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-sh">node server.js
+</code></pre>
+<p>You should see:</p>
+<pre><code class="language-sh">Server is running on http://localhost:3000
+</code></pre>
+<p>Open <strong>http://localhost:3000</strong> in your browser, and you should see:<br>
+<strong>&quot;Welcome to My Express.js App!&quot;</strong></p>
+<ul>
+<li>Step 7: Install Nodemon (Optional)**
+For automatic server restarts during development, install <strong>nodemon</strong>:</li>
+</ul>
+<pre><code class="language-sh">npm install -g nodemon
+</code></pre>
+<p>Run the server with:</p>
+<pre><code class="language-sh">nodemon server.js
+</code></pre>
+<hr>
+
+      </body>
+      </html>
+    

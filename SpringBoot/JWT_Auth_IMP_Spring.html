@@ -1,0 +1,238 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>JWT Auth IMP Spring</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h3><strong>Implementing JWT Authentication in Spring Boot</strong></h3>
+<p>Here’s how you can secure a Spring Boot REST API using <strong>JWT (JSON Web Token)</strong> authentication.</p>
+<hr>
+<h3><strong>1. Add Dependencies in <code>pom.xml</code></strong></h3>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;
+    &lt;artifactId&gt;jjwt&lt;/artifactId&gt;
+    &lt;version&gt;0.11.5&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-validation&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<hr>
+<h3><strong>2. Configure JWT Utility (<code>JwtUtil.java</code>)</strong></h3>
+<pre><code class="language-java">import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Component;
+import java.util.Date;
+
+@Component
+public class JwtUtil {
+    private final String SECRET_KEY = &quot;your_secret_key&quot;;  // Use environment variables in production
+
+    public String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hour expiry
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
+    }
+
+    public String extractUsername(String token) {
+        return getClaims(token).getSubject();
+    }
+
+    public boolean validateToken(String token, String username) {
+        return (username.equals(extractUsername(token)) &amp;&amp; !isTokenExpired(token));
+    }
+
+    private boolean isTokenExpired(String token) {
+        return getClaims(token).getExpiration().before(new Date());
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody();
+    }
+}
+</code></pre>
+<hr>
+<h3><strong>3. Create Authentication Controller (<code>AuthController.java</code>)</strong></h3>
+<pre><code class="language-java">import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@RequestMapping(&quot;/auth&quot;)
+public class AuthController {
+    private final JwtUtil jwtUtil;
+
+    public AuthController(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
+    }
+
+    @PostMapping(&quot;/login&quot;)
+    public ResponseEntity&lt;?&gt; login(@RequestBody Map&lt;String, String&gt; request) {
+        String username = request.get(&quot;username&quot;);
+        String password = request.get(&quot;password&quot;);
+
+        if (&quot;testuser&quot;.equals(username) &amp;&amp; &quot;password&quot;.equals(password)) { // Mock authentication
+            String token = jwtUtil.generateToken(username);
+            Map&lt;String, String&gt; response = new HashMap&lt;&gt;();
+            response.put(&quot;token&quot;, token);
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(401).body(&quot;Invalid credentials&quot;);
+        }
+    }
+}
+</code></pre>
+<hr>
+<h3><strong>4. Implement JWT Filter (<code>JwtFilter.java</code>)</strong></h3>
+<pre><code class="language-java">import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+import io.jsonwebtoken.ExpiredJwtException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@Component
+public class JwtFilter extends OncePerRequestFilter {
+    private final JwtUtil jwtUtil;
+
+    public JwtFilter(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
+    }
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+            throws ServletException, IOException {
+        String authHeader = request.getHeader(&quot;Authorization&quot;);
+
+        if (authHeader != null &amp;&amp; authHeader.startsWith(&quot;Bearer &quot;)) {
+            String token = authHeader.substring(7);
+            try {
+                String username = jwtUtil.extractUsername(token);
+
+                if (username != null &amp;&amp; SecurityContextHolder.getContext().getAuthentication() == null) {
+                    UserDetails userDetails = User.withUsername(username).password(&quot;&quot;).roles(&quot;USER&quot;).build();
+                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                            userDetails, null, userDetails.getAuthorities());
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
+            } catch (ExpiredJwtException e) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
+            }
+        }
+        chain.doFilter(request, response);
+    }
+}
+</code></pre>
+<hr>
+<h3><strong>5. Configure Security (<code>SecurityConfig.java</code>)</strong></h3>
+<pre><code class="language-java">import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+@Configuration
+public class SecurityConfig {
+    private final JwtFilter jwtFilter;
+
+    public SecurityConfig(JwtFilter jwtFilter) {
+        this.jwtFilter = jwtFilter;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+                .authorizeHttpRequests()
+                .antMatchers(&quot;/auth/login&quot;).permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+}
+</code></pre>
+<hr>
+<h3><strong>6. Create a Protected API (<code>HelloController.java</code>)</strong></h3>
+<pre><code class="language-java">import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class HelloController {
+
+    @GetMapping(&quot;/hello&quot;)
+    public String sayHello() {
+        return &quot;Hello, this is a protected API!&quot;;
+    }
+}
+</code></pre>
+<hr>
+<h3><strong>7. Test the Application</strong></h3>
+<p>1️⃣ <strong>Login to Get JWT Token:</strong></p>
+<pre><code class="language-sh">POST http://localhost:8080/auth/login
+Body: { &quot;username&quot;: &quot;testuser&quot;, &quot;password&quot;: &quot;password&quot; }
+</code></pre>
+<p><em>Response:</em></p>
+<pre><code class="language-json">{ &quot;token&quot;: &quot;your_jwt_token&quot; }
+</code></pre>
+<p>2️⃣ <strong>Access Protected API (<code>/api/hello</code>) with Token:</strong></p>
+<pre><code class="language-sh">GET http://localhost:8080/api/hello
+Headers: { &quot;Authorization&quot;: &quot;Bearer your_jwt_token&quot; }
+</code></pre>
+<p><em>Response:</em></p>
+<pre><code class="language-json">&quot;Hello, this is a protected API!&quot;
+</code></pre>
+<hr>
+<h3><strong>Summary</strong></h3>
+<p>✅ User logs in and gets a JWT token<br>
+✅ JWT token is sent with API requests in the <code>Authorization</code> header<br>
+✅ <code>JwtFilter</code> validates the token and grants access<br>
+✅ Secure authentication without sessions! 🚀</p>
+<p>Would you like any modifications, such as <strong>refresh tokens</strong> or <strong>database integration</strong>? 😊</p>
+
+      </body>
+      </html>
+    

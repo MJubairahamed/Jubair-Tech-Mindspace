@@ -1,0 +1,150 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>Selenium Concepts</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Selenium</h1>
+<h3>What is the Differenec between WebDriverManager and ThreadGuard Protect? Which one is best to create webdrivers.</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><strong>ThreadGuard-Protected ChromeDriver</strong></th>
+<th><strong>WebDriverManager</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Purpose</strong></td>
+<td>Ensures thread safety for WebDriver instances in multi-threaded test scenarios.</td>
+<td>Simplifies management of browser driver binaries (e.g., ChromeDriver, GeckoDriver) for Selenium.</td>
+</tr>
+<tr>
+<td><strong>Mechanism</strong></td>
+<td>Uses <code>ThreadLocal</code> to create isolated WebDriver instances for each thread, preventing conflicts in parallel tests.</td>
+<td>Automatically downloads and configures the correct WebDriver binary based on the installed browser version.</td>
+</tr>
+<tr>
+<td><strong>Usage</strong></td>
+<td>Combined with <code>ThreadLocal</code> to manage isolated drivers per thread.</td>
+<td>Single line setup (<code>WebDriverManager.chromedriver().setup();</code>) downloads and sets up the driver if needed.</td>
+</tr>
+<tr>
+<td><strong>Benefits</strong></td>
+<td>Ideal for parallel testing, ensuring each thread has its own WebDriver, reducing driver conflicts.</td>
+<td>Minimizes manual setup and driver management; ideal for CI/CD pipelines due to automatic driver handling.</td>
+</tr>
+<tr>
+<td><strong>Downsides</strong></td>
+<td>Requires manual driver binary management and may need additional configuration for multi-threading.</td>
+<td>Lacks inherent thread safety; requires additional setup (e.g., <code>ThreadLocal</code>) to manage driver instances in multi-threaded tests.</td>
+</tr>
+<tr>
+<td><strong>Best Use Cases</strong></td>
+<td>Best for multi-threaded applications where driver conflicts could occur.</td>
+<td>Suitable for ease of driver management, especially in CI/CD environments and when managing browser driver compatibility.</td>
+</tr>
+<tr>
+<td><strong>Conclusion</strong></td>
+<td>Preferred for thread safety; prevents driver conflicts in parallel execution.</td>
+<td>Provides simpler driver management; use with <code>ThreadLocal</code> to achieve both automation and thread safety.</td>
+</tr>
+</tbody>
+</table>
+<p>Simple example of using <strong>WebDriverManager</strong> with <strong>ThreadLocal</strong> in Java to manage ChromeDriver instances for multi-threaded test execution.</p>
+<p>This setup ensures that each thread gets its own instance of ChromeDriver, which avoids conflicts when running tests in parallel.</p>
+<h3>Example Code</h3>
+<ol>
+<li><strong>Set up WebDriverManager with ThreadLocal</strong>
+<ul>
+<li>In this example, each test thread will have its own WebDriver instance, managed by ThreadLocal.</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-java">import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class WebDriverThreadLocalExample {
+
+    // ThreadLocal for holding WebDriver instances
+    private static ThreadLocal&lt;WebDriver&gt; driverThreadLocal = new ThreadLocal&lt;&gt;();
+
+    // Initialize WebDriver for each thread
+    public static void initializeDriver() {
+        WebDriverManager.chromedriver().setup();  // WebDriverManager handles driver binary management
+        driverThreadLocal.set(new ChromeDriver()); // Assign new ChromeDriver instance to each thread
+    }
+
+    // Get the WebDriver instance for the current thread
+    public static WebDriver getDriver() {
+        return driverThreadLocal.get();
+    }
+
+    // Quit and remove WebDriver instance for the current thread
+    public static void quitDriver() {
+        if (driverThreadLocal.get() != null) {
+            driverThreadLocal.get().quit();
+            driverThreadLocal.remove();
+        }
+    }
+}
+</code></pre>
+<ol start="2">
+<li><strong>Using the WebDriver in Tests</strong>
+<ul>
+<li>Here's how you can use <code>WebDriverThreadLocalExample</code> in your test methods.</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-java">import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class ParallelTests {
+
+    @BeforeEach
+    public void setUp() {
+        WebDriverThreadLocalExample.initializeDriver();
+    }
+
+    @Test
+    public void test1() {
+        WebDriver driver = WebDriverThreadLocalExample.getDriver();
+        driver.get(&quot;https://example.com&quot;);
+        System.out.println(&quot;Title in test1: &quot; + driver.getTitle());
+    }
+
+    @Test
+    public void test2() {
+        WebDriver driver = WebDriverThreadLocalExample.getDriver();
+        driver.get(&quot;https://example.com&quot;);
+        System.out.println(&quot;Title in test2: &quot; + driver.getTitle());
+    }
+
+    @AfterEach
+    public void tearDown() {
+        WebDriverThreadLocalExample.quitDriver();
+    }
+}
+</code></pre>
+<h3>Explanation</h3>
+<ul>
+<li><strong><code>initializeDriver()</code></strong>: Sets up a new ChromeDriver instance for each test thread and stores it in <code>ThreadLocal</code>.</li>
+<li><strong><code>getDriver()</code></strong>: Retrieves the WebDriver instance specific to the current thread.</li>
+<li><strong><code>quitDriver()</code></strong>: Closes and cleans up the WebDriver instance at the end of each test.</li>
+</ul>
+<p>This setup ensures thread-safe management of WebDriver instances when running tests in parallel.</p>
+
+      </body>
+      </html>
+    

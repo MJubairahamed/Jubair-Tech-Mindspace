@@ -1,0 +1,132 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>ScenarioBasedQuestionsPart1</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <p>Here are some <strong>scenario-based Java Collections questions</strong> that can be asked in an interview for an <strong>experienced Java developer (10+ years)</strong>. These focus on real-world problems, best practices, and optimizations.</p>
+<hr>
+<h2><strong>🔹 Scenario-Based Java Collections Questions</strong></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th><strong>Scenario</strong></th>
+<th><strong>Expected Answer Approach</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1</strong></td>
+<td>You need to store a large number of records that are <strong>retrieved frequently but updated rarely</strong>. Which collection will you choose?</td>
+<td><code>ArrayList</code> is preferred for fast retrieval (<code>O(1)</code>) if ordering is needed, otherwise a <code>HashSet</code> for uniqueness with fast lookup (<code>O(1)</code>).</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>You have a scenario where you need a <strong>thread-safe list</strong> but with <strong>high read performance</strong> and occasional writes. Which collection will you use?</td>
+<td><code>CopyOnWriteArrayList</code>, since it allows safe iteration without <code>ConcurrentModificationException</code> and is optimized for read-heavy scenarios.</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>You are designing a <strong>LRU Cache</strong>. Which Java collection would you use?</td>
+<td>Use <code>LinkedHashMap</code> with <code>accessOrder=true</code> and override <code>removeEldestEntry()</code>.</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>You need a <strong>sorted list of unique elements</strong> and frequent retrieval operations. Which collection should you use?</td>
+<td><code>TreeSet</code> as it maintains <strong>sorted order</strong> and ensures uniqueness (<code>O(log n)</code> insertion and retrieval).</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>Your application requires a <strong>fast lookup for key-value pairs</strong> but should also <strong>maintain insertion order</strong>. Which collection do you choose?</td>
+<td><code>LinkedHashMap</code> preserves insertion order while providing <code>O(1)</code> lookup time.</td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td>You have a <strong>multithreaded application</strong> where multiple threads need to <strong>read and write to a Map</strong>. What will you use?</td>
+<td>Use <code>ConcurrentHashMap</code>, as it allows <strong>concurrent access</strong> with segment-based locking (better than synchronizing <code>HashMap</code>).</td>
+</tr>
+<tr>
+<td><strong>7</strong></td>
+<td>You are handling a <strong>priority-based job scheduler</strong>. Which collection should you use?</td>
+<td><code>PriorityQueue</code>, as it provides <strong>automatic ordering</strong> based on priority (Min Heap / Max Heap).</td>
+</tr>
+<tr>
+<td><strong>8</strong></td>
+<td>How would you <strong>find duplicate elements</strong> in a <code>List</code> efficiently?</td>
+<td>Use a <code>Set</code> to track unique elements, and add elements already present to a <code>HashSet</code>.</td>
+</tr>
+<tr>
+<td><strong>9</strong></td>
+<td>You need to store elements <strong>in the order they were last accessed</strong> (Least Recently Used order). What will you use?</td>
+<td><code>LinkedHashMap</code> with <code>accessOrder=true</code>.</td>
+</tr>
+<tr>
+<td><strong>10</strong></td>
+<td>You are implementing a <strong>real-time message queue</strong> where multiple consumers retrieve messages <strong>in FIFO order</strong>. Which collection is ideal?</td>
+<td>Use <code>ConcurrentLinkedQueue</code> (thread-safe) or <code>ArrayDeque</code> (for single-threaded scenarios).</td>
+</tr>
+<tr>
+<td><strong>11</strong></td>
+<td>You have a collection where <strong>duplicate keys are allowed</strong>, and each key maps to multiple values. Which collection will you use?</td>
+<td>Use <code>Multimap</code> from <strong>Guava library</strong> or <code>Map&lt;K, List&lt;V&gt;&gt;</code>.</td>
+</tr>
+<tr>
+<td><strong>12</strong></td>
+<td>You need to store a large dataset and frequently perform <strong>search operations</strong> on it. Which collection will be the most efficient?</td>
+<td><code>HashSet</code> or <code>HashMap</code> for <code>O(1)</code> search time.</td>
+</tr>
+<tr>
+<td><strong>13</strong></td>
+<td>You need to implement a <strong>word frequency counter</strong> for a large text file. What data structure should you use?</td>
+<td>Use <code>HashMap&lt;String, Integer&gt;</code> to count occurrences.</td>
+</tr>
+<tr>
+<td><strong>14</strong></td>
+<td>How would you efficiently <strong>remove duplicate elements from an ArrayList</strong>?</td>
+<td>Use <code>new ArrayList&lt;&gt;(new HashSet&lt;&gt;(list))</code>, but this will lose ordering. Use <code>LinkedHashSet</code> if order needs to be preserved.</td>
+</tr>
+<tr>
+<td><strong>15</strong></td>
+<td>You have an application where <strong>the highest priority tasks should be processed first</strong>. How do you implement it?</td>
+<td>Use <code>PriorityQueue</code> with a custom comparator.</td>
+</tr>
+<tr>
+<td><strong>16</strong></td>
+<td>You need a <strong>queue where the last inserted element should be removed first</strong> (LIFO behavior). Which collection should you use?</td>
+<td>Use <code>Deque</code> (<code>ArrayDeque</code> or <code>LinkedList</code>) and call <code>pop()/push()</code>.</td>
+</tr>
+<tr>
+<td><strong>17</strong></td>
+<td>How can you efficiently <strong>merge two unsorted lists</strong> and remove duplicates?</td>
+<td>Use <code>Set</code> (<code>HashSet</code> or <code>LinkedHashSet</code>) for uniqueness, and then convert it back to a <code>List</code>.</td>
+</tr>
+<tr>
+<td><strong>18</strong></td>
+<td>How do you efficiently count the <strong>occurrences of each character in a String</strong>?</td>
+<td>Use <code>Map&lt;Character, Integer&gt;</code> and iterate through the string, updating the count.</td>
+</tr>
+<tr>
+<td><strong>19</strong></td>
+<td>You have a <strong>huge dataset that doesn't fit into memory</strong>. How will you perform a <strong>top-K elements retrieval efficiently</strong>?</td>
+<td>Use a <strong>Min Heap (PriorityQueue)</strong> to maintain only K largest elements.</td>
+</tr>
+<tr>
+<td><strong>20</strong></td>
+<td>You need a <strong>thread-safe, blocking queue</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+      </body>
+      </html>
+    

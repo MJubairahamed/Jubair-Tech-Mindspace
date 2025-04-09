@@ -1,0 +1,84 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>SpringBootBasics</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h3>What is Spring Boot, and how is it different from Spring Framework?</h3>
+<p>✅ <strong>Spring Boot</strong> is a framework that simplifies <strong>Spring-based applications</strong> by eliminating XML configuration, providing embedded servers, and enabling auto-configuration.<br>
+✅ <strong>auto-configuration</strong> A key feature, which automatically sets up your application based on the dependencies present on the classpath.
+✅ <strong>Providing production-ready</strong> features like metrics, health checks, and externalized configuration.</p>
+<p><strong>Key Differences:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Spring Framework</th>
+<th>Spring Boot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuration</td>
+<td>Requires XML / Java Config</td>
+<td>Uses auto-configuration</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>Needs external server (Tomcat, Jetty)</td>
+<td>Comes with embedded servers</td>
+</tr>
+<tr>
+<td>Complexity</td>
+<td>More manual setup</td>
+<td>Less boilerplate, faster development</td>
+</tr>
+</tbody>
+</table>
+<p>📌 <strong>Example:</strong> Spring Boot removes the need for a <code>web.xml</code> file and allows you to start an application with a simple <code>main()</code> method.</p>
+<hr>
+<h3>What are the main features and advantages of using Spring Boot for application development?</h3>
+<ol>
+<li><strong>Auto Configuration</strong>: Auto-configures beans based on classpath and dependencies using conditional annotations.
+<ul>
+<li>It Loads auto-configuration classes from META-INF/spring.factories, applies conditional checks, and registers qualifying beans.</li>
+</ul>
+</li>
+<li><strong>Embedded Servers</strong>: Spring Boot comes with embedded servers like Tomcat, Jetty, or Undertow, so you don’t need to deploy WAR files or set up an external server.</li>
+<li><strong>Spring Boot Actuator</strong>: It includes built-in production-ready features like health checks, metrics, application monitoring, and externalized configuration.</li>
+<li><strong>Starter Dependencies</strong>: Spring Boot simplifies dependency management with a set of curated, versioned dependencies that work well together.</li>
+<li><strong>Spring Boot CLI</strong>: A command-line interface for running and testing Spring Boot applications quickly, allowing you to write Groovy scripts and start applications with minimal setup.</li>
+<li><strong>Spring Boot DevTools</strong>: Provides a set of tools to improve the development experience, such as automatic restarts, live reload, and enhanced logging, to speed up development cycles.</li>
+</ol>
+<hr>
+<h3>What is the purpose of the <code>@SpringBootApplication</code> annotation?</h3>
+<ul>
+<li><code>@SpringBootApplication</code> is a <strong>meta-annotation</strong> combining:
+<ul>
+<li><code>@Configuration</code> – Marks the class as a Spring configuration. Marks the class as a source of bean definitions for the application
+context. It is equivalent to using XML configuration in traditional Spring, but in a more concise and Java-based way.</li>
+<li><code>@EnableAutoConfiguration</code> – Enables automatic configuration based on dependencies is present in the classpath.</li>
+<li><code>@ComponentScan</code> – Scans for Spring components (like @Controllers, @Services,@Repository).</li>
+</ul>
+</li>
+</ul>
+<p>📌 <strong>Example:</strong></p>
+<pre><code class="language-java">@SpringBootApplication
+public class MyApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MyApplication.class, args);
+    }
+}
+</code></pre>
+
+      </body>
+      </html>
+    

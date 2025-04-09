@@ -1,0 +1,65 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>Basics</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h2>Functional programming basics.</h2>
+<h3><strong>Method Reference in Java</strong></h3>
+<p>✅ <strong>Method Reference</strong> is a shorthand way to refer to a method <strong>without calling it explicitly</strong>. It makes the code <strong>cleaner and more readable</strong>, especially when using <strong>Lambda Expressions</strong>.<br>
+✅  It works with static methods (<code>Class::staticMethod</code>), instance methods (<code>object::method</code> or <code>Class::method</code>), and constructors (<code>Class::new</code>).</p>
+<h3><strong>🔹 Why Use Method References?</strong></h3>
+<p>🔸 Reduces <strong>boilerplate code</strong> in Lambda Expressions.<br>
+🔸 Improves <strong>code readability</strong> and <strong>reusability</strong>.<br>
+🔸 Works with <strong>Functional Interfaces</strong> (like <code>Consumer&lt;T&gt;</code>, <code>Supplier&lt;T&gt;</code>, <code>Predicate&lt;T&gt;</code>).</p>
+<h3><strong>🔹 Syntax of Method References</strong></h3>
+<pre><code class="language-java">ClassName::methodName  // Syntax for static and instance methods
+</code></pre>
+<h2><strong>2️⃣ Types of Method References</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Syntax</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Static Method Reference</strong></td>
+<td><code>ClassName::staticMethod</code></td>
+<td><code>Math::sqrt</code> instead of <code>x -&gt; Math.sqrt(x)</code></td>
+</tr>
+<tr>
+<td><strong>Instance Method Reference (on object)</strong></td>
+<td><code>object::instanceMethod</code></td>
+<td><code>&quot;hello&quot;::toUpperCase</code> instead of <code>() -&gt; &quot;hello&quot;.toUpperCase()</code></td>
+</tr>
+<tr>
+<td><strong>Instance Method Reference (on class type, used in streams)</strong></td>
+<td><code>ClassName::instanceMethod</code></td>
+<td><code>String::length</code> instead of <code>s -&gt; s.length()</code></td>
+</tr>
+<tr>
+<td><strong>Constructor Reference</strong></td>
+<td><code>ClassName::new</code></td>
+<td><code>ArrayList::new</code> instead of <code>() -&gt; new ArrayList&lt;&gt;()</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Method Reference:</strong> <a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/FunctionalInterface/LamdaExamples/MethodReferenceExample.java">code</a></li>
+</ul>
+<hr>
+
+      </body>
+      </html>
+    

@@ -1,0 +1,72 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>SpringMvc</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Spring MVC Concepts</h1>
+<h3><strong>What is a Controller in Spring MVC?</strong></h3>
+<p>In <strong>Spring MVC</strong>, a <strong>Controller</strong> is a key component that handles incoming HTTP requests, processes them, and returns responses. It acts as an intermediary between the <strong>Model</strong> (business logic/data) and the <strong>View</strong> (UI). Controllers are typically annotated with <code>@Controller</code> or <code>@RestController</code> to define request-handling logic.</p>
+<h3><strong>Key Annotations in Spring MVC Controllers</strong></h3>
+<ol>
+<li><strong><code>@Controller</code></strong> – Marks a class as a Spring MVC controller that returns <strong>view templates (JSP, Thymeleaf, etc.)</strong>.</li>
+<li><strong><code>@RestController</code></strong> – A specialized version of <code>@Controller</code> that returns <strong>JSON or XML responses</strong> (used in REST APIs).</li>
+<li><strong><code>@RequestMapping</code></strong> – Maps HTTP requests to specific handler methods.</li>
+<li><strong><code>@GetMapping</code>, <code>@PostMapping</code>, <code>@PutMapping</code>, <code>@DeleteMapping</code></strong> – Shortcut annotations for HTTP methods.</li>
+<li><strong><code>@RequestParam</code>, <code>@PathVariable</code></strong> – Used to extract parameters from the request.</li>
+</ol>
+<h3><strong>Example of a Spring MVC Controller</strong></h3>
+<h4><strong>1. Using <code>@Controller</code> (Returns a View)</strong></h4>
+<pre><code class="language-java">@Controller
+@RequestMapping(&quot;/user&quot;)
+public class UserController {
+
+    @GetMapping(&quot;/welcome&quot;)
+    public String welcomePage(Model model) {
+        model.addAttribute(&quot;message&quot;, &quot;Welcome to Spring MVC!&quot;);
+        return &quot;welcome&quot;;  // Returns &quot;welcome.jsp&quot; or &quot;welcome.html&quot;
+    }
+}
+</code></pre>
+<ul>
+<li>
+<p>Maps <code>GET /user/welcome</code> to <code>welcomePage()</code>.</p>
+</li>
+<li>
+<p>Adds data to the <code>Model</code> object.</p>
+</li>
+<li>
+<p>Returns a view name (resolved by <code>ViewResolver</code>).</p>
+</li>
+<li></li>
+</ul>
+<h4><strong>2. Using <code>@RestController</code> (Returns JSON Response)</strong></h4>
+<pre><code class="language-java">@RestController
+@RequestMapping(&quot;/api/users&quot;)
+public class UserRestController {
+
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;User&gt; getUser(@PathVariable int id) {
+        User user = new User(id, &quot;John Doe&quot;, &quot;john@example.com&quot;);
+        return ResponseEntity.ok(user); // Returns JSON response
+    }
+}
+</code></pre>
+<ul>
+<li>Maps <code>GET /api/users/{id}</code> to <code>getUser()</code>.</li>
+<li>Extracts <code>id</code> from the URL using <code>@PathVariable</code>.</li>
+<li>Returns a JSON response instead of a view.</li>
+</ul>
+<hr>
+
+      </body>
+      </html>
+    

@@ -1,0 +1,209 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>JDBC</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h3><strong>Difference Between <code>Statement.executeBatch()</code> and <code>PreparedStatement.executeUpdate()</code></strong></h3>
+<p>Both <code>executeBatch()</code> and <code>executeUpdate()</code> are used to execute <strong>SQL statements</strong> in <strong>JDBC</strong>, but they serve different purposes and have distinct advantages.</p>
+<hr>
+<h2><strong>1. <code>Statement.executeBatch()</code> (Batch Execution)</strong></h2>
+<p><strong>Used when executing multiple SQL queries together as a batch.</strong></p>
+<ul>
+<li>It reduces the number of database round trips, improving performance.</li>
+<li>Used for bulk inserts, updates, or deletes.</li>
+<li>Typically used with <code>Statement</code> or <code>PreparedStatement</code>.</li>
+<li><strong>Best for large data processing (bulk operations).</strong></li>
+</ul>
+<h3><strong>Example: Batch Execution (Multiple Inserts)</strong></h3>
+<pre><code class="language-java">import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class BatchExample {
+    public static void main(String[] args) {
+        String jdbcUrl = &quot;jdbc:mysql://localhost:3306/your_database&quot;;
+        String username = &quot;your_user&quot;;
+        String password = &quot;your_password&quot;;
+
+        try (Connection conn = DriverManager.getConnection(jdbcUrl, username, password);
+             Statement stmt = conn.createStatement()) {
+
+            conn.setAutoCommit(false); // Disable auto-commit for batch processing
+
+            // Add multiple insert statements to batch
+            stmt.addBatch(&quot;INSERT INTO users(name, email) VALUES ('John Doe', 'john@example.com')&quot;);
+            stmt.addBatch(&quot;INSERT INTO users(name, email) VALUES ('Jane Doe', 'jane@example.com')&quot;);
+            stmt.addBatch(&quot;UPDATE accounts SET balance = balance + 500 WHERE user_id = 1&quot;);
+
+            // Execute batch
+            int[] results = stmt.executeBatch();
+            conn.commit(); // Commit only if all queries succeed
+
+            System.out.println(&quot;Batch executed successfully!&quot;);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+<h3><strong>Key Points of <code>executeBatch()</code></strong></h3>
+<p>✔ <strong>Multiple queries executed in a single database round-trip</strong> (better performance).<br>
+✔ <strong>Rollback possible</strong> (if used inside a transaction).<br>
+✔ <strong>Efficient for bulk operations</strong> (e.g., inserting thousands of records).<br>
+⚠ <strong>If one query fails, the whole batch may fail</strong> (depending on database settings).</p>
+<hr>
+<h2><strong>2. <code>PreparedStatement.executeUpdate()</code> (Single Query Execution)</strong></h2>
+<p><strong>Used for executing a single <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code> query at a time.</strong></p>
+<ul>
+<li>Executes one query at a time.</li>
+<li>Accepts <strong>dynamic parameters</strong> (<code>?</code> placeholders) to prevent SQL injection.</li>
+<li><strong>Best for executing queries with dynamic values in loops.</strong></li>
+</ul>
+<h3><strong>Example: Executing a Single Query with <code>executeUpdate()</code></strong></h3>
+<pre><code class="language-java">import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class UpdateExample {
+    public static void main(String[] args) {
+        String jdbcUrl = &quot;jdbc:mysql://localhost:3306/your_database&quot;;
+        String username = &quot;your_user&quot;;
+        String password = &quot;your_password&quot;;
+
+        try (Connection conn = DriverManager.getConnection(jdbcUrl, username, password)) {
+            String updateQuery = &quot;UPDATE users SET email = ? WHERE name = ?&quot;;
+            
+            try (PreparedStatement pstmt = conn.prepareStatement(updateQuery)) {
+                pstmt.setString(1, &quot;updated_email@example.com&quot;);
+                pstmt.setString(2, &quot;John Doe&quot;);
+
+                int rowsAffected = pstmt.executeUpdate();
+                System.out.println(rowsAffected + &quot; row(s) updated.&quot;);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+<h3><strong>Key Points of <code>executeUpdate()</code></strong></h3>
+<p>✔ <strong>Executes a single <code>INSERT</code>, <code>UPDATE</code>, or <code>DELETE</code> query.</strong><br>
+✔ <strong>Safer than <code>Statement.executeBatch()</code></strong> (as it executes one query at a time).<br>
+✔ <strong>Prevents SQL injection using placeholders (<code>?</code>).</strong><br>
+⚠ <strong>Multiple executions require multiple database calls (less efficient for bulk operations).</strong></p>
+<hr>
+<h2><strong>3. When to Use Which?</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><code>Statement.executeBatch()</code></th>
+<th><code>PreparedStatement.executeUpdate()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Use Case</strong></td>
+<td>Bulk operations (multiple queries)</td>
+<td>Single <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></td>
+</tr>
+<tr>
+<td><strong>Performance</strong></td>
+<td>High (single round trip)</td>
+<td>Lower (multiple round trips)</td>
+</tr>
+<tr>
+<td><strong>Dynamic Parameters (<code>?</code>)</strong></td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>SQL Injection Protection</strong></td>
+<td>❌ No</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Transaction Support</strong></td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Best For</strong></td>
+<td>Bulk inserts/updates/deletes</td>
+<td>Updating/inserting single records</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2><strong>4. Best of Both Worlds: <code>PreparedStatement.executeBatch()</code></strong></h2>
+<p>You can also use <strong><code>PreparedStatement</code> with <code>executeBatch()</code></strong> to combine batch execution and SQL injection protection.</p>
+<h3><strong>Example: Batch Execution Using <code>PreparedStatement</code></strong></h3>
+<pre><code class="language-java">import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class PreparedStatementBatchExample {
+    public static void main(String[] args) {
+        String jdbcUrl = &quot;jdbc:mysql://localhost:3306/your_database&quot;;
+        String username = &quot;your_user&quot;;
+        String password = &quot;your_password&quot;;
+
+        try (Connection conn = DriverManager.getConnection(jdbcUrl, username, password)) {
+            conn.setAutoCommit(false);
+
+            String insertQuery = &quot;INSERT INTO users(name, email) VALUES (?, ?)&quot;;
+            try (PreparedStatement pstmt = conn.prepareStatement(insertQuery)) {
+                
+                pstmt.setString(1, &quot;User1&quot;);
+                pstmt.setString(2, &quot;user1@example.com&quot;);
+                pstmt.addBatch(); // Add to batch
+                
+                pstmt.setString(1, &quot;User2&quot;);
+                pstmt.setString(2, &quot;user2@example.com&quot;);
+                pstmt.addBatch(); // Add to batch
+                
+                pstmt.setString(1, &quot;User3&quot;);
+                pstmt.setString(2, &quot;user3@example.com&quot;);
+                pstmt.addBatch(); // Add to batch
+                
+                // Execute batch
+                int[] result = pstmt.executeBatch();
+                conn.commit(); // Commit transaction
+                
+                System.out.println(&quot;Batch insert completed!&quot;);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+<p>✔ <strong>Combines batch execution and SQL injection prevention.</strong><br>
+✔ <strong>Efficient for bulk inserts and updates.</strong></p>
+<hr>
+<h2><strong>Final Recommendation</strong></h2>
+<ul>
+<li><strong>Use <code>executeUpdate()</code></strong> if executing <strong>one query at a time</strong> (e.g., updating a single record).</li>
+<li><strong>Use <code>executeBatch()</code></strong> if executing <strong>multiple queries in a single transaction</strong> (better performance).</li>
+<li><strong>Use <code>PreparedStatement.executeBatch()</code></strong> to get <strong>both performance and security</strong> (ideal for bulk inserts/updates).</li>
+</ul>
+<p>Would you like an example using <strong>HikariCP for better connection management? 🚀</strong></p>
+
+      </body>
+      </html>
+    

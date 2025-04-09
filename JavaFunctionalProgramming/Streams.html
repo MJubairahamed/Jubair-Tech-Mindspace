@@ -1,0 +1,250 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>Streams</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Streams</h1>
+<h2>IO (InputOutput)</h2>
+<ul>
+<li>Transfering the data in and out from the resources to program. It is called Input Output.</li>
+</ul>
+<h2>Stream</h2>
+<ul>
+<li>
+<p>Stream is a <strong>flow of data</strong>. Data may be flow from resouce to program or program to resource.</p>
+<ul>
+<li>Just like a water flow from tank to bucket.</li>
+</ul>
+</li>
+<li>
+<p>Data will be send in the form of Byte or Chars not a whole chunk. ex: name=John, It will not send as whole string. It will be either send as character like 'J','O','H','N' or in byte.</p>
+</li>
+<li>
+<p>Types of Streams</p>
+<ul>
+<li><strong>Byte Stream (1 byte)</strong>
+<ul>
+<li>InputStream</li>
+<li>OutputStream</li>
+</ul>
+</li>
+<li><strong>Char Stream (2 byte)</strong>
+<ul>
+<li>Reader</li>
+<li>Writer</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>What is <strong>buffer</strong>?</p>
+<ul>
+<li>If the speed of the data send from resource to the Java program environment would not be same, in that case data might get lost. To avoid that, Transfer the data to buffer. Then reciever will get the complete data.
+<ul>
+<li>Example: While watching videos in mobile buffer initially to load the high quality videos. Because the rate the resource sending the data and rate at which video displayed in video would be different.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>IO Stream</h2>
+<p>&lt;img src=&quot;../Images/IOStreams.png&quot; alt=&quot;Alt Text&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</p>
+<h2>InputStream and OutputStream</h2>
+<ul>
+<li>
+<p>InputStream Classes
+&lt;img src=&quot;../Images/InputStreamClasses.png&quot; alt=&quot;Alt Text&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</p>
+</li>
+<li>
+<p>OutputStream Classes
+&lt;img src=&quot;../Images/OutputStreamClasses.png&quot; alt=&quot;Alt Text&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</p>
+</li>
+<li>
+<p><strong>Simple Input and Output Streams</strong></p>
+<ul>
+<li>
+<p>FileInputStream and FileOutputStream</p>
+<ul>
+<li>Read data from or write data to a file on the native file system.</li>
+</ul>
+</li>
+<li>
+<p>ByteArrayInputStream and ByteArrayOutputStream</p>
+<ul>
+<li>Read data from or write data to a byte array in memory.</li>
+</ul>
+</li>
+<li>
+<p>StringBufferInputStream</p>
+<ul>
+<li>Allow programs to read from a StringBuffer as if it were an input stream.</li>
+</ul>
+</li>
+<li>
+<p><strong>ObjectInputStream  and ObjectOutputStream</strong></p>
+<ul>
+<li>It is used to read and write objects in a serialized form.They allow Java objects to be saved to a file, transferred over a network, or stored in databases.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Filtered Streams</strong></p>
+<ul>
+<li>
+<p>DataInputStream and DataOutputStream</p>
+<ul>
+<li>Read or write primitive Java data types in a machine-independent format.</li>
+<li>Store the properties of the object in the own format.</li>
+<li>Student object has rollno(int) and name(string). DataInputStream used to write the object with same datatype.</li>
+</ul>
+</li>
+<li>
+<p>BufferedInputStream and BufferedOutputStream</p>
+<ul>
+<li>Buffer data while reading or writing, thereby reducing the number of accesses required on the original data source. Buffered streams are typically more efficient than similar non-buffered streams.</li>
+</ul>
+</li>
+<li>
+<p>PushbackInputStream</p>
+<ul>
+<li>An input stream with a one-byte pushback buffer. Sometimes when reading data from a stream it is useful to peek at the next character in the stream in order to decide what to do next. If you peek at a character in the stream, you'll need to put it back so that it can be read again and processed normally.</li>
+</ul>
+</li>
+<li>
+<p>PrintStream</p>
+<ul>
+<li>An output stream with convenient printing methods.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Other</strong></p>
+<ul>
+<li>
+<p>File</p>
+<ul>
+<li>Represents a file on the native file system. You can create a File object for a file on the native file system and then query the object for information about that file (such as its full pathname).</li>
+</ul>
+</li>
+<li>
+<p>RandomAccessFile</p>
+<ul>
+<li>Represents a random access file.</li>
+</ul>
+</li>
+<li>
+<p>StreamTokenizer</p>
+<ul>
+<li>Breaks the contents of a stream into tokens. Tokens are the smallest unit recognized by a text-parsing algorithm (such as words, symbols, and so on). A StreamTokenizer object can be used to parse any text file. For example, you could use it to parse a Java source file into variable names operators and so on, or an HTML file into HTML tags, words and such.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Reader and Writer Classes</h2>
+<p>&lt;img src=&quot;../Images/ReaderWriterClasses.png&quot; alt=&quot;Alt Text&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;</p>
+<hr>
+<h2><strong>What is Serialization?</strong></h2>
+<p><strong>Serialization</strong> is the process of converting a Java object into a <strong>byte stream</strong> so that it can be:</p>
+<ul>
+<li><strong>Saved to a file</strong></li>
+<li><strong>Sent over a network</strong></li>
+<li><strong>Stored in a database</strong></li>
+<li><strong>Recreated later by deserialization</strong></li>
+</ul>
+<h4><strong>Example: Writing an Object to a File</strong> <a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/Stream/SerializeExample.java">code</a></h4>
+<h4><strong>Example: Reading the Serialized Object</strong> <a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/Stream/DeserializeExample.java">code</a></h4>
+<h3><strong>Why Do Objects Need to Be Serialized?</strong></h3>
+<p>Java objects exist <strong>temporarily in memory (heap)</strong>. To <strong>save, transfer, or retrieve</strong> them later:</p>
+<ol>
+<li><strong>Convert them into bytes</strong> (<code>ObjectOutputStream</code> - Serialization).</li>
+<li><strong>Store or send the bytes</strong> (file, network, etc.).</li>
+<li><strong>Convert bytes back into objects</strong> (<code>ObjectInputStream</code> - Deserialization).</li>
+</ol>
+<h3><strong>Use Cases of Serialization</strong></h3>
+<p>✅ <strong>Saving objects to files</strong> (e.g., caching, configuration storage).<br>
+✅ <strong>Sending objects over networks</strong> (e.g., RMI, WebSockets).<br>
+✅ <strong>Storing objects in databases</strong>.<br>
+✅ <strong>Deep cloning</strong> (object duplication without reference links).</p>
+<h3><strong>Important Notes</strong></h3>
+<p>🚀 <strong>Objects must implement <code>Serializable</code></strong> for serialization.<br>
+⚠ <strong><code>transient</code> keyword</strong> skips fields from serialization (e.g., passwords).<br>
+🔑 <strong>Use <code>serialVersionUID</code></strong> to ensure class version consistency.</p>
+<hr>
+<ul>
+<li></li>
+</ul>
+<h1>IntStream Interview Questions — — ——</h1>
+<h3>1. <strong>What is IntStream in Java?.</strong></h3>
+<ul>
+<li><strong>Answer</strong>:<br>
+- <strong>IntStream</strong> is a specialized stream for handling primitive integers (int). It provides a sequence of primitive int values and supports various operations such as filtering, mapping, reduction, and iteration.</li>
+</ul>
+<h3>2. <strong>How do you create an IntStream in Java?</strong></h3>
+<ul>
+<li><strong>Answer</strong>:<br>
+- You can create an IntStream in Java using factory methods like <strong>IntStream.range(int startInclusive, int endExclusive)</strong> or <strong>IntStream.rangeClosed(int startInclusive, int endInclusive)</strong> to create a stream of integers within a specified range, or by converting other data structures like arrays or collections using <strong>Arrays.stream(int[] array)</strong> or <strong>Collection.stream().mapToInt</strong>().</li>
+</ul>
+<h3>3. <strong>What are the terminal operations you can perform on an IntStream?</strong></h3>
+<ul>
+<li><strong>Answer</strong>:
+<ul>
+<li>Common terminal operations include <strong>forEach, sum, average, min, max, count, and reduce</strong>. These operations consume the elements of the stream and produce a result or a side effect.</li>
+</ul>
+</li>
+</ul>
+<h3>4. <strong>How do you perform mapping operations on an IntStream?</strong></h3>
+<ul>
+<li><strong>Answer</strong>:
+<ul>
+<li>You can perform mapping operations on an IntStream using methods like <strong>mapToInt, mapToLong, and mapToDouble</strong>. These methods transform each element of the stream into another type or value.</li>
+</ul>
+</li>
+</ul>
+<h3>5. <strong>Explain the usage of filter in IntStream?</strong></h3>
+<ul>
+<li><strong>Answer</strong>:
+<ul>
+<li>The filter method in IntStream is used to <strong>eliminate elements from the stream based on a specified condition</strong>. It takes a predicate as an argument and retains only those elements that satisfy the predicate.</li>
+</ul>
+</li>
+</ul>
+<h3>6. <strong>How can you filter elements in an IntStream?</strong></h3>
+<ul>
+<li><strong>Answer</strong>:
+<ul>
+<li>You can use the filter method, which takes a predicate. For example:</li>
+</ul>
+<pre><code class="language-java">IntStream.range(1, 10)
+        .filter(n -&gt; n % 2 == 0)
+        .forEach(System.out::println);
+</code></pre>
+</li>
+</ul>
+<h3>7. <strong>How do you perform reduction operations on an IntStream?</strong></h3>
+<ul>
+<li>
+<p><strong>Answer</strong>:</p>
+<ul>
+<li>Reduction operations in IntStream are performed using methods like <strong>reduce, sum, average, min, and max</strong>. These operations aggregate the elements of the stream into a single result by applying a binary operator to each element.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sample Program</strong> <a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/Stream/PrimitiveStreamExample.java">code</a></p>
+</li>
+</ul>
+
+      </body>
+      </html>
+    

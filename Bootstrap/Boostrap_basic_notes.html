@@ -1,0 +1,162 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>Boostrap Basic Notes</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Bootstrap Basics</h1>
+<h2>What is Bootstrap?</h2>
+<ul>
+<li>Bootstrap is a free front-end framework for faster and easier web development.</li>
+<li>Bootstrap includes HTML and CSS based <strong>design templates for typography, forms, buttons, tables, navigation, modals, image carousels and any other</strong> , as well as optional JavaScript plugins.</li>
+<li>Bootstrap also gives you the ability to easily <strong>create responsive designs.</strong></li>
+</ul>
+<h3>What is  Responsive Web Design?</h3>
+<ul>
+<li>Responsive web design is about creating web sites which automatically adjust themselves to look good on all devices, from small phones to large desktops.</li>
+</ul>
+<h1></h1>
+<h2>Notes</h2>
+<ul>
+<li>
+<p>Containers</p>
+<ul>
+<li>There are two container classes to choose from:
+<ul>
+<li>The <code>.container</code> class provides a responsive fixed width container</li>
+<li>The <code>.container-fluid</code> class provides a full width container, spanning the entire width of the viewport.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Bootstrap Grid System</p>
+<ul>
+<li>
+<p>Bootstrap's grid system allows up to <strong>12 columns</strong> across the page.If you do not want to use all 12 columns individually, you can group the columns together to create wider columns.</p>
+</li>
+<li>
+<p>Bootstrap's <strong>grid system is responsive</strong>, and the columns will re-arrange automatically depending on the screen size.</p>
+</li>
+<li>
+<p><strong>Grid Classes</strong></p>
+<ul>
+<li>The Bootstrap grid system has four classes:
+<ul>
+<li><strong>xs</strong> (<strong>for phones</strong> - screens less than 768px wide)</li>
+<li><strong>sm</strong> (<strong>for tablets</strong> - screens equal to or greater than 768px wide)</li>
+<li><strong>md</strong> (<strong>for small laptops</strong> - screens equal to or greater than 992px wide)</li>
+<li><strong>lg</strong> (<strong>for laptops and desktops</strong> - screens equal to or greater than 1200px wide)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Ex:</p>
+<pre><code class="language-bootstrap">    &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;col-sm-4&quot;&gt;.col-sm-4&lt;/div&gt;
+        &lt;div class=&quot;col-sm-4&quot;&gt;.col-sm-4&lt;/div&gt;
+        &lt;div class=&quot;col-sm-4&quot;&gt;.col-sm-4&lt;/div&gt;
+    &lt;/div&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Image Shapes</p>
+<ul>
+<li>
+<p>Rounded Corners</p>
+<ul>
+<li>The .img-rounded class adds rounded corners to an image (IE8 does not support rounded corners):</li>
+<li>Ex: &lt;img src=&quot;cinqueterre.jpg&quot; class=&quot;img-rounded&quot; alt=&quot;Cinque Terre&quot;&gt;</li>
+</ul>
+</li>
+<li>
+<p>Circle</p>
+<ul>
+<li>The .img-circle class shapes the image to a circle (IE8 does not support rounded corners):</li>
+<li>&lt;img src=&quot;cinqueterre.jpg&quot; class=&quot;img-circle&quot; alt=&quot;Cinque Terre&quot;&gt;</li>
+</ul>
+</li>
+<li>
+<p>Thumbnail</p>
+<ul>
+<li>The .img-thumbnail class shapes the image to a thumbnail:</li>
+<li>&lt;img src=&quot;cinqueterre.jpg&quot; class=&quot;img-thumbnail&quot; alt=&quot;Cinque Terre&quot;&gt;</li>
+</ul>
+</li>
+<li>
+<p>Response Images</p>
+</li>
+<li>
+<p>Responsive Embeds</p>
+<ul>
+<li>Also let videos or slideshows scale properly on any device.</li>
+<li>Classes can be applied directly to &lt;iframe&gt;, &lt;embed&gt;, &lt;video&gt;, and &lt;object&gt; elements.</li>
+<li>The following example creates a responsive video by adding an .embed-responsive-item class to an &lt;iframe&gt; tag (the video will  then scale nicely to the parent element). The containing &lt;div&gt; defines the aspect ratio of the video:
+Ex: &lt;div class=&quot;embed-responsive embed-responsive-16by9&quot;&gt;
+&lt;iframe class=&quot;embed-responsive-item&quot; src=&quot;...&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Creating a Jumbotron</p>
+<ul>
+<li>A jumbotron indicates a big box for calling extra attention to some special content or information.</li>
+<li>A jumbotron is displayed as a grey box with rounded corners. It also enlarges the font sizes of the text inside it.</li>
+<li><strong>Tip:</strong> Inside a jumbotron you can put nearly any valid HTML, including other Bootstrap elements/classes.</li>
+<li>Use a &lt;div&gt; element with class .jumbotron to create a jumbotro.</li>
+</ul>
+</li>
+<li>
+<p>Glyphicons</p>
+<ul>
+<li>Bootstrap provides 260 glyphicons from the Glyphicons Halflings set.</li>
+<li>Glyphicons can be used in text, buttons, toolbars, navigation, forms, etc.</li>
+<li>Ex: Envelope glyphicon.</li>
+</ul>
+</li>
+<li>
+<p>Badges</p>
+<ul>
+<li>Badges are numerical indicators of how many items are associated with a link:</li>
+<li>The numbers (5, 10, and 2) are the badges.</li>
+<li>Use the <code>.badge</code> class within &lt;span&gt; elements to create badges:</li>
+</ul>
+</li>
+<li>
+<p>Media Objects</p>
+<ul>
+<li>Bootstrap provides an easy way to align media objects (like images or videos) to the left or to the right of some content. This can be used to display blog comments, tweets and so on:</li>
+</ul>
+</li>
+<li>
+<p>The Carousel Plugin</p>
+<ul>
+<li>The Carousel plugin is a component for cycling through elements, like a carousel (<strong>slideshow</strong>).</li>
+<li><strong>Tip:</strong> Plugins can be included individually (using Bootstrap's individual &quot;carousel.js&quot; file), or all at once (using &quot;bootstrap.js&quot; or &quot;bootstrap.min.js&quot;).</li>
+</ul>
+</li>
+<li>
+<p>The Modal Plugin</p>
+<ul>
+<li>The Modal plugin is a dialog box/popup window that is displayed on top of the current page:</li>
+<li>**TIP:**Plugins can be included individually (using Bootstrap's individual &quot;modal.js&quot; file), or all at once (using &quot;bootstrap.js&quot; or &quot;bootstrap.min.js&quot;).</li>
+</ul>
+</li>
+</ul>
+
+      </body>
+      </html>
+    

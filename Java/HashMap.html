@@ -1,0 +1,486 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>HashMap</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h3><strong>Internal Working of HashMap in Java (Simplified Explanation)</strong></h3>
+<p>A <strong>HashMap</strong> in Java stores key-value pairs and uses <strong>hashing</strong> to efficiently retrieve values. Let's break down its working with a <strong>simple example</strong>.</p>
+<hr>
+<h3><strong>1️⃣ Key Concepts Behind HashMap</strong></h3>
+<ul>
+<li><strong>Bucket</strong>: An array of <code>Node&lt;K, V&gt;</code> where data is stored.</li>
+<li><strong>Hashing</strong>: Converts a key into an integer (hash code).</li>
+<li><strong>Index Calculation</strong>: Determines where to store the entry in the bucket array.</li>
+<li><strong>Collision Handling</strong>: Manages cases when multiple keys map to the same bucket.</li>
+</ul>
+<hr>
+<h3><strong>2️⃣ Internal Structure of HashMap</strong></h3>
+<p>Internally, a <strong>HashMap</strong> consists of an <strong>array of linked lists (buckets)</strong>:</p>
+<pre><code class="language-java">class Node&lt;K, V&gt; {
+    final int hash;
+    final K key;
+    V value;
+    Node&lt;K, V&gt; next; // For handling collisions (linked list or tree in Java 8+)
+
+    Node(int hash, K key, V value, Node&lt;K, V&gt; next) {
+        this.hash = hash;
+        this.key = key;
+        this.value = value;
+        this.next = next;
+    }
+}
+</code></pre>
+<hr>
+<h3><strong>3️⃣ How <code>put()</code> Works in HashMap</strong></h3>
+<p>When you insert a key-value pair using <code>put(key, value)</code>, the following steps occur:</p>
+<h4><strong>Step 1: Compute Hash</strong></h4>
+<p>HashMap calls <code>hashCode()</code> on the key and applies a <strong>hashing function</strong>:</p>
+<pre><code class="language-java">int hash = key.hashCode() ^ (key.hashCode() &gt;&gt;&gt; 16);
+</code></pre>
+<h4><strong>Step 2: Find the Index</strong></h4>
+<p>The index in the bucket array is determined using:</p>
+<pre><code class="language-java">index = (hash &amp; (n - 1));  // n is the array length (default 16)
+</code></pre>
+<h4><strong>Step 3: Store the Entry</strong></h4>
+<ul>
+<li>If the bucket <strong>is empty</strong>, a new <code>Node</code> is created and stored.</li>
+<li>If <strong>collision occurs</strong> (same index for different keys), entries are stored in a <strong>linked list</strong> (before Java 8) or <strong>balanced tree (Java 8+ when bucket size &gt; 8)</strong>.</li>
+</ul>
+<h4><strong>Example</strong></h4>
+<pre><code class="language-java">import java.util.HashMap;
+
+public class HashMapExample {
+    public static void main(String[] args) {
+        HashMap&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+
+        map.put(&quot;A&quot;, 1);
+        map.put(&quot;B&quot;, 2);
+        map.put(&quot;C&quot;, 3);
+
+        System.out.println(map.get(&quot;B&quot;)); // Output: 2
+    }
+}
+</code></pre>
+<h4><strong>How Data is Stored Internally</strong></h4>
+<ol>
+<li><code>hashCode(&quot;A&quot;)</code> → Hash calculated → Index found → Store <code>(A,1)</code> in a bucket.</li>
+<li><code>hashCode(&quot;B&quot;)</code> → Another index found → Store <code>(B,2)</code>.</li>
+<li><code>hashCode(&quot;C&quot;)</code> → Another index found → Store <code>(C,3)</code>.</li>
+<li>If <code>hashCode(&quot;D&quot;)</code> collides with <code>hashCode(&quot;A&quot;)</code>, it will be added to the same bucket as a <strong>linked list node</strong>.</li>
+</ol>
+<hr>
+<h3><strong>4️⃣ How <code>get()</code> Works</strong></h3>
+<ul>
+<li>HashMap <strong>calculates the hash</strong> of the key.</li>
+<li>It <strong>finds the index</strong> using <code>(hash &amp; (n-1))</code>.</li>
+<li>It searches the bucket:
+<ul>
+<li>If <strong>one node exists</strong>, return the value.</li>
+<li>If <strong>multiple nodes exist (collision scenario)</strong>, it compares keys using <code>.equals()</code>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3><strong>5️⃣ Handling Collisions</strong></h3>
+<p><strong>Scenario</strong>: When multiple keys get the same bucket index:</p>
+<ul>
+<li><strong>Before Java 8</strong> → Uses a <strong>linked list</strong>.</li>
+<li><strong>Java 8+ Optimization</strong> → Converts to a <strong>binary search tree</strong> (if bucket has &gt; 8 entries) for faster retrieval.</li>
+</ul>
+<hr>
+<h3><strong>6️⃣ HashMap Performance</strong></h3>
+<ul>
+<li><strong>Best case (O(1))</strong>: Direct index access.</li>
+<li><strong>Worst case (O(log n))</strong>: If a bucket converts to a tree.</li>
+<li><strong>Resize Mechanism</strong>: When the load factor (default <code>0.75</code>) is exceeded, the array size <strong>doubles</strong>, and entries are <strong>rehashed</strong>.</li>
+</ul>
+<hr>
+<h3><strong>🔹 Summary</strong></h3>
+<p>✅ <strong>Fast Lookup</strong> → Uses <strong>hashing</strong> to get index quickly.<br>
+✅ <strong>Collision Handling</strong> → Uses <strong>linked lists (before Java 8)</strong>, <strong>balanced trees (Java 8+)</strong>.<br>
+✅ <strong>Resizing</strong> → Happens when the <strong>threshold</strong> is exceeded.<br>
+✅ <strong>Performance</strong> → <strong>O(1)</strong> for get/put (best case), <strong>O(log n)</strong> for worst-case collisions.</p>
+<h3><strong>Overriding <code>hashCode()</code> and <code>equals()</code> in Java for Custom Objects</strong></h3>
+<p>When storing <strong>custom objects</strong> as <strong>keys</strong> in a <code>HashMap</code>, <code>HashSet</code>, or other hash-based collections, we must <strong>override both <code>hashCode()</code> and <code>equals()</code></strong> to ensure correct behavior.</p>
+<hr>
+<h3><strong>1️⃣ Why Override <code>hashCode()</code> and <code>equals()</code>?</strong></h3>
+<ul>
+<li><code>hashCode()</code> is used to <strong>find the bucket</strong> where the key-value pair will be stored.</li>
+<li><code>equals()</code> is used to <strong>check key uniqueness</strong> in case of hash collisions.</li>
+<li>If these methods are <strong>not overridden</strong>, <code>HashMap</code> may store duplicate keys or fail to retrieve values correctly.</li>
+</ul>
+<hr>
+<h3><strong>2️⃣ Example Without Overriding (<code>hashCode()</code> and <code>equals()</code>)</strong></h3>
+<pre><code class="language-java">import java.util.HashMap;
+
+class Student {
+    int id;
+    String name;
+
+    public Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+}
+
+public class HashMapTest {
+    public static void main(String[] args) {
+        HashMap&lt;Student, String&gt; map = new HashMap&lt;&gt;();
+
+        Student s1 = new Student(1, &quot;John&quot;);
+        Student s2 = new Student(1, &quot;John&quot;); // Same data, different object
+
+        map.put(s1, &quot;Grade A&quot;);
+        map.put(s2, &quot;Grade B&quot;); // Should replace the previous entry, but doesn't!
+
+        System.out.println(map.size()); // Output: 2 (Wrong!)
+    }
+}
+</code></pre>
+<p>🔴 <strong>Problem</strong>:<br>
+Even though <code>s1</code> and <code>s2</code> contain the <strong>same data</strong>, <code>HashMap</code> treats them as different keys because <strong><code>hashCode()</code> and <code>equals()</code> are not overridden</strong>.</p>
+<hr>
+<h3><strong>3️⃣ Correcting It: Overriding <code>hashCode()</code> and <code>equals()</code></strong></h3>
+<p>We need to override <code>equals()</code> to <strong>compare object data</strong> and <code>hashCode()</code> to <strong>return the same hash for equal objects</strong>.</p>
+<pre><code class="language-java">import java.util.HashMap;
+import java.util.Objects;
+
+class Student {
+    int id;
+    String name;
+
+    public Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name); // Generates a unique hash based on fields
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;  // Check if both references are same
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Student student = (Student) obj;
+        return id == student.id &amp;&amp; name.equals(student.name); // Compare field values
+    }
+}
+
+public class HashMapTest {
+    public static void main(String[] args) {
+        HashMap&lt;Student, String&gt; map = new HashMap&lt;&gt;();
+
+        Student s1 = new Student(1, &quot;John&quot;);
+        Student s2 = new Student(1, &quot;John&quot;); // Same data
+
+        map.put(s1, &quot;Grade A&quot;);
+        map.put(s2, &quot;Grade B&quot;); // Now correctly replaces the previous entry
+
+        System.out.println(map.size()); // Output: 1 (Correct!)
+        System.out.println(map.get(s1)); // Output: Grade B
+    }
+}
+</code></pre>
+<hr>
+<h3><strong>4️⃣ Explanation</strong></h3>
+<p>✅ <strong><code>hashCode()</code></strong></p>
+<ul>
+<li>Uses <code>Objects.hash(id, name)</code>, ensuring <strong>objects with the same data generate the same hash code</strong>.</li>
+<li>Ensures that objects are <strong>stored in the same bucket</strong> when used in <code>HashMap</code>.</li>
+</ul>
+<p>✅ <strong><code>equals()</code></strong></p>
+<ul>
+<li>Checks if two <code>Student</code> objects have the <strong>same <code>id</code> and <code>name</code></strong>.</li>
+<li>Ensures that <code>HashMap</code> <strong>replaces</strong> values when an existing key is updated.</li>
+</ul>
+<hr>
+<h3><strong>5️⃣ What If We Override Only One of Them?</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Override <code>equals()</code> but NOT <code>hashCode()</code></td>
+<td>Objects may be treated as <strong>different keys</strong>, leading to duplicate entries in <code>HashMap</code>.</td>
+</tr>
+<tr>
+<td>Override <code>hashCode()</code> but NOT <code>equals()</code></td>
+<td>Objects with same hash <strong>may still be considered different</strong>, causing incorrect behavior.</td>
+</tr>
+</tbody>
+</table>
+<p>📌 <strong>Rule</strong>: Always override <strong>both</strong> together!</p>
+<hr>
+<h3><strong>6️⃣ Summary</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hashCode()</code></td>
+<td>Determines the <strong>bucket index</strong> for storage in <code>HashMap</code>.</td>
+</tr>
+<tr>
+<td><code>equals()</code></td>
+<td>Checks <strong>logical equality</strong> to prevent duplicate keys.</td>
+</tr>
+<tr>
+<td><code>Objects.hash()</code></td>
+<td>Generates a <strong>unique and consistent</strong> hash for multiple fields.</td>
+</tr>
+<tr>
+<td><strong>Performance</strong></td>
+<td>Ensuring proper implementation <strong>improves retrieval speed</strong> and prevents collisions.</td>
+</tr>
+</tbody>
+</table>
+<h3><strong>Hash Collisions in HashMap and Java 8 Optimization</strong></h3>
+<p>A <strong>hash collision</strong> occurs when <strong>two different keys</strong> generate the <strong>same hash code</strong>, leading them to be stored in the <strong>same bucket</strong> in a <code>HashMap</code>.</p>
+<p>Let’s break this down with:<br>
+✅ <strong>How collisions occur</strong><br>
+✅ <strong>How Java 8 optimizes collision handling</strong><br>
+✅ <strong>Example demonstrating collisions</strong></p>
+<hr>
+<h2><strong>1️⃣ How Hash Collisions Occur?</strong></h2>
+<ul>
+<li><strong>HashMap stores key-value pairs in an array called &quot;buckets&quot;.</strong></li>
+<li><strong>The index of a bucket is calculated as:</strong><pre><code class="language-java">index = (hashCode(key)) &amp; (n - 1); // n is bucket size (default 16)
+</code></pre>
+</li>
+<li>If <strong>two keys generate the same index</strong>, they are placed in the <strong>same bucket</strong>, causing a <strong>collision</strong>.</li>
+</ul>
+<p>📌 <strong>Example of Hash Collision</strong></p>
+<pre><code class="language-java">String key1 = &quot;FB&quot;;  // Generates hashCode = 2236
+String key2 = &quot;Ea&quot;;  // Also generates hashCode = 2236 (Collision!)
+</code></pre>
+<p>Both <code>&quot;FB&quot;</code> and <code>&quot;Ea&quot;</code> produce the same <strong>hash code</strong> and will be placed in the <strong>same bucket</strong>, creating a <strong>collision</strong>.</p>
+<hr>
+<h2><strong>2️⃣ How HashMap Handles Collisions?</strong></h2>
+<h3><strong>Before Java 8 (Using Linked List)</strong></h3>
+<ul>
+<li>If multiple elements <strong>fall into the same bucket</strong>, they are stored as a <strong>linked list</strong> (<code>Node&lt;K, V&gt;</code>).</li>
+<li>Searching in a <strong>linked list</strong> takes <strong>O(n) time complexity</strong> if there are many collisions.</li>
+</ul>
+<p>📌 <strong>Example Before Java 8 (Linked List Handling Collisions)</strong></p>
+<pre><code>Bucket 5 → (key1, value1) → (key2, value2) → (key3, value3)
+</code></pre>
+<p>Here, retrieval needs to traverse the list <strong>sequentially</strong> → <strong>O(n) time complexity</strong>.</p>
+<hr>
+<h3><strong>Java 8 Optimization: Tree Structure for High Collisions</strong></h3>
+<p>From <strong>Java 8 onwards</strong>, when a bucket contains <strong>more than 8 entries</strong>, the linked list is <strong>converted into a Red-Black Tree</strong>, reducing <strong>search time from O(n) to O(log n)</strong>.</p>
+<p>📌 <strong>Java 8+ Collision Handling (Bucket becomes a Tree)</strong></p>
+<pre><code>Bucket 5 → Binary Search Tree (O(log n) retrieval)
+</code></pre>
+<p>This improves performance <strong>significantly</strong> in worst-case scenarios.</p>
+<hr>
+<h2><strong>3️⃣ Example Demonstrating Collisions</strong></h2>
+<p>The following code forces a <strong>collision scenario</strong> using custom keys:</p>
+<pre><code class="language-java">import java.util.HashMap;
+
+class CustomKey {
+    String value;
+
+    public CustomKey(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public int hashCode() {
+        return 42; // Force all keys to land in the same bucket (collision)
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        CustomKey that = (CustomKey) obj;
+        return this.value.equals(that.value);
+    }
+}
+
+public class HashMapCollisionTest {
+    public static void main(String[] args) {
+        HashMap&lt;CustomKey, String&gt; map = new HashMap&lt;&gt;();
+
+        map.put(new CustomKey(&quot;One&quot;), &quot;Value1&quot;);
+        map.put(new CustomKey(&quot;Two&quot;), &quot;Value2&quot;);
+        map.put(new CustomKey(&quot;Three&quot;), &quot;Value3&quot;);
+
+        System.out.println(&quot;Map size: &quot; + map.size());
+        System.out.println(&quot;Retrieving: &quot; + map.get(new CustomKey(&quot;Two&quot;)));
+    }
+}
+</code></pre>
+<h3><strong>Output (Before Java 8)</strong></h3>
+<pre><code>Map size: 3
+Retrieving: null  // Due to inefficient collision handling
+</code></pre>
+<h3><strong>Output (Java 8+)</strong></h3>
+<pre><code>Map size: 3
+Retrieving: Value2  // Improved search time using Tree
+</code></pre>
+<p>🔴 <strong>Why does retrieval fail in Java 7?</strong> Because <code>equals()</code> comparison happens in a <strong>linked list</strong>, making retrieval slower.</p>
+<p>🟢 <strong>Why does retrieval improve in Java 8+?</strong> Because the linked list is <strong>converted to a tree</strong> when bucket entries exceed 8.</p>
+<hr>
+<h2><strong>4️⃣ Java 8 Performance Optimization Summary</strong></h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Java 7 and Below</th>
+<th>Java 8+ Optimization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collision Handling</td>
+<td><strong>Linked List (O(n))</strong></td>
+<td><strong>Balanced Tree (O(log n))</strong></td>
+</tr>
+<tr>
+<td>Threshold for Tree Conversion</td>
+<td><strong>Not Applicable</strong></td>
+<td><strong>Bucket size &gt; 8 → Convert to Red-Black Tree</strong></td>
+</tr>
+<tr>
+<td>Search Complexity</td>
+<td><strong>O(n) (Worst case)</strong></td>
+<td><strong>O(log n) (Tree search)</strong></td>
+</tr>
+</tbody>
+</table>
+<p>🔹 <strong>Before Java 8</strong> → Linked List (O(n) search)<br>
+🔹 <strong>After Java 8</strong> → Red-Black Tree (O(log n) search) when collisions exceed 8</p>
+<hr>
+<h2><strong>5️⃣ Key Interview Takeaways</strong></h2>
+<p>✅ <strong>How does HashMap handle collisions?</strong></p>
+<ul>
+<li>Uses <strong>chaining</strong> (linked list or tree structure in Java 8+).</li>
+</ul>
+<p>✅ <strong>What is the Java 8 optimization in HashMap?</strong></p>
+<ul>
+<li>If a <strong>bucket size exceeds 8</strong>, the linked list <strong>converts to a Red-Black Tree</strong> for better search performance (<code>O(log n)</code>).</li>
+</ul>
+<p>✅ <strong>What happens when a HashMap exceeds the load factor?</strong></p>
+<ul>
+<li>The <strong>bucket array resizes (doubles in size)</strong> and all entries are <strong>rehashed</strong>.</li>
+</ul>
+<hr>
+<h2><strong>Final Thought</strong></h2>
+<p>Java 8 <strong>significantly improved HashMap performance</strong> by replacing linked lists with <strong>balanced trees</strong> in case of <strong>high collisions</strong>, reducing worst-case time complexity from <strong>O(n) to O(log n)</strong>. 🚀</p>
+<p>Here’s a <strong>visual representation</strong> of <strong>how HashMap handles collisions</strong> and <strong>how Java 8 optimizes it</strong> with a <strong>Red-Black Tree</strong> conversion.</p>
+<hr>
+<h3><strong>1️⃣ Initial HashMap Structure (Before Any Collisions)</strong></h3>
+<p>Each key-value pair is stored in <strong>buckets (array index positions) based on hash codes</strong>.</p>
+<pre><code>Index  |   Key  |   Value
+----------------------------
+  0    |   -    |    -
+  1    | &quot;A&quot;    |  &quot;Apple&quot;
+  2    | &quot;B&quot;    |  &quot;Banana&quot;
+  3    |   -    |    -
+  4    | &quot;C&quot;    |  &quot;Cherry&quot;
+  5    |   -    |    -
+  6    | &quot;D&quot;    |  &quot;Date&quot;
+</code></pre>
+<p>📌 <strong>No Collisions Yet</strong> → Each key maps to a unique index.</p>
+<hr>
+<h3><strong>2️⃣ Collision Occurs (Before Java 8, Using Linked List)</strong></h3>
+<p>Suppose <code>&quot;X&quot;</code> and <code>&quot;Y&quot;</code> both generate the <strong>same hash index</strong> (index 5).</p>
+<pre><code>Index  |   Key   |   Value  
+----------------------------
+  0    |   -     |    -  
+  1    | &quot;A&quot;     |  &quot;Apple&quot;  
+  2    | &quot;B&quot;     |  &quot;Banana&quot;  
+  3    |   -     |    -  
+  4    | &quot;C&quot;     |  &quot;Cherry&quot;  
+  5    | &quot;X&quot; → &quot;Y&quot; (Linked List)  |  &quot;X_Value&quot; → &quot;Y_Value&quot;  
+  6    | &quot;D&quot;     |  &quot;Date&quot;  
+</code></pre>
+<p>🔴 <strong>Problem</strong>: Searching for <code>&quot;Y&quot;</code> takes <strong>O(n) time complexity</strong> because Java must <strong>traverse the linked list</strong>.</p>
+<hr>
+<h3><strong>3️⃣ Java 8 Optimization (Convert to Red-Black Tree)</strong></h3>
+<p>If <strong>more than 8 entries</strong> exist in a bucket, Java 8 <strong>converts the linked list into a Red-Black Tree</strong>, reducing lookup time to <strong>O(log n)</strong>.</p>
+<pre><code>Index  |   Key   |   Value  
+----------------------------
+  0    |   -     |    -  
+  1    | &quot;A&quot;     |  &quot;Apple&quot;  
+  2    | &quot;B&quot;     |  &quot;Banana&quot;  
+  3    |   -     |    -  
+  4    | &quot;C&quot;     |  &quot;Cherry&quot;  
+  5    | 
+       |      (Root: X)  
+       |        /   \  
+       |      Y       Z  
+       |     / \     / \  
+       |    P   Q   R   S  
+       | (Red-Black Tree with Balanced Nodes)  
+  6    | &quot;D&quot;     |  &quot;Date&quot;  
+</code></pre>
+<p>🟢 <strong>Benefit</strong>: <strong>O(log n) search time</strong> instead of <strong>O(n)</strong> for large buckets.</p>
+<hr>
+<h3><strong>4️⃣ Visualizing the Transition from Linked List to Tree</strong></h3>
+<h4><strong>Before Java 8 (Linked List)</strong></h4>
+<pre><code>Bucket 5:  X -&gt; Y -&gt; Z -&gt; P -&gt; Q -&gt; R -&gt; S  (O(n) lookup)
+</code></pre>
+<h4><strong>Java 8+ (Tree Structure)</strong></h4>
+<pre><code>Bucket 5:  
+      X  
+    /   \  
+   Y     Z  
+  / \   / \  
+ P   Q R   S  (O(log n) lookup)
+</code></pre>
+<hr>
+<h3><strong>5️⃣ Key Takeaways</strong></h3>
+<p>✅ <strong>Before Java 8</strong> → HashMap used a <strong>linked list for collisions</strong>, causing slow <strong>O(n) retrieval</strong> in worst cases.<br>
+✅ <strong>After Java 8</strong> → When a bucket has <strong>&gt;8 entries</strong>, it <strong>converts to a Red-Black Tree</strong>, improving lookup time to <strong>O(log n)</strong>.<br>
+✅ <strong>Why is it better?</strong> → A <strong>Red-Black Tree</strong> is <strong>self-balancing</strong>, ensuring <strong>efficient searching and insertion</strong>.</p>
+<hr>
+<h3><strong>6️⃣ Final Summary Table</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Version</strong></th>
+<th><strong>Collision Handling</strong></th>
+<th><strong>Search Time Complexity</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Java 7 &amp; Below</strong></td>
+<td><strong>Linked List</strong> (Sequential search)</td>
+<td><strong>O(n)</strong></td>
+</tr>
+<tr>
+<td><strong>Java 8+</strong></td>
+<td><strong>Converts to Red-Black Tree when &gt;8 elements</strong></td>
+<td><strong>O(log n)</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><strong>🎯 Interview-Ready Answer</strong></h3>
+<p>📝 <strong>&quot;Before Java 8, HashMap handled collisions using a linked list, which caused slow O(n) lookup times in worst-case scenarios. In Java 8+, if a bucket contains more than 8 entries, it automatically converts into a self-balancing Red-Black Tree, reducing lookup time to O(log n). This improves performance significantly for large-scale applications.&quot;</strong> 🚀</p>
+
+      </body>
+      </html>
+    

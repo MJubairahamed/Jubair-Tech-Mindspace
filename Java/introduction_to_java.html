@@ -1,0 +1,114 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>Introduction To Java</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Introduction</h1>
+<h2>What is JDK, JRE and JVM?</h2>
+<h3>JDK (Java Development Kit)</h3>
+<ul>
+<li>Used for developing Java programs (writing and compiling).</li>
+<li>Contains JRE + development tools (compiler, debugger, etc.)</li>
+</ul>
+<h3>JRE (Java Runtime Environment)</h3>
+<ul>
+<li>Used for running Java programs (executing the code).</li>
+<li>Contains JVM and libraries needed to run Java applications.</li>
+</ul>
+<h3>JVM (Java Virtual Machine)</h3>
+<ul>
+<li>The JVM acts as an interpreter between your Java code and your computer.</li>
+</ul>
+<h2>How JVM Works?</h2>
+<ul>
+<li>Compiler converts the ‘C-Language code in to Assembly code. Assembler converts the Assembly code in to Machine code.</li>
+<li>Machine code is the sequences of binary 1 &amp; 0's that the processor understands.</li>
+<li>Combination of OS and Processor is called Platform.</li>
+<li>Java is a programming language as well as a Platform.</li>
+<li>Compiler compiles the Java code (.java file) in to byte code (.class file). JVM only understands the byte code which is available in RAM of the OS.</li>
+</ul>
+<h4>Components of JVM</h4>
+<ul>
+<li><strong>Class Loader</strong> - Compiled .class files are loaded without linking using Class Loader.</li>
+<li><strong>Byte Code verifier</strong> – Verify the byte Code. (Reason for why Java is secure).</li>
+<li><strong>Execution Engine</strong> – Converts the byte code in to machine code.</li>
+</ul>
+<p><img src="/Java/Images/JDK_JRE_JVM_ss.png" alt="Components of JDK!" title="Components of JDK"></p>
+<h2>What is Class and Object in Java?</h2>
+<ul>
+<li>A <strong>class</strong> is like a set of instructions or a blueprint.</li>
+<li>Ex: The class would describe things like the car’s features (color, model, speed) and what it can do (drive, honk).</li>
+<li>An <strong>object</strong> is the actual thing created from those instructions.</li>
+<li>An object would be an actual car made using that blueprint, with specific details (e.g., a red sports car that can go 200 km/h) .</li>
+</ul>
+<h3>First Java Program</h3>
+<pre><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello, World!&quot;);
+    }
+}
+</code></pre>
+<h2>Difference between interpreters and compilers</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>Interpreter</strong></th>
+<th><strong>Compiler</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>How it works</strong></td>
+<td>Reads and runs the program <strong>one line at a time</strong>.</td>
+<td>Reads the whole program and <strong>translates it all at once</strong>.</td>
+</tr>
+<tr>
+<td><strong>Speed</strong></td>
+<td><strong>Slower</strong> because it works line by line.</td>
+<td><strong>Faster</strong> because it runs the entire program at once.</td>
+</tr>
+<tr>
+<td><strong>Errors</strong></td>
+<td>Stops when it finds an error, so you fix them <strong>one by one</strong>.</td>
+<td>Shows <strong>all errors</strong> after translating the whole program.</td>
+</tr>
+<tr>
+<td><strong>Output</strong></td>
+<td>No file is created, it just runs the code.</td>
+<td>Creates a <strong>new file</strong> that can be run on any computer.</td>
+</tr>
+<tr>
+<td><strong>Examples</strong></td>
+<td>Python, JavaScript</td>
+<td>C, C++, Java</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li></li>
+</ul>
+<h3>Note: Java uses both a compiler and an interpreter** as part of its execution process. Here's how it works:</h3>
+<ol>
+<li>
+<p><strong>Compilation Stage</strong>: When you write Java code, it is first compiled by the <strong>Java compiler (<code>javac</code>)</strong>. The compiler translates your source code into an intermediate form called <strong>bytecode</strong>. This bytecode is platform-independent, meaning it can run on any system that has a Java Virtual Machine (JVM).</p>
+</li>
+<li>
+<p><strong>Interpretation/Execution Stage</strong>: The <strong>JVM</strong> (Java Virtual Machine) then interprets this bytecode. The JVM includes an <strong>interpreter</strong> that reads and executes the bytecode line by line, as well as a <strong>Just-In-Time (JIT) compiler</strong> that can optimize the code by compiling it to native machine code for faster execution.</p>
+</li>
+</ol>
+<p>This two-step process makes Java both a compiled and an interpreted language, providing a good balance of performance, portability, and platform independence.</p>
+<p><img src="/Java/Images/Interperter_Compiler.png" alt="Interperter_Compiler!" title="Interperter &amp; Compiler"></p>
+
+      </body>
+      </html>
+    

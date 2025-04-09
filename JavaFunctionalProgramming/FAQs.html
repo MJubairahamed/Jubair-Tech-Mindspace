@@ -1,0 +1,72 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>FAQs</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Java 8 FAQ's</h1>
+<h2>What is MetaSpace? How does it differ from PermGen?</h2>
+<ul>
+<li><strong>PremGen:</strong> MetaData information of classes was stored in PremGen (Permanent-Generation) memory type before Java 8. PremGen is <strong>fixed in size</strong> and cannot be dynamically resized. It was a contiguous Java Heap Memory.</li>
+<li><strong>MetaSpace:</strong> Java 8 stores the MetaData of classes in native memory called <strong>'MetaSpace'</strong>. It is not a contiguous Heap Memory and hence can be <strong>grown dynamically</strong> which helps to overcome the size constraints. This improves the garbage collection, auto-tuning, and de-allocation of metadata.</li>
+</ul>
+<h2>What is Optional?</h2>
+<ul>
+<li>Wrapper class to check the null values and helps in further processing based on the value.</li>
+<li>It helps avoid NullPointerException by providing a type-level solution for optional values.</li>
+<li>An Optional instance can either contain a non-null value or be empty, indicating the absence of a value.</li>
+<li>Example:<pre><code class="language-java">import java.util.Optional;
+
+public class OptionalExample {
+    public static void main(String[] args) {
+        String text = &quot;Hello&quot;;
+        Optional&lt;String&gt; optionalText = Optional.of(text);
+
+        // Check if a value is present
+        if (optionalText.isPresent()) {
+            System.out.println(&quot;Value is present: &quot; + optionalText.get());
+        }
+
+        // Perform an action if a value is present
+        optionalText.ifPresent(value -&gt; System.out.println(&quot;Value: &quot; + value));
+
+        // Return a default value if empty
+        String valueOrDefault = optionalText.orElse(&quot;Default Value&quot;);
+        System.out.println(&quot;Value or default: &quot; + valueOrDefault);
+
+        // Return a value from a supplier if empty
+        String valueOrSupplier = optionalText.orElseGet(() -&gt; &quot;Value from Supplier&quot;);
+        System.out.println(&quot;Value or supplier: &quot; + valueOrSupplier);
+
+        // Throw an exception if empty
+        try {
+            String valueOrThrow = optionalText.orElseThrow(() -&gt; new IllegalArgumentException(&quot;Value not found&quot;));
+            System.out.println(&quot;Value or throw: &quot; + valueOrThrow);
+        } catch (IllegalArgumentException e) {
+            System.err.println(&quot;Exception: &quot; + e.getMessage());
+        }
+
+        // Map the value if present
+        Optional&lt;String&gt; mappedValue = optionalText.map(String::toUpperCase);
+        System.out.println(&quot;Mapped value: &quot; + mappedValue.orElse(&quot;&quot;));
+
+        // Filter the value if present
+        Optional&lt;String&gt; filteredValue = optionalText.filter(v -&gt; v.startsWith(&quot;H&quot;));
+        System.out.println(&quot;Filtered value: &quot; + filteredValue.orElse(&quot;&quot;));
+    }
+}
+</code></pre>
+</li>
+</ul>
+
+      </body>
+      </html>
+    

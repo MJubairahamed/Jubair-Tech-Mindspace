@@ -1,0 +1,375 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>Collections</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h3><strong>Collections Core Concepts</strong></h3>
+<ol>
+<li>
+<p><strong>What is the Java Collections Framework, and why is it used?</strong></p>
+<ul>
+<li>The <strong>Java Collections Framework (JCF)</strong> is a set of classes and interfaces that provides a standard way to store, manipulate, and retrieve groups of objects efficiently.</li>
+<li>It helps with <strong>code reusability, performance optimization, and reduced programming effort</strong> by offering predefined data structures and algorithms.</li>
+</ul>
+</li>
+<li>
+<p><strong>What are the core interfaces in the Java Collections Framework?</strong></p>
+<ul>
+<li><code>Collection</code> (superinterface)
+<ul>
+<li><code>List</code> (e.g., <code>ArrayList</code>, <code>LinkedList</code>, <code>Vector</code>)</li>
+<li><code>Set</code> (e.g., <code>HashSet</code>, <code>TreeSet</code>, <code>LinkedHashSet</code>)</li>
+<li><code>Queue</code> (e.g., <code>PriorityQueue</code>, <code>Deque</code>)</li>
+</ul>
+</li>
+<li><code>Map</code> (e.g., <code>HashMap</code>, <code>TreeMap</code>, <code>LinkedHashMap</code>, <code>ConcurrentHashMap</code>)</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between <code>Collection</code> and <code>Collections</code> in Java?</strong></p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><strong>Collection</strong></th>
+<th><strong>Collections</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definition</strong></td>
+<td><code>Collection</code> is an <strong>interface</strong> in Java that represents a group of objects.</td>
+<td><code>Collections</code> is a <strong>utility class</strong> that provides static methods for working with collections.</td>
+</tr>
+<tr>
+<td><strong>Package</strong></td>
+<td><code>java.util.Collection</code> (superinterface for List, Set, Queue).</td>
+<td><code>java.util.Collections</code> (utility class for collection manipulation).</td>
+</tr>
+<tr>
+<td><strong>Type</strong></td>
+<td>Interface</td>
+<td>Class</td>
+</tr>
+<tr>
+<td><strong>Usage</strong></td>
+<td>Provides a blueprint for implementing data structures like <code>List</code>, <code>Set</code>, <code>Queue</code>.</td>
+<td>Provides helper methods such as sorting, searching, and thread-safety.</td>
+</tr>
+<tr>
+<td><strong>Methods</strong></td>
+<td>Contains methods like <code>add()</code>, <code>remove()</code>, <code>size()</code>, <code>iterator()</code>.</td>
+<td>Contains static utility methods like <code>sort()</code>, <code>reverse()</code>, <code>synchronizedList()</code>, <code>min()</code>, <code>max()</code>.</td>
+</tr>
+<tr>
+<td><strong>Inheritance</strong></td>
+<td>Extended by subinterfaces (<code>List</code>, <code>Set</code>, <code>Queue</code>).</td>
+<td>Cannot be extended (final class).</td>
+</tr>
+<tr>
+<td><strong>Implementation</strong></td>
+<td>Implemented by classes like <code>ArrayList</code>, <code>HashSet</code>, <code>LinkedList</code>, etc.</td>
+<td>Not implemented, only contains static methods.</td>
+</tr>
+<tr>
+<td><strong>Thread Safety</strong></td>
+<td>Does not provide synchronization by default.</td>
+<td>Provides methods like <code>synchronizedList()</code> and <code>synchronizedMap()</code> for thread safety.</td>
+</tr>
+<tr>
+<td><strong>Sorting Support</strong></td>
+<td>No built-in sorting mechanism.</td>
+<td>Provides <code>Collections.sort()</code> for sorting lists.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><strong>List and Set Implementations</strong></h3>
+<ol start="4">
+<li>
+<p><strong>What is the difference between <code>ArrayList</code> and <code>LinkedList</code>? When should you use each?</strong></p>
+<ul>
+<li><code>ArrayList</code>
+<ul>
+<li>It is backed by a <strong>dynamic array</strong> to store the elements.</li>
+<li>It provides <strong>O(1)</strong> access time but <strong>O(n) insertion/deletion</strong> in the middle.</li>
+<li>Manipulation with ArrayList is slow because it internally uses an array. If any element is removed from the array, all the other elements are shifted in memory.</li>
+</ul>
+</li>
+<li><code>LinkedList</code>
+<ul>
+<li>It is a <strong>doubly linked list</strong>, making insertion/deletion <strong>O(1)</strong> but lookup <strong>O(n)</strong>.</li>
+<li>Manipulation with LinkedList is faster than ArrayList because it uses a doubly linked list, so no bit shifting is required in memory.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">List&lt;String&gt; arrayList = new ArrayList&lt;&gt;();
+List&lt;String&gt; linkedList = new LinkedList&lt;&gt;();
+</code></pre>
+</li>
+<li>
+<p><strong>How does <code>Vector</code> differ from <code>ArrayList</code>?</strong></p>
+<ul>
+<li><code>Vector</code> is <strong>synchronized</strong>, making it thread-safe but slower.</li>
+<li><code>ArrayList</code> is <strong>not synchronized</strong>, making it faster in a single-threaded environment.</li>
+</ul>
+</li>
+<li>
+<p><strong>What is the default capacity of an <code>ArrayList</code>, and how does it grow dynamically?</strong></p>
+<ul>
+<li>Default capacity is <strong>10</strong>, and when full, it grows by <strong>1.5x the current size</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>How does <code>HashSet</code> ensure uniqueness?</strong></p>
+<ul>
+<li><code>HashSet</code> uses <strong>hashing</strong> and relies on <code>hashCode()</code> and <code>equals()</code> to prevent duplicates.<br>
+<img src="../Images/HashSetUniqueFlow_ss.png" alt="Hashset Flow!" title="Hashset"></li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between <code>HashSet</code>, <code>LinkedHashSet</code>, and <code>TreeSet</code>?</strong></p>
+<ul>
+<li><code>HashSet</code> - <strong>Unordered</strong> and provides O(1) operations.</li>
+<li><code>LinkedHashSet</code> - <strong>Maintains insertion order</strong>.</li>
+<li><code>TreeSet</code> - <strong>Sorted</strong> but has O(log n) complexity due to its Red-Black Tree implementation.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3><strong>Map Implementations</strong></h3>
+<ol start="9">
+<li>
+<p><strong>How does <code>HashMap</code> work internally?</strong></p>
+<ul>
+<li><code>HashMap</code> stores key-value pairs in <strong>buckets</strong> based on the <code>hashCode()</code> of the key.</li>
+<li>Collisions are resolved using <strong>Linked List (Java 7)</strong> or <strong>Tree (Java 8+ when a bucket exceeds 8 nodes).</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>What is the difference between <code>HashMap</code> and <code>Hashtable</code>?</strong></p>
+</li>
+</ol>
+<ul>
+<li><code>HashMap</code> is <strong>not synchronized</strong> and allows <strong>one null key</strong>.</li>
+<li><code>Hashtable</code> is <strong>synchronized</strong> and does <strong>not allow null keys or values</strong>.</li>
+</ul>
+<ol start="11">
+<li><strong>What is the difference between <code>HashMap</code>, <code>LinkedHashMap</code>, and <code>TreeMap</code>?</strong></li>
+</ol>
+<ul>
+<li><code>HashMap</code> - No ordering guarantee.</li>
+<li><code>LinkedHashMap</code> - <strong>Maintains insertion order</strong>.</li>
+<li><code>TreeMap</code> - <strong>Sorted order (based on keys)</strong> and uses a Red-Black Tree.</li>
+</ul>
+<ol start="12">
+<li><strong>What is <code>ConcurrentHashMap</code>, and how does it improve performance?</strong></li>
+</ol>
+<ul>
+<li><code>ConcurrentHashMap</code> provides <strong>thread-safe access</strong> using <strong>segment-based locking</strong> instead of synchronizing the whole map.</li>
+</ul>
+<ol start="13">
+<li><strong>What is <code>WeakHashMap</code>, and when should you use it?</strong></li>
+</ol>
+<ul>
+<li><code>WeakHashMap</code> stores <strong>keys as WeakReferences</strong>, meaning they will be <strong>garbage collected</strong> if not referenced elsewhere.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">WeakHashMap&lt;Object, String&gt; weakMap = new WeakHashMap&lt;&gt;();
+Object key = new Object();
+weakMap.put(key, &quot;Weak Value&quot;);
+key = null; // The entry will be eligible for GC
+System.gc();
+</code></pre>
+<hr>
+<h3><strong>Queues and Deques</strong></h3>
+<ol start="14">
+<li><strong>What is the difference between <code>Queue</code> and <code>Deque</code>?</strong></li>
+</ol>
+<ul>
+<li><code>Queue</code> - Follows <strong>FIFO</strong> (e.g., <code>LinkedList</code>, <code>PriorityQueue</code>).</li>
+<li><code>Deque</code> - Supports both <strong>FIFO and LIFO</strong> (e.g., <code>ArrayDeque</code>).</li>
+</ul>
+<ol start="15">
+<li><strong>How does a <code>PriorityQueue</code> work?</strong></li>
+</ol>
+<ul>
+<li>Elements are ordered based on <strong>natural order</strong> or a <strong>custom Comparator</strong>.</li>
+</ul>
+<ol start="16">
+<li><strong>What is the difference between <code>poll()</code> and <code>remove()</code> in <code>Queue</code>?</strong></li>
+</ol>
+<ul>
+<li><code>poll()</code> returns <code>null</code> if empty, while <code>remove()</code> throws an exception.</li>
+</ul>
+<hr>
+<h3><strong>Concurrency &amp; Performance</strong></h3>
+<ol start="17">
+<li><strong>How do you synchronize a collection in Java?</strong></li>
+</ol>
+<ul>
+<li>Use <code>Collections.synchronizedList(list)</code> or <strong>concurrent collections</strong> like <code>CopyOnWriteArrayList</code>.</li>
+</ul>
+<ol start="18">
+<li><strong>What is <code>CopyOnWriteArrayList</code>, and when should you use it?</strong></li>
+</ol>
+<ul>
+<li>It creates a new copy of the list on every modification, making it ideal for <strong>read-heavy</strong> scenarios.</li>
+</ul>
+<ol start="19">
+<li><strong>How do you prevent <code>ConcurrentModificationException</code> when iterating?</strong></li>
+</ol>
+<ul>
+<li>Use <strong>Iterator with <code>remove()</code></strong>, <code>CopyOnWriteArrayList</code>, or <code>ConcurrentHashMap</code>.</li>
+</ul>
+<hr>
+<h3><strong>Sorting and Comparators</strong></h3>
+<ol start="20">
+<li><strong>What is the difference between <code>Comparable</code> and <code>Comparator</code>?</strong></li>
+</ol>
+<ul>
+<li><code>Comparable</code> is for <strong>natural ordering</strong> (<code>compareTo()</code> in the class itself).</li>
+<li><code>Comparator</code> is for <strong>custom ordering</strong> (<code>compare()</code> method).</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">Collections.sort(list, Comparator.comparing(Employee::getSalary));
+</code></pre>
+<ol start="21">
+<li><strong>How do you sort a <code>List</code> of objects using Java 8 Stream API?</strong></li>
+</ol>
+<pre><code class="language-java">list.sort(Comparator.comparing(Employee::getName));
+</code></pre>
+<hr>
+<h3><strong>Use Cases &amp; Best Practices</strong></h3>
+<ol start="22">
+<li><strong>How do you implement an LRU Cache in Java?</strong></li>
+</ol>
+<ul>
+<li>Use <code>LinkedHashMap</code> with <code>accessOrder=true</code> and override <code>removeEldestEntry()</code>.  An LRU (Least Recently Used) cache is a type of cache that evicts the least recently accessed element when the cache is full.
+<ul>
+<li><a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/LeastRecentlyUsedCache.java">Example LRU</a></li>
+</ul>
+</li>
+</ul>
+<ol start="23">
+<li><strong>How do you remove duplicates from an <code>ArrayList</code>?</strong></li>
+</ol>
+<ul>
+<li>Use <code>Set</code> (<code>HashSet</code> for unordered, <code>LinkedHashSet</code> for ordered).
+<ul>
+<li><a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/removeduplicatesarraylist/RemoveDuplicatesArrayListUsingStream.java">Code</a></li>
+</ul>
+</li>
+</ul>
+<ol start="24">
+<li><strong>How would you count the occurrences of words in a sentence using Java Collections?</strong></li>
+</ol>
+<ul>
+<li>Use <code>HashMap&lt;String, Integer&gt;</code> to store word frequencies.
+<ul>
+<li><a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/WordCountFromSentence.java">Code</a></li>
+</ul>
+</li>
+</ul>
+<ol start="25">
+<li><strong>Which Java collection would you use for a multi-threaded job queue?</strong></li>
+</ol>
+<ul>
+<li>BlockingQueue provides thread-safe operations for adding and retrieving elements, with the added benefit of blocking behavior when the queue is either full or empty. This eliminates the need for manual synchronization and wait/notify mechanisms, simplifying the code and reducing the risk of errors.</li>
+<li>LinkedBlockingQueue is often preferred due to its flexibility.  Use (<code>LinkedBlockingQueue</code> or <code>ArrayBlockingQueue</code>).</li>
+</ul>
+<ol start="26">
+<li><strong>Which collection would you use for real-time leaderboard ranking?</strong></li>
+</ol>
+<ul>
+<li>Use <code>TreeMap</code> (sorted order) or <code>PriorityQueue</code>.</li>
+</ul>
+<ol start="27">
+<li><strong>How do you convert an <code>Array</code> to a <code>List</code> in Java?</strong></li>
+</ol>
+<pre><code class="language-java">List&lt;String&gt; list = Arrays.asList(array);
+</code></pre>
+<ol start="28">
+<li><strong>How do you merge two unsorted lists and remove duplicates?</strong></li>
+</ol>
+<ul>
+<li>Use <code>Set</code> (<code>HashSet</code> or <code>LinkedHashSet</code>).</li>
+</ul>
+<ol start="29">
+<li><strong>What is <code>EnumSet</code>, and when is it used?</strong></li>
+</ol>
+<ul>
+<li>A specialized <code>Set</code> for Enums with <strong>high performance</strong> and <strong>bitwise storage</strong>.
+<ul>
+<li><a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/EnumSetsExample.java">Code</a></li>
+</ul>
+</li>
+</ul>
+<ol start="30">
+<li><strong>What are the best practices for using Java Collections in large-scale applications?</strong></li>
+</ol>
+<ul>
+<li>Use <strong>lazy initialization</strong>, <strong>proper data structures</strong>, and <strong>optimize memory usage</strong>.</li>
+</ul>
+<hr>
+<h3><strong>Difference Between <code>Collections.sort()</code> with and without <code>Comparator</code></strong></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><code>Collections.sort(list)</code> (Without Comparator)</th>
+<th><code>Collections.sort(list, Comparator)</code> (With Comparator)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sorting Order</strong></td>
+<td>Natural order (ascending for numbers, lexicographical for Strings).</td>
+<td>Custom order (ascending, descending, or based on other properties).</td>
+</tr>
+<tr>
+<td><strong>Implementation Requirement</strong></td>
+<td>Class must implement <code>Comparable&lt;T&gt;</code> and override <code>compareTo()</code>.</td>
+<td>No need to modify class; sorting logic is external.</td>
+</tr>
+<tr>
+<td><strong>Flexibility</strong></td>
+<td>One sorting logic per class.</td>
+<td>Multiple sorting strategies possible.</td>
+</tr>
+<tr>
+<td><strong>Best Use Case</strong></td>
+<td>Simple sorting when natural order is sufficient.</td>
+<td>Complex sorting scenarios (e.g., sorting by multiple fields).</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/ComparatorInterfaceExample.java">code</a></li>
+</ul>
+<hr>
+<h2>Notes:</h2>
+<ul>
+<li>In Java, &quot;non-synchronized&quot; signifies that a method or block of code does not have any built-in mechanism to control concurrent access from multiple threads. When a method is not synchronized, multiple threads can execute it simultaneously, potentially leading to data corruption or inconsistent state if the method accesses shared resources.
+<ul>
+<li>on-synchronized methods are faster due to the absence of locking overhead</li>
+</ul>
+</li>
+<li>synchronized methods or blocks, which allow only one thread to execute them at a time, ensuring data consistency.</li>
+</ul>
+
+      </body>
+      </html>
+    

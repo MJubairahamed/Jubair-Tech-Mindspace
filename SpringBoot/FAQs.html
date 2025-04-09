@@ -1,0 +1,326 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>FAQs</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h2><strong>🔹 Core Spring Boot Questions</strong></h2>
+<hr>
+<h3>Spring Boot Internal Flow</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Main class with <code>@SpringBootApplication</code> starts the application, combining <code>@Configuration</code>, <code>@EnableAutoConfiguration</code>, and <code>@ComponentScan</code>.</p>
+<ul>
+<li>Entry point method calls <code>SpringApplication.run()</code> which begins the bootstrapping process.</li>
+</ul>
+</li>
+<li>
+<p><strong>Spring Application Context Creation</strong>: Creates application context to manage beans and dependencies.</p>
+<ul>
+<li>It Builds environment, creates appropriate context type, prepares context with environment settings, then scans for components.</li>
+</ul>
+</li>
+<li>
+<p><strong>Auto Configuration</strong>: Auto-configures beans based on classpath and dependencies using conditional annotations.</p>
+<ul>
+<li>It Loads auto-configuration classes from META-INF/spring.factories, applies conditional checks, and registers qualifying beans.</li>
+</ul>
+</li>
+<li>
+<p><strong>Externalized Configuration</strong>: Loads configuration from property files, environment variables, and command-line arguments.</p>
+<ul>
+<li>It Creates PropertySources, loads values in order of precedence, binds them to configuration properties beans.</li>
+</ul>
+</li>
+<li>
+<p><strong>Embedded Web Server Initialization</strong>: For web applications, initializes and configures embedded web server.</p>
+<ul>
+<li>It Detects web environment, creates server factory, configures connector properties, then starts server.</li>
+</ul>
+</li>
+<li>
+<p><strong>Application Startup</strong>: Invokes lifecycle callbacks and initialization methods on beans.</p>
+<ul>
+<li>It Instantiates beans, injects dependencies, calls <code>@PostConstruct</code> methods, and executes other initialization callbacks.</li>
+</ul>
+</li>
+<li>
+<p><strong>Application Ready</strong>: Application context fully initialized and ready to handle requests.</p>
+<ul>
+<li>It Publishes ApplicationReadyEvent, completes startup logging, and begins accepting client requests.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3>How does Spring Boot handle exceptions globally?</h3>
+<ul>
+<li>Spring Boot provides mechanisms for handling exceptions globally across the application using @ControllerAdvice and @ExceptionHandler annotations.</li>
+<li><code>@ControllerAdvice</code>: This annotation enables a class to act as a global exception handler for all controllers. Any exception that is thrown within a controller will be caught by a method annotated with @ExceptionHandler inside a @ControllerAdvice class.</li>
+<li><code>@ExceptionHandler</code>: This annotation is used within a @ControllerAdvice class to define methods that handle specific types of exceptions. It takes the exception class as an argument, specifying which exception type the method should handle.</li>
+</ul>
+<p>📌 <strong>Example:</strong></p>
+<pre><code class="language-java">@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity&lt;ErrorResponse&gt; handleResourceNotFoundException(ResourceNotFoundException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+        return new ResponseEntity&lt;&gt;(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity&lt;ErrorResponse&gt; handleGeneralException(Exception ex) {
+       ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), &quot;An unexpected error occurred&quot;);
+        return new ResponseEntity&lt;&gt;(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+</code></pre>
+<ul>
+<li>Note: In this example, GlobalExceptionHandler class handles ResourceNotFoundException and general Exception. When <code>ResourceNotFoundException </code> is thrown, the handleResourceNotFoundException method will be invoked, returning a 404 Not Found response. If any other exception occurs, the handleGeneralException method will be invoked, returning a 500 Internal Server Error response.</li>
+</ul>
+<hr>
+<h3>What is ResponseEntity&lt;&gt;?</h3>
+<ul>
+<li><strong>ResponseEntity&lt;T&gt;</strong> represents the entire HTTP response, including the status code, headers, and body. It offers a way to fully customize the response sent to the client. The generic type T specifies the type of the response body. It is commonly used in RESTful web services to provide more control over the response than simply returning the data directly.</li>
+</ul>
+<hr>
+<h2><strong>🔹 REST API &amp; Security Questions</strong></h2>
+<h3>How do you create a REST API in Spring Boot?</h3>
+<p>✅ Use <code>@RestController</code> with <code>@RequestMapping</code>.</p>
+<p>📌 <strong>Example:</strong></p>
+<pre><code class="language-java">@RestController
+@RequestMapping(&quot;/users&quot;)
+public class UserController {
+
+    @GetMapping(&quot;/{id}&quot;)
+    public User getUser(@PathVariable int id) {
+        return new User(id, &quot;John Doe&quot;);
+    }
+}
+</code></pre>
+<p>📌 <strong>Response:</strong></p>
+<pre><code>GET /users/1  → { &quot;id&quot;: 1, &quot;name&quot;: &quot;John Doe&quot; }
+</code></pre>
+<hr>
+<h3>What are the different types of authentication in Spring Security?</h3>
+<ul>
+<li>Form-Based Authentication</li>
+<li>HTTP Basic Authentication</li>
+<li>OAuth 2.0 / OpenID Connect</li>
+<li>JWT Authentication</li>
+</ul>
+<h3>Form-Based Authentication</h3>
+<ul>
+<li>Uses HTML forms for credentials collection</li>
+<li>Default login page provided by Spring Security</li>
+<li>Session-based authentication</li>
+<li>Good for traditional web applications</li>
+</ul>
+<pre><code class="language-java">@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .formLogin(form -&gt; form
+                .loginPage(&quot;/login&quot;)
+                .permitAll()
+            )
+            .authorizeHttpRequests(authorize -&gt; authorize
+                .requestMatchers(&quot;/public/**&quot;).permitAll()
+                .anyRequest().authenticated()
+            );
+        return http.build();
+    }
+}
+</code></pre>
+<h2>HTTP Basic Authentication</h2>
+<ul>
+<li>Uses HTTP Authorization header</li>
+<li>Credentials sent with every request.</li>
+<li>Simple implementation for APIs</li>
+<li>No session management required</li>
+</ul>
+<pre><code class="language-java">@Configuration
+@EnableWebSecurity
+public class BasicAuthConfig {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .httpBasic(Customizer.withDefaults())
+            .authorizeHttpRequests(authorize -&gt; authorize
+                .anyRequest().authenticated()
+            );
+        return http.build();
+    }
+}
+</code></pre>
+<h2>OAuth 2.0 / OpenID Connect</h2>
+<ul>
+<li>Industry standard protocol for authorization</li>
+<li>Supports authentication delegation to identity providers</li>
+<li>Used for single sign-on and API access</li>
+<li>Handles various grant types (authorization code, client credentials, etc.)</li>
+</ul>
+<pre><code class="language-java">@Configuration
+@EnableWebSecurity
+public class OAuth2LoginConfig {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .oauth2Login(oauth2 -&gt; oauth2
+                .loginPage(&quot;/login&quot;)
+                .defaultSuccessUrl(&quot;/home&quot;)
+            )
+            .authorizeHttpRequests(authorize -&gt; authorize
+                .anyRequest().authenticated()
+            );
+        return http.build();
+    }
+}
+</code></pre>
+<h2>JWT Authentication</h2>
+<ul>
+<li>Stateless authentication using JSON Web Tokens</li>
+<li>Token contains encoded claims about the user</li>
+<li>No server-side session storage needed</li>
+<li>Good for microservices and APIs</li>
+</ul>
+<pre><code class="language-java">@Configuration
+@EnableWebSecurity
+public class JwtSecurityConfig {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(csrf -&gt; csrf.disable())
+            .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+            .sessionManagement(session -&gt; session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(authorize -&gt; authorize
+                .requestMatchers(&quot;/api/auth/**&quot;).permitAll()
+                .anyRequest().authenticated()
+            );
+        return http.build();
+    }
+}
+</code></pre>
+<hr>
+<h3>** How do you implement role-based access control in Spring Boot?**</h3>
+<p>✅ Use <code>@PreAuthorize</code> for <strong>method-level security</strong>.</p>
+<p>📌 <strong>Example:</strong> <strong>Only ADMIN users can access this API.</strong></p>
+<pre><code class="language-java">@PreAuthorize(&quot;hasRole('ADMIN')&quot;)
+@GetMapping(&quot;/admin&quot;)
+public String adminPage() {
+    return &quot;Admin Content&quot;;
+}
+</code></pre>
+<hr>
+<h2><strong>🔹 Database &amp; JPA Questions</strong></h2>
+<h3>** What is the difference between <code>CrudRepository</code>, <code>JpaRepository</code>, and <code>PagingAndSortingRepository</code>?**</h3>
+<table>
+<thead>
+<tr>
+<th>Repository Type</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CrudRepository</code></td>
+<td>Basic CRUD methods (<code>save()</code>, <code>findById()</code>)</td>
+</tr>
+<tr>
+<td><code>JpaRepository</code></td>
+<td>Extends <code>CrudRepository</code>, adds <code>flush()</code> and batch operations</td>
+</tr>
+<tr>
+<td><code>PagingAndSortingRepository</code></td>
+<td>Provides <strong>pagination &amp; sorting</strong> methods</td>
+</tr>
+</tbody>
+</table>
+<p>📌 <strong>Example:</strong></p>
+<pre><code class="language-java">public interface UserRepository extends JpaRepository&lt;User, Long&gt; {
+    List&lt;User&gt; findByName(String name);
+}
+</code></pre>
+<hr>
+<h3>** How do you implement pagination in Spring Boot?**</h3>
+<p>✅ Use <code>Pageable</code> with <code>JpaRepository</code>.</p>
+<p>📌 <strong>Example:</strong></p>
+<pre><code class="language-java">@GetMapping(&quot;/users&quot;)
+public Page&lt;User&gt; getUsers(Pageable pageable) {
+    return userRepository.findAll(pageable);
+}
+</code></pre>
+<p>📌 <strong>Request Example:</strong></p>
+<pre><code>GET /users?page=0&amp;size=10&amp;sort=name,asc
+</code></pre>
+<hr>
+<h2><strong>🔹 Microservices &amp; Cloud Questions</strong></h2>
+<h3>** What is Spring Cloud, and why is it used?**</h3>
+<p>✅ <strong>Spring Cloud</strong> provides tools to build <strong>distributed systems</strong> with features like:</p>
+<ul>
+<li><strong>Service Discovery</strong> (<code>Eureka</code>)</li>
+<li><strong>Load Balancing</strong> (<code>Ribbon</code>, <code>Spring Cloud LoadBalancer</code>)</li>
+<li><strong>Circuit Breakers</strong> (<code>Resilience4j</code>)</li>
+<li><strong>API Gateway</strong> (<code>Spring Cloud Gateway</code>)</li>
+</ul>
+<hr>
+<h3>** How does Spring Boot handle inter-service communication?**</h3>
+<p>✅ Using <strong>RestTemplate (Legacy)</strong> or <strong>WebClient (Modern, Non-blocking)</strong>.</p>
+<p>📌 <strong>Example (WebClient):</strong></p>
+<pre><code class="language-java">WebClient client = WebClient.create(&quot;http://user-service&quot;);
+User user = client.get().uri(&quot;/users/1&quot;).retrieve().bodyToMono(User.class).block();
+</code></pre>
+<hr>
+<h3>** How do you implement Circuit Breaker in Spring Boot?**</h3>
+<p>✅ Using <strong>Resilience4j</strong> to prevent cascading failures.</p>
+<p>📌 <strong>Example:</strong></p>
+<pre><code class="language-java">@CircuitBreaker(name = &quot;userService&quot;, fallbackMethod = &quot;fallback&quot;)
+public String getUser() {
+    return restTemplate.getForObject(&quot;http://user-service/users/1&quot;, String.class);
+}
+
+public String fallback(Throwable t) {
+    return &quot;User Service is down, please try later&quot;;
+}
+</code></pre>
+<hr>
+<h2><strong>🔹 Other Advanced Questions</strong></h2>
+<h3>** How do you secure sensitive configurations in Spring Boot?**</h3>
+<p>✅ Use <strong>Spring Cloud Config + Vault</strong> or <strong>Environment Variables</strong>.</p>
+<hr>
+<h3>** How do you optimize a slow Spring Boot application?**</h3>
+<p>✅ <strong>Optimize SQL Queries, Enable Caching, Use Connection Pooling (HikariCP), Compress Responses, Use Profiling Tools.</strong></p>
+<hr>
+<h3>** How does Spring Boot handle transactions?**</h3>
+<p>✅ Using <code>@Transactional</code>.</p>
+<p>📌 <strong>Example:</strong></p>
+<pre><code class="language-java">@Transactional
+public void transferMoney(Long fromAcc, Long toAcc, Double amount) {
+    debit(fromAcc, amount);
+    credit(toAcc, amount);
+}
+</code></pre>
+<p>If any method fails, <strong>the entire transaction rolls back</strong>.</p>
+<hr>
+<h2><strong>🔹 Final Questions (Behavioral &amp; Best Practices)</strong></h2>
+<h3>** What are best practices for designing REST APIs?**</h3>
+<p>✅ Use <strong>proper status codes</strong>, <strong>versioning</strong>, <strong>pagination</strong>, <strong>JWT for security</strong>, and <strong>HATEOAS</strong>.</p>
+<h3>** How do you handle large file uploads in Spring Boot?**</h3>
+<p>✅ Use <code>MultipartFile</code> and configure <code>spring.servlet.multipart.max-file-size</code>.</p>
+<hr>
+<h3>** How manage different environments in Spring Boot?**</h3>
+<p>✅ Use <code>profile</code> and configure <code>spring.profile.active=dev or test</code>. Use Spring profiles (application-dev.properties, application-prod.properties) for environment-specific configurations, activated by SPRING_PROFILES_ACTIVE.</p>
+
+      </body>
+      </html>
+    

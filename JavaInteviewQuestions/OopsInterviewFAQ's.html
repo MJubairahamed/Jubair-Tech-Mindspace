@@ -1,0 +1,413 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>OopsInterviewFAQ'S</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <p><strong>Advanced Object-Oriented Programming (OOP) concepts</strong> that are frequently tested in <strong>senior-level Java interviews</strong></p>
+<hr>
+<h3><strong>1. SOLID Principles</strong></h3>
+<p>SOLID is a set of design principles for writing maintainable and scalable software.</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>S</strong> - <strong>Single Responsibility Principle (SRP)</strong>: A class should have only one reason to change.</li>
+<li><strong>O</strong> - <strong>Open/Closed Principle (OCP)</strong>: Classes should be open for extension but closed for modification.</li>
+<li><strong>L</strong> - <strong>Liskov Substitution Principle (LSP)</strong>: Subtypes must be replaceable with their base types without altering program behavior.</li>
+<li><strong>I</strong> - <strong>Interface Segregation Principle (ISP)</strong>: Clients should not be forced to depend on interfaces they do not use.</li>
+<li><strong>D</strong> - <strong>Dependency Inversion Principle (DIP)</strong>: High-level modules should not depend on low-level modules. Both should depend on abstractions.</li>
+</ul>
+<p><strong>Example (SRP)</strong>:</p>
+<pre><code class="language-java">class Report {
+    void generateReport() { /* Generates report */ }
+}
+
+class ReportPrinter {
+    void printReport() { /* Prints report */ }
+}
+</code></pre>
+<p>Here, <code>Report</code> is responsible for generating the report, and <code>ReportPrinter</code> is responsible for printing it, following SRP.</p>
+<hr>
+<h3><strong>2. Method Overloading vs. Method Overriding</strong></h3>
+<p>These are key concepts of <strong>polymorphism</strong> in Java.</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Method Overloading</strong>: Defining multiple methods with the same name but different parameters. (Compile-time polymorphism)</li>
+<li><strong>Method Overriding</strong>: Redefining a method in a subclass that already exists in the parent class. (Runtime polymorphism)</li>
+</ul>
+<p><strong>Example (Overriding):</strong></p>
+<pre><code class="language-java">class Parent {
+    void display() { System.out.println(&quot;Parent class&quot;); }
+}
+
+class Child extends Parent {
+    @Override
+    void display() { System.out.println(&quot;Child class&quot;); }
+}
+</code></pre>
+<hr>
+<h3><strong>3. Composition vs. Inheritance</strong></h3>
+<p>Favor <strong>composition over inheritance</strong> for better maintainability.</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Inheritance</strong>: A subclass derives properties from a parent class (tight coupling).</li>
+<li><strong>Composition</strong>: A class contains an instance of another class instead of inheriting from it (loose coupling).</li>
+</ul>
+<p><strong>Example (Composition):</strong></p>
+<pre><code class="language-java">class Engine {
+    void start() { System.out.println(&quot;Engine started&quot;); }
+}
+
+class Car {
+    private Engine engine = new Engine();
+    void startCar() { engine.start(); }
+}
+</code></pre>
+<p>Here, <code>Car</code> contains an <code>Engine</code> instead of extending it, reducing tight coupling.</p>
+<hr>
+<h3><strong>4. Abstract Classes vs. Interfaces</strong></h3>
+<p>Understanding when to use an <strong>abstract class</strong> vs. an <strong>interface</strong> is crucial.</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Abstract Class</strong>:
+<ul>
+<li>Can have both abstract and concrete methods.</li>
+<li>Used when classes share common behavior.</li>
+</ul>
+</li>
+<li><strong>Interface</strong>:
+<ul>
+<li>Only contains abstract methods (before Java 8) or default/static methods (Java 8+).</li>
+<li>Used for defining contracts.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">abstract class Animal {
+    abstract void makeSound();
+    void sleep() { System.out.println(&quot;Sleeping...&quot;); }
+}
+
+interface Flyable {
+    void fly();
+}
+
+class Bird extends Animal implements Flyable {
+    void makeSound() { System.out.println(&quot;Chirp&quot;); }
+    public void fly() { System.out.println(&quot;Flying&quot;); }
+}
+</code></pre>
+<hr>
+<h3><strong>5. Covariant Return Types</strong></h3>
+<p>Allows overriding methods to return a subclass type instead of the parent type.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">class Animal {}
+class Dog extends Animal {}
+
+class Parent {
+    Animal getAnimal() { return new Animal(); }
+}
+
+class Child extends Parent {
+    @Override
+    Dog getAnimal() { return new Dog(); } // Covariant return type
+}
+</code></pre>
+<hr>
+<h3><strong>6. Object Cloning (Deep Copy vs. Shallow Copy)</strong></h3>
+<p>Cloning helps create exact copies of objects.</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Shallow Copy</strong>: Copies object references (changes in the copy affect the original).</li>
+<li><strong>Deep Copy</strong>: Creates a completely independent copy.</li>
+</ul>
+<p><strong>Example (Shallow Copy):</strong></p>
+<pre><code class="language-java">class Person implements Cloneable {
+    String name;
+    Person(String name) { this.name = name; }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+}
+</code></pre>
+<p><strong>Deep Copy Example:</strong></p>
+<pre><code class="language-java">class Address {
+    String city;
+    Address(String city) { this.city = city; }
+}
+
+class Person {
+    String name;
+    Address address;
+
+    Person(String name, Address address) {
+        this.name = name;
+        this.address = new Address(address.city);
+    }
+}
+</code></pre>
+<p>Here, the deep copy creates a new instance of <code>Address</code>.</p>
+<hr>
+<h3><strong>7. Static Binding vs. Dynamic Binding</strong></h3>
+<p>Understanding how Java resolves method calls at compile-time vs. runtime.</p>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Static Binding (Compile-time)</strong>: Method resolution happens at compile time (e.g., method overloading).</li>
+<li><strong>Dynamic Binding (Runtime)</strong>: The actual method to be executed is determined at runtime (e.g., method overriding).</li>
+</ul>
+<p><strong>Example (Dynamic Binding):</strong></p>
+<pre><code class="language-java">class Parent {
+    void show() { System.out.println(&quot;Parent&quot;); }
+}
+
+class Child extends Parent {
+    void show() { System.out.println(&quot;Child&quot;); }
+}
+
+Parent obj = new Child();
+obj.show(); // Output: &quot;Child&quot; (Runtime resolution)
+</code></pre>
+<hr>
+<h3><strong>8. Reflection in Java</strong></h3>
+<p>Reflection allows inspecting and modifying class behavior at runtime.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">import java.lang.reflect.Method;
+
+class Test {
+    void display() { System.out.println(&quot;Hello&quot;); }
+}
+
+public class ReflectionExample {
+    public static void main(String[] args) throws Exception {
+        Class&lt;?&gt; obj = Class.forName(&quot;Test&quot;);
+        Method method = obj.getDeclaredMethod(&quot;display&quot;);
+        method.invoke(obj.getDeclaredConstructor().newInstance()); // Output: Hello
+    }
+}
+</code></pre>
+<hr>
+<h3><strong>9. Singleton Design Pattern</strong></h3>
+<p>Ensures that only one instance of a class exists in the application.</p>
+<p><strong>Example (Thread-Safe Singleton):</strong></p>
+<pre><code class="language-java">class Singleton {
+    private static Singleton instance;
+
+    private Singleton() {}
+
+    public static synchronized Singleton getInstance() {
+        if (instance == null) instance = new Singleton();
+        return instance;
+    }
+}
+</code></pre>
+<hr>
+<h3><strong>10. Dependency Injection (DI) and IoC</strong></h3>
+<p>Used in frameworks like <strong>Spring</strong> to achieve loose coupling.</p>
+<p><strong>Example (Constructor Injection):</strong></p>
+<pre><code class="language-java">class Service {
+    void serve() { System.out.println(&quot;Service running&quot;); }
+}
+
+class Client {
+    private Service service;
+
+    Client(Service service) { this.service = service; }
+
+    void doSomething() { service.serve(); }
+}
+
+// Usage
+Client client = new Client(new Service());
+client.doSomething();
+</code></pre>
+<p>Here, <code>Service</code> is injected into <code>Client</code>, following the <strong>Inversion of Control (IoC)</strong> principle.</p>
+<hr>
+<h3><strong>11. What is the difference between Composition, Aggregation, and Association?</strong></h3>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong>Association</strong>: A general relationship where one class is related to another without ownership.</li>
+<li><strong>Aggregation</strong> (Weak Association): A &quot;has-a&quot; relationship where one class contains another, but the contained object can exist independently.</li>
+<li><strong>Composition</strong> (Strong Association): A &quot;has-a&quot; relationship where the contained object’s lifecycle is dependent on the container class.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">class Address {} // Exists independently
+
+class Employee {
+    Address address; // Aggregation (Employee &quot;has-a&quot; Address)
+}
+
+class Engine {} // Exists only with Car
+
+class Car {
+    private final Engine engine = new Engine(); // Composition
+}
+</code></pre>
+<hr>
+<h3><strong>12. What is a Marker Interface? Can we create our own?</strong></h3>
+<p><strong>Answer:</strong><br>
+A <strong>marker interface</strong> is an empty interface (without methods) used to provide metadata to Java classes. Examples: <code>Serializable</code>, <code>Cloneable</code>.<br>
+Yes, we can create our own.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">interface MyMarker {} // Custom marker interface
+
+class MyClass implements MyMarker {} 
+</code></pre>
+<p>Java frameworks (e.g., <code>instanceof</code> checks in serialization) use marker interfaces to identify capabilities.</p>
+<hr>
+<h3><strong>13. How does Garbage Collection (GC) work in Java? What are the types of GC algorithms?</strong></h3>
+<p><strong>Answer:</strong><br>
+GC in Java automatically removes unused objects from memory. Java has multiple GC algorithms:</p>
+<ul>
+<li><strong>Serial GC</strong> (Good for single-threaded applications)</li>
+<li><strong>Parallel GC</strong> (Multi-threaded, default for Java 8)</li>
+<li><strong>G1 (Garbage First) GC</strong> (Balances performance, used in Java 9+)</li>
+<li><strong>ZGC and Shenandoah GC</strong> (Low-latency GCs introduced in newer Java versions)</li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">System.gc(); // Suggests JVM to run garbage collection
+</code></pre>
+<p>However, explicit calls to <code>System.gc()</code> are discouraged.</p>
+<hr>
+<h3><strong>14. What is Method Hiding in Java? How is it different from Overriding?</strong></h3>
+<p><strong>Answer:</strong><br>
+When a <strong>static method</strong> in a subclass has the same name as one in its superclass, it is <strong>hidden</strong>, not overridden.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">class Parent {
+    static void display() { System.out.println(&quot;Parent static method&quot;); }
+}
+
+class Child extends Parent {
+    static void display() { System.out.println(&quot;Child static method&quot;); }
+}
+
+Parent obj = new Child();
+obj.display(); // Output: Parent static method (Not overridden)
+</code></pre>
+<p>Unlike overriding, <strong>method hiding binds at compile time</strong>.</p>
+<hr>
+<h3><strong>15. What is the Role of <code>final</code>, <code>finally</code>, and <code>finalize()</code> in Java?</strong></h3>
+<p><strong>Answer:</strong></p>
+<ul>
+<li><strong><code>final</code></strong>: Used for <strong>constants, methods, and classes</strong>.</li>
+<li><strong><code>finally</code></strong>: A block in exception handling that <strong>always executes</strong>, even if an exception is thrown.</li>
+<li><strong><code>finalize()</code></strong>: A <strong>deprecated</strong> method that was called before an object was garbage collected.</li>
+</ul>
+<p><strong>Example (finally block):</strong></p>
+<pre><code class="language-java">try {
+    int x = 5 / 0;
+} catch (ArithmeticException e) {
+    System.out.println(&quot;Exception caught&quot;);
+} finally {
+    System.out.println(&quot;This always executes&quot;);
+}
+</code></pre>
+<hr>
+<h3><strong>16. How does Java handle multiple inheritance?</strong></h3>
+<p><strong>Answer:</strong><br>
+Java <strong>does not support multiple inheritance</strong> with classes to avoid <strong>Diamond Problem</strong>, but it supports it using <strong>interfaces</strong>.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">interface A { void show(); }
+interface B { void show(); }
+
+class C implements A, B {
+    public void show() { System.out.println(&quot;Resolved multiple inheritance&quot;); }
+}
+</code></pre>
+<p>Here, <code>C</code> implements both <code>A</code> and <code>B</code> but provides its own implementation of <code>show()</code>, resolving ambiguity.</p>
+<hr>
+<h3><strong>17. What is a Functional Interface? Can it have multiple methods?</strong></h3>
+<p><strong>Answer:</strong><br>
+A <strong>functional interface</strong> has exactly <strong>one abstract method</strong> and may have <strong>default/static methods</strong>.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">@FunctionalInterface
+interface MyFuncInterface {
+    void execute(); // Single abstract method
+    default void log() { System.out.println(&quot;Logging...&quot;); }
+}
+</code></pre>
+<p>Java 8 introduced <strong>lambda expressions</strong>, which rely on functional interfaces.</p>
+<hr>
+<h3><strong>18. What are Proxy Classes in Java? How are they used in frameworks like Spring?</strong></h3>
+<p><strong>Answer:</strong><br>
+A <strong>proxy class</strong> is a dynamically created class at runtime that wraps another class to add functionality (e.g., logging, security).</p>
+<p><strong>Example (Dynamic Proxy in Java Reflection API):</strong></p>
+<pre><code class="language-java">import java.lang.reflect.*;
+
+interface Service {
+    void serve();
+}
+
+class RealService implements Service {
+    public void serve() { System.out.println(&quot;Serving...&quot;); }
+}
+
+class ServiceProxy {
+    public static Service createProxy(Service realService) {
+        return (Service) Proxy.newProxyInstance(
+            realService.getClass().getClassLoader(),
+            new Class[]{Service.class},
+            (proxy, method, args) -&gt; {
+                System.out.println(&quot;Logging before execution&quot;);
+                return method.invoke(realService, args);
+            }
+        );
+    }
+}
+</code></pre>
+<p>Used in <strong>Spring AOP</strong> for method interception.</p>
+<hr>
+<h3><strong>19. What is a Thread-Safe Singleton? How do we implement it?</strong></h3>
+<p><strong>Answer:</strong><br>
+A <strong>thread-safe singleton</strong> ensures only one instance of a class is created, even in multi-threaded environments.</p>
+<p><strong>Example (Double-Checked Locking):</strong></p>
+<pre><code class="language-java">class Singleton {
+    private static volatile Singleton instance;
+    
+    private Singleton() {}
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+</code></pre>
+<p>This ensures <strong>lazy initialization</strong> and <strong>thread safety</strong>.</p>
+<hr>
+<h3><strong>20. How does Java’s <code>Optional</code> Class Help in Handling Null Values?</strong></h3>
+<p><strong>Answer:</strong><br>
+<code>Optional&lt;T&gt;</code> helps avoid <code>NullPointerException</code> by explicitly handling null values.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="language-java">import java.util.Optional;
+
+class Test {
+    static Optional&lt;String&gt; getData() {
+        return Optional.ofNullable(null); // Returns empty Optional
+    }
+
+    public static void main(String[] args) {
+        Optional&lt;String&gt; data = getData();
+        System.out.println(data.orElse(&quot;Default Value&quot;)); // Output: Default Value
+    }
+}
+</code></pre>
+<p>Used in <strong>functional programming</strong> to replace traditional null checks.</p>
+<hr>
+
+      </body>
+      </html>
+    

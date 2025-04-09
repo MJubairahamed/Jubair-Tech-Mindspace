@@ -1,0 +1,517 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>Basic Questions Answers</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <p>*** Java fundamentals questions and answers**</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Question</th>
+<th>Answer</th>
+<th>Example (if required)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>What is Java?</td>
+<td>Java is a high-level, object-oriented programming language developed by Sun Microsystems (now owned by Oracle).</td>
+<td>-</td>
+</tr>
+<tr>
+<td>2</td>
+<td>What are the key features of Java?</td>
+<td>Platform independence, Object-oriented, Robust, Secure, Multithreading, High Performance, Dynamic.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>3</td>
+<td>What is JVM?</td>
+<td>JVM (Java Virtual Machine) is an abstract machine that provides the runtime environment to execute Java bytecode.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>4</td>
+<td>What is JDK?</td>
+<td>JDK (Java Development Kit) is a software package that includes the JRE and development tools like a compiler and debugger.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>5</td>
+<td>What is JRE?</td>
+<td>JRE (Java Runtime Environment) is a package containing libraries and JVM to run Java applications.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>6</td>
+<td>What is the difference between JVM, JDK, and JRE?</td>
+<td>JVM runs Java bytecode, JRE contains libraries + JVM, and JDK includes JRE + development tools.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>7</td>
+<td>What is the main() method in Java?</td>
+<td>The <code>main()</code> method is the entry point of a Java application: <code>public static void main(String[] args)</code>.</td>
+<td><code>public static void main(String[] args) { System.out.println(&quot;Hello Java&quot;); }</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Why is Java platform-independent?</td>
+<td>Java is platform-independent because of the <code>JVM</code>, which allows Java programs to run on any OS.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>9</td>
+<td>What is bytecode in Java?</td>
+<td>Bytecode is an intermediate representation of Java code that JVM interprets and executes.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>10</td>
+<td>What is the difference between == and .equals()?</td>
+<td><code>==</code> checks reference equality, while <code>.equals()</code> checks content equality.</td>
+<td><code>String a = &quot;Java&quot;; String b = &quot;Java&quot;; a.equals(b) → true; a == b → true (if interned)</code></td>
+</tr>
+<tr>
+<td>11</td>
+<td>What are wrapper classes in Java?</td>
+<td>In Java, wrapper classes serve as object representations of primitive data types (e.g., int, char, float, boolean). Each primitive type has a corresponding wrapper class: Integer, Character, Float, Boolean, and so on. These classes encapsulate a primitive value within an object, enabling the use of primitive types in contexts where objects are required.</td>
+<td><code>int a = 10; Integer obj = Integer.valueOf(a);</code></td>
+</tr>
+<tr>
+<td>11a</td>
+<td>Benefits of Wrapper Classes?</td>
+<td><strong>Null Values:</strong> Unlike primitive types, wrapper classes can represent null values. This is useful in situations where the absence of a value needs to be explicitly indicated, such as when interacting with databases or APIs.  &lt;br&gt; <strong>Utility Methods:</strong> Wrapper classes provide various utility methods for tasks like converting between strings and primitive types (parseInt(), valueOf()), comparing values (compareTo()), and obtaining hash codes (hashCode()).</td>
+<td><code>String a = 10; int parsedNum = Integer.parseInt(a);</code></td>
+</tr>
+<tr>
+<td>12</td>
+<td>What is autoboxing and unboxing?</td>
+<td>Autoboxing: converting a primitive to an object. Unboxing: converting an object to a primitive.</td>
+<td><code>Integer obj = 10; int num = obj;</code></td>
+</tr>
+<tr>
+<td>13</td>
+<td>What are primitive data types in Java?</td>
+<td>byte, short, int, long, float, double, char, boolean.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>14</td>
+<td>What is the default value of an uninitialized int variable?</td>
+<td>Default value is <code>0</code> for int.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>15</td>
+<td>What is a class in Java?</td>
+<td>A class is a blueprint for creating objects. It contains fields and methods.</td>
+<td><code>class Car { int speed; void drive() {} }</code></td>
+</tr>
+<tr>
+<td>16</td>
+<td>What is an object in Java?</td>
+<td>An object is an instance of a class that contains state (fields) and behavior (methods).</td>
+<td><code>Car myCar = new Car();</code></td>
+</tr>
+<tr>
+<td>17</td>
+<td>What is the difference between class and object?</td>
+<td>A class is a template; an object is an instance of a class.</td>
+<td><code>class Dog {} Dog obj = new Dog();</code></td>
+</tr>
+<tr>
+<td>18</td>
+<td>What is the difference between static and instance variables?</td>
+<td>Static variables are shared across all objects, instance variables are object-specific.</td>
+<td><code>static int count; int age;</code></td>
+</tr>
+<tr>
+<td>19</td>
+<td>What is the difference between static and non-static methods?</td>
+<td>Static methods belong to the class and don’t require an object, whereas non-static methods need an object.</td>
+<td><code>static void show() {}; void display() {};</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>What is method overloading?</td>
+<td>Method overloading allows multiple methods with the same name but different parameters.</td>
+<td><code>void add(int a, int b); void add(double a, double b);</code></td>
+</tr>
+<tr>
+<td>21</td>
+<td>What is method overriding?</td>
+<td>Method overriding allows a subclass to provide a specific implementation of a method in a superclass.</td>
+<td><code>class A { void show() {} } class B extends A { void show() {} }</code></td>
+</tr>
+<tr>
+<td>22</td>
+<td>What is the final keyword in Java?</td>
+<td>The <code>final</code> keyword is used to declare constants, prevent method overriding, and prevent inheritance.</td>
+<td><code>final int MAX = 100;</code></td>
+</tr>
+<tr>
+<td>23</td>
+<td>What is the difference between abstract class and interface?</td>
+<td>Abstract class can have method definitions; an interface only has method declarations (before Java 8).</td>
+<td><code>abstract class A { void show() {} } interface B { void display(); }</code></td>
+</tr>
+<tr>
+<td>24</td>
+<td>What is polymorphism?</td>
+<td>The ability of a method to take different forms (method overloading and overriding).</td>
+<td><code>Animal a = new Dog(); a.makeSound();</code></td>
+</tr>
+<tr>
+<td>25</td>
+<td>What is encapsulation?</td>
+<td>Encapsulation is wrapping data and methods into a single unit (class) with controlled access.</td>
+<td><code>private int age; public void setAge(int a) { age = a; }</code></td>
+</tr>
+<tr>
+<td>26</td>
+<td>What is inheritance?</td>
+<td>Inheritance allows a child class to acquire the properties of a parent class.</td>
+<td><code>class A {} class B extends A {}</code></td>
+</tr>
+<tr>
+<td>27</td>
+<td>What are constructors in Java?</td>
+<td>A constructor is a special method used to initialize an object.</td>
+<td><code>class A { A() { System.out.println(&quot;Constructor called&quot;); } }</code></td>
+</tr>
+<tr>
+<td>28</td>
+<td>Can a constructor be private?</td>
+<td>Yes, a private constructor is used in Singleton design patterns.</td>
+<td><code>private A() {}</code></td>
+</tr>
+<tr>
+<td>29</td>
+<td>What is a copy constructor in Java?</td>
+<td>Java does not have a built-in copy constructor, but you can create one manually.</td>
+<td><code>class A { A(A obj) { this.x = obj.x; } }</code></td>
+</tr>
+<tr>
+<td>30</td>
+<td>What is the super keyword?</td>
+<td>The <code>super</code> keyword refers to the parent class and is used to call the superclass constructor or method.</td>
+<td><code>super(); super.show();</code></td>
+</tr>
+<tr>
+<td>31</td>
+<td>What is the this keyword?</td>
+<td>The <code>this</code> keyword refers to the current object instance.</td>
+<td><code>this.x = x;</code></td>
+</tr>
+<tr>
+<td>32</td>
+<td>What is multiple inheritance?</td>
+<td>Java does not support multiple class inheritance but allows multiple interface inheritance.</td>
+<td><code>class A {} class B {} class C extends A, B {} // Not Allowed</code></td>
+</tr>
+<tr>
+<td>33</td>
+<td>What is an interface?</td>
+<td>An interface is a blueprint of a class with only abstract methods (before Java 8).</td>
+<td><code>interface A { void show(); }</code></td>
+</tr>
+<tr>
+<td>34</td>
+<td>What is an abstract class?</td>
+<td>An abstract class is a class that cannot be instantiated and may contain abstract methods.</td>
+<td><code>abstract class A { abstract void show(); }</code></td>
+</tr>
+<tr>
+<td>35</td>
+<td>What is exception handling?</td>
+<td>Exception handling is a mechanism to handle runtime errors using try-catch blocks.</td>
+<td><code>try { int a = 5/0; } catch (Exception e) {}</code></td>
+</tr>
+<tr>
+<td>36</td>
+<td>What are checked and unchecked exceptions?</td>
+<td>Checked exceptions are checked at compile time, unchecked at runtime.</td>
+<td><code>IOException (checked), NullPointerException (unchecked)</code></td>
+</tr>
+<tr>
+<td>37</td>
+<td>What is a finally block?</td>
+<td>The <code>finally</code> block executes whether an exception occurs or not.</td>
+<td><code>try {} catch() {} finally {}</code></td>
+</tr>
+<tr>
+<td>38</td>
+<td>What is a try-with-resources statement?</td>
+<td>It automatically closes resources like streams after execution.</td>
+<td><code>try (FileReader fr = new FileReader(&quot;file.txt&quot;)) {}</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Additional Questions:</h2>
+<h3><strong>Difference Between Abstract Class and Interface After Java 8 (Interview Perspective)</strong></h3>
+<p>Since <strong>Java 8</strong>, interfaces have been enhanced with <strong>default and static methods</strong>, reducing the gap between interfaces and abstract classes. Here’s a <strong>detailed comparison</strong> considering the latest changes:</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><strong>Abstract Class</strong></th>
+<th><strong>Interface (After Java 8)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Methods</strong></td>
+<td>Can have both abstract and concrete methods.</td>
+<td>Can have <strong>abstract</strong>, <strong>default</strong>, and <strong>static</strong> methods.</td>
+</tr>
+<tr>
+<td><strong>Default Methods</strong></td>
+<td>Allowed (as normal methods).</td>
+<td>Introduced in Java 8 using <code>default</code> keyword to provide implementation in interfaces.</td>
+</tr>
+<tr>
+<td><strong>Static Methods</strong></td>
+<td>Allowed.</td>
+<td>Introduced in Java 8. Static methods can have a body and be called using <code>InterfaceName.method()</code>.</td>
+</tr>
+<tr>
+<td><strong>Fields (Variables)</strong></td>
+<td>Can have instance variables (non-static).</td>
+<td>Can only have <strong>public static final (constants)</strong> variables.</td>
+</tr>
+<tr>
+<td><strong>Access Modifiers</strong></td>
+<td>Can have <strong>public, private, protected, or default</strong> members.</td>
+<td>Methods are <strong>public by default</strong>, but Java 9 introduced <strong>private methods</strong>.</td>
+</tr>
+<tr>
+<td><strong>Multiple Inheritance</strong></td>
+<td>Not supported (a class can extend only one abstract class).</td>
+<td>Supported (a class can implement multiple interfaces).</td>
+</tr>
+</tbody>
+</table>
+<h3><strong>Example: Abstract Class vs. Interface After Java 8</strong></h3>
+<h4><strong>Abstract Class Example</strong></h4>
+<pre><code class="language-java">abstract class Vehicle {
+    int speed = 50;
+    
+    abstract void start(); // Abstract method
+
+    void stop() { // Concrete method
+        System.out.println(&quot;Vehicle stopped&quot;);
+    }
+}
+</code></pre>
+<h4><strong>Interface Example (After Java 8)</strong></h4>
+<pre><code class="language-java">interface Engine {
+    int power = 100; // Implicitly public, static, and final
+
+    void start(); // Abstract method
+
+    default void fuelEfficiency() { // Default method (Introduced in Java 8)
+        System.out.println(&quot;This engine has good fuel efficiency&quot;);
+    }
+
+    static void engineType() { // Static method (Introduced in Java 8)
+        System.out.println(&quot;This is a petrol engine&quot;);
+    }
+}
+</code></pre>
+<h3><strong>Key Interview Points:</strong></h3>
+<ul>
+<li>
+<p><strong>Before Java 8:</strong> Interfaces only had abstract methods, while abstract classes could have concrete methods.</p>
+</li>
+<li>
+<p><strong>After Java 8:</strong> Interfaces support <strong>default</strong> and <strong>static</strong> methods, reducing the need for abstract classes.</p>
+</li>
+<li>
+<p><strong>When to Use What?</strong></p>
+<ul>
+<li>Use <strong>abstract class</strong> when you need <strong>state (instance variables)</strong> and <strong>partial implementation</strong>.</li>
+<li>Use <strong>interface</strong> when you need <strong>multiple inheritance</strong> or <strong>a strict contract</strong> for implementation.</li>
+</ul>
+</li>
+<li>
+<p>&quot;Can an interface have concrete methods after Java 8?&quot; (<strong>Yes, via default/static methods</strong>).</p>
+</li>
+<li>
+<p>&quot;What is the difference between default and static methods in interfaces?&quot; (<strong>Default methods can be overridden, but static methods belong to the interface itself</strong>).</p>
+</li>
+<li>
+<p>&quot;Can an interface extend another interface?&quot; (<strong>Yes, multiple inheritance is allowed</strong>).</p>
+</li>
+<li>
+<p>Why were default methods introduced in Java 8?</p>
+<ul>
+<li>To enable backward compatibility without breaking existing implementations.Before Java 8, if a new method was added to an interface, all implementing classes needed to implement it. Default methods allow adding new methods without breaking existing implementations.</li>
+<li>Also, Java 8 introduced Lambda Expressions and Functional Interfaces (interfaces with a single abstract method). To support this, changes in interfaces were required.</li>
+</ul>
+</li>
+<li>
+<p>Can default methods be overridden?</p>
+<ul>
+<li>Yes, implementing classes can override default methods.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java">    interface Vehicle {
+        default void start() {
+            System.out.println(&quot;Vehicle is starting...&quot;);
+        }
+    }
+
+    class Car implements Vehicle {
+        // Inherits default method start()
+    }
+
+    public class Main {
+        public static void main(String[] args) {
+            Car car = new Car();
+            car.start(); // Output: Vehicle is starting...
+        }
+    }
+</code></pre>
+<ul>
+<li>Can static methods in interfaces be overridden?
+<ul>
+<li>No, static methods belong to the interface and cannot be overridden by implementing classes.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java">    interface Engine {
+        static void engineType() {
+            System.out.println(&quot;This is a petrol engine.&quot;);
+        }
+    }
+
+    public class Main {
+        public static void main(String[] args) {
+            Engine.engineType(); // Output: This is a petrol engine.
+        }
+    }
+</code></pre>
+<ul>
+<li>Why do we need static methods in interfaces?
+<ul>
+<li>To define helper/utility methods within the interface instead of using external utility classes.</li>
+</ul>
+</li>
+</ul>
+<h3><strong>Explain try-with-resources with examples</strong></h3>
+<ul>
+<li>It is introduced in Java 7 — allows us to declare resources to be used in a try block with the assurance that the resources will be closed after the execution of that block.The resources declared need to implement the AutoCloseable interface.</li>
+<li><strong>Example Without finally (Using Try-with-Resources)</strong></li>
+</ul>
+<pre><code class="language-java">   try (Connection conn = DriverManager.getConnection(jdbcUrl, username, password)) {
+    conn.setAutoCommit(false);
+
+    try (PreparedStatement stmt = conn.prepareStatement(&quot;INSERT INTO users(name) VALUES ('John Doe')&quot;)) {
+        stmt.executeUpdate();
+    }
+
+    conn.commit();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+</code></pre>
+<ul>
+<li><strong>Example Without Try-with-Resources (Needs finally)</strong></li>
+</ul>
+<pre><code class="language-java">   Connection conn = null;
+    try {
+        conn = DriverManager.getConnection(jdbcUrl, username, password);
+        conn.setAutoCommit(false);
+
+        PreparedStatement stmt = conn.prepareStatement(&quot;INSERT INTO users(name) VALUES ('John Doe')&quot;);
+        stmt.executeUpdate();
+        stmt.close();
+
+        conn.commit();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+</code></pre>
+<ul>
+<li>Note:
+<ul>
+<li>In try-with-resources, any object that implements AutoCloseable (like <code>Connection</code>, <code>PreparedStatement</code>, and <code>ResultSet</code>) is <strong>automatically closed</strong> when the block exits, regardless of whether it exits normally or due to an exception.</li>
+<li><code>Connection</code> in JDBC implements AutoCloseable, so it gets closed automatically when the try block finishes.</li>
+</ul>
+</li>
+</ul>
+<h3>** <code>PATH</code> Variable:**</h3>
+<ul>
+<li>The <code>PATH</code> environment variable tells the <strong>operating system</strong> where to find executable files, including Java tools like <code>javac</code> and <code>java</code>.</li>
+<li>It should include the <strong>bin directory</strong> of the Java installation (e.g., <code>C:\Program Files\Java\jdk-17\bin</code>).</li>
+<li>Without setting <code>PATH</code>, running <code>javac</code> or <code>java</code> from the command line will result in a <strong>&quot;command not found&quot;</strong> error.</li>
+<li>Example:<pre><code class="language-sh">export PATH=$PATH:/usr/lib/jvm/java-17-openjdk-amd64/bin
+</code></pre>
+</li>
+</ul>
+<h3>** <code>CLASSPATH</code> Variable:**</h3>
+<ul>
+<li>
+<p>The <code>CLASSPATH</code> environment variable tells the <strong>JVM</strong> where to find <strong>Java class files or JAR files</strong> for execution and compilation.</p>
+</li>
+<li>
+<p>If not set, Java looks in the <strong>current directory (<code>.</code>) by default</strong>.</p>
+</li>
+<li>
+<p>Required when referencing <strong>external libraries</strong> in class execution.</p>
+</li>
+<li>
+<p>Example:</p>
+<pre><code class="language-sh">export CLASSPATH=.:/home/user/lib/myLibrary.jar
+</code></pre>
+<h3><strong>Java <code>Properties</code> Class</strong></h3>
+</li>
+<li>
+<p>The <strong><code>Properties</code> class</strong> in Java is a <strong>subclass of <code>Hashtable</code></strong> used to store <strong>key-value pairs</strong>, where both the key and value are <strong>Strings</strong>.</p>
+</li>
+<li>
+<p>It is commonly used for <strong>reading and writing configuration files</strong>, such as <code>.properties</code> files for application settings.</p>
+</li>
+<li>
+<p>Supports <strong>I/O operations</strong> to <strong>load and store properties</strong> from a file using methods like <code>load()</code> and <code>store()</code>.</p>
+</li>
+<li>
+<p>Example:</p>
+<pre><code class="language-java">import java.io.FileInputStream;
+import java.util.Properties;
+
+public class PropertiesExample {
+    public static void main(String[] args) throws Exception {
+        Properties prop = new Properties();
+        prop.load(new FileInputStream(&quot;config.properties&quot;)); // Load properties file
+        System.out.println(prop.getProperty(&quot;database.url&quot;)); // Read property
+    }
+}
+</code></pre>
+</li>
+</ul>
+
+      </body>
+      </html>
+    

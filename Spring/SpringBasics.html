@@ -1,0 +1,121 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>SpringBasics</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h2><strong>🔹 Spring Basics Concepts</strong></h2>
+<p><strong>What is a Spring?</strong><br>
+Spring Framework is a powerful, open-source framework for building Java applications, particularly enterprise-level applications. It provides comprehensive infrastructure support, making it easier to develop, test, and deploy Java applications.</p>
+<p><strong>Key Features of Spring Framework:</strong></p>
+<ol>
+<li><strong>Inversion of Control (IoC)</strong> – Uses Dependency Injection (DI) to manage object creation and dependencies.</li>
+<li><strong>Aspect-Oriented Programming (AOP)</strong> – Helps in separating cross-cutting concerns like logging, security, and transaction management.</li>
+<li><strong>Spring MVC</strong> – A framework for building web applications with a Model-View-Controller architecture.</li>
+<li><strong>Spring Boot</strong> – A subproject that simplifies Spring application development with auto-configuration and embedded servers.</li>
+<li><strong>Spring Data</strong> – Simplifies database access, working with JPA, Hibernate, and NoSQL databases.</li>
+<li><strong>Spring Security</strong> – Handles authentication and authorization for applications.</li>
+<li><strong>Spring Cloud</strong> – Supports building microservices with features like service discovery, load balancing, and circuit breakers.</li>
+<li><strong>Spring Batch</strong> – Facilitates batch processing of large datasets.</li>
+</ol>
+<p><strong>Why Use Spring Framework?</strong></p>
+<ul>
+<li>Reduces boilerplate code with dependency injection.</li>
+<li>Provides a flexible, modular approach to development.</li>
+<li>Offers integration with various technologies like databases, messaging systems, and cloud platforms.</li>
+<li>Supports both monolithic and microservices architecture.</li>
+</ul>
+<hr>
+<h3><strong>What is Spring IoC Container?</strong></h3>
+<p>The <strong>Spring IoC (Inversion of Control) Container</strong> is responsible for managing the lifecycle, configuration, and dependencies of Spring beans. The IoC container follows the <strong>Dependency Injection (DI)</strong> principle to provide objects (beans) to a Spring application rather than the application manually creating them.</p>
+<h3><strong>How Does Spring IoC Work?</strong></h3>
+<ol>
+<li><strong>Defines Beans</strong> – Objects are defined in XML configuration, Java-based configuration, or using annotations.</li>
+<li><strong>Manages Dependencies</strong> – Automatically injects dependencies into beans.</li>
+<li><strong>Controls Lifecycle</strong> – Handles bean initialization, dependency injection, and destruction.</li>
+</ol>
+<h3><strong>Types of IoC Containers in Spring</strong></h3>
+<ol>
+<li>
+<p><strong>BeanFactory (Lightweight Container)</strong></p>
+<ul>
+<li>The simplest container that provides basic DI support.</li>
+<li><strong>Example:</strong><pre><code class="language-java">Resource resource = new ClassPathResource(&quot;beans.xml&quot;);
+BeanFactory factory = new XmlBeanFactory(resource);
+</code></pre>
+</li>
+<li>Rarely used today, as <code>ApplicationContext</code> is preferred.</li>
+</ul>
+</li>
+<li>
+<p><strong>ApplicationContext (Advanced Container)</strong></p>
+<ul>
+<li>A more powerful container that includes features like event propagation, declarative mechanisms, and internationalization.</li>
+<li><strong>Common Implementations:</strong>
+<ul>
+<li>
+<p><code>ClassPathXmlApplicationContext</code> – Loads beans from an XML configuration file.</p>
+</li>
+<li>
+<p><code>AnnotationConfigApplicationContext</code> – Uses Java-based configuration with <code>@Configuration</code>.</p>
+</li>
+<li>
+<p><code>WebApplicationContext</code> – Special version for web applications.</p>
+</li>
+<li>
+<h3><strong>Different implementations of ApplicationContext?</strong></h3>
+<p>ApplicationContext interface in Spring can be configured in several different ways. Each configuration approach has its own benefits depending on your application's needs:</p>
+<ol>
+<li><strong>XML-based configuration</strong> (<code>ClassPathXmlApplicationContext</code>): Traditionally, Spring used XML files to define beans and dependencies.</li>
+</ol>
+<pre><code class="language-xml">&lt;beans&gt;
+    &lt;bean id=&quot;userService&quot; class=&quot;com.example.UserServiceImpl&quot;&gt;
+    &lt;property name=&quot;userRepository&quot; ref=&quot;userRepository&quot;/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+
+</code></pre>
+<pre><code class="language-java">    ApplicationContext context = new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);
+    MyBean myBean = context.getBean(MyBean.class);
+</code></pre>
+<ol start="2">
+<li><strong>Java-based configuration</strong> (<code>AnnotationConfigApplicationContext</code>): Using <code>@Configuration</code> and <code>@Bean</code> annotations.</li>
+</ol>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+    @Bean
+    public UserService userService() {
+        return new UserServiceImpl(userRepository());
+    }
+}
+</code></pre>
+<ol start="3">
+<li><strong>Annotation-based configuration</strong>: Using component scanning with annotations like <code>@Component</code>, <code>@Service</code>, <code>@Repository</code>, etc.</li>
+</ol>
+<pre><code class="language-java">@Service
+public class UserServiceImpl implements UserService {
+    @Autowired
+    private UserRepository userRepository;
+}
+</code></pre>
+<ol start="4">
+<li><strong>Spring Boot auto-configuration</strong>: Letting Spring Boot configure the context automatically based on dependencies in your classpath.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      </body>
+      </html>
+    

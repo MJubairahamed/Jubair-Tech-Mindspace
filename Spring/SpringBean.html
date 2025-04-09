@@ -1,0 +1,113 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>SpringBean</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Spring Bean</h1>
+<h3><strong>What is a Spring Beans?</strong></h3>
+<ul>
+<li>A <strong>Spring Bean</strong> is an object that is instantiated, managed, and controlled by the Spring IoC (Inversion of Control) container. Beans are the backbone of a Spring application and are defined in the Spring configuration file (XML-based or Java-based annotations @Bean).</li>
+<li>These beans are the backbone of any Spring application, as they encapsulate the application's core business logic, data, and services.</li>
+</ul>
+<h3><strong>Key Characteristics of Beans</strong></h3>
+<ul>
+<li><strong>Singleton by Default:</strong> By default, Spring beans are singleton, meaning that only one instance of a bean is created per Spring IoC container. This instance is shared across the entire application.</li>
+<li><strong>Configurable:</strong> Beans can be customized and configured through XML, annotations, or Java code.</li>
+<li><strong>Managed by the Container:</strong> The entire lifecycle of a bean—from instantiation to destruction—is managed by the Spring IoC container.</li>
+</ul>
+<h3><strong>Defining a Spring Bean</strong></h3>
+<h4><strong>1. Using XML Configuration</strong></h4>
+<pre><code class="language-xml">&lt;bean id=&quot;myBean&quot; class=&quot;com.example.MyClass&quot;/&gt;
+</code></pre>
+<h4><strong>2. Using Java-based Configuration</strong></h4>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+    @Bean
+    public MyClass myBean() {
+        return new MyClass();
+    }
+}
+</code></pre>
+<h4><strong>3. Using Annotations (Component Scanning)</strong></h4>
+<pre><code class="language-java">@Component
+public class MyBean {
+    // Bean logic
+}
+</code></pre>
+<p>If using <code>@ComponentScan</code>, Spring will automatically detect <code>@Component</code>, <code>@Service</code>, <code>@Repository</code>, and <code>@Controller</code> annotated classes.</p>
+<hr>
+<h3><strong>Spring Bean Scopes</strong></h3>
+<p>Spring provides different scopes to control the lifecycle of beans:</p>
+<ul>
+<li><strong>Singleton (default)</strong> – One instance per Spring IOC container.</li>
+<li><strong>Prototype</strong> – A new instance is created every time it is requested.</li>
+<li><strong>Request (Web Applications)</strong> – One instance per HTTP request.</li>
+<li><strong>Session (Web Applications)</strong> – One instance per HTTP session.</li>
+<li><strong>Application (Web Applications)</strong> – A single instance for the entire web application lifecycle.</li>
+<li><strong>WebSocket (Web Applications)</strong> – One instance per WebSocket connection.</li>
+</ul>
+<p>Example of defining a prototype bean:</p>
+<pre><code class="language-java">@Bean
+@Scope(&quot;prototype&quot;)
+public MyClass myBean() {
+    return new MyClass();
+}
+</code></pre>
+<hr>
+<h3><strong>Bean Lifecycle in Spring</strong></h3>
+<p>Spring manages the complete lifecycle of a bean:</p>
+<ol>
+<li><strong>Instantiation</strong> – The IoC container instantiates the bean using the class's constructor.</li>
+<li><strong>Dependency Injection</strong> – The container injects the bean's dependencies, either through constructor injection, setter injection, or field injection.</li>
+<li><strong>Bean usage</strong> – The bean is now ready to be used by the application.
+<ul>
+<li><code>@PreDestroy</code> Method Before the bean is destroyed, the container calls the method annotated with <code>@PreDestroy</code>, allowing the bean to release any resources it holds.</li>
+<li><code>@PostConstruct</code> or <code>init-method</code> executes.</li>
+</ul>
+</li>
+<li><strong>Destruction</strong> – Finally, the container destroys the bean, freeing up memory.
+<ul>
+<li><code>@PreDestroy</code> or <code>destroy-method</code> executes before bean removal.</li>
+</ul>
+</li>
+</ol>
+<p>Example:</p>
+<pre><code class="language-java">@Component
+public class MyBean {
+    @PostConstruct
+    public void init() {
+        System.out.println(&quot;Bean is initialized.&quot;);
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println(&quot;Bean is about to be destroyed.&quot;);
+    }
+}
+</code></pre>
+<h3><strong>Does Spring Bean Provide Thread Safety</strong></h3>
+<ul>
+<li>The default scope of the spring bean is singleton, so there will only one instance per context. That mean a class level variable that any thread can update will lead to data inconsistent.</li>
+<li>To achieve thread safety either change the scope to prototype/session or Keep beans stateless,meaning they do not store instance variables. This eliminates concurrency issue.
+Example:</li>
+</ul>
+<pre><code class="language-java">@Component
+public class MyService {
+    public String process(String input) {
+        return &quot;Processed: &quot; + input;
+    }
+}
+</code></pre>
+
+      </body>
+      </html>
+    
