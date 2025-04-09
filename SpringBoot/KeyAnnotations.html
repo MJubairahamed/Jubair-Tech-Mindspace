@@ -1,0 +1,172 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>KeyAnnotations</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h3><strong>Key Annotations in Spring Boot and Their Usage</strong></h3>
+<p><strong>important Spring Boot annotations</strong> and their <strong>usage</strong>:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Annotation</strong></th>
+<th><strong>Usage</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@SpringBootApplication</code></td>
+<td>Marks the main application class and enables auto-configuration.</td>
+<td><code>@SpringBootApplication public class MyApp { public static void main(String[] args) { SpringApplication.run(MyApp.class, args); } }</code></td>
+</tr>
+<tr>
+<td><code>@Component</code></td>
+<td>It is the generic stereotype annotation that marks a class as a Spring-managed component. It's the parent annotation that <code>@Service</code> and <code>@Repository</code> inherit from. Use this when a class doesn't fit into any specialized category.</td>
+<td><code>@Component public class MyComponent { }</code></td>
+</tr>
+<tr>
+<td><code>@Service</code></td>
+<td>Marks a <strong>service layer</strong> class (business logic). It indicates that a class performs business logic or calculations. It's functionally identical to <code>@Component</code> but communicates to developers that this class contains service-layer logic like transaction management, validation, or orchestration of multiple repositories</td>
+<td><code>@Service public class UserService { }</code></td>
+</tr>
+<tr>
+<td><code>@Repository</code></td>
+<td>Marks a <strong>DAO (Data Access Object)</strong> class and enables exception translation. It is designates a class that interacts with a database or other data store.Exception translation: Automatically converts persistence-specific exceptions into Spring's unified DataAccessException hierarchy.</td>
+<td><code>@Repository public class UserRepository { }</code></td>
+</tr>
+<tr>
+<td><code>@Controller</code></td>
+<td>Marks a <strong>Spring MVC controller</strong> (for returning views).</td>
+<td><code>@Controller public class HomeController { @GetMapping(&quot;/&quot;) public String home() { return &quot;index&quot;; } }</code></td>
+</tr>
+<tr>
+<td><code>@RestController</code></td>
+<td>A combination of <code>@Controller</code> and <code>@ResponseBody</code> for REST APIs.</td>
+<td><code>@RestController public class UserController { @GetMapping(&quot;/users&quot;) public List&lt;User&gt; getUsers() { return userService.getAllUsers(); } }</code></td>
+</tr>
+<tr>
+<td><code>@RequestMapping</code></td>
+<td>Maps HTTP requests to a controller method (supports all HTTP methods).</td>
+<td><code>@RequestMapping(&quot;/users&quot;) public class UserController { }</code></td>
+</tr>
+<tr>
+<td><code>@GetMapping</code></td>
+<td>Handles <strong>HTTP GET</strong> requests.</td>
+<td><code>@GetMapping(&quot;/{id}&quot;) public User getUser(@PathVariable int id) { return userService.getUser(id); }</code></td>
+</tr>
+<tr>
+<td><code>@PostMapping</code></td>
+<td>Handles <strong>HTTP POST</strong> requests.</td>
+<td><code>@PostMapping(&quot;/&quot;) public void createUser(@RequestBody User user) { userService.createUser(user); }</code></td>
+</tr>
+<tr>
+<td><code>@PutMapping</code></td>
+<td>Handles <strong>HTTP PUT</strong> requests (update resource).</td>
+<td><code>@PutMapping(&quot;/{id}&quot;) public void updateUser(@PathVariable int id, @RequestBody User user) { userService.updateUser(id, user); }</code></td>
+</tr>
+<tr>
+<td><code>@DeleteMapping</code></td>
+<td>Handles <strong>HTTP DELETE</strong> requests.</td>
+<td><code>@DeleteMapping(&quot;/{id}&quot;) public void deleteUser(@PathVariable int id) { userService.deleteUser(id); }</code></td>
+</tr>
+<tr>
+<td><code>@PathVariable</code></td>
+<td>Extracts a value from the URL.</td>
+<td><code>@GetMapping(&quot;/{id}&quot;) public User getUser(@PathVariable int id) { return userService.getUser(id); }</code></td>
+</tr>
+<tr>
+<td><code>@RequestParam</code></td>
+<td>Extracts query parameters from the request.</td>
+<td><code>@GetMapping(&quot;/users&quot;) public List&lt;User&gt; getUsers(@RequestParam String name) { return userService.findByName(name); }</code></td>
+</tr>
+<tr>
+<td><code>@RequestBody</code></td>
+<td>Maps request body to a Java object (for JSON data).</td>
+<td><code>@PostMapping(&quot;/&quot;) public void createUser(@RequestBody User user) { }</code></td>
+</tr>
+<tr>
+<td><code>@ResponseBody</code></td>
+<td>Converts Java object to JSON response.</td>
+<td><code>@ResponseBody public User getUser() { return new User(1, &quot;John&quot;); }</code></td>
+</tr>
+<tr>
+<td><code>@Autowired</code></td>
+<td>Injects a Spring bean automatically.</td>
+<td><code>@Service public class UserService { @Autowired private UserRepository userRepository; }</code></td>
+</tr>
+<tr>
+<td><code>@Qualifier</code></td>
+<td>Resolves conflicts when multiple beans of the same type exist. It allows you to specify a specific bean to be injected by using a qualifier value.</td>
+<td><code>interface Message {} @Component(&quot;email&quot;) class Email implements Message {} @Component(&quot;sms&quot;) class SMS implements Message {} @Service class MessageService { @Autowired @Qualifier(&quot;email&quot;)  private Message message; }</code> Note: In this example, the <strong>MessageService</strong> depends on the Message interface. There are two implementations of this interface: Email and SMS. Without the <strong>@Qualifier</strong> annotation, Spring would not know which bean to inject. By using <strong>@Qualifier(&quot;email&quot;)</strong>, we specify that the email bean should be injected.</td>
+</tr>
+<tr>
+<td><code>@Primary</code></td>
+<td>The <code>@Primary</code> annotation is used to indicate a default bean when multiple beans of the same type are present. If multiple beans are eligible for autowiring and none of them are explicitly specified using @Qualifier, the bean marked with @Primary will be selected by default.</td>
+<td><code>@Primary @Component public class PrimaryBean { }</code></td>
+</tr>
+<tr>
+<td><code>@Value</code></td>
+<td>Injects values from properties files.</td>
+<td><code>@Value(&quot;${app.name}&quot;) private String appName;</code></td>
+</tr>
+<tr>
+<td><code>@Configuration</code></td>
+<td>Marks a class as a <strong>Spring configuration class</strong>.</td>
+<td><code>@Configuration public class AppConfig { @Bean public RestTemplate restTemplate() { return new RestTemplate(); } }</code></td>
+</tr>
+<tr>
+<td><code>@Bean</code></td>
+<td>Declares a Spring bean explicitly inside a <code>@Configuration</code> class.</td>
+<td><code>@Bean public RestTemplate restTemplate() { return new RestTemplate(); }</code></td>
+</tr>
+<tr>
+<td><code>@ComponentScan</code></td>
+<td>Tells Spring to scan a package for components.</td>
+<td><code>@ComponentScan(&quot;com.example&quot;)</code></td>
+</tr>
+<tr>
+<td><code>@EnableAutoConfiguration</code></td>
+<td>Enables automatic Spring Boot configuration.</td>
+<td><code>@EnableAutoConfiguration</code></td>
+</tr>
+<tr>
+<td><code>@Transactional</code></td>
+<td>Ensures that a method runs within a transaction.</td>
+<td><code>@Transactional public void transferMoney() { debitAccount(); creditAccount(); }</code></td>
+</tr>
+<tr>
+<td><code>@Cacheable</code></td>
+<td>The <code>@Cacheable</code> annotation in Spring is used to enable caching for a method. When a method annotated with <code>@Cacheable</code> is called, Spring checks if the result of the method call is already cached. If it is, Spring returns the cached result instead of executing the method again. If it is not cached, the method is executed, and the result is stored in the cache before being returned. This can significantly <strong>improve the performance of applications</strong> by reducing the number of times expensive operations, such as database queries or API calls, need to be performed.To use <code>@Cacheable</code>, you need to first enable caching in your Spring application using the <code>@EnableCaching</code> annotation. Then, you can annotate the methods you want to cache with @Cacheable</td>
+<td><code>@Service @EnableCaching public class MyService { @Cacheable(&quot;myCache&quot;) public String getData(String key) {   return data;    } }</code></td>
+</tr>
+<tr>
+<td><code>@Scheduled</code></td>
+<td><code>@Scheduled</code> is an annotation used to schedule the execution of methods at specific times or   ntervals. It's a part of Spring's task scheduling capabilities, allowing developers to automate tasks within their applications. To use <code>@Scheduled</code>, it's necessary to enable scheduling in the Spring configuration, typically by using the <code>@EnableScheduling</code> annotation.<code>@Scheduled</code> annotation offers several attributes to define the scheduling behavior:<code>fixedDelay</code>,<code>fixedRate</code>,<code>Corn</code></td>
+<td><code>@Scheduled(fixedRate = 5000) public void logTime() { System.out.println(new Date()); }</code></td>
+</tr>
+<tr>
+<td><code>@Async</code></td>
+<td>The <code>@Async</code> annotation is used to indicate that a method should be executed asynchronously in a separate thread. This allows the calling thread to continue its execution without waiting for the completion of the annotated method. It's particularly useful for long-running tasks or operations that don't require immediate results, improving application responsiveness and performance. To use <code>@Async</code>, you need to: Enable asynchronous processing by adding <code>@EnableAsync</code> to your Spring configuration class. The return type of an <code>@Async</code> method can be either <code>void</code> or <code>Future&lt;?&gt;</code></td>
+<td><code>@Async public void sendEmail() { // Asynchronous email sending logic }</code></td>
+</tr>
+<tr>
+<td><code>@PreAuthorize</code></td>
+<td>Applies method-level security based on roles.If the conditions are not met, an <code>AccessDeniedException</code> is thrown, and the method is not executed. To use <code>@PreAuthorize</code>, you first need to enable method security in your Spring configuration. This can be done by adding the <code>@EnableGlobalMethodSecurity(prePostEnabled = true)</code> annotation to a configuration class.</td>
+<td><code>@PreAuthorize(&quot;hasRole('ADMIN')&quot;) public void deleteUser() { }</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+
+      </body>
+      </html>
+    
