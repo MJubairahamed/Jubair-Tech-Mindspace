@@ -1,0 +1,171 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>AngularIntro</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Introduction</h1>
+<h3>What it is Angular?</h3>
+<ul>
+<li>Angular is an open-source framework developed by Google that uses TypeScript (Convert in JS after Compile), a JavaScript-based programming language. Angular provides a broad suite of tools, APIs, libraries, developer tools, and a component-based framework.</li>
+</ul>
+<h3>Why Angular?</h3>
+<ul>
+<li>Plain Venilla JS/Jquery is hard to maintain. Angular can help developers create scalable, maintainable, and interactive web applications more efficiently and faster. It provides a <strong>standard structure</strong> and a set of features that can help developers avoid rebuilding code from scratch.</li>
+</ul>
+<h3>Difference between AngularJs and Angular?</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>AngularJs</strong></th>
+<th><strong>Angular</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Architecture</strong></td>
+<td>AngularJS uses MVC or Model-View-Controller architecture, where the Model contains the business logic, Controller processes information and View shows the information present in the Model .</td>
+<td>Angular replaces controllers with Components. <strong>Components are nothing but directives with a predefined template</strong>.</td>
+</tr>
+<tr>
+<td><strong>Language</strong></td>
+<td>AngularJS uses JavaScript language, which is a dynamically typed language.</td>
+<td>Angular uses <strong>TypeScript</strong> language, which is a statically typed language and is a <strong>superset of JavaScript</strong>. By using statically typed language, Angular provides better performance while developing larger applications.</td>
+</tr>
+<tr>
+<td><strong>Mobile Support</strong></td>
+<td>AngularJS does not provide mobile support.</td>
+<td>Angular is supported by all popular mobile browsers.</td>
+</tr>
+</tbody>
+</table>
+<h1></h1>
+<h3>Angular Architecture Overview:</h3>
+<ul>
+<li>Angular is a component-based framework for building scalable, maintainable, and modular web applications. Its architecture is built around the following core concepts:
+<ul>
+<li><strong>Modules</strong>
+<ul>
+<li>Angular applications are modularized using <strong>NgModules</strong>.</li>
+<li>Use modules to manage application organization and code reusability.</li>
+<li>The <code>AppModule</code> is the root module.</li>
+</ul>
+</li>
+<li><strong>Components</strong>
+<ul>
+<li>The basic building blocks of the Angular framework are Angular components.</li>
+<li>Components define views, which are sets of screen elements that Angular can choose among and modify according to your program logic and data.</li>
+<li>Components use services, which provide background functionality not directly related to views such as fetching data. Such services can be injected into components as dependencies, making your code modular, reusable, and efficient.</li>
+<li>Components interact via Input and Output properties for data binding.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1></h1>
+<h3>What are the different types of Complier in Angular?</h3>
+<ul>
+<li>There are 2 types of complier
+<ul>
+<li><strong>JIT</strong> – Just in Time
+<ul>
+<li>By Default, Angular build and serves using JIT. Ex: ng build, ng serve</li>
+</ul>
+</li>
+<li><strong>AOT</strong> – Ahead of Time compilation.
+<ul>
+<li>To use AOT, Ex: <code>ng build --aot</code>, <code>ng serve --aot </code>
+<img src="/Angular/Images/AOT_JIT.png" alt="JIT AOT!" title="JIT AOT"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>The advantages of using AOT compilation are:</h3>
+<ul>
+<li>Since the application compiles before running inside the browser, the browser loads the executable code and renders the application immediately, which leads to faster rendering.</li>
+<li>In AOT compilation, the compiler sends the external HTML and CSS files along with the application, eliminating separate AJAX requests for those source files, which leads to fewer ajax requests.</li>
+<li>Developers can detect and handle errors during the building phase, which helps in minimizing errors.</li>
+<li>The AOT compiler adds HTML and templates into the JS files before they run inside the browser. Due to this, there are no extra HTML files to be read, which provide better security to the application.</li>
+</ul>
+<h3>What is a Bootstrapping in Angular?</h3>
+<ul>
+<li>Bootstrapping is the process of initializing or loading our Angular application.</li>
+<li>Angular takes the following steps to load our first view.
+<ul>
+<li>Loads <code>Index.html</code></li>
+<li>Loads Angular &amp; Third-party libraries &amp; Application</li>
+<li>Executes application entry point (<code>main.ts</code>)</li>
+<li>Load &amp; execute Root Module (<code>app.module.ts</code>)</li>
+<li>Executes the Root Component (<code>app.component.ts</code>)</li>
+<li>Displayes the template (<code>app.component.html</code>)</li>
+</ul>
+</li>
+</ul>
+<h1></h1>
+<h3>How Angular works:</h3>
+<ul>
+<li>
+<p><strong>Angular.json</strong>(Ealier angular-cli.json) :</p>
+<ul>
+<li>This file will contain all the configurations of the app. While building the app, the builder looks at this file to find the entry point of the application.</li>
+<li>Entry point of the application (<code>Main.ts</code>) is declared under build section</li>
+</ul>
+</li>
+<li>
+<p><strong>Main.ts</strong> :</p>
+<ul>
+<li>These two steps are performed in the following order inside the main.ts file:
+<ul>
+<li>The main.ts file creates a browser environment for the application to run.</li>
+<li>It also calls a function called bootstrapModule, which bootstraps the application.</li>
+<li><code>platformBrowserDynamic().bootstrapModule(AppModule)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>App Module</strong> :</p>
+<ul>
+<li>The AppModule is declared in the <strong>app.module.ts</strong> file. This module contains declarations of all the components.</li>
+</ul>
+</li>
+<li>
+<p><strong>App Component</strong> :</p>
+<ul>
+<li>This component is defined in <strong>app.component.ts</strong> file. This file interacts with the webpage and serves data to it.</li>
+<li>Each component is declared with three properties:
+<ul>
+<li><strong>Selector</strong> - used for accessing the component. It can be defined in 3 ways.
+<ul>
+<li>Element Selector : <strong><code>'app-root'</code></strong> – Then uses <code>&lt;app-root&gt;</code> in html.</li>
+<li>Attribute Selector : <strong><code>'[app-root]'</code></strong> – Then uses <code>&lt;div app-root&gt;&lt;/div&gt;</code> in html.</li>
+<li>Class Selector : <strong>'.app-root'</strong> – Then uses <code>&lt;div class=&quot;app-root&quot;&gt;&lt;/div&gt;</code> in html.</li>
+</ul>
+</li>
+<li><strong>Template/TemplateURL</strong> - Can provide inline or external template url which contains HTML of the component</li>
+<li><strong>StylesURL</strong> -Can provide inline or external css file url which contains component-specific stylesheets.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Index.html</strong> :</p>
+<ul>
+<li>This file consequently calls the root component that is app-root. The root component is defined in <strong>app.component.ts</strong>.</li>
+</ul>
+</li>
+</ul>
+
+      </body>
+      </html>
+    

@@ -1,0 +1,245 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>Component</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <h1>Component Metadata</h1>
+<h2>Anatomy of a component</h2>
+<ul>
+<li>
+<p>Every component must have:</p>
+<ul>
+<li>A <strong>TypeScript</strong> class with behaviors such as handling user input and fetching data from a server</li>
+<li>An <strong>HTML template</strong> that controls what renders into the DOM</li>
+<li>A <strong>CSS</strong> selector that defines how the component is used in HTML</li>
+</ul>
+</li>
+<li>
+<p>Provide Angular-specific information for a component by adding a @Component decorator on top of the TypeScript class.</p>
+</li>
+<li>
+<p>The object passed to the @Component decorator is called <strong>the component's metadata</strong>. This includes the selector, template, and other properties described throughout this guide.</p>
+</li>
+</ul>
+<h3>Inline template and External File template declaration</h3>
+<ul>
+<li>Inline template:<pre><code>  @Component({`
+      `selector: 'profile-photo',
+      template: '&lt;img src=&quot;profile-photo.jpg&quot; alt=&quot;Your profile photo&quot;&gt;',
+      styles: 'img { border-radius: 50%; }',
+  })
+  export class ProfilePhoto { }
+</code></pre>
+</li>
+<li>External Reference:<pre><code>@Component({
+selector: 'profile-photo',
+templateUrl: 'profile-photo.html',
+styleUrl: 'profile-photo.css',
+})
+export class ProfilePhoto { }
+</code></pre>
+</li>
+</ul>
+<h3>Imports of a component</h3>
+<ul>
+<li>To use a component, directive, or pipe, you must add it to the imports array in the @Component decorator:<code>imports: [ProfilePhoto]</code></li>
+</ul>
+<h4>Note:</h4>
+<ul>
+<li>In Angular versions prior to <strong>19.0.0</strong>, when creating a component, directive, or pipe, you had to <strong>explicitly set the standalone property to true</strong> if you wanted it to be standalone. If you didn't specify the standalone property, <strong>it would default to false</strong>, meaning the component, directive, or pipe would be considered part of an NgModule.</li>
+</ul>
+<hr>
+<h1>Selector</h1>
+<ul>
+<li><strong>Angular matches selectors statically at compile-time.</strong> Changing the DOM at run-time, either via Angular bindings or with DOM APIs, does not affect the components rendered.</li>
+<li><strong>An element can match exactly one component selector.</strong> If multiple component selectors match a single element, Angular reports an error.</li>
+<li><strong>Component selectors are case-sensitive</strong>.</li>
+</ul>
+<h3>Type of Selectors</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Selector Type</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Examples</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type selector</strong></td>
+<td>Matches elements based on their HTML tag name, or node name. .</td>
+<td>profile-photo</td>
+</tr>
+<tr>
+<td><strong>Attribute selector</strong></td>
+<td>Matches elements based on the presence of an HTML attribute and, optionally, an exact value for that attribute.</td>
+<td>[dropzone] [type=&quot;reset&quot;]</td>
+</tr>
+<tr>
+<td><strong>Class selector</strong></td>
+<td>Matches elements based on the presence of a CSS class.</td>
+<td>.menu-item</td>
+</tr>
+</tbody>
+</table>
+<h4>Notes:</h4>
+<ul>
+<li>Angular component selectors do not support <strong>combinators &amp; namespaces</strong>.</li>
+<li>Angular component selectors supports :not pseudo-class.</li>
+<li>You can combine multiple selectors by concatenating them.
+<ul>
+<li>For example, you can match &lt;button&gt; elements that specify type=&quot;reset&quot;: <code>selector: 'button[type=&quot;reset&quot;]',</code></li>
+<li>You can also define multiple selectors with a comma-separated list: <code>selector: 'drop-zone, [dropzone]'</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1>Style</h1>
+<h3>Style Scoping</h3>
+<ul>
+<li>
+<p>Every component has a view encapsulation setting that determines how the framework scopes a component's styles. There are three view encapsulation modes: Emulated, ShadowDom, and None.</p>
+<h4><strong>ViewEncapsulation.Emulated</strong></h4>
+<ul>
+<li><strong>Default Mode in Angular</strong>: Encapsulates styles so that they only apply to the component's template.</li>
+<li><strong>How it Works</strong>:
+<ul>
+<li>Angular generates a unique HTML attribute for the component.</li>
+<li>This attribute is applied to template elements and CSS selectors.</li>
+</ul>
+</li>
+<li><strong>Key Features</strong>:
+<ul>
+<li>Component styles <strong>don’t leak</strong> to other components.</li>
+<li><strong>Global styles</strong> can still affect the component.</li>
+<li>Supports <code>:host</code> and <code>:host-context()</code> pseudo-classes by transforming them into attributes (not native behavior).</li>
+<li><strong>Limitations</strong>: Does not support Shadow DOM pseudo-classes like <code>::shadow</code> or <code>::part</code>.</li>
+</ul>
+</li>
+<li><strong>Special Case - ::ng-deep</strong>:
+<ul>
+<li>Used to <strong>disable encapsulation</strong> for a CSS rule, making it global.</li>
+<li>Strongly discouraged for new development; retained only for backward compatibility.</li>
+</ul>
+</li>
+</ul>
+<h4><strong>ViewEncapsulation.ShadowDom</strong></h4>
+<ul>
+<li><strong>Uses Web Standard Shadow DOM API</strong>:
+<ul>
+<li>Styles are <strong>strictly scoped</strong> to the component.</li>
+<li>Global styles <strong>cannot affect</strong> the component, and vice versa.</li>
+</ul>
+</li>
+<li><strong>How it Works</strong>:
+<ul>
+<li>Angular attaches a <strong>shadow root</strong> to the component's host element.</li>
+<li>Template and styles are rendered in the <strong>shadow tree</strong>.</li>
+</ul>
+</li>
+<li><strong>Key Features</strong>:
+<ul>
+<li>Guarantees <strong>style isolation</strong> for the component.</li>
+<li>Affects event propagation, <code>&lt;slot&gt;</code> API behavior, and browser developer tools.</li>
+</ul>
+</li>
+</ul>
+<h4><strong>ViewEncapsulation.None</strong></h4>
+<ul>
+<li>
+<p>This mode <strong>disables all style</strong> encapsulation for the component. Any styles associated with the component behave as global styles.</p>
+</li>
+<li>
+<p><strong>Caution</strong>: Understand the implications before using Shadow DOM, as it impacts rendering and interaction.</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3><strong>Provider:</strong></h3>
+<ul>
+<li>A way to supply dependencies to components or services using Angular’s <strong>Dependency Injection (DI)</strong> system.</li>
+<li>Defines how and where an instance of a dependency (like a service) is created.</li>
+<li>Configured in a module, component, or directive using the <code>providers</code> array.
+<ul>
+<li><strong>Example</strong>:</li>
+</ul>
+<pre><code class="language-typescript">        @Component({
+            selector: 'app-example',
+            providers: [MyService] // Provides a new instance of MyService for this component
+        })
+        export class ExampleComponent {}
+</code></pre>
+<ul>
+<li><strong>Scopes</strong>:
+<ul>
+<li><strong>Module-level</strong>: Shared across all components in a module.</li>
+<li><strong>Component-level</strong>: Each component gets its own instance of the service.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3><strong>View Provider:</strong></h3>
+<ul>
+<li>A specialized form of a provider, configured using the <code>viewProviders</code> array, to supply dependencies <strong>only to the component's view</strong> (<strong>not its content children</strong>).</li>
+<li>Used when you want a dependency to be available for the template of the component but not for components projected into it.</li>
+<li><strong>Example</strong>:<pre><code class="language-typescript">@Component({
+    selector: 'app-example',
+    viewProviders: [MyService] // Service available only to this component’s view
+})
+export class ExampleComponent {}
+</code></pre>
+</li>
+</ul>
+<hr>
+<h3><strong>Change Detection</strong></h3>
+<ul>
+<li>The process Angular uses to track changes in the application and update the DOM (UI) accordingly.</li>
+<li>Angular creates a <strong>Change Detection Tree</strong> for the application.</li>
+<li>When a change occurs (e.g., a user event or data update), Angular checks the component tree to identify what needs to be updated.
+- <strong>Strategies</strong>:
+<ol>
+<li><strong>Default</strong>:
+<ul>
+<li>Checks every component in the change detection tree.</li>
+<li>Suitable for most use cases.</li>
+</ul>
+</li>
+<li><strong>OnPush</strong>:
+<ul>
+<li>Optimizes performance by skipping checks for a component unless:</li>
+<li>Input properties change (by reference).</li>
+<li>An event bound to the component is triggered.</li>
+<li>Used for components with immutable data structures.</li>
+<li>Example:</li>
+</ul>
+<pre><code class="language-typescript">@Component({
+    selector: 'app-optimized',
+    changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class OptimizedComponent {}
+</code></pre>
+</li>
+</ol>
+</li>
+</ul>
+<pre><code>- **Common Scenarios**:
+- Default strategy is used for dynamic, frequently updated components.
+- OnPush is preferred for high-performance and static data scenarios.
+</code></pre>
+<hr>
+
+      </body>
+      </html>
+    
