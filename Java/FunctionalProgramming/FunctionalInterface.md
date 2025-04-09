@@ -59,3 +59,8 @@
 - An infinite number of methods (whether **static or default) can be added to the functional interface. In simple words, there is no limit to a functional interface containing static and default methods.
 - **Overriding methods** from the parent class do not violate the rules of a functional interface in Java.
 - The **java.util.function** package contains many built-in functional interfaces in Java 8.
+
+### FAQ's
+- Can a functional interface extend/inherit another interface?
+    - A functional interface **cannot extend another interface with abstract methods** as it will void the rule of one abstract method per functional interface.
+    - 

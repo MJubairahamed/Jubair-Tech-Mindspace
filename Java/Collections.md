@@ -1,7 +1,4 @@
-**30 Java Collections Framework questions** 
----
-
-### **Core Concepts**  
+### **Collections Core Concepts**  
 
 1. **What is the Java Collections Framework, and why is it used?**  
    - The **Java Collections Framework (JCF)** is a set of classes and interfaces that provides a standard way to store, manipulate, and retrieve groups of objects efficiently.  
