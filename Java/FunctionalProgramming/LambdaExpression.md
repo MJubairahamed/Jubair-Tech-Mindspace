@@ -1,6 +1,7 @@
 # Lambda Notes
 ### **What is Lambda Expression in Java**  
 - Lambda expression is an **anonymous** function that provides a clear and concise way to represent a method interface.
+- It is beneficial in iterating, filtering, and extracting data from a collection.It may or may not have results and parameters.
 - Lambda expressions work only with Functional Interfaces (interfaces with a single abstract method).
     - ```java 
         @FunctionalInterface

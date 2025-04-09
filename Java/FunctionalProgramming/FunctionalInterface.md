@@ -40,6 +40,21 @@
      - BiPredicate -It accepts two arguments and returns a boolean result.
      - BiFunction -It accepts two arguments and returns a result.
 
+### What are static methods in Interfaces?
+- **Static methods**, which contains method implementation is owned by the interface and is invoked using the name of the interface, it is suitable for defining the utility methods and cannot be overridden.
+
+### What is the default method, and why is it required?
+- In Java, a "default method" allows interfaces to have methods with implementations, enabling the addition of new methods to interfaces without breaking existing implementations of those interfaces.
+- This is required to maintain backward compatibility and allow for evolving interfaces without forcing all implementing classes to recompile and update. 
+- Example:
+    ```java     
+    interface MyInterface {
+        void abstractMethod(); // Abstract method
+        default void defaultMethod() { // Default method
+            System.out.println("Default implementation");
+        }
+    }
+    ```
 ### Important Points:
 - An infinite number of methods (whether **static or default) can be added to the functional interface. In simple words, there is no limit to a functional interface containing static and default methods.
 - **Overriding methods** from the parent class do not violate the rules of a functional interface in Java.
