@@ -12,12 +12,10 @@
    </style>  
 </head>
 <body>
-  <h1>OOPS Concepts</h1>
+  <p>&lt;h1 style=&quot;text-align: center;&quot;&gt;OOPS Concepts&lt;/h1&gt;</p>
 <h2>What is OOPS?</h2>
 <ul>
-<li>Unstructured Programming Languages - The most primitive of all programming languages having sequentially flow of control.  Code is repeated throughout the program.</li>
-<li>Structured Programming Languages - Has non-sequentially flow of control. Use of functions allows for re-use of code.</li>
-<li>Object Oriented Programming: Combines Data &amp; Action Together.</li>
+<li><strong>Object-Oriented Programming (OOPs)</strong> is a programming style that <strong>organizes code using objects</strong>, which combine data (variables) and behavior (methods) into a single unit.</li>
 </ul>
 <h2>Principle Concepts OOPS</h2>
 <ul>
@@ -36,30 +34,38 @@
 <li>
 <p><strong>Abstraction :</strong></p>
 <ul>
-<li>Representing essential features without including the background details or explanations.</li>
-<li>Abstract class must be <strong>extended/subclassed (to be useful)</strong>. It serves as a template.</li>
-<li>A class that is abstract may not be instantiated (ie. you may not call its constructor), abstract class may contain static data.</li>
-<li>An abstract class may also have concrete (complete) methods.</li>
-<li>For design purpose, a class can be declared abstract even if it does not contain any abstract methods.</li>
-<li>Reference of an abstract class can point to objects of its sub-classes thereby achieving run-time polymorphism
+<li>Representing essential features without including the background details or explanations.Or Hiding internal implementation and showing only necessary details to the user.</li>
+<li>Abstract class
 <ul>
-<li><code>Ex: Shape obj = new Rectangle();</code></li>
+<li>Abstract class must be <strong>extended/subclassed (to be useful)</strong>. It serves as a template.</li>
+<li>A class that is abstract may not be instantiated, abstract class may contain static data.</li>
+<li>A class can be declared abstract even if it does not contain any abstract methods.</li>
+<li>A class must be compulsorily labeled abstract, if it has one or more abstract methods.</li>
+<li>Example:</li>
 </ul>
+<pre><code class="language-java">    abstract class Animal {
+        abstract void sound();  // Abstract method (no body)
+
+        void sleep() {
+            System.out.println(&quot;Sleeping...&quot;);
+        }
+    }
+
+    class Dog extends Animal {
+        void sound() {
+            System.out.println(&quot;Barks&quot;);
+        }
+    }       
+</code></pre>
 </li>
-<li>A class must be compulsorily labeled abstract , if it has one or more abstract methods.</li>
-<li>Example:
-<code>Rectangle obj = new Rectangle();//An object of the class rectangle, will gives a rectangle.</code>
-<code>Triangle obj = new Triangle();//An object of the class triangle, will gives a triangle.</code>
-<code>Shape obj = new Shape();// Parent Class to above.An shape object gives?Here we have to declare a class a abstract.</code>
-<code>abstract public void calcArea(); //no implementation required.</code></li>
 </ul>
 </li>
 <li>
 <p><strong>Encapsulation :</strong></p>
 <ul>
-<li>Encapsulation is a technique used for <strong>hiding the properties and behaviours of an object and allowing outside access only as appropriate</strong>. It prevents other objects from directly altering or accessing the properties or methods of the encapsulated object.</li>
+<li>Encapsulation means <strong>hiding the properties and behaviours of an object andprotecting data by making it accessible only through getter and setter methods.</strong>. It prevents other objects from directly altering or accessing the properties or methods of the encapsulated object.</li>
+<li>Hiding internal details and showing only what’s necessary.</li>
 <li>Although a lesser degree of encapsulation can be achieved by making the members public or protected.</li>
-<li>Encapsulation helps the developer to make the code more flexible and maintainable by binding related data in a single unit and access/restrict that using appropriate access modifier. With well encapsulation implementation, one can change one part of the code easily without affecting the other part of the code.</li>
 </ul>
 </li>
 <li>
@@ -306,11 +312,6 @@
 <blockquote>
 <p>&quot;Static polymorphism improves code readability with overloading, while dynamic polymorphism enhances extensibility through overriding. Mastery of both is key to designing scalable and flexible object-oriented systems.&quot;</p>
 </blockquote>
-<h2>What is Data hiding?</h2>
-<ul>
-<li>Data hiding in Java is a way to protect the internal details of a class by keeping its data (like variables) private and providing only public methods (functions) to access or change that data. This helps prevent others from directly changing the data in unexpected ways and keeps the inner workings of the class safe and controlled.</li>
-<li>It's like hiding your valuables in a locked box and only letting others use a key to access or change them through a controlled opening.</li>
-</ul>
 
 </body>
 </html>

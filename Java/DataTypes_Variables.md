@@ -1,4 +1,6 @@
-# Data Types & Variables  
+<h1 style="text-align: center;">Data Types & Variables</h1>
+--
+
 ## Data Types
 ### Basic Data Types in Java: 
 - There are two types of data types in Java: 
@@ -59,7 +61,8 @@
 
 
 ### Java ENUM
-- In Java, an enum (short for enumeration) is a **special data type** that represents a group of named constants. It is used to define a set of related values, making code more readable and maintainable. Each value in an enum is an **object**, and the **enum itself is a class**.
+- In Java, an enum (short for enumeration) is a **special data type** that represents a group of named constants.
+- It is used to define a set of related values, making code more readable and maintainable. Each value in an enum is an **object**, and the **enum itself is a class**.
 - enum constants are public, static and final (unchangeable - cannot be overridden).
 - An enum cannot be used to create objects, and it cannot extend other classes.
  ```java  

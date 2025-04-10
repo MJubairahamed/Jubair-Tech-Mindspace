@@ -1,9 +1,8 @@
-# OOPS Concepts
+<h1 style="text-align: center;">OOPS Concepts</h1>
+--
 
 ## What is OOPS?
-- Unstructured Programming Languages - The most primitive of all programming languages having sequentially flow of control.  Code is repeated throughout the program.
-- Structured Programming Languages - Has non-sequentially flow of control. Use of functions allows for re-use of code.
-- Object Oriented Programming: Combines Data & Action Together.
+- **Object-Oriented Programming (OOPs)** is a programming style that **organizes code using objects**, which combine data (variables) and behavior (methods) into a single unit.
 
 ## Principle Concepts OOPS  
 - Abstraction
@@ -12,25 +11,34 @@
 - Inheritance
 
 - **Abstraction :**
-    - Representing essential features without including the background details or explanations.
-    - Abstract class must be **extended/subclassed (to be useful)**. It serves as a template. 
-    - A class that is abstract may not be instantiated (ie. you may not call its constructor), abstract class may contain static data.
-    - An abstract class may also have concrete (complete) methods.
-    - For design purpose, a class can be declared abstract even if it does not contain any abstract methods.
-    - Reference of an abstract class can point to objects of its sub-classes thereby achieving run-time polymorphism
-       -  `Ex: Shape obj = new Rectangle();`
-    - A class must be compulsorily labeled abstract , if it has one or more abstract methods.   
-    - Example: 
-        `Rectangle obj = new Rectangle();//An object of the class rectangle, will gives a rectangle.`
-        `Triangle obj = new Triangle();//An object of the class triangle, will gives a triangle.`
-        `Shape obj = new Shape();// Parent Class to above.An shape object gives?Here we have to declare a class a abstract.`
-        `abstract public void calcArea(); //no implementation required.`
+    - Representing essential features without including the background details or explanations.Or Hiding internal implementation and showing only necessary details to the user.
+    - Abstract class
+        - Abstract class must be **extended/subclassed (to be useful)**. It serves as a template. 
+        - A class that is abstract may not be instantiated, abstract class may contain static data.
+        - A class can be declared abstract even if it does not contain any abstract methods.  
+        - A class must be compulsorily labeled abstract, if it has one or more abstract methods.   
+        - Example: 
+        ``` java
+            abstract class Animal {
+                abstract void sound();  // Abstract method (no body)
+
+                void sleep() {
+                    System.out.println("Sleeping...");
+                }
+            }
+
+            class Dog extends Animal {
+                void sound() {
+                    System.out.println("Barks");
+                }
+            }       
+        ```
 
 - **Encapsulation :**   
-    - Encapsulation is a technique used for **hiding the properties and behaviours of an object and allowing outside access only as appropriate**. It prevents other objects from directly altering or accessing the properties or methods of the encapsulated object.
-    - Although a lesser degree of encapsulation can be achieved by making the members public or protected.
-    - Encapsulation helps the developer to make the code more flexible and maintainable by binding related data in a single unit and access/restrict that using appropriate access modifier. With well encapsulation implementation, one can change one part of the code easily without affecting the other part of the code.
-
+    - Encapsulation means **hiding the properties and behaviours of an object andprotecting data by making it accessible only through getter and setter methods.**. It prevents other objects from directly altering or accessing the properties or methods of the encapsulated object.
+    - Hiding internal details and showing only what’s necessary.        
+    - Although a lesser degree of encapsulation can be achieved by making the members public or protected.    
+    
 - **Polymorphism :** 
     - An **object to have more than one form**.
     - Inheritance, Overloading and Overriding are used to achieve Polymorphism in java.
@@ -118,7 +126,3 @@ Here's a **simple and effective table** to explain the **difference between Stat
 
 ### 🧠 Interview Tip :
 > "Static polymorphism improves code readability with overloading, while dynamic polymorphism enhances extensibility through overriding. Mastery of both is key to designing scalable and flexible object-oriented systems."
-
-## What is Data hiding?
-* Data hiding in Java is a way to protect the internal details of a class by keeping its data (like variables) private and providing only public methods (functions) to access or change that data. This helps prevent others from directly changing the data in unexpected ways and keeps the inner workings of the class safe and controlled.
-* It's like hiding your valuables in a locked box and only letting others use a key to access or change them through a controlled opening.

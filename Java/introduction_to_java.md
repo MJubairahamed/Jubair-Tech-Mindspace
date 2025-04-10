@@ -1,4 +1,6 @@
-# Introduction
+<h1 style="text-align: center;">Introduction</h1>
+--
+
 ## What is JDK, JRE and JVM?
 ### JDK (Java Development Kit)
 * Used for developing Java programs (writing and compiling).
