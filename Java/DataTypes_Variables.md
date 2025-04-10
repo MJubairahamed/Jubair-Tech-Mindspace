@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">Data Types & Variables</h1>
+# Data Types & Variables
 --
 
 ## Data Types

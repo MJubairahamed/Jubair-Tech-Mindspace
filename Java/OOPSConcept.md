@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">OOPS Concepts</h1>
+# OOPS Concepts
 --
 
 ## What is OOPS?

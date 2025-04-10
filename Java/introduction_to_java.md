@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">Introduction</h1>
+# Basic Java Concepts
 --
 
 ## What is JDK, JRE and JVM?

@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">String</h1>
+# String Concepts
 --
 
 - **Definition**: **String** is a built-in class representing sequences of characters.  
