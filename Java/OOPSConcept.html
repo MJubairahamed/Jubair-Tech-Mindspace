@@ -13,8 +13,8 @@
 </head>
 <body>
   <h1>OOPS Concepts</h1>
+<h2>What is OOPS?</h2>
 <ul>
-<li></li>
 <li>Unstructured Programming Languages - The most primitive of all programming languages having sequentially flow of control.  Code is repeated throughout the program.</li>
 <li>Structured Programming Languages - Has non-sequentially flow of control. Use of functions allows for re-use of code.</li>
 <li>Object Oriented Programming: Combines Data &amp; Action Together.</li>
@@ -22,42 +22,42 @@
 <h2>Principle Concepts OOPS</h2>
 <ul>
 <li>
-<p><strong>Abstraction</strong></p>
+<p>Abstraction</p>
 </li>
 <li>
-<p><strong>Encapsulation</strong></p>
+<p>Encapsulation</p>
 </li>
 <li>
-<p><strong>Polymorphism</strong></p>
+<p>Polymorphism</p>
 </li>
 <li>
-<p><strong>Inheritance</strong></p>
+<p>Inheritance</p>
 </li>
 <li>
 <p><strong>Abstraction :</strong></p>
 <ul>
 <li>Representing essential features without including the background details or explanations.</li>
-<li>Abstract class must be extended/subclassed (to be useful). It serves as a template.</li>
+<li>Abstract class must be <strong>extended/subclassed (to be useful)</strong>. It serves as a template.</li>
 <li>A class that is abstract may not be instantiated (ie. you may not call its constructor), abstract class may contain static data.</li>
 <li>An abstract class may also have concrete (complete) methods.</li>
 <li>For design purpose, a class can be declared abstract even if it does not contain any abstract methods.</li>
 <li>Reference of an abstract class can point to objects of its sub-classes thereby achieving run-time polymorphism
-<code>Ex: Shape obj = new Rectangle();</code></li>
-<li>A class must be compulsorily labeled abstract , if it has one or more abstract methods.</li>
-<li>Example:
 <ul>
-<li><code>Rectangle obj = new Rectangle();//An object of the class rectangle, will gives a rectangle.</code></li>
-<li><code>Triangle obj = new Triangle();//An object of the class triangle, will gives a triangle.</code></li>
-<li><code>Shape obj = new Shape();// Parent Class to above.An shape object gives?Here we have to declare a class a abstract.</code></li>
-<li><code>abstract public void calcArea(); //no implementation required.</code></li>
+<li><code>Ex: Shape obj = new Rectangle();</code></li>
 </ul>
 </li>
+<li>A class must be compulsorily labeled abstract , if it has one or more abstract methods.</li>
+<li>Example:
+<code>Rectangle obj = new Rectangle();//An object of the class rectangle, will gives a rectangle.</code>
+<code>Triangle obj = new Triangle();//An object of the class triangle, will gives a triangle.</code>
+<code>Shape obj = new Shape();// Parent Class to above.An shape object gives?Here we have to declare a class a abstract.</code>
+<code>abstract public void calcArea(); //no implementation required.</code></li>
 </ul>
 </li>
 <li>
 <p><strong>Encapsulation :</strong></p>
 <ul>
-<li>Encapsulation is a technique used for hiding the properties and behaviours of an object and allowing outside access only as appropriate. It prevents other objects from directly altering or accessing the properties or methods of the encapsulated object.</li>
+<li>Encapsulation is a technique used for <strong>hiding the properties and behaviours of an object and allowing outside access only as appropriate</strong>. It prevents other objects from directly altering or accessing the properties or methods of the encapsulated object.</li>
 <li>Although a lesser degree of encapsulation can be achieved by making the members public or protected.</li>
 <li>Encapsulation helps the developer to make the code more flexible and maintainable by binding related data in a single unit and access/restrict that using appropriate access modifier. With well encapsulation implementation, one can change one part of the code easily without affecting the other part of the code.</li>
 </ul>
@@ -65,9 +65,9 @@
 <li>
 <p><strong>Polymorphism :</strong></p>
 <ul>
-<li>An object to have more than one form.</li>
+<li>An <strong>object to have more than one form</strong>.</li>
 <li>Inheritance, Overloading and Overriding are used to achieve Polymorphism in java.</li>
-<li>There are two types of polymorphism one is <strong>Compile time polymorphism</strong> and the other is <strong>run time polymorphism</strong>.
+<li>There are two types of polymorphism, one is <strong>Compile time polymorphism</strong> and the other is <strong>run time polymorphism</strong>.
 <ul>
 <li><strong>Dynamic or Runtime Polymorphism</strong>
 <ul>
@@ -87,7 +87,7 @@
 <li>
 <p><strong>Inheritance :</strong></p>
 <ul>
-<li>When a “Is-A” relationship exists between two classes we use Inheritance.</li>
+<li>When a <strong>“Is-A”</strong> relationship exists between two classes we use Inheritance.</li>
 <li>The parent class is termed super class and the inherited class is the sub class&gt;.</li>
 <li>The keyword extends is used by the sub class to inherit the features of super class.</li>
 <li>Inheritance is important since it leads to reusability of code.</li>
@@ -112,7 +112,7 @@
 </ul>
 </li>
 <li>
-<p><strong>Method OverLoading :</strong></p>
+<p><strong>Interface:</strong></p>
 <ul>
 <li>The class which implements the interface needs to provide functionality for the methods declared in the interface.</li>
 <li>All methods in an interface are implicitly public and abstract.</li>

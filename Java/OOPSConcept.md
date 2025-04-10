@@ -1,39 +1,40 @@
 # OOPS Concepts
--
+
+## What is OOPS?
 - Unstructured Programming Languages - The most primitive of all programming languages having sequentially flow of control.  Code is repeated throughout the program.
 - Structured Programming Languages - Has non-sequentially flow of control. Use of functions allows for re-use of code.
 - Object Oriented Programming: Combines Data & Action Together.
 
 ## Principle Concepts OOPS  
-- **Abstraction**
-- **Encapsulation**
-- **Polymorphism**
-- **Inheritance**
+- Abstraction
+- Encapsulation
+- Polymorphism
+- Inheritance
 
 - **Abstraction :**
     - Representing essential features without including the background details or explanations.
-    - Abstract class must be extended/subclassed (to be useful). It serves as a template. 
+    - Abstract class must be **extended/subclassed (to be useful)**. It serves as a template. 
     - A class that is abstract may not be instantiated (ie. you may not call its constructor), abstract class may contain static data.
     - An abstract class may also have concrete (complete) methods.
     - For design purpose, a class can be declared abstract even if it does not contain any abstract methods.
     - Reference of an abstract class can point to objects of its sub-classes thereby achieving run-time polymorphism
-        `Ex: Shape obj = new Rectangle();`
+       -  `Ex: Shape obj = new Rectangle();`
     - A class must be compulsorily labeled abstract , if it has one or more abstract methods.   
     - Example: 
-        - `Rectangle obj = new Rectangle();//An object of the class rectangle, will gives a rectangle.`
-        - `Triangle obj = new Triangle();//An object of the class triangle, will gives a triangle.`
-        - `Shape obj = new Shape();// Parent Class to above.An shape object gives?Here we have to declare a class a abstract.`
-        - `abstract public void calcArea(); //no implementation required.`
+        `Rectangle obj = new Rectangle();//An object of the class rectangle, will gives a rectangle.`
+        `Triangle obj = new Triangle();//An object of the class triangle, will gives a triangle.`
+        `Shape obj = new Shape();// Parent Class to above.An shape object gives?Here we have to declare a class a abstract.`
+        `abstract public void calcArea(); //no implementation required.`
 
 - **Encapsulation :**   
-    - Encapsulation is a technique used for hiding the properties and behaviours of an object and allowing outside access only as appropriate. It prevents other objects from directly altering or accessing the properties or methods of the encapsulated object.
+    - Encapsulation is a technique used for **hiding the properties and behaviours of an object and allowing outside access only as appropriate**. It prevents other objects from directly altering or accessing the properties or methods of the encapsulated object.
     - Although a lesser degree of encapsulation can be achieved by making the members public or protected.
     - Encapsulation helps the developer to make the code more flexible and maintainable by binding related data in a single unit and access/restrict that using appropriate access modifier. With well encapsulation implementation, one can change one part of the code easily without affecting the other part of the code.
 
 - **Polymorphism :** 
-    - An object to have more than one form.
+    - An **object to have more than one form**.
     - Inheritance, Overloading and Overriding are used to achieve Polymorphism in java.
-    - There are two types of polymorphism one is **Compile time polymorphism** and the other is **run time polymorphism**.
+    - There are two types of polymorphism, one is **Compile time polymorphism** and the other is **run time polymorphism**.
         - **Dynamic or Runtime Polymorphism**
             - The process in which a call to an overridden method is resolved at runtime rather than compile-time.
             - A reference variable of the super class can refer to a sub class object   
@@ -44,7 +45,7 @@
             - This is decided during run-time and hence termed dynamic or run-time polymorphism.
 
 - **Inheritance :** 
-    - When a “Is-A” relationship exists between two classes we use Inheritance.
+    - When a **“Is-A”** relationship exists between two classes we use Inheritance.
     - The parent class is termed super class and the inherited class is the sub class>.
     - The keyword extends is used by the sub class to inherit the features of super class.
     - Inheritance is important since it leads to reusability of code.
@@ -58,7 +59,7 @@
 - **Method OverLoading :** 
     - Overloading in java occurs when methods in a same class or in child classes shares a same name with a ‘difference in number of arguments’ or ‘difference in argument type’ or both.
    
-- **Method OverLoading :** 
+- **Interface:** 
     - The class which implements the interface needs to provide functionality for the methods declared in the interface.
     - All methods in an interface are implicitly public and abstract.
     - An interface cannot be instantiated.
