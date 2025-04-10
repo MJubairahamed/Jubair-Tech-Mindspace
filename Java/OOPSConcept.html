@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OOPSConcept</title>
+   <style>
+       body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+       h1, h2, h3 { color: #2c3e50; }
+       pre { background: #eee; padding: 1rem; overflow-x: auto; }
+       code { color: #d63384; }
+   </style>  
+</head>
+<body>
+  <h1>OOPS Concepts</h1>
+<ul>
+<li></li>
+<li>Unstructured Programming Languages - The most primitive of all programming languages having sequentially flow of control.  Code is repeated throughout the program.</li>
+<li>Structured Programming Languages - Has non-sequentially flow of control. Use of functions allows for re-use of code.</li>
+<li>Object Oriented Programming: Combines Data &amp; Action Together.</li>
+</ul>
+<h2>Principle Concepts OOPS</h2>
+<ul>
+<li>
+<p><strong>Abstraction</strong></p>
+</li>
+<li>
+<p><strong>Encapsulation</strong></p>
+</li>
+<li>
+<p><strong>Polymorphism</strong></p>
+</li>
+<li>
+<p><strong>Inheritance</strong></p>
+</li>
+<li>
+<p><strong>Abstraction :</strong></p>
+<ul>
+<li>Representing essential features without including the background details or explanations.</li>
+<li>Abstract class must be extended/subclassed (to be useful). It serves as a template.</li>
+<li>A class that is abstract may not be instantiated (ie. you may not call its constructor), abstract class may contain static data.</li>
+<li>An abstract class may also have concrete (complete) methods.</li>
+<li>For design purpose, a class can be declared abstract even if it does not contain any abstract methods.</li>
+<li>Reference of an abstract class can point to objects of its sub-classes thereby achieving run-time polymorphism
+<code>Ex: Shape obj = new Rectangle();</code></li>
+<li>A class must be compulsorily labeled abstract , if it has one or more abstract methods.</li>
+<li>Example:
+<ul>
+<li><code>Rectangle obj = new Rectangle();//An object of the class rectangle, will gives a rectangle.</code></li>
+<li><code>Triangle obj = new Triangle();//An object of the class triangle, will gives a triangle.</code></li>
+<li><code>Shape obj = new Shape();// Parent Class to above.An shape object gives?Here we have to declare a class a abstract.</code></li>
+<li><code>abstract public void calcArea(); //no implementation required.</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Encapsulation :</strong></p>
+<ul>
+<li>Encapsulation is a technique used for hiding the properties and behaviours of an object and allowing outside access only as appropriate. It prevents other objects from directly altering or accessing the properties or methods of the encapsulated object.</li>
+<li>Although a lesser degree of encapsulation can be achieved by making the members public or protected.</li>
+<li>Encapsulation helps the developer to make the code more flexible and maintainable by binding related data in a single unit and access/restrict that using appropriate access modifier. With well encapsulation implementation, one can change one part of the code easily without affecting the other part of the code.</li>
+</ul>
+</li>
+<li>
+<p><strong>Polymorphism :</strong></p>
+<ul>
+<li>An object to have more than one form.</li>
+<li>Inheritance, Overloading and Overriding are used to achieve Polymorphism in java.</li>
+<li>There are two types of polymorphism one is <strong>Compile time polymorphism</strong> and the other is <strong>run time polymorphism</strong>.
+<ul>
+<li><strong>Dynamic or Runtime Polymorphism</strong>
+<ul>
+<li>The process in which a call to an overridden method is resolved at runtime rather than compile-time.</li>
+<li>A reference variable of the super class can refer to a sub class object</li>
+<li><code>Doctor obj = new Surgeon(); obj.treatPatient();</code></li>
+<li>Here the reference variable “obj” is of the parent class , but the object it is pointing to is of the child class.</li>
+<li><code>obj.treatPatient()</code> will execute treatPatient() method of the sub-class – Surgeon.</li>
+<li>If a base class reference is used to call a method, the method to be invoked is decided by the JVM, depending on the object the reference is pointing to.</li>
+<li>This is decided during run-time and hence termed dynamic or run-time polymorphism.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Inheritance :</strong></p>
+<ul>
+<li>When a “Is-A” relationship exists between two classes we use Inheritance.</li>
+<li>The parent class is termed super class and the inherited class is the sub class&gt;.</li>
+<li>The keyword extends is used by the sub class to inherit the features of super class.</li>
+<li>Inheritance is important since it leads to reusability of code.</li>
+</ul>
+</li>
+<li>
+<p><strong>Method Overriding :</strong></p>
+<ul>
+<li>Redefining a super class method in a sub class is called method overriding.</li>
+<li>Rules for Method Overriding
+<ul>
+<li>The method signature i.e. method name, parameter list and return type have to match exactly.</li>
+<li>The overridden method can widen the accessibility but not narrow it, i.e. if it is private in the base class, the child class can make it public but not vice versa.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Method OverLoading :</strong></p>
+<ul>
+<li>Overloading in java occurs when methods in a same class or in child classes shares a same name with a ‘difference in number of arguments’ or ‘difference in argument type’ or both.</li>
+</ul>
+</li>
+<li>
+<p><strong>Method OverLoading :</strong></p>
+<ul>
+<li>The class which implements the interface needs to provide functionality for the methods declared in the interface.</li>
+<li>All methods in an interface are implicitly public and abstract.</li>
+<li>An interface cannot be instantiated.</li>
+<li>An interface reference can point to objects of its implementing classes.</li>
+<li>An interface can extend from one or many interfaces. A class can extend only one class but implement any number of interfaces.</li>
+</ul>
+</li>
+</ul>
+<h3>**Abstraction vs Encapsulation **</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Aspect</strong></th>
+<th><strong>Abstraction</strong></th>
+<th><strong>Encapsulation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definition</strong></td>
+<td>Hiding <strong>implementation details</strong> and showing only <strong>essential features</strong></td>
+<td>Wrapping <strong>data and code together</strong> and <strong>restricting direct access</strong></td>
+</tr>
+<tr>
+<td><strong>Goal</strong></td>
+<td>Focus on <strong>what the object does</strong></td>
+<td>Focus on <strong>how data is protected</strong></td>
+</tr>
+<tr>
+<td><strong>Example</strong></td>
+<td>Using a <code>List</code> interface without knowing if it’s backed by <code>ArrayList</code> or <code>LinkedList</code></td>
+<td>Making fields <code>private</code> and accessing them via <code>getters/setters</code></td>
+</tr>
+<tr>
+<td><strong>Used for</strong></td>
+<td>Simplifying complexity for the user</td>
+<td>Protecting data from unwanted changes</td>
+</tr>
+<tr>
+<td><strong>Access</strong></td>
+<td>Achieved via <strong>abstract classes, interfaces</strong></td>
+<td>Achieved via <strong>access modifiers</strong> (<code>private</code>, <code>public</code>, etc.)</td>
+</tr>
+<tr>
+<td><strong>Real-world analogy</strong></td>
+<td>Driving a car without knowing how the engine works</td>
+<td>Keeping the engine locked so no one can tamper with its internals</td>
+</tr>
+<tr>
+<td><strong>Benefit</strong></td>
+<td>Promotes <strong>loose coupling</strong>, reusability</td>
+<td>Promotes <strong>data hiding</strong>, security</td>
+</tr>
+<tr>
+<td><strong>When to Use</strong></td>
+<td>When you want to <strong>hide complexity and expose functionalities</strong></td>
+<td>When you want to <strong>safeguard internal state of objects</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>🧠 Interview Tip:</h3>
+<blockquote>
+<p>&quot;Abstraction is about <strong>hiding the 'how'</strong> and showing only the <strong>'what'</strong>. Encapsulation is about <strong>hiding the data</strong> to protect it. Both are core OOP principles and work best <strong>together</strong> to create clean, modular, and secure code.&quot;</p>
+</blockquote>
+<h3><strong>Abstract Class vs Interface</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Aspect</strong></th>
+<th><strong>Abstract Class</strong></th>
+<th><strong>Interface</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definition</strong></td>
+<td>A class that can have <strong>abstract and non-abstract methods</strong></td>
+<td>A contract with <strong>abstract methods (default/static allowed)</strong></td>
+</tr>
+<tr>
+<td><strong>Purpose</strong></td>
+<td>Used when classes share <strong>common behavior</strong></td>
+<td>Used to define <strong>capability/contract</strong></td>
+</tr>
+<tr>
+<td><strong>Keyword</strong></td>
+<td><code>abstract class</code></td>
+<td><code>interface</code></td>
+</tr>
+<tr>
+<td><strong>Inheritance Type</strong></td>
+<td>Supports <strong>single inheritance</strong></td>
+<td>Supports <strong>multiple inheritance</strong> (via multiple interfaces)</td>
+</tr>
+<tr>
+<td><strong>Access Modifiers</strong></td>
+<td>Can have <strong>private, protected, public</strong> methods and fields</td>
+<td>Only <strong>public</strong> methods (by default), fields are <code>public static final</code></td>
+</tr>
+<tr>
+<td><strong>Constructors</strong></td>
+<td>✔ Can have constructors</td>
+<td>❌ Cannot have constructors</td>
+</tr>
+<tr>
+<td><strong>State (fields/vars)</strong></td>
+<td>✔ Can have instance variables</td>
+<td>❌ Cannot have instance variables (only constants)</td>
+</tr>
+<tr>
+<td><strong>Default Implementation</strong></td>
+<td>✔ Can provide method implementation</td>
+<td>✔ Can provide <code>default</code> and <code>static</code> method implementations (since Java 8)</td>
+</tr>
+<tr>
+<td><strong>When to Use</strong></td>
+<td>When you need a <strong>base class with shared code</strong></td>
+<td>When you need to define <strong>common capabilities</strong> across unrelated classes</td>
+</tr>
+<tr>
+<td><strong>Real-world analogy</strong></td>
+<td>A <strong>partially built blueprint</strong> used by subclasses</td>
+<td>A <strong>contract</strong> that classes agree to follow</td>
+</tr>
+</tbody>
+</table>
+<h3>🧠 Interview Tip :</h3>
+<blockquote>
+<p>&quot;Use an abstract class when you want to share code among closely related classes. Use an interface when you expect unrelated classes to implement a common set of behaviors. Thanks to Java 8+, interfaces can now include default methods, but abstract classes still offer more structure like constructors and state.&quot;</p>
+</blockquote>
+<p>Here's a <strong>simple and effective table</strong> to explain the <strong>difference between Static Polymorphism and Dynamic Polymorphism</strong>, tailored for <strong>senior software engineer interviews</strong>:</p>
+<h3><strong>Static vs Dynamic Polymorphism</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Aspect</strong></th>
+<th><strong>Static Polymorphism</strong> (Compile-time)</th>
+<th><strong>Dynamic Polymorphism</strong> (Run-time)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Also Known As</strong></td>
+<td>Method Overloading</td>
+<td>Method Overriding</td>
+</tr>
+<tr>
+<td><strong>When is it Resolved?</strong></td>
+<td>At <strong>compile time</strong></td>
+<td>At <strong>run time</strong></td>
+</tr>
+<tr>
+<td><strong>How it Works</strong></td>
+<td>Based on <strong>method signature</strong> (name + parameters)</td>
+<td>Based on <strong>object type</strong> at runtime</td>
+</tr>
+<tr>
+<td><strong>Flexibility</strong></td>
+<td>Less flexible – method to call is fixed at compile time</td>
+<td>More flexible – behavior decided dynamically</td>
+</tr>
+<tr>
+<td><strong>Inheritance Required?</strong></td>
+<td>❌ Not required</td>
+<td>✔ Required – typically via superclass and subclass</td>
+</tr>
+<tr>
+<td><strong>Performance</strong></td>
+<td>Slightly <strong>faster</strong> (resolved early)</td>
+<td>Slightly <strong>slower</strong> (resolved at runtime via virtual table)</td>
+</tr>
+<tr>
+<td><strong>Real-world analogy</strong></td>
+<td>A calculator with <strong>buttons for each operation</strong></td>
+<td>A remote that behaves <strong>differently with different TVs</strong></td>
+</tr>
+<tr>
+<td><strong>Java Example</strong></td>
+<td>Multiple <code>add()</code> methods with different parameters</td>
+<td>A <code>draw()</code> method overridden in <code>Circle</code>, <code>Rectangle</code> subclasses</td>
+</tr>
+<tr>
+<td><strong>Use Case</strong></td>
+<td>When you want to <strong>perform similar operations with different inputs</strong></td>
+<td>When you want <strong>subclass-specific behavior through a base class</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>🧠 Interview Tip :</h3>
+<blockquote>
+<p>&quot;Static polymorphism improves code readability with overloading, while dynamic polymorphism enhances extensibility through overriding. Mastery of both is key to designing scalable and flexible object-oriented systems.&quot;</p>
+</blockquote>
+<h2>What is Data hiding?</h2>
+<ul>
+<li>Data hiding in Java is a way to protect the internal details of a class by keeping its data (like variables) private and providing only public methods (functions) to access or change that data. This helps prevent others from directly changing the data in unexpected ways and keeps the inner workings of the class safe and controlled.</li>
+<li>It's like hiding your valuables in a locked box and only letting others use a key to access or change them through a controlled opening.</li>
+</ul>
+
+</body>
+</html>
+<style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background: #f9f9f9;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    code {
+      color: #d63384;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    tr:nth-child(even) td {
+      background-color: #f9f9f9;
+    }
+    tr:hover td {
+      background-color: #eef2f7;
+    }
+  </style>
