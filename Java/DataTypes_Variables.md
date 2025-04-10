@@ -1,10 +1,10 @@
 # Data Types & Variables  
 ## Data Types
 ### Basic Data Types in Java: 
-* There are two types of data types in Java: 
-* Primitive data types. 
-* Non-primitive data types. 
-![Data Types!](/Java/Images/DataTypes_ss.png "Data Types")
+- There are two types of data types in Java: 
+    * Primitive data types. 
+    * Non-primitive data types. 
+![Data Types!](./Images/DataTypes_ss.png "Data Types")
 
 ### Java primitive data types with their types, size, range, and default values:
 
