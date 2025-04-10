@@ -23,7 +23,7 @@
 * **Byte Code verifier** – Verify the byte Code. (Reason for why Java is secure).
 * **Execution Engine** – Converts the byte code in to machine code.
 
-![Components of JDK!](/Java/Images/JDK_JRE_JVM_ss.png "Components of JDK")
+![Components of JDK!](./Images/JDK_JRE_JVM_ss.png "Components of JDK")
 
 ## What is Class and Object in Java?
 * A **class** is like a set of instructions or a blueprint.
@@ -57,4 +57,4 @@
 
 This two-step process makes Java both a compiled and an interpreted language, providing a good balance of performance, portability, and platform independence.
 
-![Interperter_Compiler!](/Java/Images/Interperter_Compiler.png "Interperter & Compiler")
+![Interperter_Compiler!](./Images/Interperter_Compiler.png "Interperter & Compiler")
