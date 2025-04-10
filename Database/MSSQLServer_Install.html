@@ -1,0 +1,127 @@
+
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <title>MSSQLServer Install</title>
+        <style>
+          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+          h1, h2, h3 { color: #2c3e50; }
+          pre { background: #eee; padding: 1rem; overflow-x: auto; }
+          code { color: #d63384; }
+        </style>
+      </head>
+      <body>
+        <hr>
+<h2>✅ Step-by-Step to Install SQL Server Locally</h2>
+<h3>🔹 1. <strong>Download SQL Server Developer Edition (Free)</strong></h3>
+<p>Microsoft offers a <strong>free Developer Edition</strong> which is perfect for learning.</p>
+<ul>
+<li>Go to: <a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads">https://www.microsoft.com/en-us/sql-server/sql-server-downloads</a></li>
+<li>Download the <strong>Developer edition</strong>.</li>
+<li>Run the installer and choose the <strong>Basic</strong> or <strong>Custom</strong> installation (Basic is easier for learning).</li>
+</ul>
+<blockquote>
+<p>It installs the actual <strong>SQL Server Engine</strong>.</p>
+</blockquote>
+<hr>
+<h3>🔹 2. <strong>Install SQL Server</strong></h3>
+<p>Follow the steps in the installer:</p>
+<ul>
+<li>Accept the license</li>
+<li>Choose install location</li>
+<li>Let it install the <strong>SQL Server Engine</strong> + <strong>SQL Server Services</strong></li>
+</ul>
+<p>It will also install:</p>
+<ul>
+<li>SQL Server Database Engine</li>
+<li>SQL Server Browser</li>
+<li>Optionally: SQL Server Agent (you can skip for now)</li>
+</ul>
+<hr>
+<h3>🔹 3. <strong>Install SQL Server Management Studio (Already Done ✅)</strong></h3>
+<p>You already have SSMS — great! After SQL Server is installed, just <strong>open SSMS</strong>, and when it asks you to <strong>connect to a server</strong>, use:</p>
+<ul>
+<li><strong>Server type</strong>: Database Engine</li>
+<li><strong>Server name</strong>: <code>localhost</code> or <code>.\SQLEXPRESS</code> (depending on what you installed)</li>
+<li><strong>Authentication</strong>: Windows Authentication (by default)</li>
+</ul>
+<p>Click <strong>Connect</strong>, and now you’re in!</p>
+<hr>
+<h3>🔹 4. <strong>Can’t Find Server Name?</strong></h3>
+<p>If you’re unsure about the server name, do this:</p>
+<ul>
+<li>Press <code>Windows + R</code>, type <code>services.msc</code>, and press Enter</li>
+<li>Look for a service called something like:
+<ul>
+<li><code>SQL Server (MSSQLSERVER)</code></li>
+<li>or <code>SQL Server (SQLEXPRESS)</code></li>
+</ul>
+</li>
+<li>That tells you what instance is running</li>
+</ul>
+<p>Then in SSMS, use:</p>
+<ul>
+<li><code>localhost</code></li>
+<li>or <code>.\SQLEXPRESS</code> (if it’s the Express edition)</li>
+</ul>
+<hr>
+<h3>🔹 5. <strong>Create Your First Database</strong></h3>
+<p>Once connected, right-click <code>Databases</code> → <strong>New Database…</strong> → give it a name → click <strong>OK</strong>.</p>
+<p>You're good to go!</p>
+<ul>
+<li></li>
+</ul>
+<p>Creating a database in <strong>Microsoft SQL Server Management Studio (SSMS)</strong> is pretty straightforward. Here's a step-by-step guide:</p>
+<hr>
+<h3>✅ <strong>Option 1: Using the GUI (Graphical Interface)</strong></h3>
+<ol>
+<li><strong>Open SSMS (SQL Server Management Studio).</strong></li>
+<li><strong>Connect to your SQL Server instance.</strong></li>
+<li>In the <strong>Object Explorer</strong>, right-click on the <code>Databases</code> folder.</li>
+<li>Click <strong>New Database...</strong></li>
+<li>In the dialog box:
+<ul>
+<li>Enter the <strong>database name</strong> (e.g., <code>MyDatabase</code>)</li>
+<li>Optionally, you can configure settings like the initial size, file names, etc.</li>
+</ul>
+</li>
+<li>Click <strong>OK</strong>.</li>
+</ol>
+<p>Your new database will appear under the <code>Databases</code> folder.</p>
+<hr>
+<h3>✅ <strong>Option 2: Using SQL Query</strong></h3>
+<p>If you prefer writing SQL:</p>
+<pre><code class="language-sql">CREATE DATABASE MyDatabase;
+</code></pre>
+<p>You can also customize the database files:</p>
+<pre><code class="language-sql">CREATE DATABASE MyDatabase
+ON
+(
+    NAME = MyDatabase_Data,
+    FILENAME = 'C:\SQLData\MyDatabase_Data.mdf',
+    SIZE = 10MB,
+    MAXSIZE = 100MB,
+    FILEGROWTH = 5MB
+)
+LOG ON
+(
+    NAME = MyDatabase_Log,
+    FILENAME = 'C:\SQLData\MyDatabase_Log.ldf',
+    SIZE = 5MB,
+    MAXSIZE = 25MB,
+    FILEGROWTH = 5MB
+);
+</code></pre>
+<blockquote>
+<p>⚠️ Make sure the folder paths exist and SQL Server has permissions to write to them.</p>
+</blockquote>
+<hr>
+<h3>💡 To verify the database was created:</h3>
+<pre><code class="language-sql">SELECT name FROM sys.databases;
+</code></pre>
+<hr>
+
+      </body>
+      </html>
+    
