@@ -1,6 +1,5 @@
 # OOPS Concepts
---
-
+-
 ## What is OOPS?
 - **Object-Oriented Programming (OOPs)** is a programming style that **organizes code using objects**, which combine data (variables) and behavior (methods) into a single unit.
 

@@ -1,18 +1,21 @@
 
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <title>Collections</title>
-        <style>
-          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
-          h1, h2, h3 { color: #2c3e50; }
-          pre { background: #eee; padding: 1rem; overflow-x: auto; }
-          code { color: #d63384; }
-        </style>
-      </head>
-      <body>
-        <h3><strong>Collections Core Concepts</strong></h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Collections</title>
+   <style>
+       body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+       h1, h2, h3 { color: #2c3e50; }
+       pre { background: #eee; padding: 1rem; overflow-x: auto; }
+       code { color: #d63384; }
+   </style>  
+</head>
+<body>
+  <h1>Collections Core Concepts</h1>
+<ul>
+<li></li>
+</ul>
 <ol>
 <li>
 <p><strong>What is the Java Collections Framework, and why is it used?</strong></p>
@@ -24,7 +27,7 @@
 <li>
 <p><strong>What are the core interfaces in the Java Collections Framework?</strong></p>
 <ul>
-<li><code>Collection</code> (superinterface)
+<li>Collection (superinterface)
 <ul>
 <li><code>List</code> (e.g., <code>ArrayList</code>, <code>LinkedList</code>, <code>Vector</code>)</li>
 <li><code>Set</code> (e.g., <code>HashSet</code>, <code>TreeSet</code>, <code>LinkedHashSet</code>)</li>
@@ -35,7 +38,7 @@
 </ul>
 </li>
 <li>
-<p><strong>What is the difference between <code>Collection</code> and <code>Collections</code> in Java?</strong></p>
+<p><strong>What is the difference between Collection and Collections in Java?</strong></p>
 </li>
 </ol>
 <table>
@@ -49,8 +52,8 @@
 <tbody>
 <tr>
 <td><strong>Definition</strong></td>
-<td><code>Collection</code> is an <strong>interface</strong> in Java that represents a group of objects.</td>
-<td><code>Collections</code> is a <strong>utility class</strong> that provides static methods for working with collections.</td>
+<td>Collection is an <strong>interface</strong> in Java that represents a group of objects.</td>
+<td>Collections is a <strong>utility class</strong> that provides static methods for working with collections.</td>
 </tr>
 <tr>
 <td><strong>Package</strong></td>
@@ -94,36 +97,35 @@
 </tr>
 </tbody>
 </table>
-<hr>
 <h3><strong>List and Set Implementations</strong></h3>
 <ol start="4">
 <li>
 <p><strong>What is the difference between <code>ArrayList</code> and <code>LinkedList</code>? When should you use each?</strong></p>
 <ul>
-<li><code>ArrayList</code>
+<li><strong><code>ArrayList</code></strong>
 <ul>
 <li>It is backed by a <strong>dynamic array</strong> to store the elements.</li>
 <li>It provides <strong>O(1)</strong> access time but <strong>O(n) insertion/deletion</strong> in the middle.</li>
 <li>Manipulation with ArrayList is slow because it internally uses an array. If any element is removed from the array, all the other elements are shifted in memory.</li>
 </ul>
 </li>
-<li><code>LinkedList</code>
+<li><strong><code>LinkedList</code></strong>
 <ul>
 <li>It is a <strong>doubly linked list</strong>, making insertion/deletion <strong>O(1)</strong> but lookup <strong>O(n)</strong>.</li>
 <li>Manipulation with LinkedList is faster than ArrayList because it uses a doubly linked list, so no bit shifting is required in memory.</li>
+<li><strong>Example:</strong><pre><code class="language-java">List&lt;String&gt; arrayList = new ArrayList&lt;&gt;();
+List&lt;String&gt; linkedList = new LinkedList&lt;&gt;();
+</code></pre>
+</li>
 </ul>
 </li>
 </ul>
-<p><strong>Example:</strong></p>
-<pre><code class="language-java">List&lt;String&gt; arrayList = new ArrayList&lt;&gt;();
-List&lt;String&gt; linkedList = new LinkedList&lt;&gt;();
-</code></pre>
 </li>
 <li>
 <p><strong>How does <code>Vector</code> differ from <code>ArrayList</code>?</strong></p>
 <ul>
-<li><code>Vector</code> is <strong>synchronized</strong>, making it thread-safe but slower.</li>
-<li><code>ArrayList</code> is <strong>not synchronized</strong>, making it faster in a single-threaded environment.</li>
+<li><strong><code>Vector</code></strong> is <strong>synchronized</strong>, making it thread-safe but slower.</li>
+<li><strong><code>ArrayList</code></strong> is <strong>not synchronized</strong>, making it faster in a single-threaded environment.</li>
 </ul>
 </li>
 <li>
@@ -135,16 +137,18 @@ List&lt;String&gt; linkedList = new LinkedList&lt;&gt;();
 <li>
 <p><strong>How does <code>HashSet</code> ensure uniqueness?</strong></p>
 <ul>
-<li><code>HashSet</code> uses <strong>hashing</strong> and relies on <code>hashCode()</code> and <code>equals()</code> to prevent duplicates.<br>
-<img src="../Images/HashSetUniqueFlow_ss.png" alt="Hashset Flow!" title="Hashset"></li>
+<li>
+<p><strong><code>HashSet</code></strong> uses <strong>hashing</strong> and relies on <code>hashCode()</code> and <code>equals()</code> to prevent duplicates.</p>
+<p><img src="./Images/HashSetUniqueFlow_ss.png" alt="Hashset Flow!" title="Hashset"></p>
+</li>
 </ul>
 </li>
 <li>
 <p><strong>What is the difference between <code>HashSet</code>, <code>LinkedHashSet</code>, and <code>TreeSet</code>?</strong></p>
 <ul>
-<li><code>HashSet</code> - <strong>Unordered</strong> and provides O(1) operations.</li>
-<li><code>LinkedHashSet</code> - <strong>Maintains insertion order</strong>.</li>
-<li><code>TreeSet</code> - <strong>Sorted</strong> but has O(log n) complexity due to its Red-Black Tree implementation.</li>
+<li><strong><code>HashSet</code></strong> - <strong>Unordered</strong> and provides O(1) operations.</li>
+<li><strong><code>LinkedHashSet</code></strong> - <strong>Maintains insertion order</strong>.</li>
+<li><strong><code>TreeSet</code></strong> - <strong>Sorted</strong> but has O(log n) complexity due to its Red-Black Tree implementation.</li>
 </ul>
 </li>
 </ol>
@@ -154,7 +158,7 @@ List&lt;String&gt; linkedList = new LinkedList&lt;&gt;();
 <li>
 <p><strong>How does <code>HashMap</code> work internally?</strong></p>
 <ul>
-<li><code>HashMap</code> stores key-value pairs in <strong>buckets</strong> based on the <code>hashCode()</code> of the key.</li>
+<li><strong><code>HashMap</code></strong> stores key-value pairs in <strong>buckets</strong> based on the <code>hashCode()</code> of the key.</li>
 <li>Collisions are resolved using <strong>Linked List (Java 7)</strong> or <strong>Tree (Java 8+ when a bucket exceeds 8 nodes).</strong></li>
 </ul>
 </li>
@@ -163,29 +167,112 @@ List&lt;String&gt; linkedList = new LinkedList&lt;&gt;();
 </li>
 </ol>
 <ul>
-<li><code>HashMap</code> is <strong>not synchronized</strong> and allows <strong>one null key</strong>.</li>
-<li><code>Hashtable</code> is <strong>synchronized</strong> and does <strong>not allow null keys or values</strong>.</li>
+<li><strong><code>HashMap</code></strong> is <strong>not synchronized</strong> and allows <strong>one null key</strong>.</li>
+<li><strong><code>Hashtable</code></strong> is <strong>synchronized</strong> and does <strong>not allow null keys or values</strong>.</li>
 </ul>
 <ol start="11">
 <li><strong>What is the difference between <code>HashMap</code>, <code>LinkedHashMap</code>, and <code>TreeMap</code>?</strong></li>
 </ol>
 <ul>
-<li><code>HashMap</code> - No ordering guarantee.</li>
-<li><code>LinkedHashMap</code> - <strong>Maintains insertion order</strong>.</li>
-<li><code>TreeMap</code> - <strong>Sorted order (based on keys)</strong> and uses a Red-Black Tree.</li>
+<li><strong><code>HashMap</code></strong> - No ordering guarantee.</li>
+<li><strong><code>LinkedHashMap</code></strong> - <strong>Maintains insertion order</strong>.</li>
+<li><strong><code>TreeMap</code></strong> - <strong>Sorted order (based on keys)</strong> and uses a Red-Black Tree.</li>
 </ul>
 <ol start="12">
 <li><strong>What is <code>ConcurrentHashMap</code>, and how does it improve performance?</strong></li>
 </ol>
 <ul>
-<li><code>ConcurrentHashMap</code> provides <strong>thread-safe access</strong> using <strong>segment-based locking</strong> instead of synchronizing the whole map.</li>
+<li><code>ConcurrentHashMap</code> is a <strong>high-performance, thread-safe implementation</strong> of the <code>Map</code> interface that allows <strong>concurrent access</strong> to the map <strong>without locking the entire structure</strong>. It is part of the <code>java.util.concurrent</code> package and is a preferred choice in <strong>multi-threaded environments</strong>.</li>
 </ul>
+<h3><strong>Key Characteristics of <code>ConcurrentHashMap</code>:</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Thread Safety</strong></td>
+<td>Allows safe concurrent read and write operations <strong>without external synchronization</strong>.</td>
+</tr>
+<tr>
+<td><strong>Fine-Grained Locking</strong></td>
+<td>Uses <strong>bucket-level locking (Java 7)</strong> or <strong>internal partitioning (Java 8)</strong> to allow multiple threads to operate in parallel.</td>
+</tr>
+<tr>
+<td><strong>Locking Strategy (Java 8+)</strong></td>
+<td>Uses <strong>CAS (Compare-And-Swap)</strong> and <strong>synchronized blocks</strong> only when necessary — improving throughput.</td>
+</tr>
+<tr>
+<td><strong>Null Support</strong></td>
+<td><strong>Does not allow <code>null</code> keys or values</strong> — avoids ambiguity during concurrent access.</td>
+</tr>
+<tr>
+<td><strong>Performance</strong></td>
+<td>Much faster than <code>Hashtable</code> and synchronized <code>HashMap</code> in concurrent scenarios.</td>
+</tr>
+<tr>
+<td><strong>Fail-safe Iterator</strong></td>
+<td>Does <strong>not throw <code>ConcurrentModificationException</code></strong>, but reflects the <strong>state of the map at some point</strong> during iteration.</td>
+</tr>
+<tr>
+<td><strong>Use Case</strong></td>
+<td>Ideal for <strong>caches, registries, or real-time metrics</strong> where read/write happens concurrently.</td>
+</tr>
+</tbody>
+</table>
+<h3><strong>Example:</strong></h3>
+<pre><code>     ```java
+     import java.util.concurrent.ConcurrentHashMap;
+
+     public class ConcurrentMapExample {
+        public static void main(String[] args) {
+           ConcurrentHashMap&lt;String, Integer&gt; map = new ConcurrentHashMap&lt;&gt;();
+           
+           map.put(&quot;A&quot;, 1);
+           map.put(&quot;B&quot;, 2);
+
+           // Safe concurrent access
+           map.computeIfAbsent(&quot;C&quot;, key -&gt; 3);
+
+           System.out.println(map); // Output: {A=1, B=2, C=3}
+        }
+     }
+     ```
+</code></pre>
+<h3>🔹 <strong>Why Use ConcurrentHashMap Instead of Hashtable or SynchronizedMap?</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Implementation</th>
+<th>Drawback</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Hashtable</code></td>
+<td>Global lock on every operation → <strong>performance bottleneck</strong></td>
+</tr>
+<tr>
+<td><code>Collections.synchronizedMap()</code></td>
+<td>Entire map is locked → <strong>not scalable</strong></td>
+</tr>
+<tr>
+<td><code>ConcurrentHashMap</code></td>
+<td>Uses fine-grained locks or CAS → <strong>high concurrency support</strong></td>
+</tr>
+</tbody>
+</table>
 <ol start="13">
 <li><strong>What is <code>WeakHashMap</code>, and when should you use it?</strong></li>
 </ol>
 <ul>
-<li><code>WeakHashMap</code> stores <strong>keys as WeakReferences</strong>, meaning they will be <strong>garbage collected</strong> if not referenced elsewhere.</li>
-</ul>
+<li>
+<p><strong><code>WeakHashMap</code></strong> stores <strong>keys as WeakReferences</strong>, meaning they will be <strong>garbage collected</strong> if not referenced elsewhere.</p>
+</li>
+<li>
 <p><strong>Example:</strong></p>
 <pre><code class="language-java">WeakHashMap&lt;Object, String&gt; weakMap = new WeakHashMap&lt;&gt;();
 Object key = new Object();
@@ -193,6 +280,8 @@ weakMap.put(key, &quot;Weak Value&quot;);
 key = null; // The entry will be eligible for GC
 System.gc();
 </code></pre>
+</li>
+</ul>
 <hr>
 <h3><strong>Queues and Deques</strong></h3>
 <ol start="14">
@@ -220,7 +309,36 @@ System.gc();
 <li><strong>How do you synchronize a collection in Java?</strong></li>
 </ol>
 <ul>
-<li>Use <code>Collections.synchronizedList(list)</code> or <strong>concurrent collections</strong> like <code>CopyOnWriteArrayList</code>.</li>
+<li>
+<p>In Java, synchronizing a collection means making it <strong>thread-safe</strong>, so that <strong>multiple threads can access or modify it safely</strong> without corrupting its state.</p>
+<h3>✅ <strong>Synchronization of Collections in Java</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Definition / Explanation</strong></th>
+<th><strong>Example</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Using <code>Collections.synchronizedXXX()</code></strong>&lt;br&gt;Wraps standard collections with synchronized versions to make them thread-safe.</td>
+<td><code>java List&lt;String&gt; syncList = Collections.synchronizedList(new ArrayList&lt;&gt;()); Map&lt;String, String&gt; syncMap = Collections.synchronizedMap(new HashMap&lt;&gt;()); </code></td>
+<td>✅ Easy to use&lt;br&gt;⚠️ Must manually synchronize during iteration: &lt;br&gt;<code>synchronized(syncList) { for(...) }</code></td>
+</tr>
+<tr>
+<td><strong>2. Using Concurrent Collections (Recommended for multi-threading)</strong>&lt;br&gt;Thread-safe, high-performance collections from <code>java.util.concurrent</code>.</td>
+<td><code>java Map&lt;String, String&gt; map = new ConcurrentHashMap&lt;&gt;(); List&lt;String&gt; list = new CopyOnWriteArrayList&lt;&gt;(); </code></td>
+<td>✅ Best for high-concurrency apps&lt;br&gt;✅ More scalable than synchronized wrappers&lt;br&gt;❌ Slightly higher memory usage (e.g., <code>CopyOnWriteArrayList</code>)</td>
+</tr>
+<tr>
+<td><strong>3. Manual Synchronization Using <code>synchronized</code> Block</strong>&lt;br&gt;Manually control thread-safe access to the collection.</td>
+<td><code>java List&lt;String&gt; list = new ArrayList&lt;&gt;(); synchronized (list) { list.add(&quot;A&quot;); } </code></td>
+<td>✅ Gives precise control&lt;br&gt;❌ Verbose&lt;br&gt;❌ Error-prone&lt;br&gt;❌ Not recommended for complex or large applications</td>
+</tr>
+</tbody>
+</table>
+</li>
 </ul>
 <ol start="18">
 <li><strong>What is <code>CopyOnWriteArrayList</code>, and when should you use it?</strong></li>
@@ -232,9 +350,65 @@ System.gc();
 <li><strong>How do you prevent <code>ConcurrentModificationException</code> when iterating?</strong></li>
 </ol>
 <ul>
-<li>Use <strong>Iterator with <code>remove()</code></strong>, <code>CopyOnWriteArrayList</code>, or <code>ConcurrentHashMap</code>.</li>
+<li>
+<p><code>ConcurrentModificationException</code> occurs when a <strong>collection is modified while it is being iterated</strong>, using <strong>fail-fast iterators</strong> like those from <code>ArrayList</code>, <code>HashMap</code>, etc.</p>
+<h3>Common Scenario That Causes the Exception</h3>
+<pre><code>```java
+List&lt;String&gt; list = new ArrayList&lt;&gt;(List.of(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;));
+
+for (String item : list) {
+   if (item.equals(&quot;B&quot;)) {
+      list.remove(item); // ❌ throws ConcurrentModificationException
+   }
+}
+```
+</code></pre>
+</li>
 </ul>
-<hr>
+<h3>✅ <strong>Ways to Prevent It</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Approach / Strategy</strong></th>
+<th><strong>Example</strong></th>
+<th><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Use <code>Iterator</code> and <code>iterator.remove()</code></strong>&lt;br&gt;Only safe way to remove elements while iterating.</td>
+<td><code>java Iterator&lt;String&gt; it = list.iterator(); while (it.hasNext()) { if (it.next().equals(&quot;B&quot;)) { it.remove(); } } </code></td>
+<td>✅ Safe removal&lt;br&gt;❌ Works only for removing elements, not adding</td>
+</tr>
+<tr>
+<td><strong>2. Use <code>CopyOnWriteArrayList</code> for concurrent modification</strong>&lt;br&gt;Creates a copy of the list on each write operation.</td>
+<td><code>java List&lt;String&gt; list = new CopyOnWriteArrayList&lt;&gt;(List.of(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)); for (String item : list) { if (item.equals(&quot;B&quot;)) list.remove(item); } </code></td>
+<td>✅ No exception&lt;br&gt;✅ Thread-safe&lt;br&gt;❌ Slower for write-heavy scenarios</td>
+</tr>
+<tr>
+<td><strong>3. Collect items to remove, and remove them after the loop</strong>&lt;br&gt;Modify collection only after iteration ends.</td>
+<td><code>java List&lt;String&gt; toRemove = new ArrayList&lt;&gt;(); for (String item : list) { if (item.equals(&quot;B&quot;)) toRemove.add(item); } list.removeAll(toRemove); </code></td>
+<td>✅ Works for both add/remove&lt;br&gt;❌ More memory overhead</td>
+</tr>
+<tr>
+<td><strong>4. Use <code>ListIterator</code> when iterating over a list</strong>&lt;br&gt;Supports safe removal and addition.</td>
+<td><code>java ListIterator&lt;String&gt; it = list.listIterator(); while (it.hasNext()) { if (it.next().equals(&quot;B&quot;)) it.remove(); } </code></td>
+<td>✅ Allows element updates and bidirectional traversal</td>
+</tr>
+</tbody>
+</table>
+<h3>🔹 Bonus (for Maps): Use <code>Iterator</code> on <code>entrySet()</code></h3>
+<pre><code class="language-java">Map&lt;String, String&gt; map = new HashMap&lt;&gt;();
+map.put(&quot;A&quot;, &quot;1&quot;); map.put(&quot;B&quot;, &quot;2&quot;);
+
+Iterator&lt;Map.Entry&lt;String, String&gt;&gt; it = map.entrySet().iterator();
+while (it.hasNext()) {
+   Map.Entry&lt;String, String&gt; entry = it.next();
+   if (entry.getKey().equals(&quot;A&quot;)) {
+      it.remove(); // ✅ Safe
+   }
+}
+</code></pre>
 <h3><strong>Sorting and Comparators</strong></h3>
 <ol start="20">
 <li><strong>What is the difference between <code>Comparable</code> and <code>Comparator</code>?</strong></li>
@@ -259,7 +433,7 @@ System.gc();
 <ul>
 <li>Use <code>LinkedHashMap</code> with <code>accessOrder=true</code> and override <code>removeEldestEntry()</code>.  An LRU (Least Recently Used) cache is a type of cache that evicts the least recently accessed element when the cache is full.
 <ul>
-<li><a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/LeastRecentlyUsedCache.java">Example LRU</a></li>
+<li><a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/LeastRecentlyUsedCache.java">Code</a></li>
 </ul>
 </li>
 </ul>
@@ -267,9 +441,19 @@ System.gc();
 <li><strong>How do you remove duplicates from an <code>ArrayList</code>?</strong></li>
 </ol>
 <ul>
-<li>Use <code>Set</code> (<code>HashSet</code> for unordered, <code>LinkedHashSet</code> for ordered).
+<li>Using Stream
 <ul>
 <li><a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/removeduplicatesarraylist/RemoveDuplicatesArrayListUsingStream.java">Code</a></li>
+</ul>
+</li>
+<li>Using Iterator
+<ul>
+<li><a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/removeduplicatesarraylist/RemoveDuplicatesUsingIterator.java">Code</a></li>
+</ul>
+</li>
+<li>Using LinkedHashMap
+<ul>
+<li><a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/CollectionExamples/removeduplicatesarraylist/RemoveDuplicatesUsingLinkedHashMap.java">Code</a></li>
 </ul>
 </li>
 </ul>
@@ -297,12 +481,14 @@ System.gc();
 <li>Use <code>TreeMap</code> (sorted order) or <code>PriorityQueue</code>.</li>
 </ul>
 <ol start="27">
-<li><strong>How do you convert an <code>Array</code> to a <code>List</code> in Java?</strong></li>
-</ol>
+<li>
+<p><strong>How do you convert an <code>Array</code> to a <code>List</code> in Java?</strong></p>
 <pre><code class="language-java">List&lt;String&gt; list = Arrays.asList(array);
 </code></pre>
-<ol start="28">
-<li><strong>How do you merge two unsorted lists and remove duplicates?</strong></li>
+</li>
+<li>
+<p><strong>How do you merge two unsorted lists and remove duplicates?</strong></p>
+</li>
 </ol>
 <ul>
 <li>Use <code>Set</code> (<code>HashSet</code> or <code>LinkedHashSet</code>).</li>
@@ -362,14 +548,54 @@ System.gc();
 <hr>
 <h2>Notes:</h2>
 <ul>
-<li>In Java, &quot;non-synchronized&quot; signifies that a method or block of code does not have any built-in mechanism to control concurrent access from multiple threads. When a method is not synchronized, multiple threads can execute it simultaneously, potentially leading to data corruption or inconsistent state if the method accesses shared resources.
-<ul>
+<li>In Java, &quot;non-synchronized&quot; signifies that a method or block of code does not have any built-in mechanism to control concurrent access from multiple threads. When a method is not synchronized, multiple threads can execute it simultaneously, potentially leading to data corruption or inconsistent state if the method accesses shared resources.</li>
 <li>on-synchronized methods are faster due to the absence of locking overhead</li>
-</ul>
-</li>
 <li>synchronized methods or blocks, which allow only one thread to execute them at a time, ensuring data consistency.</li>
 </ul>
 
-      </body>
-      </html>
-    
+</body>
+</html>
+<style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background: #f9f9f9;
+    }
+    h1 {
+        color:rgb(5, 7, 9);
+        text-align: center;
+    }
+    h2, h3, h4, h5, h6  {
+      color: #2c3e50;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    code {
+      color: #d63384;;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    tr:nth-child(even) td {
+      background-color: #f9f9f9;
+    }
+    tr:hover td {
+      background-color: #eef2f7;
+    }
+  </style>

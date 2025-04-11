@@ -1,6 +1,5 @@
 # Data Types & Variables
---
-
+-
 ## Data Types
 ### Basic Data Types in Java: 
 - There are two types of data types in Java: 

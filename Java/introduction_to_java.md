@@ -1,6 +1,5 @@
 # Basic Java Concepts
---
-
+-
 ## What is JDK, JRE and JVM?
 ### JDK (Java Development Kit)
 * Used for developing Java programs (writing and compiling).
