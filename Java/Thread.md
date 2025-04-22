@@ -82,19 +82,16 @@ public class ThreadJoinExample {
     }
 }
 ```
-
----
-
 ### **Why Synchronization?**
 - To prevent **race conditions** where multiple threads access shared resources incorrectly.  
 - Ensures **thread safety** when modifying shared objects.
-
+- Synchronization is achieved using locks, where a thread must acquire a lock before accessing a synchronized block or method, and release it afterward, allowing other threads to acquire the lock and proceed.
 
 ### **What is `Callable` in Java?**  
 - In Java, Callable is an interface in the java.util.concurrent package that represents a ** task capable of returning a result and throwing an exception** . It is similar to Runnable, but Runnable cannot return a value or throw checked exceptions.
 - Callable is often used with ExecutorService to perform asynchronous computations in multi-threaded environments.
-
----
+- **Callable Example** [code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/ThreadConcepts/CallableExample.java)
+- **MultiCallable Example** [code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/ThreadConcepts/MultiCallableExample.java)
 
 ### Key Differences Between **Callable** and **Runnable**
 | Feature | **Runnable** | **Callable<T>** |
@@ -104,18 +101,11 @@ public class ThreadJoinExample {
 | **Method** | `public void run()` | `public T call() throws Exception` |
 | **Usage** | Used with `Thread` | Used with `ExecutorService.submit()` |
 
----
-- **Callable Example** [code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/ThreadConcepts/CallableExample.java)
-- **MultiCallable Example** [code](https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/ThreadConcepts/MultiCallableExample.java)
-
----
 ### **What is **Future** in Java?**  
 `Future<T>` is an interface in Java's **`java.util.concurrent`** package that represents the **result of an asynchronous computation**. It allows you to:  
 ✅ **Check if a task is completed** (`isDone()`).  
 ✅ **Cancel a task** (`cancel()`).  
 ✅ **Retrieve the result** (`get()`, which blocks until completion).  
-
----
 
 ### **Key Methods of Future<T>**
 | **Method** | **Description** |
@@ -142,7 +132,6 @@ public class ThreadJoinExample {
 ✅ When using `ExecutorService` to **execute background tasks**.  
 ✅ Concurrent API Calls: Retrieve results from multiple endpoints simultaneously.
 
----
 ### **Difference Between sleep() and wait() in Java**  
 
 Both `sleep()` and `wait()` cause a thread to pause, but they have different behaviors and use cases.
@@ -158,7 +147,6 @@ Both `sleep()` and `wait()` cause a thread to pause, but they have different beh
 | **Resumption** | Automatically resumes after timeout | Needs `notify()` or `notifyAll()` |
 | **Usage Scenario** | Used to introduce **delays** | Used for **thread communication** |
 
-
 ### **When to Use What?**
 | Use Case | **Use sleep()** | **Use wait()** |
 |----------|-------------|-------------|
@@ -166,5 +154,3 @@ Both `sleep()` and `wait()` cause a thread to pause, but they have different beh
 | **Pause execution until another thread notifies** | ❌ No | ✅ Yes |
 | **Retain object lock while sleeping** | ✅ Yes | ❌ No (Releases lock) |
 | **Thread synchronization and coordination** | ❌ No | ✅ Yes |
-
----
