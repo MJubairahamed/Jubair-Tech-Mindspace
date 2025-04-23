@@ -118,7 +118,7 @@ public class ThreadJoinExample {
 
 ✅ **Future waits until the task completes and retrieves the result.**  
 
-### **🔹 `Future` vs `CompletableFuture`**
+### **`Future` vs `CompletableFuture`**
 | Feature | `Future<T>` | `CompletableFuture<T>` |
 |---------|------------|----------------------|
 | **Blocking** | Yes (uses `get()`) | No (async support) |

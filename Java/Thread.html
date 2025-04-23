@@ -1,21 +1,21 @@
 
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <title>Thread</title>
-        <style>
-          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
-          h1, h2, h3 { color: #2c3e50; }
-          pre { background: #eee; padding: 1rem; overflow-x: auto; }
-          code { color: #d63384; }
-        </style>
-      </head>
-      <body>
-        <h1>Thread Concepts</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thread</title>
+   <style>
+       body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+       h1, h2, h3 { color: #2c3e50; }
+       pre { background: #eee; padding: 1rem; overflow-x: auto; }
+       code { color: #d63384; }
+   </style>  
+</head>
+<body>
+  <h1>Thread Concepts</h1>
 <h3><strong>Java Threads &amp; Multithreading - Key Concepts for Interviews</strong></h3>
 <hr>
-<h2><strong>🔹 Basics of Threads in Java</strong></h2>
+<h2><strong>Basics of Threads in Java</strong></h2>
 <ol>
 <li>
 <p><strong>What is a Thread?</strong></p>
@@ -64,7 +64,7 @@ public class Test {
 </li>
 </ol>
 <hr>
-<h2><strong>🔹 Thread Lifecycle &amp; Important Methods</strong></h2>
+<h2><strong>Thread Lifecycle &amp; Important Methods</strong></h2>
 <h3><strong>Thread States</strong></h3>
 <ul>
 <li><strong><code>NEW</code></strong> – Created but not started (<code>Thread t = new Thread();</code>).</li>
@@ -124,22 +124,26 @@ public class Test {
     }
 }
 </code></pre>
-<hr>
-<h3><strong>🔹 Why Synchronization?</strong></h3>
+<h3><strong>Why Synchronization?</strong></h3>
 <ul>
 <li>To prevent <strong>race conditions</strong> where multiple threads access shared resources incorrectly.</li>
 <li>Ensures <strong>thread safety</strong> when modifying shared objects.</li>
+<li>Synchronization is achieved using locks, where a thread must acquire a lock before accessing a synchronized block or method, and release it afterward, allowing other threads to acquire the lock and proceed.</li>
 </ul>
-<h3><strong>🔹What is <code>Callable</code> in Java?</strong></h3>
-<p><code>Callable&lt;T&gt;</code> is an interface in Java introduced in <strong>Java 5</strong> under the <strong><code>java.util.concurrent</code></strong> package. It is used to define <strong>tasks that return a result</strong> and <strong>can throw checked exceptions</strong>, unlike <code>Runnable</code>.</p>
-<hr>
-<h3><strong>🔹 Key Differences Between <code>Callable</code> and <code>Runnable</code></strong></h3>
+<h3><strong>What is <code>Callable</code> in Java?</strong></h3>
+<ul>
+<li>In Java, Callable is an interface in the java.util.concurrent package that represents a ** task capable of returning a result and throwing an exception** . It is similar to Runnable, but Runnable cannot return a value or throw checked exceptions.</li>
+<li>Callable is often used with ExecutorService to perform asynchronous computations in multi-threaded environments.</li>
+<li><strong>Callable Example</strong> <a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/ThreadConcepts/CallableExample.java">code</a></li>
+<li><strong>MultiCallable Example</strong> <a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/ThreadConcepts/MultiCallableExample.java">code</a></li>
+</ul>
+<h3>Key Differences Between <strong>Callable</strong> and <strong>Runnable</strong></h3>
 <table>
 <thead>
 <tr>
 <th>Feature</th>
-<th><code>Runnable</code></th>
-<th><code>Callable&lt;T&gt;</code></th>
+<th><strong>Runnable</strong></th>
+<th><strong>Callable&lt;T&gt;</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -165,19 +169,12 @@ public class Test {
 </tr>
 </tbody>
 </table>
-<hr>
-<ul>
-<li><strong>Callable Example</strong> <a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/ThreadConcepts/CallableExample.java">code</a></li>
-<li><strong>MultiCallable Example</strong> <a href="https://github.com/MJubairahamed/JavaLearningCodeRepo/blob/main/Code/ThreadConcepts/MultiCallableExample.java">code</a></li>
-</ul>
-<hr>
-<h3><strong>What is <code>Future</code> in Java?</strong></h3>
+<h3><strong>What is <strong>Future</strong> in Java?</strong></h3>
 <p><code>Future&lt;T&gt;</code> is an interface in Java's <strong><code>java.util.concurrent</code></strong> package that represents the <strong>result of an asynchronous computation</strong>. It allows you to:<br>
 ✅ <strong>Check if a task is completed</strong> (<code>isDone()</code>).<br>
 ✅ <strong>Cancel a task</strong> (<code>cancel()</code>).<br>
 ✅ <strong>Retrieve the result</strong> (<code>get()</code>, which blocks until completion).</p>
-<hr>
-<h3><strong>🔹 Key Methods of <code>Future&lt;T&gt;</code></strong></h3>
+<h3><strong>Key Methods of Future&lt;T&gt;</strong></h3>
 <table>
 <thead>
 <tr>
@@ -209,7 +206,7 @@ public class Test {
 </tbody>
 </table>
 <p>✅ <strong>Future waits until the task completes and retrieves the result.</strong></p>
-<h3><strong>🔹 <code>Future</code> vs <code>CompletableFuture</code></strong></h3>
+<h3><strong><code>Future</code> vs <code>CompletableFuture</code></strong></h3>
 <table>
 <thead>
 <tr>
@@ -241,25 +238,24 @@ public class Test {
 </tr>
 </tbody>
 </table>
-<h3><strong>🔹 𝗪𝗵𝗲𝗻 𝘁𝗼 𝗨𝘀𝗲 <code>𝗖𝗮𝗹𝗹𝗮𝗯𝗹𝗲</code> 𝗮𝗻𝗱 <code>𝗙𝘂𝘁𝘂𝗿𝗲</code>?</strong></h3>
+<h3>𝗪𝗵𝗲𝗻 𝘁𝗼 𝗨𝘀𝗲 <strong>𝗖𝗮𝗹𝗹𝗮𝗯𝗹𝗲</strong> 𝗮𝗻𝗱 <strong>𝗙𝘂𝘁𝘂𝗿𝗲</strong>?</h3>
 <p>✅ When <strong>asynchronous processing</strong> is needed but callbacks aren’t required.<br>
 ✅ When managing <strong>long-running tasks</strong> in <strong>multi-threaded applications</strong>. Split large tasks into smaller parallel ones.
 ✅ When using <code>ExecutorService</code> to <strong>execute background tasks</strong>.<br>
 ✅ Concurrent API Calls: Retrieve results from multiple endpoints simultaneously.</p>
-<hr>
-<h3><strong>🔹 Difference Between <code>sleep()</code> and <code>wait()</code> in Java</strong></h3>
+<h3><strong>Difference Between sleep() and wait() in Java</strong></h3>
 <p>Both <code>sleep()</code> and <code>wait()</code> cause a thread to pause, but they have different behaviors and use cases.</p>
 <ul>
 <li><strong>Sleep()</strong> is a blocking operation that keeps a hold on the monitor/lock of the shared objects for the specified number of milliseconds.Use when delaying execution.</li>
 <li><strong>Wait()</strong> is pauses the thread until either the specified number of milliseconds have elapsed or it recieves a desired notification from another thread. Note whithout keep hold on the monitor/lock of the shared objects. use when coordinating multiple threads</li>
 </ul>
-<h3><strong>🔹 Key Differences of <code>Sleep</code> and <code>Wait</code></strong></h3>
+<h3><strong>Key Differences of Sleep and Wait</strong></h3>
 <table>
 <thead>
 <tr>
 <th>Feature</th>
-<th><code>sleep(long ms)</code></th>
-<th><code>wait(long ms)</code></th>
+<th><strong>sleep(long ms)</strong></th>
+<th><strong>wait(long ms)</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -290,13 +286,13 @@ public class Test {
 </tr>
 </tbody>
 </table>
-<h3><strong>🔹 When to Use What?</strong></h3>
+<h3><strong>When to Use What?</strong></h3>
 <table>
 <thead>
 <tr>
 <th>Use Case</th>
-<th>Use <code>sleep()</code></th>
-<th>Use <code>wait()</code></th>
+<th><strong>Use sleep()</strong></th>
+<th><strong>Use wait()</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -322,8 +318,50 @@ public class Test {
 </tr>
 </tbody>
 </table>
-<hr>
 
-      </body>
-      </html>
-    
+</body>
+</html>
+<style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background: #f9f9f9;
+    }
+    h1 {
+        color:rgb(5, 7, 9);
+        text-align: center;
+    }
+    h2, h3, h4, h5, h6  {
+      color: #2c3e50;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    code {
+      color: #d63384;;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    tr:nth-child(even) td {
+      background-color: #f9f9f9;
+    }
+    tr:hover td {
+      background-color: #eef2f7;
+    }
+  </style>
