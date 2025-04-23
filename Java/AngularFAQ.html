@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AngularFAQ</title>
+   <style>
+       body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+       h1, h2, h3 { color: #2c3e50; }
+       pre { background: #eee; padding: 1rem; overflow-x: auto; }
+       code { color: #d63384; }
+   </style>  
+</head>
+<body>
+  <h1>Angular FAQ's</h1>
+<h3><strong>Difference between Promise and Observables in angular</strong></h3>
+<ul>
+<li>In Angular (and JavaScript/TypeScript in general), <strong>Promises</strong> and <strong>Observables</strong> are both used for handling asynchronous operations—but they differ significantly in terms of functionality, flexibility, and use cases. Here's a clear comparison:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><strong>Promise</strong></th>
+<th><strong>Observable</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Library</td>
+<td>Built-in JavaScript (ES6)</td>
+<td>Provided by RxJS (used in Angular)</td>
+</tr>
+<tr>
+<td>Value Emission</td>
+<td>Emits a <strong>single</strong> value</td>
+<td>Emits <strong>multiple</strong> values over time</td>
+</tr>
+<tr>
+<td>Execution</td>
+<td>Executes immediately when created</td>
+<td>Executes only when subscribed</td>
+</tr>
+<tr>
+<td>Cancellability</td>
+<td>Cannot be cancelled</td>
+<td>Can be cancelled using <code>unsubscribe()</code></td>
+</tr>
+<tr>
+<td>Operators</td>
+<td>Limited (<code>then</code>, <code>catch</code>)</td>
+<td>Rich set of RxJS operators (<code>map</code>, <code>filter</code>, <code>retry</code>, etc.)</td>
+</tr>
+<tr>
+<td>Laziness</td>
+<td>Eager (starts right away)</td>
+<td>Lazy (starts on subscription)</td>
+</tr>
+<tr>
+<td>Error Handling</td>
+<td><code>.catch()</code> handles errors</td>
+<td>Powerful error handling via RxJS (<code>catchError</code>, <code>retry</code>, etc.)</td>
+</tr>
+<tr>
+<td>Use Case</td>
+<td>Suitable for one-time async tasks like HTTP requests</td>
+<td>Ideal for streams, event handling, real-time data</td>
+</tr>
+<tr>
+<td>Composition</td>
+<td>Limited chaining</td>
+<td>Advanced chaining and transformation using operators</td>
+</tr>
+</tbody>
+</table>
+<h3>Example</h3>
+<p><strong>Promise:</strong></p>
+<pre><code class="language-typescript">getData(): Promise&lt;any&gt; {
+  return fetch('api/data').then(res =&gt; res.json());
+}
+</code></pre>
+<p><strong>Observable (Angular Way):</strong></p>
+<pre><code class="language-typescript">getData(): Observable&lt;any&gt; {
+  return this.http.get&lt;any&gt;('api/data');
+}
+</code></pre>
+<h3><strong>What is DDependency Injection (DI) in angular?</strong></h3>
+<ul>
+<li>Dependency Injection (DI) in Angular is a design pattern where a class requests dependencies from external sources rather than creating them itself. It's a core concept in Angular that promotes loose coupling, modularity, and testability.</li>
+<li>Instead of a component creating its dependencies, such as services, Angular's DI framework provides these dependencies when the component is instantiated. This is achieved through <strong>injectors and providers</strong>.</li>
+<li><strong>Injectors</strong> are responsible for creating and managing dependencies, while <strong>providers</strong> configure how these dependencies are created.</li>
+</ul>
+<h3>What is forRoot() and forChild()?</h3>
+<ul>
+<li><code>forRoot()</code>
+<ul>
+<li>
+<p>It is for the <strong>root module to initialize routing and create the main Router</strong>.</p>
+</li>
+<li>
+<p>It ensures there's only one Router instance for your entire application, which is crucial for consistency.</p>
+</li>
+<li>
+<p>The <code>forRoot()</code> method supplies the <strong>service providers and directives</strong> needed for routing, and performs the initial navigation based on the current browser URL.</p>
+</li>
+<li>
+<p>Example:
+```TS
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';</p>
+<pre><code>  const routes: Routes = [];
+
+  @NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule, HomeComponent, Headers]
+  })
+  export class AppRoutingModule { }
+  ```
+</code></pre>
+</li>
+</ul>
+</li>
+<li><code>forChild()</code>
+<ul>
+<li>It is for <strong>child modules to register routes using the existing Router</strong>.</li>
+<li>It allows for lazy loading of modules without needing to reinitialize the Router.</li>
+</ul>
+</li>
+</ul>
+<h3>What is The &lt;router-outlet&gt; ?</h3>
+<ul>
+<li>The <code>&lt;router-outlet&gt;</code> tells the router where to display routed views.</li>
+<li>The RouterOutlet is one of the router directives that became available to the AppComponent because AppModule imports AppRoutingModule which exported RouterModule.</li>
+</ul>
+<h3>What is routerlink?</h3>
+<ul>
+<li>Enables navigation between routes within a single-page application.</li>
+<li>Creates clickable elements that trigger navigation to a specific route.</li>
+</ul>
+<pre><code class="language-TS">    &lt;nav&gt;
+        &lt;a routerLink=&quot;/heroes&quot;&gt;Heroes&lt;/a&gt;
+        &lt;a [routerLink]=&quot;'/home'&quot;&gt;Home&lt;/a&gt;
+    &lt;/nav&gt;
+</code></pre>
+<h3>Different way to add router path in angular?</h3>
+<p>Absolutely! Here's the rephrased version in a <strong>table format with thick borders</strong>, showing the <strong>type of routing</strong> and the <strong>description/example</strong>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>🧭 Type of Routing</strong></th>
+<th style="text-align:left"><strong>📌 Description / Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>Basic Route Configuration</strong></td>
+<td style="text-align:left"><code>RouterModule.forRoot()</code> with a static array of routes.&lt;br&gt;<code>{ path: 'about', component: AboutComponent }</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Lazy Loading Modules</strong></td>
+<td style="text-align:left">Loads modules on demand for better performance.&lt;br&gt;<code>{ path: 'admin', loadChildren: () =&gt; import('./admin/admin.module').then(m =&gt; m.AdminModule) }</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Child / Nested Routes</strong></td>
+<td style="text-align:left">Define child routes inside a module.&lt;br&gt;<code>{ path: '', component: LayoutComponent, children: [...] }</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Redirect and Wildcard Routes</strong></td>
+<td style="text-align:left">Redirect or handle unknown paths.&lt;br&gt;<code>{ path: '', redirectTo: '/home', pathMatch: 'full' }</code>&lt;br&gt;<code>{ path: '**', component: NotFoundComponent }</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Route with Parameters</strong></td>
+<td style="text-align:left">Supports dynamic values.&lt;br&gt;<code>{ path: 'profile/:id', component: ProfileComponent }</code>&lt;br&gt;Access via <code>paramMap.get('id')</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Query Parameters</strong></td>
+<td style="text-align:left">Add optional parameters.&lt;br&gt;Navigate with <code>this.router.navigate(['/search'], { queryParams: { q: 'test' } })</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Route Guards</strong></td>
+<td style="text-align:left">Protect routes with <code>canActivate</code>, <code>canLoad</code>, etc.&lt;br&gt;<code>{ path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Route Metadata / Data</strong></td>
+<td style="text-align:left">Pass static data to routes.&lt;br&gt;<code>{ path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } }</code>&lt;br&gt;Access via <code>route.snapshot.data['title']</code></td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
+<style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background: #f9f9f9;
+    }
+    h1 {
+        color:rgb(5, 7, 9);
+        text-align: center;
+    }
+    h2, h3, h4, h5, h6  {
+      color: #2c3e50;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    code {
+      color: #d63384;;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    tr:nth-child(even) td {
+      background-color: #f9f9f9;
+    }
+    tr:hover td {
+      background-color: #eef2f7;
+    }
+  </style>
