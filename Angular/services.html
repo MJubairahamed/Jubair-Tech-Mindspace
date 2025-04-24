@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Services</title>
+   <style>
+       body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+       h1, h2, h3 { color: #2c3e50; }
+       pre { background: #eee; padding: 1rem; overflow-x: auto; }
+       code { color: #d63384; }
+   </style>  
+</head>
+<body>
+  <h1>Angular Services</h1>
+<h3><strong>Dependency Injection (DI)</strong></h3>
+<ul>
+<li>DI in Angular decouples class dependencies and centralizes creation logic.</li>
+<li>Services are injected via constructors using the DI framework.</li>
+<li>Angular manages the lifecycle, scoping, and injection of dependencies.</li>
+<li>The <code>@Injectable</code> decorator and DI hierarchy are key to effective use.</li>
+</ul>
+<hr>
+<h2>Key Points to Understand about DI</h2>
+<table>
+<thead>
+<tr>
+<th>Key Concept</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Provider</strong></td>
+<td>Tells Angular how to create or supply a dependency (usually a service).</td>
+</tr>
+<tr>
+<td><strong>Injector</strong></td>
+<td>A container that holds and manages service instances. Each component has access to an injector.</td>
+</tr>
+<tr>
+<td><strong>Hierarchy</strong></td>
+<td>Angular uses a <strong>hierarchical DI system</strong> — services can be singleton or scoped to components depending on where they're provided.</td>
+</tr>
+<tr>
+<td><strong>Tree-shakable</strong></td>
+<td>Services provided in <code>root</code> are singleton and available app-wide; unused services can be tree-shaken during build.</td>
+</tr>
+<tr>
+<td><strong>Injection Tokens</strong></td>
+<td>Used to inject values or objects that don’t have a class type (e.g., strings, configs).</td>
+</tr>
+<tr>
+<td><strong>Constructor Injection</strong></td>
+<td>Angular injects dependencies via class constructors.</td>
+</tr>
+</tbody>
+</table>
+<h2>Simple Example — Creating and Injecting a Service</h2>
+<h3>1. <strong>Create a Service</strong></h3>
+<pre><code class="language-bash">ng generate service UserService
+</code></pre>
+<h3>1. <strong>Service with HTTP Call (using Promise)</strong></h3>
+<pre><code class="language-ts">// user.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root' // Singleton service
+})
+export class UserService {
+  constructor(private http: HttpClient) {}
+
+  getUserById(id: number): Promise&lt;any&gt; {
+    return this.http.get(`https://api.example.com/users/${id}`).toPromise();
+  }
+}
+</code></pre>
+<h3>2. <strong>Component Injecting and Using the Service</strong></h3>
+<pre><code class="language-ts">// user.component.ts
+import { Component, OnInit } from '@angular/core';
+import { UserService } from './user.service';
+
+@Component({
+  selector: 'app-user',
+  template: `&lt;div *ngIf=&quot;user&quot;&gt;Welcome, {{ user.name }}&lt;/div&gt;`
+})
+export class UserComponent implements OnInit {
+  user: any;
+
+  constructor(private userService: UserService) {}
+
+  async ngOnInit() {
+    try {
+      this.user = await this.userService.getUserById(1);
+    } catch (err) {
+      console.error('Error fetching user:', err);
+    }
+  }
+}
+</code></pre>
+<h3>3. <strong>Required Configuration</strong></h3>
+<p>Make sure <code>HttpClientModule</code> is imported once in your root module:</p>
+<pre><code class="language-ts">// app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { UserComponent } from './user.component';
+
+@NgModule({
+  declarations: [AppComponent, UserComponent],
+  imports: [BrowserModule, HttpClientModule],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+</code></pre>
+<h3>Notes for Senior Devs:</h3>
+<ul>
+<li><code>.toPromise()</code> is deprecated in RxJS 7+. For future-proof code, consider using <code>firstValueFrom()</code> or <code>lastValueFrom()</code>:<pre><code class="language-ts">import { firstValueFrom } from 'rxjs';
+return firstValueFrom(this.http.get(...));
+</code></pre>
+</li>
+<li>Stick to <strong>Observables</strong> unless interop with <code>async/await</code> or Promise-based APIs is specifically needed.</li>
+<li>Promises can't be cancelled—consider Observables for cancellable streams or reactive patterns.</li>
+</ul>
+<p>Sure! Here's the same example rewritten to use <strong>Observables</strong>.</p>
+<h3><strong>Service with HTTP Call (Observables):</strong></h3>
+<h3><code>user.service.ts</code></h3>
+<pre><code class="language-ts">import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {
+  constructor(private http: HttpClient) {}
+
+  getUserById(id: number): Observable&lt;any&gt; {
+    return this.http.get(`https://api.example.com/users/${id}`);
+  }
+}
+</code></pre>
+<h3><code>user.component.ts</code></h3>
+<pre><code class="language-ts">import { Component, OnInit } from '@angular/core';
+import { UserService } from './user.service';
+
+@Component({
+  selector: 'app-user',
+  template: `&lt;div *ngIf=&quot;user&quot;&gt;Welcome, {{ user.name }}&lt;/div&gt;`
+})
+export class UserComponent implements OnInit {
+  user: any;
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {
+    this.userService.getUserById(1).subscribe({
+      next: (data) =&gt; this.user = data,
+      error: (err) =&gt; console.error('Error fetching user:', err)
+    });
+  }
+}
+</code></pre>
+
+</body>
+</html>
+<style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background: #f9f9f9;
+    }
+    h1 {
+        color:rgb(5, 7, 9);
+        text-align: center;
+    }
+    h2, h3, h4, h5, h6  {
+      color: #2c3e50;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    code {
+      color: #d63384;;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    tr:nth-child(even) td {
+      background-color: #f9f9f9;
+    }
+    tr:hover td {
+      background-color: #eef2f7;
+    }
+  </style>
