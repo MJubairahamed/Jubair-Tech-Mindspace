@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Routers</title>
+  <title>Routing</title>
    <style>
        body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
        h1, h2, h3 { color: #2c3e50; }
@@ -13,6 +13,125 @@
 </head>
 <body>
   <h1>Routing Concepts</h1>
+<h3>What is Routing?</h3>
+<ul>
+<li>The Angular Router enables navigation from one view to the next as users perform application tasks.</li>
+</ul>
+<h3>How to enable Routing in Angular?</h3>
+<ul>
+<li>The appRoutes is the const which holds the array of routes. The approutes will be the Routes type from angular.</li>
+<li>Add RouterModule in import and Pass the above routes in to the RouterModule.forRoot(appRoutes) method.</li>
+<li>Then at last add the &lt;router-outlet&gt;  directive.</li>
+</ul>
+<h3>How to create Child Routing?</h3>
+<ul>
+<li>In app.routing.module.ts add the children similar to following code.</li>
+</ul>
+<pre><code class="language-ts">        children: [
+            {path: 'accounts',   component: AccountsComponent},
+            {path: 'personalinfo',component: PersonalInfoComponent}
+        ]
+    }
+</code></pre>
+<ul>
+<li>Children data type is array so we can declare similar to Routes array.</li>
+<li>One Important point to note , Add &lt;router-outlet&gt; tag in the profile html. Then only Angular identify and plugin the child code.</li>
+</ul>
+<h3>What is RouterLink?</h3>
+<ul>
+<li>It is another option to route the page from one to another.</li>
+<li>Ex:  <code>&lt;a routerLink=&quot;/home&quot;&gt;Home&lt;/a&gt;</code></li>
+<li>The / is used to absolute path otherwise it. We can add the without &quot;/&quot; for nested route which relative path.</li>
+</ul>
+<h3>What is RouterLinkActive and RouterLinkActiveOptions?</h3>
+<ul>
+<li>RouterLinkActive is used to enable the selected tabs as active.</li>
+<li>RouterLinkActiveOptions is used to fix or change the default active tab behavior. routerLinkActiveOptions=&quot;{exact: true}&quot;.</li>
+</ul>
+<h3>What is ActivatedRoute?</h3>
+<ul>
+<li>An ActivatedRoute is an object that contains information about route parameters, query parameters and URL fragments.</li>
+<li>Inject ActivatedRoute in the constructor.</li>
+<li>Example:</li>
+</ul>
+<pre><code class="language-TS">    this.activatedRoute.queryParams.subscribe(params =&gt; {
+
+    this.openAccountOrchId = params['goalID'];
+
+    });
+</code></pre>
+<h3>How to pass parameter to Routes ?</h3>
+<ul>
+<li>By adding &quot;:&quot;  in path which tell angular that what given after the colon is parameter.</li>
+<li>Ex: <code>{path: 'user/:id', component : UserComponent}</code></li>
+<li>id token in the path is a placeholder. That creates a slot in the path for a Route Parameter. In this case, the router will insert the id of a user into that slot.</li>
+</ul>
+<h3>How to Fetch the params value reactively?</h3>
+<ul>
+<li>This mean based on some action or service response (Async) value the URL parameter might get changed.so that data object should be updated accordingly.</li>
+<li>This approach is used to get the updated user object If the params modified with in the component.</li>
+<li>Ex:</li>
+</ul>
+<pre><code class="language-TS">    this.route.params
+
+    .subscribe((params:Params)=&gt; {
+
+    this.user.id = params['id'];
+
+    });
+</code></pre>
+<h3>How to add queryparam in route?</h3>
+<ul>
+<li>We can add query param in routerLink as like follows</li>
+<li><code>&lt;a [routerLink]=&quot;['/server']&quot; [queryParams]=&quot;{Pin: '1234'} fargment='loading' href=&quot;#&quot;&gt;&lt;/a&gt;</code></li>
+<li>Fargment is used to add '#' after the query param.</li>
+<li>Query Param through component like follows,</li>
+<li><code>This.router.navigate(['/server',id,'edit'],{queryParams: {Pin:'123'}, fargment='loading'});</code></li>
+</ul>
+<h3>How to fetch queryparam in route?</h3>
+<ul>
+<li>Need to inject the ActivatedRoute in constructor.</li>
+<li>There are 2 approach to fetch the query param similar to params</li>
+<li>Snapshot - this.route.snapshot.queryparams;</li>
+<li>Observables
+<ul>
+<li><code>this.route.queryparams.subscribe();</code></li>
+<li><code>this.route.fargment.subscribe();</code></li>
+</ul>
+</li>
+</ul>
+<h3>What is queryParamHandling?</h3>
+<ul>
+<li>It is a property used to retain the query param by using preserved or  override with new through merged property</li>
+<li><code>this.router.navigate(['edit'], {relativeTo, this.route, queryParamHandling:'Preserved');</code></li>
+</ul>
+<h3>How to implement wild card redirect?</h3>
+<ul>
+<li>Wild card Redirect is used to navigate to the error page. ** is the wildcard key which will parse the  router top to bottom.</li>
+<li>So Important point to note is wild entry should use in the last routing array.</li>
+<li><code>{path:'**',redirectTo: '/error'}</code></li>
+</ul>
+<h3>What are Route Guards?</h3>
+<ul>
+<li>Angular’s route guards are interfaces which can tell the router whether or not it should allow navigation to a requested route.</li>
+<li>There are five different types of guards and each of them is called in a particular sequence. The router’s behavior is modified differently depending on which guard is used.</li>
+<li>The guards are:
+<ul>
+<li>CanActivate</li>
+<li>CanActivateChild</li>
+<li>CanDeactivate - guard used to protect navigate away from the current page.</li>
+<li>CanLoad</li>
+<li>Resolve</li>
+</ul>
+</li>
+</ul>
+<h3>How to implement CanActivate to route guard?</h3>
+<ul>
+<li>Create a guard service which should implement the CanActivate Interface.</li>
+<li>Implement the CanActivate method with following param &quot;routea: ActivatedRouteSnapshot&quot; &amp; &quot;state: RouterStateSnapShot&quot;.</li>
+<li>CanActivate method will return boolean.</li>
+<li>So in app.routing.modules, Add the following to guard the each routing canActivate: [AccessGuard]</li>
+</ul>
 <h3>What is forRoot() and forChild()?</h3>
 <ul>
 <li><code>forRoot()</code>
