@@ -124,7 +124,6 @@ return firstValueFrom(this.http.get(...));
 <li>Stick to <strong>Observables</strong> unless interop with <code>async/await</code> or Promise-based APIs is specifically needed.</li>
 <li>Promises can't be cancelled—consider Observables for cancellable streams or reactive patterns.</li>
 </ul>
-<p>Sure! Here's the same example rewritten to use <strong>Observables</strong>.</p>
 <h3><strong>Service with HTTP Call (Observables):</strong></h3>
 <h3><code>user.service.ts</code></h3>
 <pre><code class="language-ts">import { Injectable } from '@angular/core';

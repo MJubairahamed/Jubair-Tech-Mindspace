@@ -10,7 +10,7 @@
 
 ### Inline template and External File template declaration
 * Inline template:
-  ```
+  ```ts
     @Component({`
         `selector: 'profile-photo',
         template: '<img src="profile-photo.jpg" alt="Your profile photo">',
@@ -19,7 +19,7 @@
     export class ProfilePhoto { }
     ```
 * External Reference:
-    ```
+    ```ts
     @Component({
     selector: 'profile-photo',
     templateUrl: 'profile-photo.html',
@@ -33,8 +33,7 @@
 #### Note:
 * In Angular versions prior to **19.0.0**, when creating a component, directive, or pipe, you had to **explicitly set the standalone property to true** if you wanted it to be standalone. If you didn't specify the standalone property, **it would default to false**, meaning the component, directive, or pipe would be considered part of an NgModule.
 
----
-# Selector
+### Selector
 * **Angular matches selectors statically at compile-time.** Changing the DOM at run-time, either via Angular bindings or with DOM APIs, does not affect the components rendered.
 * **An element can match exactly one component selector.** If multiple component selectors match a single element, Angular reports an error.
 * **Component selectors are case-sensitive**.
@@ -52,8 +51,8 @@
 * You can combine multiple selectors by concatenating them. 
     * For example, you can match <button> elements that specify type="reset": `selector: 'button[type="reset"]',`
     * You can also define multiple selectors with a comma-separated list: `selector: 'drop-zone, [dropzone]'`
----
-# Style
+
+## Style
 ### Style Scoping
 * Every component has a view encapsulation setting that determines how the framework scopes a component's styles. There are three view encapsulation modes: Emulated, ShadowDom, and None.
 
@@ -86,7 +85,7 @@
     - This mode **disables all style** encapsulation for the component. Any styles associated with the component behave as global styles.
 
     - **Caution**: Understand the implications before using Shadow DOM, as it impacts rendering and interaction.
----
+
 ### **Provider:**
   - A way to supply dependencies to components or services using Angular’s **Dependency Injection (DI)** system.
   - Defines how and where an instance of a dependency (like a service) is created.
@@ -102,7 +101,7 @@
     - **Scopes**:
         - **Module-level**: Shared across all components in a module.
         - **Component-level**: Each component gets its own instance of the service.
----
+
 ### **View Provider:**
   - A specialized form of a provider, configured using the `viewProviders` array, to supply dependencies **only to the component's view** (**not its content children**).
   - Used when you want a dependency to be available for the template of the component but not for components projected into it.
@@ -114,7 +113,6 @@
     })
     export class ExampleComponent {}
     ```
----
 
 ### **Change Detection**
    - The process Angular uses to track changes in the application and update the DOM (UI) accordingly.
@@ -140,5 +138,3 @@
     - **Common Scenarios**:
     - Default strategy is used for dynamic, frequently updated components.
     - OnPush is preferred for high-performance and static data scenarios.
-
----

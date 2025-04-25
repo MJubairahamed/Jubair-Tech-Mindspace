@@ -1,18 +1,18 @@
 
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <title>Component</title>
-        <style>
-          body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
-          h1, h2, h3 { color: #2c3e50; }
-          pre { background: #eee; padding: 1rem; overflow-x: auto; }
-          code { color: #d63384; }
-        </style>
-      </head>
-      <body>
-        <h1>Component Metadata</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Component</title>
+   <style>
+       body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+       h1, h2, h3 { color: #2c3e50; }
+       pre { background: #eee; padding: 1rem; overflow-x: auto; }
+       code { color: #d63384; }
+   </style>  
+</head>
+<body>
+  <h1>Component Metadata</h1>
 <h2>Anatomy of a component</h2>
 <ul>
 <li>
@@ -32,7 +32,7 @@
 </ul>
 <h3>Inline template and External File template declaration</h3>
 <ul>
-<li>Inline template:<pre><code>  @Component({`
+<li>Inline template:<pre><code class="language-ts">  @Component({`
       `selector: 'profile-photo',
       template: '&lt;img src=&quot;profile-photo.jpg&quot; alt=&quot;Your profile photo&quot;&gt;',
       styles: 'img { border-radius: 50%; }',
@@ -40,7 +40,7 @@
   export class ProfilePhoto { }
 </code></pre>
 </li>
-<li>External Reference:<pre><code>@Component({
+<li>External Reference:<pre><code class="language-ts">@Component({
 selector: 'profile-photo',
 templateUrl: 'profile-photo.html',
 styleUrl: 'profile-photo.css',
@@ -57,8 +57,7 @@ export class ProfilePhoto { }
 <ul>
 <li>In Angular versions prior to <strong>19.0.0</strong>, when creating a component, directive, or pipe, you had to <strong>explicitly set the standalone property to true</strong> if you wanted it to be standalone. If you didn't specify the standalone property, <strong>it would default to false</strong>, meaning the component, directive, or pipe would be considered part of an NgModule.</li>
 </ul>
-<hr>
-<h1>Selector</h1>
+<h3>Selector</h3>
 <ul>
 <li><strong>Angular matches selectors statically at compile-time.</strong> Changing the DOM at run-time, either via Angular bindings or with DOM APIs, does not affect the components rendered.</li>
 <li><strong>An element can match exactly one component selector.</strong> If multiple component selectors match a single element, Angular reports an error.</li>
@@ -102,8 +101,7 @@ export class ProfilePhoto { }
 </ul>
 </li>
 </ul>
-<hr>
-<h1>Style</h1>
+<h2>Style</h2>
 <h3>Style Scoping</h3>
 <ul>
 <li>
@@ -164,7 +162,6 @@ export class ProfilePhoto { }
 </ul>
 </li>
 </ul>
-<hr>
 <h3><strong>Provider:</strong></h3>
 <ul>
 <li>A way to supply dependencies to components or services using Angular’s <strong>Dependency Injection (DI)</strong> system.</li>
@@ -189,7 +186,6 @@ export class ProfilePhoto { }
 </ul>
 </li>
 </ul>
-<hr>
 <h3><strong>View Provider:</strong></h3>
 <ul>
 <li>A specialized form of a provider, configured using the <code>viewProviders</code> array, to supply dependencies <strong>only to the component's view</strong> (<strong>not its content children</strong>).</li>
@@ -202,7 +198,6 @@ export class ExampleComponent {}
 </code></pre>
 </li>
 </ul>
-<hr>
 <h3><strong>Change Detection</strong></h3>
 <ul>
 <li>The process Angular uses to track changes in the application and update the DOM (UI) accordingly.</li>
@@ -238,8 +233,50 @@ export class OptimizedComponent {}
 - Default strategy is used for dynamic, frequently updated components.
 - OnPush is preferred for high-performance and static data scenarios.
 </code></pre>
-<hr>
 
-      </body>
-      </html>
-    
+</body>
+</html>
+<style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background: #f9f9f9;
+    }
+    h1 {
+        color:rgb(5, 7, 9);
+        text-align: center;
+    }
+    h2, h3, h4, h5, h6  {
+      color: #2c3e50;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    code {
+      color: #d63384;;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    tr:nth-child(even) td {
+      background-color: #f9f9f9;
+    }
+    tr:hover td {
+      background-color: #eef2f7;
+    }
+  </style>

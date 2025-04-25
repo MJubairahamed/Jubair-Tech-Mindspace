@@ -100,9 +100,6 @@ export class AppModule {}
 - Stick to **Observables** unless interop with `async/await` or Promise-based APIs is specifically needed.
 - Promises can't be cancelled—consider Observables for cancellable streams or reactive patterns.
 
-
-Sure! Here's the same example rewritten to use **Observables**.
-
 ###  **Service with HTTP Call (Observables):**
 
 ### `user.service.ts`
