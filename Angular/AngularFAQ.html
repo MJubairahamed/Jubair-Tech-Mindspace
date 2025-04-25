@@ -90,6 +90,134 @@
 <li>Instead of a component creating its dependencies, such as services, Angular's DI framework provides these dependencies when the component is instantiated. This is achieved through <strong>injectors and providers</strong>.</li>
 <li><strong>Injectors</strong> are responsible for creating and managing dependencies, while <strong>providers</strong> configure how these dependencies are created.</li>
 </ul>
+<h3>What is @ViewChild and @ViewChildren?</h3>
+<ul>
+<li>ViewChild or ViewChildren is used to  get the local reference of you template inside your component to change the behavior &amp;  appearance of the template.</li>
+<li>syntax:  static param is introduced from Angular 8 only <code>@ViewChild('nameInput',{static:false}) nameInputRef: ElementRef; </code></li>
+</ul>
+<h3>What is @ViewChild and @ContentChild?</h3>
+<h2>@ViewChild</h2>
+<ul>
+<li>Access a child component, directive, or DOM element from the <strong>same component's template</strong>.</li>
+<li>Use it when you want to interact with elements/components <strong>defined inside the template</strong> (view DOM).</li>
+</ul>
+<h3>Example:</h3>
+<pre><code class="language-ts">@ViewChild('myInput') inputRef!: ElementRef;
+
+ngAfterViewInit() {
+  console.log(this.inputRef.nativeElement.value);
+}
+</code></pre>
+<pre><code class="language-html">&lt;input #myInput type=&quot;text&quot; value=&quot;Angular Dev&quot; /&gt;
+</code></pre>
+<h2>@ContentChild</h2>
+<ul>
+<li>Access content projected into a component using <code>&lt;ng-content&gt;</code>.</li>
+<li>Use when you’re writing a component that receives content <strong>from its parent</strong>, like a wrapper or layout component.</li>
+</ul>
+<h3>Example:</h3>
+<pre><code class="language-ts">@ContentChild('projectedContent') contentRef!: ElementRef;
+
+ngAfterContentInit() {
+  console.log(this.contentRef.nativeElement.textContent);
+}
+</code></pre>
+<pre><code class="language-html">&lt;custom-wrapper&gt;
+  &lt;p #projectedContent&gt;This is projected content&lt;/p&gt;
+&lt;/custom-wrapper&gt;
+</code></pre>
+<h3>Quick Comparison</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><code>@ViewChild</code></th>
+<th><code>@ContentChild</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Target</strong></td>
+<td>Inside component's own view</td>
+<td>Content passed via <code>&lt;ng-content&gt;</code></td>
+</tr>
+<tr>
+<td><strong>Lifecycle Hook</strong></td>
+<td><code>ngAfterViewInit()</code></td>
+<td><code>ngAfterContentInit()</code></td>
+</tr>
+<tr>
+<td><strong>Use Case</strong></td>
+<td>Access template refs, child components</td>
+<td>Access slotted/projection content</td>
+</tr>
+</tbody>
+</table>
+<h3>What is @ViewChildren and @ContentChildren?</h3>
+<h2>@ViewChildren</h2>
+<ul>
+<li><strong>What:</strong> Used to <strong>query multiple elements, directives, or components</strong> present in the <strong>same view (template)</strong>.</li>
+<li><strong>When to Use:</strong> When you want to access or manipulate <strong>multiple DOM elements</strong> or <strong>child components</strong> inside the template.</li>
+</ul>
+<h3>Example</h3>
+<pre><code class="language-ts">@ViewChildren('inputRef') inputs!: QueryList&lt;ElementRef&gt;;
+
+ngAfterViewInit() {
+  this.inputs.forEach(input =&gt; console.log(input.nativeElement.value));
+}
+</code></pre>
+<pre><code class="language-html">&lt;input #inputRef type=&quot;text&quot; value=&quot;One&quot; /&gt;
+&lt;input #inputRef type=&quot;text&quot; value=&quot;Two&quot; /&gt;
+</code></pre>
+<h2>@ContentChildren</h2>
+<ul>
+<li>Used to <strong>query multiple projected elements</strong> passed into a component using <code>&lt;ng-content&gt;</code>.</li>
+<li>When building <strong>reusable components</strong> (like tabs, cards, modals) that accept child components/content from outside.</li>
+</ul>
+<h3>Example</h3>
+<pre><code class="language-ts">@ContentChildren(HighlightDirective) highlights!: QueryList&lt;HighlightDirective&gt;;
+
+ngAfterContentInit() {
+  this.highlights.forEach(dir =&gt; dir.highlight('yellow'));
+}
+</code></pre>
+<pre><code class="language-html">&lt;app-highlight-wrapper&gt;
+  &lt;p appHighlight&gt;Projected 1&lt;/p&gt;
+  &lt;div appHighlight&gt;Projected 2&lt;/div&gt;
+&lt;/app-highlight-wrapper&gt;
+</code></pre>
+<h2>Summary Table</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><code>@ViewChildren</code></th>
+<th><code>@ContentChildren</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Scope</strong></td>
+<td>Same component's template</td>
+<td>Projected content (<code>&lt;ng-content&gt;</code>)</td>
+</tr>
+<tr>
+<td><strong>Lifecycle Hook</strong></td>
+<td><code>ngAfterViewInit()</code></td>
+<td><code>ngAfterContentInit()</code></td>
+</tr>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>QueryList&lt;T&gt;</code></td>
+<td><code>QueryList&lt;T&gt;</code></td>
+</tr>
+<tr>
+<td><strong>Common Use Case</strong></td>
+<td>Manipulating multiple DOM elements or directives inside a component's template</td>
+<td>Working with slotted components like tabs, accordions, content wrappers</td>
+</tr>
+</tbody>
+</table>
 
 </body>
 </html>
