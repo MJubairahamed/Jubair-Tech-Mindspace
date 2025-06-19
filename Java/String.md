@@ -1,6 +1,5 @@
 # String Concepts
---
-
+-
 - **Definition**: **String** is a built-in class representing sequences of characters.  
 - **JVM** doesn't perform String pool check if you create object using 'new' operator.
       ![String Storage!](./Images/StringStorage.png "String Storage")

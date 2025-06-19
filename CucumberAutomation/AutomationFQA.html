@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AutomationFQA</title>
+   <style>
+       body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 2rem; background: #f9f9f9; }
+       h1, h2, h3 { color: #2c3e50; }
+       pre { background: #eee; padding: 1rem; overflow-x: auto; }
+       code { color: #d63384; }
+   </style>  
+</head>
+<body>
+  <h1>Automation Testing FAQ's:</h1>
+<ol>
+<li>
+<p>Difference between implicit and explicit waits.</p>
+<ul>
+<li>implicit
+<ul>
+<li>Scope - Global (applies to all element lookups).</li>
+<li>Waits for an element to be found.</li>
+<li>Less precise control over waiting.</li>
+<li>Can lead to unnecessary delays.</li>
+<li><code>driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); </code></li>
+</ul>
+</li>
+<li>explicit
+<ul>
+<li>Local (applies to specific conditions).</li>
+<li>Waits for a specific condition to be met.</li>
+<li>More precise control over waiting conditions.</li>
+<li>More efficient and stable test execution.</li>
+<li>
+<pre><code class="language-Java">  WebDriverWait wait = new WebDriverWait(driver, 10); 
+  wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(&quot;myElement&quot;)));
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Asked to share screen and write XPath for a given element.
+<code>WebElement form = driver.findElement(By.xpath(&quot;//form[@id='loginForm']&quot;)); </code></p>
+</li>
+<li>
+<p>Use of the Actions class and Select class.</p>
+<ul>
+<li>Action Class
+<ul>
+<li>To perform any operations on the web application such as move to element,double-click, selecting drop-down boxes, etc. the <strong>actions</strong> class is required.</li>
+<li>
+<pre><code class="language-Java">  Actions action = new Actions(driver);
+  action.moveToElement(element).click().perform();
+</code></pre>
+</li>
+</ul>
+<pre><code></code></pre>
+</li>
+<li>Select Class
+<ul>
+<li>In Selenium, the Select class provides the implementation of the HTML SELECT tag.The helper methods with select and deselect options.</li>
+<li>Different Select Class Methods to handle Select Dropdown in Selenium
+<ul>
+<li>selectByVisibleText :
+<ul>
+<li>
+<pre><code class="language-Java">  Select objSelect =new Select(driver.findElement(By.id(&quot;search-box&quot;)));
+  objSelect.selectByVisibleText(&quot;Automation&quot;);
+</code></pre>
+</li>
+</ul>
+</li>
+<li>selectByVisibleText</li>
+<li>selectByValue</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Exceptions faced while working with Selenium (Give 5 examples).</p>
+</li>
+<li>
+<p>Difference between findElement() vs findElements().</p>
+<ul>
+<li><code>findElement()</code> is used to locate and interact with a single element,throwing an exception info Element is matching</li>
+<li><code>findElements()</code> is used to locate multiple elements, returning an empty list if none are matching.</li>
+</ul>
+</li>
+<li>
+<p>How to handle alerts in Selenium?
+<code>driver.switchTo().alert()</code></p>
+</li>
+<li>
+<p>Difference between Scenario vs Scenario Outline in Cucumber BDD.</p>
+<ul>
+<li>Both keywords are used to write scenario. But if we want to run a scenario multiple times with different test data, then we use a <strong>Scenario outline</strong>.
+<ul>
+<li>Example:<pre><code class="language-java">    Scenario Outline: Eating
+    Given there are &lt;start&gt; cucumbers
+    When I eat &lt;eat&gt; cucumbers
+    Then I should have &lt;left&gt; cucumbers
+
+    Examples:
+        | start | eat | left |
+        |  12   |  5  |  7   |
+        |  20   |  5  |  15  |
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>What are tags in Cucumber?</p>
+<ul>
+<li><code>@RunWith(Cucumber.class) </code></li>
+<li><code>@Cucumber.Options(format = {&quot;pretty&quot;, &quot;html:target/cucumber&quot;}, tags = {&quot;~@SmokeTest&quot;})</code></li>
+</ul>
+</li>
+<li>
+<p>What is BDD &amp; What is TDD?</p>
+<ul>
+<li>
+<p>In software development, TDD (Test-Driven Development) and BDD (Behavior-Driven Development) are both methodologies that emphasize testing to improve software quality.</p>
+</li>
+<li>
+<p>Test-Driven Development (TDD)</p>
+<ul>
+<li>It is about building reliable code, test-first.</li>
+<li>Focus:
+<ul>
+<li>Writing tests before implementing code, ensuring each function works as intended.</li>
+</ul>
+</li>
+<li>Process:
+<ul>
+<li>Developers write a failing test, then write the code to make the test pass, and finally refactor the code.</li>
+</ul>
+</li>
+<li>Goal:
+<ul>
+<li>To create reliable and bug-free code by identifying errors early in the development process.</li>
+</ul>
+</li>
+<li>Example:
+<ul>
+<li>Writing a test for a function that calculates the sum of two numbers before writing the function itself.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Behavior-Driven Development (BDD)</p>
+<ul>
+<li>It is about building software that meets user needs, test-first, and with collaboration.</li>
+<li>Focus:
+<ul>
+<li>Defining and testing the system's behavior from the user's perspective, ensuring the software meets user expectations.</li>
+</ul>
+</li>
+<li>Process:
+<ul>
+<li>Collaborating with stakeholders to define scenarios and requirements, then using these scenarios to guide development and testing.</li>
+</ul>
+</li>
+<li>Goal:
+<ul>
+<li>To ensure the software aligns with user requirements and business objectives.</li>
+</ul>
+</li>
+<li>Example:
+<ul>
+<li>Writing a test scenario using Gherkin syntax that describes how a user would log into the application and what the expected outcome would be.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+</body>
+</html>
+<style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background: #f9f9f9;
+    }
+    h1 {
+        color:rgb(5, 7, 9);
+        text-align: center;
+    }
+    h2, h3, h4, h5, h6  {
+      color: #2c3e50;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    code {
+      color: #d63384;;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    tr:nth-child(even) td {
+      background-color: #f9f9f9;
+    }
+    tr:hover td {
+      background-color: #eef2f7;
+    }
+  </style>
